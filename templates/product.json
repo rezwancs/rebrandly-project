@@ -410,19 +410,6 @@
     },
     "9c06ea6e-96a9-421e-91cd-70822ea74d7d": {
       "type": "apps",
-      "blocks": {
-        "e20fd468-ea6d-4f42-b6e0-5c03693d36fa": {
-          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
-          "settings": {
-            "widgetId": "productpage-118404",
-            "additional_classes": "",
-            "custom_css": ""
-          }
-        }
-      },
-      "block_order": [
-        "e20fd468-ea6d-4f42-b6e0-5c03693d36fa"
-      ],
       "settings": {
         "color_scheme": "secondary",
         "top_space_desktop": 70,

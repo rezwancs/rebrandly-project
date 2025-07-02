@@ -1,0 +1,455 @@
+<link rel="preload" as="style" href="{{ 'custom-hero-banner.css' | asset_url }}">
+{{ 'custom-hero-banner.css' | asset_url | stylesheet_tag }}
+
+<section class="hero-banner-section">
+  <div class="hero-banner-wrapper">
+    {% if section.settings.background_image != blank %}
+      <div class="hero-banner-bg-image">
+        {%- render 'lazy-image', image: section.settings.background_image -%}
+      </div>
+    {% endif %}
+    
+    <div class="hero-banner-overlay"></div>
+    
+    <div class="container">
+      <div class="hero-banner-content text-center content-width-{{ section.settings.content_width }}"
+        {% if settings.enable_animations %}
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-aos-easing="ease"
+          data-aos-duration="1000"
+          data-aos-offset="200"
+        {% endif %}>
+        
+        {% for block in section.blocks %}
+          {% case block.type %}
+          
+            {% when 'headline' %}
+              {% if block.settings.headline_image != blank %}
+                <div class="hero-banner-headline-image" 
+                  style="--headline-img-max-width-desktop: {{ block.settings.headline_image_max_width }}px;
+                         --headline-img-max-width-mobile: {{ block.settings.headline_image_max_width_mobile }}px;"
+                  {{ block.shopify_attributes }}>
+                  {% if block.settings.headline_image_mobile != blank %}
+                    {%- render 'lazy-image', image: block.settings.headline_image_mobile, class: 'headline-image mobile-only' -%}
+                    {%- render 'lazy-image', image: block.settings.headline_image, class: 'headline-image desktop-only' -%}
+                  {% else %}
+                    {%- render 'lazy-image', image: block.settings.headline_image, class: 'headline-image' -%}
+                  {% endif %}
+                </div>
+              {% elsif block.settings.headline != blank %}
+                <h1 class="hero-banner-headline {{ block.settings.headline_size }} {{ block.settings.headline_style }}"
+                  style="--outline-thickness:{{ block.settings.outline_thickness }};
+                         color: {{ block.settings.headline_color }};"
+                  {{ block.shopify_attributes }}>
+                  {{ block.settings.headline }}
+                </h1>
+              {% endif %}
+              
+            {% when 'hero_image' %}
+              {% if block.settings.hero_image != blank %}
+                <div class="hero-banner-image-wrapper" {{ block.shopify_attributes }}>
+                  {%- render 'lazy-image', image: block.settings.hero_image, class: 'hero-banner-image' -%}
+                </div>
+              {% endif %}
+              
+            {% when 'subheading' %}
+              {% if block.settings.subheading != blank %}
+                <p class="hero-banner-subheading text-{{ block.settings.subheading_size }}"
+                  style="color: {{ block.settings.subheading_color }};"
+                  {{ block.shopify_attributes }}>
+                  {{ block.settings.subheading }}
+                </p>
+              {% endif %}
+              
+            {% when 'button' %}
+              {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+                <div class="hero-banner-button">
+                  <a href="{{ block.settings.button_link }}"
+                    class="button {{ settings.button_style }} {{ block.settings.button_size }}-btn icon-btn right-icon"
+                    {{ block.shopify_attributes }}>
+                    {% assign buttonText = block.settings.button_text %}
+                    {% render 'button-style', buttonText:buttonText %}
+                  </a>
+                </div>
+              {% endif %}
+              
+          {% endcase %}
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --gradient-bg: {{ section.settings.gradient_background }};
+    --overlay-opacity: {{ section.settings.overlay_opacity }}%;
+    --inner-space-top: {{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom: {{ section.settings.bottom_space_desktop }}px;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }}.shopify-section {
+      --inner-space-top: {{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom: {{ section.settings.bottom_space_mobile }}px;
+    }
+  }
+  
+  {% if section.settings.section_visibility == 'large' %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  {% elsif section.settings.section_visibility == 'small' %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "Custom Hero Banner",
+  "class": "section hero-banner-section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "gradient_background",
+      "label": "Gradient Background (CSS)",
+      "default": "linear-gradient(135deg, #ff6b6b, #4ecdc4)",
+      "info": "Enter full CSS gradient syntax, e.g., 'linear-gradient(135deg, #ff6b6b, #4ecdc4)' or 'radial-gradient(circle, #ff6b6b, #4ecdc4)'"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content Width",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "Top Space (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "Bottom Space (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "Top Space (Mobile)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "Bottom Space (Mobile)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "Section Visibility",
+      "default": "always",
+      "options": [
+        {
+          "label": "Always",
+          "value": "always"
+        },
+        {
+          "label": "Small Devices Only",
+          "value": "small"
+        },
+        {
+          "label": "Large Devices Only",
+          "value": "large"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "headline",
+      "name": "Headline",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "headline_image",
+          "label": "Headline Image (Desktop)",
+          "info": "Use an image as the headline. This will override text headline if set."
+        },
+        {
+          "type": "image_picker",
+          "id": "headline_image_mobile",
+          "label": "Headline Image (Mobile)",
+          "info": "Optional: Use a different image for mobile devices. If not set, desktop image will be used."
+        },
+        {
+          "type": "range",
+          "id": "headline_image_max_width",
+          "label": "Headline Image Max Width (Desktop)",
+          "min": 200,
+          "max": 800,
+          "step": 20,
+          "default": 400,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "headline_image_max_width_mobile",
+          "label": "Headline Image Max Width (Mobile)",
+          "min": 150,
+          "max": 400,
+          "step": 10,
+          "default": 280,
+          "unit": "px"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline Text",
+          "default": "Welcome to Our Store",
+          "info": "This will be used if no headline image is selected."
+        },
+        {
+          "type": "color",
+          "id": "headline_color",
+          "label": "Headline Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "headline_size",
+          "label": "Headline Size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "Small"
+            },
+            {
+              "value": "h2",
+              "label": "Medium"
+            },
+            {
+              "value": "h1",
+              "label": "Large"
+            },
+            {
+              "value": "h0",
+              "label": "Extra Large"
+            }
+          ],
+          "default": "h1"
+        },
+        {
+          "type": "select",
+          "id": "headline_style",
+          "label": "Headline Style",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "animated-text",
+              "label": "Animated"
+            }
+          ],
+          "default": "normal"
+        },
+        {
+          "type": "range",
+          "id": "outline_thickness",
+          "label": "Outline Thickness",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 2,
+          "unit": "px"
+        }
+      ]
+    },
+    {
+      "type": "hero_image",
+      "name": "Hero Image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "hero_image",
+          "label": "Hero Image"
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading Text",
+          "default": "Discover amazing products and exceptional service"
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "subheading_size",
+          "label": "Subheading Size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "default": "medium"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button Size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "default": "medium"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Hero Banner",
+      "blocks": [
+        {
+          "type": "headline"
+        },
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

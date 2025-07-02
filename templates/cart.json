@@ -26,17 +26,6 @@
     },
     "81f69fc6-5adc-435c-b572-26d6c3d64b28": {
       "type": "apps",
-      "blocks": {
-        "7ce2a956-df98-41ea-a8a4-fca7e2952982": {
-          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
-          "settings": {
-            "widgetId": "cartpage-273463"
-          }
-        }
-      },
-      "block_order": [
-        "7ce2a956-df98-41ea-a8a4-fca7e2952982"
-      ],
       "settings": {}
     }
   },

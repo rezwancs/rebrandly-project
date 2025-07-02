@@ -750,19 +750,6 @@
     },
     "74315b0c-fcd0-48e0-8b56-d226bad7784f": {
       "type": "apps",
-      "blocks": {
-        "621d9073-7a0d-4057-9f66-4bb0f265a68a": {
-          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
-          "settings": {
-            "widgetId": "homepage-634041",
-            "additional_classes": "",
-            "custom_css": ""
-          }
-        }
-      },
-      "block_order": [
-        "621d9073-7a0d-4057-9f66-4bb0f265a68a"
-      ],
       "settings": {
         "color_scheme": "secondary",
         "top_space_desktop": 70,
@@ -773,19 +760,6 @@
     },
     "e7a9b876-d8a9-450b-9580-31468182912c": {
       "type": "apps",
-      "blocks": {
-        "c9693855-516b-4581-bab6-15bde3082f92": {
-          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
-          "settings": {
-            "widgetId": "homepage-244747",
-            "additional_classes": "",
-            "custom_css": ""
-          }
-        }
-      },
-      "block_order": [
-        "c9693855-516b-4581-bab6-15bde3082f92"
-      ],
       "settings": {
         "color_scheme": "secondary",
         "top_space_desktop": 70,

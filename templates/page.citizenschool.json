@@ -20,9 +20,67 @@
         "textcolor": "#807e7e",
         "overlay_opacity": 50
       }
+    },
+    "custom_header_dY4pHi": {
+      "type": "custom-header",
+      "name": "Custom Header",
+      "settings": {
+        "logo": "shopify://shop_images/citizenschool-logo.png",
+        "logo_width": 150,
+        "menu": "main-menu",
+        "header_bg_color": "#ffffff",
+        "header_text_color": "#333333",
+        "header_hover_color": "#007bff",
+        "header_active_color": "#ff6b35",
+        "header_underline_color": "#ff6b35",
+        "header_border_color": "#e5e5e5"
+      }
+    },
+    "custom_hero_banner_Ly7xck": {
+      "type": "custom-hero-banner",
+      "blocks": {
+        "headline_W4RKRr": {
+          "type": "headline",
+          "settings": {
+            "headline": "Welcome to Our Store",
+            "headline_color": "#ffffff",
+            "headline_size": "h1",
+            "headline_style": "normal",
+            "outline_thickness": 2
+          }
+        },
+        "subheading_Qzaqr4": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Discover amazing products and exceptional service",
+            "subheading_color": "#ffffff",
+            "subheading_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "headline_W4RKRr",
+        "subheading_Qzaqr4"
+      ],
+      "name": "Custom Hero Banner",
+      "settings": {
+        "gradient_background": "linear-gradient(135deg, #0E55AA 0%, #062244 55%)",
+        "overlay_opacity": 30,
+        "section_height": "60vh",
+        "min_height": 500,
+        "min_height_mobile": 400,
+        "content_width": "medium",
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 60,
+        "bottom_space_mobile": 60,
+        "section_visibility": "always"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_header_dY4pHi",
+    "custom_hero_banner_Ly7xck"
   ]
 }
