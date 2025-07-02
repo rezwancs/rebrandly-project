@@ -118,14 +118,14 @@ src="https://www.facebook.com/tr?id=337874058615736&ev=PageView
     </a>
     <div class="body-wrapper">
 
-      {% unless page.metafields.custom_pages.show_header == false %}
+      {% unless page.metafields.custom_pages.show_header == false or collection.metafields.vendor_store.is_vendor_collection == true %}
          {% sections 'header-group' %}
       {% endunless %}
      
       <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
         {{ content_for_layout }}
       </main>
-      {% unless page.metafields.custom_pages.show_footer == false %}
+      {% unless page.metafields.custom_pages.show_footer == false or collection.metafields.vendor_store.is_vendor_collection == true %}
           <div class="footer-group">
             {% sections 'footer-group' %}
           </div>

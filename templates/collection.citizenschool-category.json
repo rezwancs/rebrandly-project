@@ -9,19 +9,8 @@
  */
 {
   "sections": {
-    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e": {
-      "type": "apps",
-      "settings": {
-        "color_scheme": "secondary",
-        "top_space_desktop": 70,
-        "bottom_space_desktop": 70,
-        "top_space_mobile": 40,
-        "bottom_space_mobile": 40
-      }
-    },
     "main-collection": {
       "type": "main-collection",
-      "disabled": true,
       "settings": {
         "collection_image": true,
         "color_id": "#ffffff",
@@ -51,32 +40,74 @@
         "bottom_space_mobile": 20
       }
     },
-    "6f554fdb-7e51-41bf-aa6b-bc51024635fa": {
-      "type": "apps",
+    "custom_header_7a34bR": {
+      "type": "custom-header",
+      "name": "Custom Header",
       "settings": {
-        "color_scheme": "secondary",
-        "top_space_desktop": 70,
-        "bottom_space_desktop": 70,
-        "top_space_mobile": 40,
-        "bottom_space_mobile": 40
+        "logo": "shopify://shop_images/citizenschool-logo.png",
+        "logo_width": 150,
+        "menu": "main-menu",
+        "header_bg_color": "#ffffff",
+        "header_text_color": "#333333",
+        "header_hover_color": "#007bff",
+        "header_active_color": "#ff6b35",
+        "header_underline_color": "#ff6b35",
+        "header_border_color": "#e5e5e5"
       }
     },
-    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a": {
-      "type": "apps",
+    "custom_hero_banner_9wRCVc": {
+      "type": "custom-hero-banner",
+      "blocks": {
+        "headline_CRzrbA": {
+          "type": "headline",
+          "settings": {
+            "headline_image_max_width": 400,
+            "headline_image_max_width_mobile": 280,
+            "headline": "Collection Name",
+            "headline_color": "#ffffff",
+            "headline_size": "h1",
+            "headline_style": "normal",
+            "outline_thickness": 2
+          }
+        },
+        "subheading_RRd9Aw": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Discover amazing products and exceptional service",
+            "subheading_color": "#ffffff",
+            "subheading_size": "medium"
+          }
+        },
+        "button_DKPMfM": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "headline_CRzrbA",
+        "subheading_RRd9Aw",
+        "button_DKPMfM"
+      ],
+      "name": "Custom Hero Banner",
       "settings": {
-        "color_scheme": "secondary",
-        "top_space_desktop": 70,
-        "bottom_space_desktop": 70,
-        "top_space_mobile": 40,
-        "bottom_space_mobile": 40
+        "gradient_background": "linear-gradient(135deg, #ff6b6b, #4ecdc4)",
+        "overlay_opacity": 30,
+        "content_width": "medium",
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 60,
+        "bottom_space_mobile": 60,
+        "section_visibility": "always"
       }
     }
   },
   "order": [
-    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e",
-    "main-collection",
-    "6f554fdb-7e51-41bf-aa6b-bc51024635fa",
-    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a"
-  ],
-  "wrapper": ".boost-sd__product-filter-fallback"
+    "custom_header_7a34bR",
+    "custom_hero_banner_9wRCVc",
+    "main-collection"
+  ]
 }
