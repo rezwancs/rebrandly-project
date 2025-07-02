@@ -1,0 +1,200 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e": {
+      "type": "apps",
+      "blocks": {
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/product-filter/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "collection_image": true,
+        "color_id": "#ffffff",
+        "banner_height_desktop": "300px",
+        "banner_height_mobile": "350px",
+        "collection_title": true,
+        "heading_overy": true,
+        "collection_description": false,
+        "products_per_page": 16,
+        "infinte_scroll": false,
+        "infinte_scroll_type": "onscroll",
+        "grid_image_size": "portrait",
+        "grid_image_fit": "cover",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "bannerbgcolor": "#202020",
+        "bgcoloropacity": "#eeeeee",
+        "textcolor": "#4c4c4c",
+        "overlay_opacity": 0,
+        "filter_bar_background": "#000000",
+        "filter_bar_text": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 20
+      }
+    },
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa": {
+      "type": "apps",
+      "blocks": {
+        "bf692365-b985-4446-9230-49ff7e76628a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-101021",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "bf692365-b985-4446-9230-49ff7e76628a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a": {
+      "type": "apps",
+      "blocks": {
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-888610",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 25
+      }
+    },
+    "7825b2f2-bc5d-4f68-9d23-1c8b14257700": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "ul {list-style-type: disc;}",
+        "h1,.h1 {font-size: 25px;}",
+        "h2,.h2 {font-size: 25px;}",
+        "h3,.h3 {font-size: 25px;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"content description-container\">\n<h1>Illuminate Your Brand with Custom-Crafted Candles\n</h1>\n<br>\n<p>At Rebrand, we excel in white labeling, enabling businesses to infuse their products distinctively. Our expertise spans marketing, branding, and creative innovation, empowering clients to forge memorable, branded encounters that propel swift growth. As we navigate the captivating realm of candles, we will explore how these timeless creations can become the backdrop for your company's unique tale. \n<br>\nWith a proven track record in transforming concepts into compelling realities, we are your partner in crafting experiences that captivate, resonate, and amplify your brand's impact. Join us on this transformative journey, where candles cease to be mere objects and evolve into powerful conduits of your brand's essence, illuminating not just spaces but also minds and hearts.\n</p>\n<br>\n<h2>Candle Materials</h2>\n<br>\n<ul>\n<li>\nParaffin Wax:</li>\n<p>The stalwart of candle-making, paraffin wax is derived from petroleum. Loved for its affordability, versatility, and ease of use, it's the canvas for various candle shapes and sizes. Its fragrance-holding and color-retention capabilities make it a favored choice across the candle landscape.\n</p>\n<br>\n<li>Soy Wax:</li>\n<p>In tune with eco-conscious values, soy wax presents a sustainable alternative. It is derived from soybean oil and boasts a clean burn with minimal soot emission. Its innate origins resonate with environmentally aware consumers, aligning beautifully with modern branding ideas.\n</p>\n<br>\n<li>Beeswax: </li>\n<p>Infused with a delicate honey aroma, beeswax candles offer luxury. Their slow, even burn and air-purifying qualities elevate them to a premium tier. Perfect for brands that emphasize wellness and a commitment to quality.</p>\n<br>\n<li>Gel Wax:</li>\n<p>Propel your branding endeavors to new heights with gel wax candles. Transparent and visually captivating, these candles provide an ingenious way to incorporate your brand's logos or symbols within the candle itself. The result? A mesmerizing blend of illumination and brand representation that captures attention.\n</p>\n<br>\n<li>Palm Wax:</li>\n<p>For brands seeking distinctive textures, palm wax delivers. Its crystalline finish creates a visual spectacle, transforming each candle into an artistic masterpiece. The added allure lies in its organic sourcing, striking a chord with sustainability-conscious consumers.\n</p>\n</ul>\n<br>\n        <div class=\"more-content\">\n\n<h3>Our Round Candle Designs</h3>\n<br>\n<ul>\n<li>Classic Elegance: \n</li>\n<p>The round candle, in its timeless form, exudes elegance, making it an ideal canvas for brands embracing tradition. From embossed logos to delicate patterns, our artisans meticulously craft designs encapsulating your brand's essence.\n\n</p>\n<br>\n<li>Minimalist Modern:</li>\n<p>The sleek simplicity of round candles lends itself to modern aesthetics. Monochromatic branding or subtle debossed designs can transform these candles into sleek decor pieces that seamlessly align with contemporary brand identities.\n</p>\n<br>\n<li>Artisanal Whimsy:</li>\n<p>Businesses with a penchant for creativity find a playground in round candles. Think hand-painted motifs, textured surfaces, and unique color blends that narrate stories and spark conversations.\n</p>\n<br>\n<li>Custom Labeling: </li>\n<p>Our customization options extend beyond the candle's physical design. Custom labeling allows you to share your brand's narrative, values, or even a personalized message on each candle, fostering a deeper connection with your audience.\n</p>\n<br>\n<li>Fragrance-Infused Magic: </li>\n<p>Elevate your round candles by infusing them with signature scents. Our expert perfumers can create fragrances that resonate with your brand, transforming each candle into an aromatic journey.\n</p>\n</ul>\n<br>\n<h3>Best Spots at Home to Place Round Candles</h3>\n<br>\n<ul>\n<li>Foyer Ambiance: \n</li>\n<p>Welcome guests with the soft flicker of your brand's round candles adorning the foyer. The warm glow creates an inviting atmosphere, setting the tone for your brand's experience.\n</p>\n<br>\n<li>Tablescapes with Flair:</li>\n<p>Elevate dining experiences by placing round candles at the center of attention. Whether in a high-end restaurant or an intimate cafe, these candles infuse a touch of intimacy and romance.\n</p>\n<br>\n<li>Tranquil Retreats:</li>\n<p>In spas or wellness centers, the gentle radiance of round candles can transform spaces into sanctuaries of relaxation. Their soothing presence complements the tranquil environment, creating a cocoon of serenity.\n</p>\n<br>\n<li>Product Launch Pizzazz:</li>\n<p>Round candles make excellent additions to product launches. Placing them strategically enhances the visual appeal of your brand, adding a touch of elegance and sophistication to your event.\n</p>\n<br>\n<li>Innovative Window Dressing: </li>\n<p>Capture the attention of passersby with captivating window displays featuring your branded round candles. Their inviting glow draws curiosity and foot traffic into your store.\n</p>\n</ul>\n</div>\n\n        <button id=\"toggle-button\">Read More</button>\n    </div>\n\n\n<style>.more-content {\n    display: none;\n}\n\n.expanded .more-content {\n    display: block;\n}\n\n#toggle-button {\n    cursor: pointer;\n    border: none;\n    background: none;\n    color: #910008;\n    text-decoration: underline;\n    font-size: 15px;\n}\n\n.description-container {\n /*padding-top: 160px;\n  max-width: 1200px;\n  margin: -150px auto 0 auto;*/\n}\n\n@media screen and (max-width: 750px) {\n  .description-container {\n  padding-top:0px;\n  padding-right:15px;;\n  padding-left:15px;\n  padding-bottom:unset;\n  margin-bottom:0px;\n  margin-right:unset;\n  margin-left:unset;\n  margin-top:unset;\n}\n}\n</style>",
+        "text_alignment": "left",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 50,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 20
+      }
+    },
+    "811204a9-7d54-4c8d-a0bc-42b55eb2b52d": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--21578439229734__811204a9-7d54-4c8d-a0bc-42b55eb2b52d-content-1": {
+          "type": "content",
+          "settings": {
+            "heading": "What is the size of the round glass candle?",
+            "content": "<p>The round glass candle's size typically ranges from 3 to 4 inches in diameter and 2.5 to 3.5 inches in height.</p>"
+          }
+        },
+        "template--21578439229734__811204a9-7d54-4c8d-a0bc-42b55eb2b52d-content-2": {
+          "type": "content",
+          "settings": {
+            "heading": "Can I customize the round glass candle from Rebrand?",
+            "content": "<p>You can fully customize the round glass candle with your brand's logo, colors, and designs through Rebrand's white labeling services.</p>"
+          }
+        },
+        "template--21578439229734__811204a9-7d54-4c8d-a0bc-42b55eb2b52d-content-3": {
+          "type": "content",
+          "settings": {
+            "heading": "How is the round glass candle made?",
+            "content": "<p>The round glass candle is made by pouring melted wax, such as soy or paraffin, into a round glass container. It's then left to cool and solidify, creating the final candle.</p>"
+          }
+        },
+        "d5ff6d05-0f71-44f1-af0a-abe8a5386d9a": {
+          "type": "content",
+          "settings": {
+            "heading": "Which people mostly buy round glass candles?",
+            "content": "<p>Individuals and businesses seeking elegant decor, event planners for weddings and corporate events, and spa owners aiming to create a soothing ambiance often purchase round glass candles.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21578439229734__811204a9-7d54-4c8d-a0bc-42b55eb2b52d-content-1",
+        "template--21578439229734__811204a9-7d54-4c8d-a0bc-42b55eb2b52d-content-2",
+        "template--21578439229734__811204a9-7d54-4c8d-a0bc-42b55eb2b52d-content-3",
+        "d5ff6d05-0f71-44f1-af0a-abe8a5386d9a"
+      ],
+      "custom_css": [
+        ".accordion__item[open] {background: rgb(248, 248, 248);}",
+        ".accordion__heading-icon {background: white;}"
+      ],
+      "settings": {
+        "heading": "<strong>FAQs</strong>",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "show_first_default": false,
+        "section_visibility": "always",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "marker_color": "#ffffff",
+        "marker_text_color": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e",
+    "main-collection",
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa",
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a",
+    "7825b2f2-bc5d-4f68-9d23-1c8b14257700",
+    "811204a9-7d54-4c8d-a0bc-42b55eb2b52d"
+  ],
+  "wrapper": ".boost-sd__product-filter-fallback"
+}

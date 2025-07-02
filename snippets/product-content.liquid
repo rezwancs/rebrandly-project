@@ -1,0 +1,134 @@
+{% if section.settings.content_style == 'accordion' %}
+  <div class="product__detail-accordion details-box-outer">
+    {% if product.description != blank and section.settings.show_description %}
+      <details class="detail-box accordion__item" open>
+        <summary class="detail-summary accordion__heading">
+          {% if section.settings.description_heading != blank %}
+            {{ section.settings.description_heading }}
+          {% else %}
+            {{ 'products.product.description_heading' | t }}
+          {% endif %}
+          <span class="detail-summary-icon">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path class="vertical-line" d="M5 0H7V12H5V0Z" fill="currentColor"/>
+              <path class="horizontal-line" d="M0 5H12V7H0V5Z" fill="currentColor"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="detail-expand accordion__content" id="">
+          <div class="detail-content-body rich-text-editor-content">
+            {{
+              product.description
+              | replace: '<table', '<div class="table-responsive"><table '
+              | replace: '</table>', '</table></div>'
+            }}
+          </div>
+        </div>
+      </details>
+    {% endif %}
+    {% for i in (1..3) %}
+      {% liquid
+        assign heading_index = 'custom_heading_' | append: forloop.index
+        assign description_index = 'custom_description_' | append: forloop.index
+        assign heading = section.settings[heading_index]
+        assign description = section.settings[description_index]
+      %}
+      {% if heading != blank %}
+        <details class="detail-box accordion__item">
+          <summary class="detail-summary accordion__heading">
+            {{ heading }}
+            <span class="detail-summary-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path class="vertical-line" d="M5 0H7V12H5V0Z" fill="currentColor"/>
+                <path class="horizontal-line" d="M0 5H12V7H0V5Z" fill="currentColor"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="detail-expand accordion__content" id="">
+            <div class="detail-content-body">
+              {{ description }}
+            </div>
+          </div>
+        </details>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% else %}
+  {% assign tabStatus = false %}
+  <div class="product__detail-tabs" data-tab-wrapper>
+    <ul class="list-unstyled tab-wrapper">
+      {% if product.description != blank and section.settings.show_description %}
+        <li class="tab-item">
+          <a href="#productDescription-{{ section.id }}" class="unstyled-link tab-link hyperlink active" data-tab-header>
+            {% if section.settings.description_heading != blank %}
+              {{ section.settings.description_heading }}
+            {% else %}
+              {{ 'products.product.description_heading' | t }}
+            {% endif %}
+          </a>
+        </li>
+        {% assign tabStatus = true %}
+      {% endif %}
+      {% for i in (1..3) %}
+        {% liquid
+          assign heading_index = 'custom_heading_' | append: forloop.index
+          assign heading = section.settings[heading_index]
+          assign description_index = 'custom_description_' | append: forloop.index
+          assign description = section.settings[description_index]
+        %}
+        {% if heading != blank and description != blank %}
+          <li class="tab-item">
+            <a
+              href="#customContent-{{ section.id }}{{ forloop.index }}"
+              class="unstyled-link tab-link hyperlink{% if tabStatus == false %} active{% endif %}"
+              data-tab-header
+            >
+              {{- heading -}}
+            </a>
+          </li>
+          {% assign tabStatus = true %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% assign tabStatus = false %}
+    <div class="tab-content">
+      {% if product.description != blank and section.settings.show_description %}
+        <div
+          id="productDescription-{{ section.id }}"
+          class="tab-pane product-tab-content rich-text-editor-content"
+          data-tab-content
+        >
+          <h6>{{- section.settings.description_heading -}}</h6>
+          {{
+            product.description
+            | replace: '<table', '<div class="table-responsive"><table '
+            | replace: '</table>', '</table></div>'
+          }}
+        </div>
+        {% assign tabStatus = true %}
+      {% endif %}
+      {% for i in (1..3) %}
+        {% liquid
+          assign heading_index = 'custom_heading_' | append: forloop.index
+          assign description_index = 'custom_description_' | append: forloop.index
+          assign heading = section.settings[heading_index]
+          assign description = section.settings[description_index]
+        %}
+        {% if heading != blank and description != blank %}
+          <div
+            id="customContent-{{ section.id }}{{ forloop.index }}"
+            class="tab-pane product-tab-content rich-text-editor-content"
+            data-tab-content
+            {% if tabStatus == true %}
+              style="display:none"
+            {% endif %}
+          >
+            <p>{{ heading }}</p>
+            {{ description }}
+          </div>
+          {% assign tabStatus = true %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,729 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'collection-rtl.css' | asset_url }}">
+  {{ 'collection-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'collection.css' | asset_url }}">
+  {{ 'collection.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<div class=" section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  {%- liquid
+    assign showCollectionImage = false
+    if section.settings.collection_image == true
+      if collection.image != blank
+        assign showCollectionImage = true
+        assign collectionImage = collection.image
+      elsif section.settings.banner_image != blank
+        assign showCollectionImage = true
+        assign collectionImage = section.settings.banner_image
+      endif
+    endif
+    assign sort_by = collection.sort_by | default: collection.default_sort_by
+  -%}
+  {% if showCollectionImage or section.settings.heading_overy and section.settings.collection_title %}
+    <div class="page-banner {% if section.settings.heading_overy %}overlay-text{% endif %}">
+      {% if showCollectionImage == true %}
+        {%- render 'lazy-image', image: collectionImage, class: 'page-banner__img' -%}
+      {% endif %}
+      {% if section.settings.heading_overy %}
+        <div class="page-content">
+          {% if section.settings.collection_title == true %}
+            <div class="container">
+              <div class="page-content__text">
+                <h2 class="section--{{ section.id }} page-content__title ">{{ collection.title }}</h2>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% render 'breadcrumb' %}
+
+  {% capture collectionContent %}
+  {%- if section.settings.heading_overy == false and section.settings.collection_title == true -%}
+    <div class="page-content__text">
+      <h2 class="page-content__title">{{- collection.title -}}</h2>
+    </div>
+  {%- endif -%}
+  {%- if section.settings.collection_description and collection.description != blank -%}
+    <div class="collection-description rte">
+      {{-
+        collection.description
+        | replace: '<table', '<div class="table-responsive"><table'
+        | replace: '</table>', '</table></div>'
+      -}}
+    </div>
+  {%- endif -%}
+  {% endcapture %}
+  {% if collectionContent != blank %}
+    <div class="page-content">
+      <div class="container">{{ collectionContent }}</div>
+    </div>
+  {% endif %}
+
+  {% if section.settings.enable_filtering and collection.filters.size > 0 %}
+    {% render 'collection-filter', results: collection, clearAll: collection.url %}
+  {% else %}
+    <form id="FiltersForm" class="filterby__list"></form>
+  {% endif %}
+  <div class="collection-list__container {{ sort_by }}" id="CollectionProductsContainer" data-id="{{ section.id }}">
+    <div class="container">
+      <div class="collection-list__topbar">
+        <div class="topbar__left">
+          <p class="products-count text-small">
+            {{ 'sections.collection_template.product_count_simple' | t: count: collection.products_count }}
+          </p>
+        </div>
+        {% if collection.all_products_count > 0 %}
+          {% liquid
+            assign sortFilterClass = ''
+            if collection.filters.size > 0 and section.settings.enable_filtering == true and section.settings.enable_sorting == true
+              assign sortFilterClass = 'both-enabled'
+            elsif section.settings.enable_filtering == false or section.settings.enable_sorting == false
+              assign sortFilterClass = 'single-enabled'
+            endif
+          %}
+          {% liquid
+            assign filterSortShow = false
+            if collection.filters.size > 0 and section.settings.enable_filtering == true
+              assign filterSortShow = true
+            endif
+            if section.settings.enable_sorting == true
+              assign filterSortShow = true
+            endif
+          %}
+          {% if filterSortShow %}
+            <div class="topbar__right">
+              <div class="collection-list__filtersbar {{sortFilterClass}}">
+                {% if collection.filters.size > 0 and section.settings.enable_filtering == true %}
+                  <div class="filterby">
+                    <div class="filterby__box">
+                      <a
+                        href="#filters-sidebar"
+                        class="unstyled-link filter-item text-small"
+                        data-filter-sidebar
+                        data-side-drawer-open
+                      >
+                        <span class="filter-icon">
+                          <svg width="18" height="15" viewBox="0 0 18 15" fill="currentColor">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18 3.00245C18 2.73723 17.8946 2.48288 17.7071 2.29534C17.5196 2.10781 17.2652 2.00245 17 2.00245L15.83 2.00245C15.6234 1.41692 15.2403 0.909884 14.7334 0.55124C14.2265 0.192596 13.6209 -1.91416e-07 13 -2.18557e-07C12.3791 -2.45698e-07 11.7735 0.192596 11.2666 0.55124C10.7597 0.909884 10.3766 1.41692 10.17 2.00245L1 2.00245C0.734783 2.00245 0.480429 2.10781 0.292892 2.29534C0.105356 2.48288 -1.19648e-07 2.73723 -1.31241e-07 3.00245C-1.42834e-07 3.26767 0.105356 3.52202 0.292892 3.70956C0.480429 3.89709 0.734783 4.00245 1 4.00245L10.17 4.00245C10.3766 4.58798 10.7597 5.09502 11.2666 5.45366C11.7735 5.8123 12.3791 6.0049 13 6.0049C13.6209 6.0049 14.2265 5.8123 14.7334 5.45366C15.2403 5.09502 15.6234 4.58798 15.83 4.00245L17 4.00245C17.2652 4.00245 17.5196 3.89709 17.7071 3.70956C17.8946 3.52202 18 3.26767 18 3.00245ZM13 4.00245C12.7348 4.00245 12.4804 3.89709 12.2929 3.70956C12.1054 3.52202 12 3.26767 12 3.00245C12 2.73723 12.1054 2.48288 12.2929 2.29534C12.4804 2.10781 12.7348 2.00245 13 2.00245C13.2652 2.00245 13.5196 2.10781 13.7071 2.29534C13.8946 2.48288 14 2.73723 14 3.00245C14 3.26767 13.8946 3.52202 13.7071 3.70956C13.5196 3.89709 13.2652 4.00245 13 4.00245ZM18 11.0025C18 10.7372 17.8946 10.4829 17.7071 10.2953C17.5196 10.1078 17.2652 10.0025 17 10.0025L8.83 10.0025C8.6234 9.41692 8.24026 8.90988 7.7334 8.55124C7.22654 8.19259 6.62091 8 6 8C5.37909 8 4.77346 8.19259 4.2666 8.55124C3.75974 8.90988 3.3766 9.41692 3.17 10.0025L1 10.0025C0.734783 10.0025 0.480428 10.1078 0.292892 10.2953C0.105356 10.4829 -4.69339e-07 10.7372 -4.80932e-07 11.0025C-4.92525e-07 11.2677 0.105356 11.522 0.292892 11.7096C0.480428 11.8971 0.734783 12.0025 0.999999 12.0025L3.17 12.0025C3.3766 12.588 3.75974 13.095 4.2666 13.4537C4.77346 13.8123 5.37909 14.0049 6 14.0049C6.62091 14.0049 7.22654 13.8123 7.7334 13.4537C8.24026 13.095 8.6234 12.588 8.83 12.0025L17 12.0025C17.2652 12.0025 17.5196 11.8971 17.7071 11.7096C17.8946 11.522 18 11.2677 18 11.0025ZM6 12.0025C5.73478 12.0025 5.48043 11.8971 5.29289 11.7096C5.10536 11.522 5 11.2677 5 11.0025C5 10.7372 5.10536 10.4829 5.29289 10.2953C5.48043 10.1078 5.73478 10.0025 6 10.0025C6.26522 10.0025 6.51957 10.1078 6.70711 10.2953C6.89464 10.4829 7 10.7372 7 11.0025C7 11.2677 6.89464 11.522 6.70711 11.7096C6.51957 11.8971 6.26522 12.0025 6 12.0025Z"/>
+                          </svg>
+                        </span>
+                        {{- 'sections.collection_template.filter_title' | t }}
+                      </a>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if section.settings.enable_sorting == true %}
+                  <div class="sortby" id="toolbox-sort">
+                    <details class="collection-sortby-selected detail-box sortby__box">
+                      <summary class="detail-summary filter-item text-small">
+                        <span class="filter-icon">
+                          <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                            <path d="M0 0H16V2H0V0Z" fill="currentColor"/>
+                            <path d="M0 4H12V6H0V4Z" fill="currentColor"/>
+                            <path d="M0 8H8V10H0V8Z" fill="currentColor"/>
+                          </svg>
+                        </span>
+                        {{- 'sections.collection_template.sort_by_label' | t }}
+                      </summary>
+                      <div class="detail-expand sortby__list">
+                        <div class="sortby__heading-box d-flex d-md-none ">
+                          <p class="sortby__heading-mobile">
+                            <span class="filter-icon">
+                              <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                                <path d="M0 0H16V2H0V0Z" fill="currentColor"></path>
+                                <path d="M0 4H12V6H0V4Z" fill="currentColor"></path>
+                                <path d="M0 8H8V10H0V8Z" fill="currentColor"></path>
+                              </svg>
+                            </span>
+                            {{- 'sections.collection_template.sort_by_label' | t }}
+                          </p>
+                          <svg
+                            class="filter-close-mobile"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="currentColor"
+                          >
+                            <path d="M21.7987 20.826L11.9721 10.9958L21.7987 1.16552C22.0561 0.899047 22.0561 0.476499 21.7987 0.20994C21.5349 -0.0632507 21.0997 -0.0708067 20.8266 0.193065L11 10.0233L1.17343 0.193149C0.907055 -0.0642582 0.484664 -0.0642582 0.218204 0.193149C-0.0548867 0.457021 -0.0624398 0.892415 0.201335 1.16561L10.0279 10.9958L0.201335 20.826C0.0724268 20.9549 1.71925e-08 21.1298 1.71925e-08 21.3122C-8.39964e-05 21.692 0.307751 21.9999 0.687425 22C0.869793 22.0002 1.04469 21.9276 1.17343 21.7984L11 11.9682L20.8266 21.7985C20.9553 21.9277 21.1303 22.0002 21.3127 22C21.4949 21.9999 21.6696 21.9275 21.7985 21.7987C22.0671 21.5301 22.0672 21.0946 21.7987 20.826Z"></path>
+                          </svg>
+                        </div>
+                        <ul id="sort__list" class="list-unstyled ">
+                          {%- for option in collection.sort_options -%}
+                            <li class="sortby__list-item {% if option.value == sort_by %}selected{% endif %}">
+                              <div class="custom-checkbox radio-box">
+                                <input
+                                  class="checkmark-input"
+                                  type="radio"
+                                  name="sort_by"
+                                  id="sortByOption-{{ forloop.index }}"
+                                  value="{{ option.value | escape }}"
+                                  data-name="{{ option.name | escape }}"
+                                  form="FiltersForm"
+                                  {% if option.value == sort_by %}
+                                    checked
+                                  {% endif %}
+                                >
+                                <span class="checkmark"></span>
+                                <label for="sortByOption-{{ forloop.index }}">{{ option.name | escape }}</label>
+                              </div>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                        <noscript>
+                          <div class="text-center" style="padding: 0 20px">
+                            <button class="button xsmall-btn btn-block" form="FiltersForm">
+                              {{ 'sections.collection_template.apply' | t }}
+                            </button>
+                          </div>
+                        </noscript>
+                      </div>
+                    </details>
+                  </div>
+                {% endif %}
+               <div class="abz_custom_text">
+                 : Relevance
+               </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+      {%- capture activeFilters -%}
+          {%- for filter in collection.filters -%}
+            {%- for value in filter.active_values -%}
+              <li class="applied__filter-item">
+                <a class="unstyled-link applied__filter-link mg-applied-filter-remove" href="{{ value.url_to_remove }}">
+                  <span>
+                    <svg viewBox="0 0 23.1 23.08" fill="currentColor">
+                      <g>
+                        <path d="m13.3,11.55L22.75,2.09c.46-.48.46-1.23,0-1.72-.23-.23-.54-.36-.87-.36h-.01c-.33,0-.65.13-.88.35l-9.44,9.44L2.1.35c-.48-.47-1.23-.46-1.72,0C.15.58.01.9,0,1.23c0,.33.12.65.35.89l9.43,9.43L.36,20.99c-.23.24-.36.55-.36.87s.12.64.36.87c.44.44,1.31.44,1.75,0l9.44-9.44,9.44,9.44c.22.22.54.35.87.35s.65-.13.87-.35c.23-.23.36-.55.36-.88s-.13-.64-.36-.87l-9.43-9.43Z"></path>
+                      </g>
+                    </svg>
+                  </span>   {{- value.label | escape -}}
+                </a>
+              </li>
+            {%- endfor -%}
+            {% if filter.type == 'price_range' %}
+              {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+                <li class="applied__filter-item">
+                  <a class="unstyled-link applied__filter-link mg-applied-filter-remove" href="{{ filter.url_to_remove }}">
+                    <span >
+                      <svg viewBox="0 0 23.1 23.08" fill="currentColor">
+                        <g>
+                          <path d="m13.3,11.55L22.75,2.09c.46-.48.46-1.23,0-1.72-.23-.23-.54-.36-.87-.36h-.01c-.33,0-.65.13-.88.35l-9.44,9.44L2.1.35c-.48-.47-1.23-.46-1.72,0C.15.58.01.9,0,1.23c0,.33.12.65.35.89l9.43,9.43L.36,20.99c-.23.24-.36.55-.36.87s.12.64.36.87c.44.44,1.31.44,1.75,0l9.44-9.44,9.44,9.44c.22.22.54.35.87.35s.65-.13.87-.35c.23-.23.36-.55.36-.88s-.13-.64-.36-.87l-9.43-9.43Z"></path>
+                        </g>
+                      </svg>
+                    </span>
+                    {%- if filter.min_value.value -%}
+                      {{ filter.min_value.value | money }}
+                    {%- else -%}
+                      {{ 0 | money }}
+                    {%- endif -%}
+                    -
+                    {%- if filter.max_value.value -%}
+                      {{ filter.max_value.value | money }}
+                    {%- else -%}
+                      {{ filter.range_max | money }}
+                    {%- endif -%}
+                  
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+      <div class="collection-list__products product-card-outer">
+        {%- if activeFilters != blank -%}
+          <ul class="applied__filters list-unstyled" data-products-applied-filter>
+            {{ activeFilters }}
+            <li class="applied__filter-item">
+              <a
+                class="unstyled-link applied__filter-link applied__filters-clear mg-applied-filter-remove"
+                href="{{ collection.url }}"
+                mg-applied-filter-cross-all
+              >
+                <span>
+                  <svg width="17" height="13" viewBox="0 0 17 13" fill="none">
+                    <path d="M6.08384 12.2352C6.05671 12.2352 6.02879 12.2298 6.00322 12.2172C5.93422 12.1849 5.89001 12.1156 5.89001 12.0384V6.73893L1.0474 1.08983C0.997815 1.03155 0.986105 0.949687 1.01714 0.879614C1.04896 0.809544 1.11718 0.764648 1.19321 0.764648H12.2771C12.3531 0.764648 12.4221 0.809544 12.4531 0.879614C12.4849 0.949685 12.4725 1.03234 12.4229 1.08983L7.5803 6.73893V10.8929C7.5803 10.9495 7.55629 11.0039 7.51364 11.0416L6.20954 12.1872C6.1747 12.2187 6.12961 12.2352 6.08384 12.2352ZM1.61875 1.15752L6.2295 6.5359C6.25976 6.57207 6.27684 6.61776 6.27684 6.66494V11.6087L7.19397 10.8032V6.6658C7.19397 6.61862 7.21095 6.57293 7.2412 6.53676L11.852 1.15838L1.61875 1.15752Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.19397 10.8032V6.6658C7.19397 6.61862 7.21095 6.57293 7.2412 6.53676L11.852 1.15838L1.61949 1.15838L6.2295 6.5359C6.25976 6.57207 6.27684 6.61776 6.27684 6.66494V11.6087L7.19397 10.8032ZM10.9822 1.55838L6.93752 6.27642L6.93437 6.28013C6.84537 6.38655 6.79397 6.52258 6.79397 6.6658V10.6222L6.67684 10.725V6.66494C6.67684 6.52116 6.62497 6.38526 6.53634 6.27928L2.48927 1.55838H10.9822ZM5.89001 12.0384C5.89001 12.1156 5.93422 12.1849 6.00322 12.2172C6.02879 12.2298 6.05671 12.2352 6.08384 12.2352C6.12961 12.2352 6.1747 12.2187 6.20954 12.1872L7.51364 11.0416C7.55629 11.0039 7.5803 10.9495 7.5803 10.8929V6.73893L12.4229 1.08983C12.4725 1.03234 12.4849 0.949685 12.4531 0.879614C12.4221 0.809544 12.3531 0.764648 12.2771 0.764648H1.19321C1.11718 0.764648 1.04896 0.809544 1.01714 0.879614C0.986105 0.949687 0.997815 1.03155 1.0474 1.08983L5.89001 6.73893V12.0384ZM5.8302 12.5779C5.62202 12.4788 5.49001 12.269 5.49001 12.0384V6.88691L0.742734 1.34902C0.593072 1.17311 0.558486 0.927425 0.65141 0.717625L0.652913 0.714233C0.747711 0.505453 0.955738 0.364648 1.19321 0.364648H1.38975L1.40579 0.294523L1.46591 0.364648H12.2771C12.5113 0.364648 12.723 0.502622 12.8181 0.716139C12.9137 0.928455 12.8762 1.17622 12.7263 1.35051C12.7261 1.35069 12.7265 1.35032 12.7263 1.35051L7.9803 6.88691V10.8929C7.9803 11.0622 7.90857 11.2262 7.7788 11.3411L7.77763 11.3421L6.4751 12.4864C6.36441 12.5852 6.22386 12.6352 6.08384 12.6352C6.00535 12.6352 5.91696 12.6198 5.8302 12.5779Z" fill="currentColor"/>
+                    <path d="M12.4046 11C12.3013 11 12.198 10.9612 12.1187 10.8821C11.9604 10.7237 11.9604 10.4702 12.1187 10.312L15.3109 7.11864C15.4693 6.96045 15.7229 6.96045 15.8813 7.11864C16.0396 7.27702 16.0396 7.53219 15.8813 7.68894L12.6889 10.8821C12.6112 10.9595 12.5081 11 12.4046 11Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9772 11.0234C11.741 10.787 11.7409 10.4069 11.9772 10.1706C11.9772 10.1706 11.9772 10.1706 11.9772 10.1706L15.1694 6.97724C15.406 6.7411 15.7861 6.74096 16.0227 6.97711C16.2584 7.21306 16.2597 7.59521 16.0225 7.83066C16.0223 7.83078 16.0226 7.83053 16.0225 7.83066L12.8303 11.0235C12.7144 11.1391 12.5599 11.2 12.4046 11.2C12.251 11.2 12.0958 11.1417 11.9772 11.0234ZM15.8813 7.68894C16.0396 7.53219 16.0396 7.27702 15.8813 7.11864C15.7229 6.96045 15.4693 6.96045 15.3109 7.11864L12.1187 10.312C11.9604 10.4702 11.9604 10.7237 12.1187 10.8821C12.198 10.9612 12.3013 11 12.4046 11C12.5081 11 12.6112 10.9595 12.6889 10.8821L15.8813 7.68894Z" fill="currentColor"/>
+                    <path d="M15.5968 11C15.4935 11 15.3902 10.9612 15.3109 10.8821L12.1187 7.68894C11.9604 7.53219 11.9604 7.27702 12.1187 7.11864C12.2771 6.96045 12.5305 6.96045 12.6889 7.11864L15.8813 10.312C16.0396 10.4702 16.0396 10.7237 15.8813 10.8821C15.8036 10.9595 15.7003 11 15.5968 11Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1694 11.0235L11.9779 7.83102C11.9778 7.8309 11.978 7.83115 11.9779 7.83102C11.7407 7.59558 11.7415 7.21323 11.9772 6.97729C12.2137 6.74115 12.5937 6.74096 12.8302 6.97711L16.0227 10.1705C16.2591 10.4069 16.259 10.787 16.0228 11.0234C15.9068 11.1391 15.752 11.2 15.5968 11.2C15.4432 11.2 15.2881 11.1418 15.1694 11.0235ZM15.8813 10.8821C16.0396 10.7237 16.0396 10.4702 15.8813 10.312L12.6889 7.11864C12.5305 6.96045 12.2771 6.96045 12.1187 7.11864C11.9604 7.27702 11.9604 7.53219 12.1187 7.68894L15.3109 10.8821C15.3902 10.9612 15.4935 11 15.5968 11C15.7003 11 15.8036 10.9595 15.8813 10.8821Z" fill="currentColor"/>
+                  </svg>
+                </span>
+                {{- 'sections.collection_template.clear_all' | t -}}
+              </a>
+            </li>
+          </ul>
+        {%- endif -%}
+        {% paginate collection.products by section.settings.products_per_page %}
+          {% if collection.products_count > 0 %}
+            <div class="row no-gutters" data-collection-products>
+              {% for product in collection.products %}
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                  {% render 'product-grid',
+                    product: product,
+                    gridImageSize: section.settings.grid_image_size,
+                    index: forloop.index0
+                  %}
+                </div>
+              {% endfor %}
+
+              {%- if section.settings.infinte_scroll -%}
+                {% if paginate.next %}
+                  {% if section.settings.infinte_scroll_type == 'onscroll' %}
+                    <div class="infinte-scroll" data-scroll>
+                      <a href="{{ paginate.next.url }}" aria-label="{{ 'accessibility.loading' | t }}"></a>
+                      <div class="load hidden">
+                        <svg
+                          width="40"
+                          height="40"
+                          style="shape-rendering: auto; animation-play-state: running; animation-delay: 0s; background: none;"
+                          viewBox="0 0 100 100"
+                          preserveAspectRatio="xMidYMid"
+                        >
+                          <circle cx="50" cy="50" fill="none" stroke="#d9e2ed" stroke-width="6" r="35"
+                                  stroke-dasharray="164.93361431346415 56.97787143782138"
+                                  style="animation-play-state: running; animation-delay: 0s;"
+                                  transform="rotate(115.597 50 50)">
+                            <animateTransform attributeName="transform" type="rotate" calcMode="linear"
+                                              values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s"
+                                              repeatCount="indefinite">
+                            </animateTransform>
+                          </circle>
+                        </svg>
+                      </div>
+                    </div>
+                  {% else %}
+                    <div class="infinte-scroll laod-more" data-load-more>
+                      <a
+                        class="collection-load-more button xsmall-btn"
+                        href="{{ paginate.next.url }}"
+                        aria-label="{{ 'general.loading' | t }}"
+                      >
+                        {{- 'general.loading' | t -}}
+                      </a>
+                      <div class="load hidden">
+                        <svg
+                          width="40"
+                          height="40"
+                          style="shape-rendering: auto; animation-play-state: running; animation-delay: 0s; background: none;"
+                          viewBox="0 0 100 100"
+                          preserveAspectRatio="xMidYMid"
+                        >
+                          <circle cx="50" cy="50" fill="none" stroke="#d9e2ed" stroke-width="6" r="35"
+                                  stroke-dasharray="164.93361431346415 56.97787143782138"
+                                  style="animation-play-state: running; animation-delay: 0s;"
+                                  transform="rotate(115.597 50 50)">
+                            <animateTransform attributeName="transform" type="rotate" calcMode="linear"
+                                              values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s"
+                                              repeatCount="indefinite">
+                            </animateTransform>
+                          </circle>
+                        </svg>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              {% else %}
+                {%- if paginate.pages > 1 -%}
+                  {% render 'pagination', paginate: paginate, anchor: '' %}
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          {% else %}
+            <div class="collection__empty empty__state-box">
+              {% render 'empty-icon' %}
+              <h4 class="empty__state-heading">{{- 'sections.collection_template.filter_result' | t -}}</h4>
+            </div>
+          {% endif %}
+        {% endpaginate %}
+      </div>
+    </div>
+  </div>
+</div>            
+<script src="{{ 'filters.js' | asset_url }}" defer="defer"></script>
+<style>
+  {%- liquid
+    assign opacity = section.settings.overlay_opacity | divided_by: 100.0
+  -%}
+  #shopify-section-{{ section.id }}{
+    --mainBannerHeight:{{ section.settings.banner_height_desktop }};
+    --banner-background: {{ section.settings.bannerbgcolor }};
+    --banner-overlay-bg:{{ section.settings.bgcoloropacity }};
+    --banner-overlay-text:{{ section.settings.textcolor }};
+    --banner-overlay-opacity:{{ opacity }};
+  }
+  #shopify-section-{{ section.id }} .section-wrapper {
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+  #shopify-section-{{ section.id }} .product-card-item{
+    --image-fit:{{ section.settings.grid_image_fit}};
+  }
+  {% if section.settings.banner_height_desktop == 'auto' %}
+    #shopify-section-{{ section.id }} .page-banner{
+      padding:0;
+      {% if showCollectionImage == true %}
+        padding-bottom:{{- 1 | divided_by : collectionImage.aspect_ratio | times: 100 -}}%;
+      {% else %}
+      padding-bottom:25%;
+      {% endif %}
+    }
+  {% endif %}
+  @media screen and (max-width:767px){
+    #shopify-section-{{ section.id }}{
+      --mainBannerHeight:{{ section.settings.banner_height_mobile }};
+    }
+    #shopify-section-{{ section.id }} .topbar__right{
+      --body-bg:{{ section.settings.filter_bar_background }};
+      --body-text-color:{{ section.settings.filter_bar_text }};
+    }
+    #shopify-section-{{ section.id }} .section-wrapper {
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+    {% if section.settings.banner_height_mobile == 'auto' %}
+      #shopify-section-{{ section.id }} .page-banner{
+        padding:0;
+        {% if showCollectionImage == true %}
+          padding-bottom:{{- 1 | divided_by : collectionImage.aspect_ratio | times: 100 -}}%;
+        {% else %}
+        padding-bottom:50%;
+        {% endif %}
+      }
+    {% endif %}
+  }
+
+  .abz_collection_main .page-banner.overlay-text .page-content .section--{{ section.id }} {
+    color:{{ section.settings.color_id }};
+    text-transform:uppercase;
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.collection.name",
+  "tag": "section",
+  "class": "collection-list-section abz_collection_main",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.collection.settings.banner_content.header.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_image",
+      "default": false,
+      "label": "t:sections.collection.settings.banner_content.enable_banner_image.label",
+      "info": "t:sections.collection.settings.banner_content.enable_banner_image.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "t:sections.collection.settings.banner_content.custom_banner_image.label",
+      "info": "t:sections.collection.settings.banner_content.custom_banner_image.info"
+    },
+    {
+      "type":"color",
+      "id":"color_id",
+      "label":"Heading Color",
+      "default":"#fff"
+    },
+    {
+      "type": "select",
+      "id": "banner_height_desktop",
+      "label": "t:common.banner.desktop_height.label",
+      "default": "300px",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.banner.height.options.auto.label"
+        },
+        {
+          "value": "200px",
+          "label": "t:common.banner.height.options.small.label"
+        },
+        {
+          "value": "300px",
+          "label": "t:common.banner.height.options.medium.label"
+        },
+        {
+          "value": "550px",
+          "label": "t:common.banner.height.options.large.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "banner_height_mobile",
+      "label": "t:common.banner.mobile_height.label",
+      "default": "200px",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.banner.height.options.auto.label"
+        },
+        {
+          "value": "100px",
+          "label": "t:common.banner.height.options.small.label"
+        },
+        {
+          "value": "200px",
+          "label": "t:common.banner.height.options.medium.label"
+        },
+        {
+          "value": "350px",
+          "label": "t:common.banner.height.options.large.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.collection.settings.collection.header.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_title",
+      "default": false,
+      "label": "t:sections.collection.settings.collection.show_collection_title.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_overy",
+      "label": "t:sections.collection.settings.collection.title_overlay.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_description",
+      "default": false,
+      "label": "t:sections.collection.settings.collection.show_description.label"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "default": 16,
+      "label": "t:sections.collection.settings.collection.products_per_page.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "infinte_scroll",
+      "default": true,
+      "label": "t:sections.collection.settings.infinte_scroll.label"
+    },
+    {
+      "type": "select",
+      "id": "infinte_scroll_type",
+      "label": "t:sections.collection.settings.infinte_scroll_type.label",
+      "default": "onscroll",
+      "options": [
+        {
+          "value": "onscroll",
+          "label": "t:sections.collection.settings.infinte_scroll_type.options.onscroll.label"
+        },
+        {
+          "value": "onbutton",
+          "label": "t:sections.collection.settings.infinte_scroll_type.options.onbutton.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "grid_image_size",
+      "label": "t:common.grid_image_size.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.grid_image_size.options.auto.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:common.grid_image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:common.grid_image_size.options.portrait.label"
+        },
+        {
+          "value": "square",
+          "label": "t:common.grid_image_size.options.square.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "grid_image_fit",
+      "label": "t:common.grid_image_fit.label",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "t:common.grid_image_fit.options.cover.label"
+        },
+        {
+          "value": "contain",
+          "label": "t:common.grid_image_fit.options.contain.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.collection.settings.filter_and_sorting.header.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.collection.settings.filter_and_sorting.enable_filtering.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.collection.settings.filter_and_sorting.enable_sorting.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gradiant",
+      "label": "t:common.gradient.label",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "bannerbgcolor",
+      "default": "#202020",
+      "label": "t:sections.collection.settings.banner_background.label"
+    },
+    {
+      "type": "color",
+      "id": "bgcoloropacity",
+      "default": "#EEEEEE",
+      "label": "t:sections.collection.settings.banner_overlay_background.label"
+    },
+    {
+      "type": "color",
+      "id": "textcolor",
+      "default": "#4C4C4C",
+      "label": "t:sections.collection.settings.overlay_heading.label",
+      "info": "t:sections.collection.settings.overlay_heading.info"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:sections.collection.settings.banner_overlay_opacity.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.collection.settings.filter_bar_mobile.label"
+    },
+    {
+      "type": "color",
+      "id": "filter_bar_background",
+      "default": "#000000",
+      "label": "t:sections.collection.settings.filter_bar_background.label"
+    },
+    {
+      "type": "color",
+      "id": "filter_bar_text",
+      "default": "#ffffff",
+      "label": "t:sections.collection.settings.filter_bar_text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 30,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 20,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ]
+}
+
+
+{% endschema %}

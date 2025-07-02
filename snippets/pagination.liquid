@@ -1,0 +1,35 @@
+
+
+<ul class="list-unstyled pagination">
+    <li class="pagination__item pagination__icon{% unless paginate.previous %} disabled{% endunless %}">
+      <{% if paginate.previous %}a href="{{ paginate.previous.url }}{{ anchor }}" aria-label="{{ 'general.pagination.previous' | t }}" {% else %}p{% endif %} class="pagination__link">
+        <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor">
+            <path d="M4.3 0.3C4.7 -0.1 5.3 -0.1 5.7 0.3C6.1 0.7 6.1 1.3 5.7 1.7L2.4 5L5.7 8.3C5.9 8.5 6 8.7 6 9C6 9.6 5.6 10 5 10C4.7 10 4.5 9.9 4.3 9.7L0.3 5.7C-0.0999999 5.3 -0.0999999 4.7 0.3 4.3L4.3 0.3Z" fill="currentColor"></path>
+        </svg>
+      </{% if paginate.previous %}a{% else %}p{% endif %}>
+    </li>
+    {% for part in paginate.parts %}
+    {% if part.is_link %}
+    <li class="pagination__item">
+      <a href="{{ part.url }}{{ anchor }}" class="unstyled-link pagination__link" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{part.title}}</a>
+    </li>
+    {%- else -%}
+    {%- if part.title == paginate.current_page -%}
+    <li class="pagination__item active">
+        <p class="pagination__text">{{ part.title }}</p>
+    </li> 
+    {%- else -%}  
+    <li class="pagination__item">
+        <p class="pagination__text">{{ part.title }}</p>
+    </li>  
+    {%- endif -%}
+    {% endif %}
+    {% endfor %}
+    <li class="pagination__item pagination__icon {% unless paginate.next %} disabled{% endunless %}">
+      <{% if paginate.next %}a href="{{ paginate.next.url }}{{ anchor }}" aria-label="{{ 'general.pagination.next' | t }}" {% else %}p{% endif %} class="pagination__link">
+      <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor">
+        <path d="M1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.0999998 0.7 -0.0999998 1.3 0.3 1.7L3.6 5L0.3 8.3C0.1 8.5 0 8.7 0 9C0 9.6 0.4 10 1 10C1.3 10 1.5 9.9 1.7 9.7L5.7 5.7C6.1 5.3 6.1 4.7 5.7 4.3L1.7 0.3Z" fill="currentColor"></path>
+      </svg>
+      </{% if paginate.next %}a{% else %}p{% endif %}>
+    </li>
+  </ul>

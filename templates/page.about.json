@@ -1,0 +1,116 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "8dd0cd5a-1548-4c1b-bdaa-c7bba90461af": {
+      "type": "rich-text",
+      "blocks": {
+        "template--18467116450114__8dd0cd5a-1548-4c1b-bdaa-c7bba90461af-16800756037d527e1f-0": {
+          "type": "heading",
+          "settings": {}
+        },
+        "template--18467116450114__8dd0cd5a-1548-4c1b-bdaa-c7bba90461af-16800756037d527e1f-1": {
+          "type": "text",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--18467116450114__8dd0cd5a-1548-4c1b-bdaa-c7bba90461af-16800756037d527e1f-0",
+        "template--18467116450114__8dd0cd5a-1548-4c1b-bdaa-c7bba90461af-16800756037d527e1f-1"
+      ],
+      "settings": {}
+    },
+    "a539f9ee-caa3-40da-9c65-0558272a1897": {
+      "type": "multi-image-with-text",
+      "blocks": {
+        "template--18467116450114__a539f9ee-caa3-40da-9c65-0558272a1897-1680075634e0e6f188-0": {
+          "type": "heading",
+          "settings": {}
+        },
+        "template--18467116450114__a539f9ee-caa3-40da-9c65-0558272a1897-1680075634e0e6f188-1": {
+          "type": "text",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--18467116450114__a539f9ee-caa3-40da-9c65-0558272a1897-1680075634e0e6f188-0",
+        "template--18467116450114__a539f9ee-caa3-40da-9c65-0558272a1897-1680075634e0e6f188-1"
+      ],
+      "settings": {}
+    },
+    "5c34fb2d-1e08-4004-97e9-4c65600e5e16": {
+      "type": "Featured-content-columns",
+      "blocks": {
+        "012635e1-4d98-444f-a6d9-088e4a7a22f3": {
+          "type": "content",
+          "settings": {}
+        },
+        "c7957cf5-33b4-4d5d-bb78-ea15c7026a55": {
+          "type": "content",
+          "settings": {}
+        },
+        "336c6cba-0934-43c5-957f-37124da81d93": {
+          "type": "content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "012635e1-4d98-444f-a6d9-088e4a7a22f3",
+        "c7957cf5-33b4-4d5d-bb78-ea15c7026a55",
+        "336c6cba-0934-43c5-957f-37124da81d93"
+      ],
+      "settings": {}
+    },
+    "bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b": {
+      "type": "logo-bar",
+      "blocks": {
+        "template--18467116450114__bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b-16800757628b100e47-0": {
+          "type": "logo",
+          "settings": {}
+        },
+        "template--18467116450114__bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b-16800757628b100e47-1": {
+          "type": "logo",
+          "settings": {}
+        },
+        "template--18467116450114__bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b-16800757628b100e47-2": {
+          "type": "logo",
+          "settings": {}
+        },
+        "3c0fc76b-54d8-4f76-80f4-ce297fc8ad87": {
+          "type": "logo",
+          "settings": {}
+        },
+        "56c68235-9ffd-44d8-8606-35d02990ad54": {
+          "type": "logo",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--18467116450114__bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b-16800757628b100e47-0",
+        "template--18467116450114__bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b-16800757628b100e47-1",
+        "template--18467116450114__bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b-16800757628b100e47-2",
+        "3c0fc76b-54d8-4f76-80f4-ce297fc8ad87",
+        "56c68235-9ffd-44d8-8606-35d02990ad54"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "8dd0cd5a-1548-4c1b-bdaa-c7bba90461af",
+    "a539f9ee-caa3-40da-9c65-0558272a1897",
+    "5c34fb2d-1e08-4004-97e9-4c65600e5e16",
+    "bfa5a2e0-a0d4-4931-bbba-d2f66fa68a7b"
+  ]
+}

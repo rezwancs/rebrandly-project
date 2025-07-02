@@ -1,0 +1,123 @@
+.post-article-section {
+    --image-height: 350px;
+}
+
+.post-article__img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--image-bg);
+    border-radius: var(--image-radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.post-article__content {
+    max-width: 100%;
+    margin: 0 auto 20px;
+}
+
+.post-article__heading {
+    margin-bottom: 10px;
+}
+
+.post-article__others {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.post-article__desc {
+    border-top: 1px solid var(--divider-color);
+    padding-top: 30px;
+}
+
+.post-article__desc * {
+    margin-bottom: 10px
+}
+
+.post-article__comments,
+.comment-form {
+    margin-top: 30px;
+}
+
+.post-article__comment-fields {
+    margin-top: 17px;
+}
+
+.post-article__comment {
+    padding: 30px;
+    background-color: var(--body-alternate-bg);
+    margin: 17px 0;
+}
+
+.comment__author {
+    display: inline-block;
+    font-size: var(--med-text);
+    margin-right: 5px;
+}
+
+.comment__date {
+    display: inline-block;
+    font-size: var(--small-text);
+    opacity: 0.7;
+}
+
+.comment__content {
+    opacity: .7;
+    margin-top: 5px;
+}
+
+@media (min-width: 576px) {
+    .post-article__others .social-icons {
+        justify-content: flex-end;
+    }
+    .post-article__content {
+        max-width: 90%;
+    }
+}
+
+@media (min-width:768px) {
+    .post-article-section {
+        --image-height: 450px;
+    }
+    .post-article__img {
+        margin-bottom: 40px;
+    }
+}
+
+@media (min-width:1200px) {
+    .post-article-section {
+        --image-height: 550px;
+    }
+}
+
+@media (min-width:1441px) {
+    .post-article-section {
+        --image-height: 650px;
+    }
+    .post-article__content {
+        max-width: 80%;
+    }
+    .post-article__img {
+        margin-bottom: 60px;
+    }
+}
+
+@media (max-width: 767px) {
+    .post-article__related .row {
+        overflow: hidden;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+}
+
+@media (max-width: 575px) {
+    .post-article__heading {
+        font-size: var(--h3);
+    }
+    .post-article__others {
+        grid-template-columns: auto;
+    }
+}

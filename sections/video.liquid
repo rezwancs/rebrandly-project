@@ -1,0 +1,281 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'video-zoom-rtl.css' | asset_url }}">
+  {{ 'video-zoom-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'video-zoom.css' | asset_url }}">
+  {{ 'video-zoom.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<div
+  class="section-wrapper  {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}"
+  data-zoom-section
+>
+  <div class="video-zoom__outer">
+    <div class="video-zoom__overlay">
+      {% if section.settings.videourl != blank %}
+        <video data-video="reel" loop="" playsinline="" muted="" autoplay>
+          <source src="{{ section.settings.videourl.sources[1].url -}}" type="video/mp4">
+        </video>
+      {% else %}
+        <div class="image-wrapper" style="padding-bottom:50%">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="video-zoom-title">
+      {% if section.settings.heading != blank %}
+        {% if section.settings.style == 'shadow' %}
+          <h2
+            class="stroke-text stroke-1 h1-large video-zoom-heading rte {{ section.settings.font_family }}-font"
+          >
+            {{ section.settings.heading }}
+          </h2>
+          <h2
+            class="stroke-text stroke-2 h1-large video-zoom-heading rte {{ section.settings.font_family }}-font"
+          >
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+        <h2
+          class="h1-large video-zoom-heading rte{% if section.settings.style == 'highlight-text' %} highlight-text{% endif %} {{ section.settings.font_family }}-font"
+          {% if section.settings.style == 'highlight-text' %}
+            style="--outline-thickness:{{ section.settings.outline_thickness }}"
+          {% endif %}
+        >
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+    #shopify-section-{{ section.id }}{
+      --inner-space-top:{{ section.settings.top_space_desktop }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+      --text-shadow-color:{{ section.settings.text_shadow_color }};
+    }
+    @media only screen and (max-width:767px) {
+      #shopify-section-{{ section.id }}.shopify-section{
+        --inner-space-top:{{ section.settings.top_space_mobile }}px;
+        --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+      }
+      .video-zoom-heading {
+        font-size: var(--h1)
+      }
+    }
+    {% if section.settings.section_visibility == 'large' %}
+      @media (max-width: 767px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+    {% elsif section.settings.section_visibility == 'small' %}
+      @media (min-width: 768px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "t:sections.video.name",
+  "class": "section video-zoom-section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "video",
+      "id": "videourl",
+      "label": "t:sections.video.settings.video.label",
+      "info": "t:sections.video.settings.video.info"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.text.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.video.settings.video_text.label",
+      "default": "Video text here",
+      "info": "t:sections.video.settings.video_text.info"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "t:sections.video_banner.settings.masked_text.font_family.label",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:sections.video_banner.settings.masked_text.font_family.options.heading.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.video_banner.settings.masked_text.font_family.options.body.label"
+        }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:sections.video.settings.style.label",
+      "default": "shadow",
+      "info": "t:sections.video.settings.style.info",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.video.settings.style.options.none.label"
+        },
+        {
+          "value": "highlight-text",
+          "label": "t:sections.video.settings.style.options.highlight_text.label"
+        },
+        {
+          "value": "shadow",
+          "label": "t:sections.video.settings.style.options.shadow.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "outline_thickness",
+      "label": "t:common.outline_stroke.label",
+      "default": "1px",
+      "options": [
+        {
+          "value": "1px",
+          "label": "t:common.outline_stroke.options.thin.label"
+        },
+        {
+          "value": "2px",
+          "label": "t:common.outline_stroke.options.thick.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gradiant",
+      "label": "t:common.gradient.label",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "text_shadow_color",
+      "label": "t:sections.video.settings.text_shadow.label",
+      "info": "t:sections.video.settings.text_shadow.info",
+      "default": "#565656"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.video.presets.name"
+    }
+  ]
+}
+{% endschema %}
+{% javascript %}
+{% endjavascript %}

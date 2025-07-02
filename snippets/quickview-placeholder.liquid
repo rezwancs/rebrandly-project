@@ -1,0 +1,98 @@
+<div class="quickview__placeholder-box">
+  <div class="quickview__placeholder">
+    <svg viewBox="0 0 980.03 565" fill="#eee" class="d-none d-md-block">
+      <g>
+          <rect  width="246.21" height="278.2"/>
+          <rect  x="254.82" width="246.21" height="278.2"/>
+          <rect  x="529.03" width="451" height="34"/>
+          <rect  x="529.03" y="43" width="233" height="34"/>
+          <rect  x="529.03" y="87" width="154" height="34"/>
+          <rect  x="529.03" y="164" width="280" height="53"/>
+          <rect  x="529.03" y="254" width="327" height="53"/>
+          <rect  x="529.03" y="354" width="145" height="53"/>
+          <rect  x="529.03" y="419" width="451" height="53"/>
+          <rect  x="688.03" y="354" width="292" height="53"/>
+          <rect  y="286.8" width="246.21" height="278.2"/>
+          <rect  x="254.82" y="286.8" width="246.21" height="278.2"/>
+      </g>
+    </svg>
+    <svg viewBox="0 0 356.5 485" fill="#eee" class="d-block d-md-none">
+      <g>
+        <rect  width="356.5" height="283.81"></rect>
+        <rect  x=".04" y="300" width="255.09" height="21.31"></rect>
+        <rect  x=".04" y="330.27" width="195.99" height="21.31"></rect>
+        <rect  x=".04" y="361.17" width="129.54" height="21.31"></rect>
+        <rect  x=".04" y="401.26" width="82.01" height="35.99"></rect>
+        <rect  x=".04" y="449.01" width="355.99" height="35.99"></rect>
+        <rect  x="94.6" y="401.26" width="261.43" height="35.99"></rect>
+        </g>
+    </svg>
+  </div>
+</div>
+<style>
+      {% liquid
+        assign rtlEnable = false
+        if settings.content_direction
+          if settings.languanges_code != blank
+            if settings.languanges_code contains localization.language.iso_code
+              assign rtlEnable = true
+            endif
+          else
+            assign rtlEnable = true
+          endif
+        endif
+      %}
+      {% if rtlEnable %}
+      .quickview__placeholder svg{
+          transform: scale(-1, 1)
+      }
+  {% endif %}
+      .quickview__placeholder {
+          color: var(--body-alternate-bg)
+      }
+    .quickview__placeholder svg {
+        fill: currentColor;
+    }
+    .quickview__placeholder-box:after {
+        content: '';
+        width: 95%;
+        height: 100%;
+        top: 15px;
+        left: 15px;
+        position: absolute;
+        background-image: linear-gradient(90deg, var(--body-bg), var(--body-bg-xlight) 50%, var(--body-bg) 100%);
+        animation: gradloader 1.5s linear infinite;
+        background-size: 200% 200%;
+        background-image: linear-gradient(103deg, var(--body-bg-xlight) 46%, var(--body-bg-light) 52%, var(--body-bg-xlight) 57%);
+    }
+    @keyframes gradloader {
+        0% {
+            background-position: 200% 200%;
+        }
+        100% {
+            background-position:  0% 200%;
+        }
+    }
+    @media (min-width:768px){
+          .quickview__placeholder-box {
+              padding: 30px;
+          }
+          .quickview__placeholder {
+              max-width: 90%;
+              margin: 0 auto;
+          }
+      }
+      @media (min-width:1200px){
+          .quickview__placeholder {
+              max-width: 80%;
+          }
+      }
+    @media (min-width:1441px){
+          .quickview__placeholder-box {
+              padding: 60px;
+          }
+          .quickview__placeholder {
+              max-width: 70%;
+          }
+      }
+</style>

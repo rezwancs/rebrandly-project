@@ -1,0 +1,323 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'text-with-icons-rtl.css' | asset_url }}">
+  {{ 'text-with-icons-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'text-with-icons.css' | asset_url }}">
+  {{ 'text-with-icons.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+    <div class="text-with-icon__inner">
+      <div class="container">
+        <div class="row justify-content-center">
+          {%- for block in section.blocks -%}
+            <div
+              class="col-6 col-sm-6 col-md-6 {% if section.blocks.size > 3 %}col-lg-3{% else %}col-lg-4{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="text-with-icon__item{% if section.settings.enable_left %} icon-position-left{% endif %}">
+                <span class="text-with-icon__icon {{ section.settings.icon_size }}">
+                  {% if block.settings.custom_svg != blank %}
+                    {{ block.settings.custom_svg }}
+                  {% else %}
+                    {%- render 'icons', icon: block.settings.icon -%}
+                  {% endif %}
+                </span>
+                {%- if block.settings.heading != blank -%}
+                  <div class="text-with-icon__content">
+                    <h6 class="text-with-icon__heading text-medium">
+                      {{ block.settings.heading }}
+                    </h6>
+                     <p class="abz_text">{{ block.settings.text_abz }}</p>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+  }
+  {% if section.settings.section_visibility == 'large' %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% elsif section.settings.section_visibility == 'small' %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "ABZ Text With Icon",
+  "tag": "section",
+  "class": "text-with-icon-section abz-text-with-icon",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_left",
+      "default": false,
+      "label": "t:sections.text_with_icon.settings.show_icon_left.label"
+    },
+    {
+      "type": "select",
+      "id": "icon_size",
+      "label": "t:sections.text_with_icon.settings.icon_size.label",
+      "default": "small",
+      "options": [
+        {
+          "label": "t:sections.text_with_icon.settings.icon_size.options.small",
+          "value": "small"
+        },
+        {
+          "label": "t:sections.text_with_icon.settings.icon_size.options.medium",
+          "value": "medium"
+        },
+        {
+          "label": "t:sections.text_with_icon.settings.icon_size.options.large",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_singular_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "secondary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gradiant",
+      "label": "t:common.gradient.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 30,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 30,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "t:sections.text_with_icon.blocks.column.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.text_with_icon.blocks.column.settings.icon.label",
+          "default": "shipping",
+          "options": [
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.chat.label",
+              "value": "chat"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.eye.label",
+              "value": "eye"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.file.label",
+              "value": "file"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.gift.label",
+              "value": "gift"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.global.label",
+              "value": "global"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.heart.label",
+              "value": "heart"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.phone.label",
+              "value": "phone"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.refund.label",
+              "value": "refund"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.search.label",
+              "value": "search"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.secure.label",
+              "value": "secure"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.shipping.label",
+              "value": "shipping"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.smile.label",
+              "value": "smile"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.support.label",
+              "value": "support"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.thumb.label",
+              "value": "thumb"
+            },
+            {
+              "label": "t:sections.text_with_icon.blocks.column.settings.icon.options.user.label",
+              "value": "user"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "custom_svg",
+          "label": "t:sections.text_with_icon.blocks.column.settings.custom_svg.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Add Heading here",
+          "label": "t:common.heading.label"
+        },
+        {
+          "type":"text",
+          "id":"text_abz",
+          "label":"Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ABZ Text With Icon",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,49 @@
+{% liquid
+  assign current_variant = target.selected_or_first_available_variant
+  assign compare_at_price = current_variant.compare_at_price
+  assign price = current_variant.price | default: 1999
+  assign money_price = price | money
+  assign price_size = priceSize | default: 'large'
+%}
+<div class="product-prizebox">
+  {% assign offText = 'products.product.off' | t %}
+  <span
+    class="product-actual-price {% if targetSection == 'spotlight' %}h4{% elsif stickySize %}text{% else %}{% if priceSize != blank %}text-{{priceSize}}{% else %}h5{% endif %}{% endif %}"
+    data-actual-price
+  >
+    {{- money_price -}}
+  </span>
+  <span
+    class="product-compare-price {% if targetSection == 'spotlight' %}text-medium{% else %}{% if priceSize != blank %}text-{{priceSize}}{% endif %}{% endif %} {% unless compare_at_price > price %}hidden{% endunless %}"
+    data-compare-price
+  >
+    {{- compare_at_price | money -}}
+  </span>
+  {% if settings.show_saved_amount %}
+    <span class="product-percent-off {% unless compare_at_price > price %}hidden{% endunless %}" data-price-saving>
+      {{-
+        compare_at_price
+        | minus: price
+        | times: 100.0
+        | divided_by: compare_at_price
+        | round
+        | append: '% '
+        | append: offText
+      -}}
+    </span>
+  {% endif %}
+  <span class="hidden">{{ 'products.product.price.unit_price' | t }}</span>
+  <span
+    class="product-unit-price {% if unitSize %}text-xsmall{% else %}text-small{% endif %} {% unless current_variant.unit_price_measurement %} hidden{% endunless %}"
+    data-unit-price
+  >
+    {{ current_variant.unit_price | money }} /
+    {% if current_variant.unit_price_measurement.reference_value != 1 -%}
+      {{- current_variant.unit_price_measurement.reference_value -}}
+    {%- endif %}
+    {{ current_variant.unit_price_measurement.reference_unit }}
+  </span>
+  <span data-soldout-text class="text-small hidden">
+    {%- unless current_variant.available -%}{{ 'products.product.sold_out' | t }}{%- endunless -%}
+  </span>
+</div>

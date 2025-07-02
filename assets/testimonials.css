@@ -1,0 +1,229 @@
+.testimonial-section {
+    overflow: hidden;
+}
+
+.testimonial__slider {
+    padding-top: 20px;
+}
+
+.testimonial__slider:not(.flickity-enabled) {
+    overflow: hidden;
+}
+
+.testimonial__slider-item {
+    padding: 0 10px;
+    width: 100%;
+    flex: 0 0 100%;
+}
+
+.testimonial__slider-content {
+    position: relative;
+    padding: 30px;
+    border: 1px solid var(--divider-color);
+    background: var(--body-alternate-bg);
+    height: 100%;
+}
+
+.testimonial__slider-review-desc {
+    margin-bottom: 20px;
+}
+
+.stacked-testimonials-carousel .testimonial__slider-review-desc {
+    margin-bottom: 15px;
+}
+
+.testimonial__slider-detail {
+    opacity: 0.7;
+}
+
+.testimonial__slider-review-head {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.testimonial__slider-review-star {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.testimonial__slider-content.text-left .testimonial__slider-review-star {
+    justify-content: flex-start;
+}
+
+.testimonial__slider-content.text-center .testimonial__slider-review-star {
+    justify-content: center;
+}
+
+.testimonial__slider-content.text-right .testimonial__slider-review-star {
+    justify-content: flex-end;
+}
+
+.testimonial__slider-review-star li {
+    width: 18px;
+    margin: 0 3px;
+    height: 16px;
+    display: flex;
+}
+
+.testimonial__slider-review-star li svg {
+    fill: currentColor;
+}
+
+.testimonial__slider .flickity-button {
+    border: 1px solid;
+}
+
+.testimonial__slider .flickity-prev-next-button.next {
+    right: calc(10px - 22px);
+}
+
+.testimonial__slider .flickity-prev-next-button.previous {
+    left: calc(10px - 22px);
+}
+
+.testimonial__slider.no-border .testimonial__slider-content,
+.testimonial__slider.no-border .flickity-button {
+    border: 0;
+}
+
+.stacked-testimonials-carousel .testimonial__slider {
+    display: flex;
+    overflow: visible;
+}
+
+.stacked-testimonials-carousel .testimonial__slider-item {
+    width: 90%;
+    flex: 0 0 90%;
+    -webkit-transition: -webkit-transform 350ms;
+    transition: transform 350ms;
+    transition: transform 350ms, -webkit-transform 350ms;
+}
+
+.slide_arrows {
+    display: flex;
+    padding: 0 15px;
+    padding-top: 20px;
+}
+
+.slide_arrow {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    background: var(--slider-arrow-bg);
+    color: var(--slider-arrow-color);
+    box-shadow: 0 0 6px #0000001f;
+}
+
+.slide_arrow_icon {
+    transition: .4s ease;
+    fill: currentColor;
+    width: 28px;
+}
+
+.quote {
+    padding-bottom: 20px;
+}
+
+.testimonial__slider-review-head span {
+    opacity: 0.5;
+}
+
+@media(min-width:768px) {
+    .testimonial__slider-item {
+        width: 50%;
+        flex: 0 0 50%;
+    }
+    .testimonial__slider.one-column {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    .one-column .testimonial__slider-item {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+    .one-column .testimonial__slider-item .testimonial__slider-content {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .testimonial__slider .flickity-prev-next-button.next {
+        right: calc(15px - 28px);
+    }
+    .testimonial__slider .flickity-prev-next-button.previous {
+        left: calc(15px - 28px);
+    }
+    .stacked-testimonials-carousel .testimonial__slider-item {
+        width: 60%;
+        flex: 0 0 60%;
+    }
+}
+
+@media(min-width:1025px) {
+    .testimonial__slider-content {
+        padding: 40px;
+    }
+    .testimonial__wrapper.stacked-testimonials-carousel .testimonial__slider-content {
+        padding: 40px 35px;
+    }
+    .slide_arrow.previous:hover .slide_arrow_icon {
+        margin-right: 10px;
+    }
+    .slide_arrow.next:hover .slide_arrow_icon {
+        margin-left: 10px;
+    }
+}
+
+@media(min-width:1200px) {
+    .testimonial__slider-item {
+        padding: 0 15px;
+    }
+    .testimonial__slider .flickity-prev-next-button.next {
+        right: calc(15px - 33px);
+    }
+    .testimonial__slider .flickity-prev-next-button.previous {
+        left: calc(15px - 33px);
+    }
+    .stacked-testimonials-carousel .testimonial__slider-item {
+        width: 45%;
+        flex: 0 0 45%;
+    }
+    .stacked-testimonials-carousel .testimonial__slider-review-desc {
+        margin-bottom: 30px;
+    }
+}
+
+@media(min-width:1441px) {
+    .testimonial__slider-content {
+        padding: 60px;
+    }
+    .testimonial__wrapper.stacked-testimonials-carousel .testimonial__slider-content {
+        padding: 50px 40px;
+    }
+}
+
+@media (max-width:767px) {
+    .testimonial__slider-review-desc,
+    .testimonial__slider-review-head {
+        font-size: var(--text)!important;
+    }
+    .testimonial__slider-review-star {
+        margin-bottom: 15px;
+    }
+    .testimonial__slider-review-star li {
+        width: 14px;
+    }
+    .stacked-testimonials-carousel .testimonial__slider-content {
+        padding: 20px;
+    }
+    .quote {
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width:575px) {
+    .testimonial__slider-content {
+        padding: 25px 25px;
+    }
+}

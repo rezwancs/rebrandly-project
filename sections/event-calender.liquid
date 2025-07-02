@@ -1,0 +1,541 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'event-calender-rtl.css' | asset_url }}">
+  {{ 'event-calender-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'event-calender.css' | asset_url }}">
+  {{ 'event-calender.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  <div class="container-sm">
+    {% if section.settings.heading != blank %}
+      {%- capture higlightPrefix -%}
+        <span class="marker">
+      {%- endcapture -%}
+      {%- capture highlightSuffix -%}
+          {%- render 'marker-text-style' marker_style:section.settings.higlight_style -%}
+      {%- endcapture -%}
+      <div class="section-heading-box text-{{ section.settings.text_alignment }}">
+        <h3
+          class="section-heading-title rte{% if section.settings.enable_highlight %} highlight-text{% endif %} {{ section.settings.heading_size }}"
+          style="--outline-thickness:{{ section.settings.outline_thickness }};--marker-svg:{{ section.settings.marker_color }};--marker:{{ section.settings.marker_text_color }}"
+        >
+          {{ section.settings.heading | replace:"[[", higlightPrefix | replace:"]]",highlightSuffix }}
+        </h3>
+      </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="event-calender__outer">
+        <div class="row">
+          {% for block in section.blocks %}
+            {% if block.settings.image != blank
+              or block.settings.date != blank
+              or block.settings.title != empty
+              or block.settings.description != empty
+              or block.settings.time != empty
+              or block.settings.link_text != blank
+              and block.settings.link_url
+            %}
+              <div class="col-12 col-sm-12 col-md-12" {{ block.shopify_attributes }}>
+                <div class="event-calender__item">
+                  {% if block.settings.image != blank or block.settings.date != blank %}
+                    <div class="event-calender__img-box{% if block.settings.image == blank %} no-img{% elsif block.settings.date == blank %} no-date{% endif %}">
+                      {% if block.settings.date != blank %}
+                        {%- liquid
+                          assign day = block.settings.date | date: '%d'
+                          assign month = block.settings.date | date: '%b'
+                        -%}
+                        <div class="event-calender__date">
+                          <span class="h2">{{ day }}</span>
+                          <span>{{ month }}</span>
+                        </div>
+                      {% endif %}
+                      {% if block.settings.image != blank %}
+                        <div class="event-calender__img">
+                          <div class="image-wrapper" style="padding-bottom:100%">
+                            {%- render 'lazy-image', image: block.settings.image, sizes: '[500]' -%}
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  <div class="event-calender__content">
+                    <div class="event-calender__inner-content">
+                      {%- if block.settings.title != empty -%}
+                        <h6 class="event-calender__heading text-medium">{{ block.settings.title }}</h6>
+                      {% endif %}
+                      {%- if block.settings.description != empty -%}
+                        <div class="event-calender__desc rte">{{ block.settings.description | replace:"<p></p>","<br>" }}</div>
+                      {% endif %}
+                      <ul class="list-unstyled event-calender__list">
+                        {%- if block.settings.location != empty -%}
+                          <li class="event-location">
+                            {% capture location %}
+                              <svg width="8" height="12" viewBox="0 0 8 12" fill="none">
+                                <path d="M4 0C1.78857 0 0 1.878 0 4.2C0 7.35 4 12 4 12C4 12 8 7.35 8 4.2C8 1.878 6.21143 0 4 0ZM4 5.7C3.21143 5.7 2.57143 5.028 2.57143 4.2C2.57143 3.372 3.21143 2.7 4 2.7C4.78857 2.7 5.42857 3.372 5.42857 4.2C5.42857 5.028 4.78857 5.7 4 5.7Z" fill="currentColor"/>
+                              </svg>
+                              {{ block.settings.location }}
+                            {% endcapture %}
+                            {% if block.settings.location_url %}
+                              <a href="{{ block.settings.location_url }}" target="_blank" class="event-location-child">
+                                {{ location }}
+                              </a>
+                            {% else %}
+                              <span class="event-location-child">
+                                {{ location }}
+                              </span>
+                            {% endif %}
+                          </li>
+                        {% endif %}
+                        {%- if block.settings.time != empty -%}
+                          <li class="event-timing">
+                            <span class="event-location-child">
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M6 12C9.31235 12 12 9.31235 12 6C12 2.68765 9.31235 0 6 0C2.68765 0 0 2.68765 0 6C0 9.31235 2.68765 12 6 12ZM5.30266 2.90557C5.30266 2.67312 5.49152 2.48426 5.72397 2.48426C5.95642 2.48426 6.14528 2.67312 6.14528 2.90557V6.08717L7.90315 7.4092C8.09201 7.55448 8.12107 7.81598 7.99031 8.00484C7.90315 8.12106 7.78692 8.17918 7.65617 8.17918C7.56901 8.17918 7.48184 8.15012 7.4092 8.09201L5.477 6.63923C5.3753 6.56659 5.30266 6.43583 5.30266 6.30508V2.90557Z" fill="currentColor"/>
+                              </svg>
+                              {{ block.settings.time }}
+                            </span>
+                          </li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                    {%- if block.settings.link_text != blank and block.settings.link_url -%}
+                      <div class="event-calender__inner-content">
+                        <a
+                          href="{{ block.settings.link_url }}"
+                          class="button {{ settings.button_style }} unstyled-link event__button {% if block.settings.button_style == 'alternate' %} secondary-button{% endif %} {{ block.settings.size  }}-btn"
+                          aria-label="{{ block.settings.link_text }}"
+                        >
+                         
+                          {% assign buttonText = block.settings.link_text %}
+                          {% render 'button-style', buttonText:buttonText %}
+                        </a>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+  #shopify-section-{{ section.id }} .section-heading-title{
+    padding-bottom:{{ section.settings.heading_space_desktop }}px;
+  }
+  @media only screen and (max-width:767px) {
+      #shopify-section-{{ section.id }}{
+        --inner-space-top:{{ section.settings.top_space_mobile }}px !important;
+        --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px !important;
+      }
+      #shopify-section-{{ section.id }} .section-heading-title{
+        padding-bottom:{{ section.settings.heading_space_mobile }}px;
+      }
+  }
+  {% if section.settings.section_visibility == 'large' %}
+      @media (max-width: 767px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+    {% elsif section.settings.section_visibility == 'small' %}
+      @media (min-width: 768px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "t:sections.events_calendar.name",
+  "tag": "section",
+  "class": "section event-calender-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:common.heading.label",
+      "info":"t:common.marker_style.info",
+      "default": "Event calander"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_highlight",
+      "label": "t:common.highlight_text.label",
+      "info": "t:common.highlight_text.info",
+      "default": false
+    },
+    {
+      "type":"select",
+      "id":"higlight_style",
+      "label":"t:common.marker_style.label",
+      "default": "basic",
+      "options":[
+        {
+          "value": "basic",
+          "label": "t:common.marker_style.options.basic.label"
+        },
+        {
+          "value": "curved",
+          "label": "t:common.marker_style.options.curved.label"
+        },
+        {
+          "value": "line",
+          "label": "t:common.marker_style.options.line.label"
+        },
+        {
+          "value": "box",
+          "label": "t:common.marker_style.options.box.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "outline_thickness",
+      "label": "t:common.outline_stroke.label",
+      "default": "1px",
+      "options": [
+        {
+          "value": "1px",
+          "label": "t:common.outline_stroke.options.thin.label"
+        },
+        {
+          "value": "2px",
+          "label": "t:common.outline_stroke.options.thick.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:common.heading_size.label",
+      "default": "h5",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.heading_size.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:common.heading_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:common.heading_alignment.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:common.heading_alignment.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:common.heading_alignment.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_space_desktop",
+      "label": "t:common.header.heading_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    },
+    {
+      "type": "range",
+      "id": "heading_space_mobile",
+      "label": "t:common.header.heading_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "secondary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradiant",
+      "label":"t:common.gradient.label",
+      "default":false
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "t:common.marker_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "marker_text_color",
+      "label": "t:common.marker_text_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "t:sections.events_calendar.blocks.event.name",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "t:sections.events_calendar.blocks.event.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.events_calendar.blocks.event.settings.title.label",
+          "default": "Event"
+        },
+        {
+          "id": "description",
+          "type": "richtext",
+          "label": "t:sections.events_calendar.blocks.event.settings.description.label",
+          "default": "<p>Share information and details about this event.</p>"
+        },
+        {
+          "id": "date",
+          "type": "text",
+          "label": "t:sections.events_calendar.blocks.event.settings.date.label",
+          "placeholder": "10th December",
+          "default": "10th December"
+        },
+        {
+          "id": "time",
+          "type": "text",
+          "label": "t:sections.events_calendar.blocks.event.settings.time.label",
+          "placeholder": "10.00pm - 12.00pm"
+        },
+        {
+          "id": "location",
+          "type": "text",
+          "label": "t:sections.events_calendar.blocks.event.settings.location.label",
+          "default": "Event location"
+        },
+        {
+          "id": "location_url",
+          "type": "url",
+          "label": "t:sections.events_calendar.blocks.event.settings.location_url.label"
+        },
+        {
+          "id": "link_text",
+          "type": "text",
+          "label": "t:sections.events_calendar.blocks.event.settings.link_text.label",
+          "default": "More info"
+        },
+        {
+          "id": "link_url",
+          "type": "url",
+          "label": "t:sections.events_calendar.blocks.event.settings.link_url.label"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "t:common.header.size.label",
+          "default": "small",
+          "options": [
+            {
+              "value": "xsmall",
+              "label": "t:common.button_size.options.xsmall.label"
+            },
+            {
+              "value": "small",
+              "label": "t:common.button_size.options.small.label"
+            },
+            {
+              "value": "med",
+              "label": "t:common.button_size.options.medium.label"
+            },
+            {
+              "value": "large",
+              "label": "t:common.button_size.options.large.label"
+            },
+            {
+              "value": "xlarge",
+              "label": "t:common.button_size.options.xlarge.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:common.button_style.label",
+          "default": "main",
+          "options": [
+            {
+              "value": "main",
+              "label": "t:common.button_style.options.main.label"
+            },
+            {
+              "value": "alternate",
+              "label": "t:common.button_style.options.alternate.label"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.events_calendar.presets.name",
+      "blocks": [
+        {
+          "type": "event",
+          "settings": {
+            "date": "10th December",
+            "time": "7PM - 11PM"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "date": "20th November"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "date": "Oct 29",
+            "time": "8PM"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

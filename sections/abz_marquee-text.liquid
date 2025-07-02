@@ -1,0 +1,512 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'marquee-text-rtl.css' | asset_url }}">
+  {{ 'marquee-text-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'marquee-text.css' | asset_url }}">
+  {{ 'marquee-text.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{% liquid
+  if section.settings.enable_autoplay
+    assign limit = 15
+  else
+    assign limit = 50
+  endif
+%}
+<div class="text-marque__box{% if section.settings.image != blank %} img-enabled{% endif %}">
+  {% if section.settings.image != blank %}
+    <div class="text-marque__img">
+      {% render 'lazy-image', image: section.settings.image %}
+    </div>
+  {% endif %}
+  <div class="text-marque__inner-box">
+    {% for block in section.blocks %}
+      {%- capture direction -%}
+        {%- if section.settings.direction == 'ltr' -%}
+          {%- cycle section_id:'ltr','rtl' -%}
+          {%- else -%}      
+          {%- cycle section_id:'rtl','ltr' -%}
+          {%- endif -%}
+        {%- endcapture -%}
+      <div
+        class="text-marque_wrapper"
+        id="text-marque_{{ block.id }}"
+        {{ block.shopify_attributes }}
+      >
+        <div
+          class="text-marque__content {% if section.settings.enable_autoplay %} autoplay-infinite{% else %} on-scroll-move{% endif %} {{ direction }}-direction"
+          data-marquee-speed="{{ block.settings.scrolling_speed }}"
+          data-marquee-speed-mobile="{{ block.settings.scrolling_speed_mobile }}"
+          {% unless section.settings.enable_autoplay %}
+            data-marquee-on-scroll
+          {% else %}
+            data-marquee-text
+          {% endunless %}
+        >
+          {% for i in (1..limit) %}
+            <div class="text-marque__node{% if block.settings.small_icon %} small-icon{% endif %}" data-marque-node>
+              <div class="text-marque__item text-shadow-{{ block.settings.enable_text_shadow }}">
+                {% if block.settings.text != blank %}
+                  <span
+                    class="marqueeNode-{{ block.id }} rte {% if block.settings.enable_highlight %} highlight-text{% endif %} {{ block.settings.font_family }}-font"
+                    style="--outline-thickness:{{ block.settings.outline_thickness }}"
+                  >
+                    {{- block.settings.text -}}
+                  </span>
+                {% endif %}
+                {% if block.settings.custom_icon != blank %}
+                  <span
+                    class="marqueeNode-{{ block.id }} marquee-icon{% if block.settings.default_color %} default-color{% endif %}"
+                  >
+                    {{- block.settings.custom_icon -}}
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<style>
+  {% if section.settings.background_effect %}
+    #shopify-section-{{ section.id }}:after {
+      content:'';
+      position: absolute;
+      background-image:{{ section.settings.effect_color }};
+      width: 100%;
+      top: 0%;
+      left: 0%;
+      {% if section.settings.effect_color contains 'radial' %}
+        max-width: 600px;
+        height: 600px;
+        border-radius: 100%;
+        background-size: unset;
+        animation: waveMove 30s infinite linear;
+        filter: blur(31px);
+      {% else %}
+        animation: gradient 20s infinite linear;
+        background-size: 400% 400%;
+        filter: blur(0);
+        max-width: 100%;
+        height: 100%;
+      {% endif %}
+    }
+  {% endif %}
+        #shopify-section-{{ section.id }} {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          padding-top:{{ section.settings.top_space_desktop }}px;
+          padding-bottom:{{ section.settings.bottom_space_desktop }}px;
+          background:{{ section.settings.bgcolor }};
+          --marquee-height:{{ section.settings.min_height_desktop }}px;
+        }
+        #shopify-section-{{ section.id }} .text-marque_wrapper{
+          transform:rotate({{ section.settings.text_angle }}deg);
+          z-index:1
+        }
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            #text-marque_{{ block.id }}{
+              --node-color: {{ block.settings.color }};
+              --text-shadow-color:{{block.settings.shadow_color.red }} {{block.settings.shadow_color.green }} {{block.settings.shadow_color.blue }};
+              --text-hightlight-color:{{ block.settings.highlight_color }};
+              --marquee-gap:{{ block.settings.text_gap }}px;
+              --marquee-icon-gap:{{ block.settings.text_icon_gap }}px;
+            }
+            #text-marque_{{ block.id }} .marquee-icon:not(.default-color),
+            #text-marque_{{ block.id }} .marquee-icon:not(.default-color) *{
+              color:{{ block.settings.icon_color}};
+            }
+            #text-marque_{{ block.id }} .marquee-icon:not(.default-color) svg{
+              fill:{{ block.settings.icon_color}};
+            }
+
+            #text-marque_{{ block.id }} .text-shadow-true .rte {
+              {% if  block.settings.desktop_font > 30 %}
+                text-shadow: 4px 8px 0px rgb(var(--text-shadow-color)), -3px -3px 0px rgb(var(--text-shadow-color)), -3px 3px 0px rgb(var(--text-shadow-color)), 3px -3px 0px rgb(var(--text-shadow-color)), 3px 3px 0px rgb(var(--text-shadow-color));
+                {% else %}
+                text-shadow: 2px 4px 0px rgb(var(--text-shadow-color)), -2px -2px 0px rgb(var(--text-shadow-color)), -2px 2px 0px rgb(var(--text-shadow-color)), 2px -2px 0px rgb(var(--text-shadow-color)), 2px 2px 0px rgb(var(--text-shadow-color));
+              {% endif %}
+            }
+
+          {% endfor %}
+          @media only screen and (min-width:768px) {
+          {% for block in section.blocks %}
+            #text-marque_{{ block.id }}{
+              --node-size: calc({{ block.settings.desktop_font }}px * 0.8);
+            }
+            {% endfor %}
+          }
+          @media only screen and (min-width:1200px) {
+          {% for block in section.blocks %}
+            #text-marque_{{ block.id }}{
+              --node-size: {{ block.settings.desktop_font }}px;
+            }
+            {% endfor %}
+          }
+        {% endif %}
+      @media only screen and (max-width:767px) {
+        #shopify-section-{{ section.id }}.shopify-section{
+          padding-top:{{ section.settings.top_space_mobile }}px;
+          padding-bottom:{{ section.settings.bottom_space_mobile }}px;
+          --marquee-height:{{ section.settings.min_height_mobile }}px;
+        }
+
+        {% for block in section.blocks %}
+          #text-marque_{{ block.id }}{
+          --node-size: {{ block.settings.mobile_font }}px;
+          }
+          #text-marque_{{ block.id }} .text-shadow-true .rte {
+            {% if  block.settings.mobile_font > 40 %}
+            text-shadow: 4px 8px 0px rgb(var(--text-shadow-color)), -3px -3px 0px rgb(var(--text-shadow-color)), -3px 3px 0px rgb(var(--text-shadow-color)), 3px -3px 0px rgb(var(--text-shadow-color)), 3px 3px 0px rgb(var(--text-shadow-color));
+            {% else %}
+            text-shadow: 1px 3px 0px rgb(var(--text-shadow-color)), -1px -1px 0px rgb(var(--text-shadow-color)), -1px 1px 0px rgb(var(--text-shadow-color)), 1px -1px 0px rgb(var(--text-shadow-color)), 1px 1px 0px rgb(var(--text-shadow-color));
+            {% endif %}
+          }
+        {% endfor %}
+      }
+      {% if section.settings.section_visibility == 'large' %}
+        @media (max-width: 767px) {
+          #shopify-section-{{ section.id }}{
+            display: none !important;
+          }
+        }
+      {% elsif section.settings.section_visibility == 'small' %}
+        @media (min-width: 768px) {
+          #shopify-section-{{ section.id }}{
+            display: none !important;
+          }
+        }
+    {% endif %}
+</style>
+{% schema %}
+{
+  "name": "ABZ Marquee Text",
+  "tag": "section",
+  "class": "section text-marque-section abz-text-marque",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "label": "t:sections.marquee_text.settings.enable_autoplay.label",
+      "id": "enable_autoplay",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:sections.marquee_text.settings.direction.label",
+      "options": [
+        {
+          "value": "rtl",
+          "label": "t:sections.marquee_text.settings.direction.options.rtl.label"
+        },
+        {
+          "value": "ltr",
+          "label": "t:sections.marquee_text.settings.direction.options.ltr.label"
+        }
+      ],
+      "default": "rtl"
+    },
+    {
+      "type": "range",
+      "id": "text_angle",
+      "label": "t:sections.marquee_text.settings.text_angle.label",
+      "default": 0,
+      "unit": "°",
+      "min": -5,
+      "max": 5,
+      "step": 1
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.marquee_text.settings.image.label"
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "t:sections.marquee_text.settings.min_height_desktop.label",
+      "default": 400,
+      "min": 300,
+      "max": 700,
+      "step": 5,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "t:sections.marquee_text.settings.min_height_mobile.label",
+      "default": 200,
+      "min": 100,
+      "max": 500,
+      "step": 5,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_singular_section.label"
+    },
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "t:sections.marquee_text.settings.background.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "background_effect",
+      "label": "t:sections.multi_image_with_text.settings.background_effect.label",
+      "default": false
+    },
+    {
+      "type": "color_background",
+      "id": "effect_color",
+      "label": "t:sections.multi_image_with_text.settings.effect_color.label",
+      "default": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+      "info": "t:sections.multi_image_with_text.settings.effect_color.info"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "t:sections.marquee_text.blocks.text.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "t:common.text.label",
+          "default": "MARQUEE TEXT HERE"
+        },
+        {
+          "type": "select",
+          "id": "outline_thickness",
+          "label": "t:common.outline_stroke.label",
+          "default": "1px",
+          "options": [
+            {
+              "value": "1px",
+              "label": "t:common.outline_stroke.options.thin.label"
+            },
+            {
+              "value": "2px",
+              "label": "t:common.outline_stroke.options.thick.label"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_highlight",
+          "label": "t:common.highlight_text.label",
+          "info": "t:common.highlight_text.info",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_text_shadow",
+          "label": "t:sections.marquee_text.blocks.text.settings.enable_text_shadow.label",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "text_gap",
+          "label": "Space between text",
+          "min": 5,
+          "max": 100,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "scrolling_speed",
+          "label": "t:sections.marquee_text.settings.scrolling_speed.label",
+          "min": 5,
+          "max": 100,
+          "unit": "s",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "scrolling_speed_mobile",
+          "label": "t:sections.marquee_text.settings.scrolling_speed_mobile.label",
+          "min": 5,
+          "max": 100,
+          "unit": "s",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "t:common.header.fonts.label"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "t:sections.marquee_text.settings.font_family.label",
+          "options": [
+            {
+              "value": "heading",
+              "label": "t:sections.marquee_text.settings.font_family.options.heading.label"
+            },
+            {
+              "value": "body",
+              "label": "t:sections.marquee_text.settings.font_family.options.body.label"
+            }
+          ],
+          "default": "heading"
+        },
+        {
+          "type": "range",
+          "id": "desktop_font",
+          "label": "t:sections.marquee_text.settings.desktop_font.label",
+          "min": 20,
+          "max": 130,
+          "step": 2,
+          "unit": "px",
+          "default": 112
+        },
+        {
+          "type": "range",
+          "id": "mobile_font",
+          "label": "t:sections.marquee_text.settings.mobile_font.label",
+          "min": 14,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "t:sections.marquee_text.blocks.text.settings.color.label"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "t:sections.marquee_text.blocks.text.settings.highlight_color.label"
+        },
+        {
+          "type": "color",
+          "id": "shadow_color",
+          "label": "t:sections.marquee_text.blocks.text.settings.shadow_color.label"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "t:sections.marquee_text.blocks.icon.settings.custom_icon.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "small_icon",
+          "label": "t:sections.marquee_text.blocks.icon.settings.small_icon.label",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "t:sections.marquee_text.blocks.icon.settings.custom_color.label"
+        },
+        {
+          "type": "range",
+          "id": "text_icon_gap",
+          "label": "Space between text and icon",
+          "min": 5,
+          "max": 100,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "checkbox",
+          "id": "default_color",
+          "label": "t:sections.marquee_text.blocks.icon.settings.default_color.label",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ABZ Marquee Text",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

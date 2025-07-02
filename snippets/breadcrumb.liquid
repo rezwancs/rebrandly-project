@@ -1,0 +1,79 @@
+{% if settings.enable_breadcrumb %}
+  {% liquid
+    assign rtlEnable = false
+    if settings.languanges_code contains localization.language.iso_code and settings.content_direction
+      assign rtlEnable = true
+    endif
+  %}
+  {% if rtlEnable %}
+    <link rel="stylesheet" href="{{ 'breadcrumb-rtl.css' | asset_url }}">
+  {% else %}
+    <link rel="stylesheet" href="{{ 'breadcrumb.css' | asset_url }}">
+  {% endif %}
+  <div class="breadcrumb">
+    <nav class="breadcrumb-nav">
+      <div class="container">
+        <ul class="list-unstyled breadcrumb__list">
+          <li class="breadcrumb__item">
+            <a href="{{ routes.root_url }}" title="{{ 'general.home' | t}}" class="unstyled-link breadcrumb__link">
+              {{- 'general.home' | t -}}
+            </a>
+          </li>
+          {%- if template contains 'page' -%}
+            <li class="breadcrumb__item">
+              <span class="breadcrumb__link">{{ page.title | strip_html }}</span>
+            </li>
+          {%- elsif template contains 'product' -%}
+            {%- if collection.url -%}
+              <li class="breadcrumb__item">
+                <span class="breadcrumb__link">
+                  {{- collection.title | strip_html | truncatewords: 5 | link_to: collection.url }}
+                </span>
+              </li>
+            {%- endif -%}
+            <li class="breadcrumb__item">
+              <span class="breadcrumb__link breadcrumb__text">{{ product.title | strip_html | truncatewords: 5 }}</span>
+            </li>
+          {%- elsif template contains 'collection' and collection.handle -%}
+            {%- if current_tags -%}
+              <li class="breadcrumb__item">
+                <span class="breadcrumb__link">
+                  {{- collection.title | strip_html | truncatewords: 5 | link_to: url }}
+                  <span>{{ current_tags | join: ' + ' }}</span>
+                </span>
+              </li>
+            {%- else -%}
+              <li class="breadcrumb__item">
+                <span class="breadcrumb__link breadcrumb__text">
+                  {{- collection.title | strip_html | truncatewords: 5 -}}
+                </span>
+              </li>
+            {%- endif -%}
+          {%- elsif template == 'blog' -%}
+            {%- if current_tags -%}
+              {{ blog.title | link_to: blog.url }}
+              <li class="breadcrumb__item">
+                <span class="breadcrumb__link breadcrumb__text">{{ current_tags | join: ' + ' }}</span>
+              </li>
+            {%- else -%}
+              <li class="breadcrumb__item">
+                <span class="breadcrumb__link breadcrumb__text">{{ blog.title | strip_html }}</span>
+              </li>
+            {%- endif -%}
+          {%- elsif template == 'article' -%}
+            <li class="breadcrumb__item">
+              <span class="breadcrumb__link">{{ blog.title | strip_html | link_to: blog.url }} </span>
+            </li>
+            <li class="breadcrumb__item">
+              <span class="breadcrumb__link breadcrumb__text"> {{ 'blogs.article.blog_detail' | t }}</span>
+            </li>
+          {%- else -%}
+            <li class="breadcrumb__item">
+              <span class="breadcrumb__link breadcrumb__text">{{ page_title }}</span>
+            </li>
+          {%- endif -%}
+        </ul>
+      </div>
+    </nav>
+  </div>
+{% endif %}

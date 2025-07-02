@@ -1,0 +1,470 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'contact-rtl.css' | asset_url }}">
+  {{ 'contact-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'contact.css' | asset_url }}">
+  {{ 'contact.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{% liquid
+  if section.settings.image_size == 'adaptive'
+    assign imageRatio = 0
+  else
+    if section.settings.image != blank
+      assign imageRatio = 1 | divided_by: section.settings.image.aspect_ratio | times: 100 | append: '%'
+    endif
+  endif
+%}
+<style>
+  {% if section.settings.image != blank %}
+    @media only screen and (max-width:575px) {
+      #shopify-section-{{ section.id }} {
+        --image-height:{{1 | divided_by: section.settings.image.aspect_ratio | times: 100 | append: '%'}};
+      }
+    }
+  {% endif %}
+  #shopify-section-{{ section.id }} .section-wrapper {
+    padding-top: {{ section.settings.top_space_desktop }}px;
+    padding-bottom:  {{ section.settings.bottom_space_desktop }}px;
+  }
+  #shopify-section-{{ section.id }} .section-heading-title{
+    padding-bottom:{{ section.settings.heading_space_desktop }}px;
+  }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }} .section-wrapper{
+      padding-top:{{ section.settings.top_space_mobile }}px;
+      padding-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .section-heading-title{
+      padding-bottom:{{ section.settings.heading_space_mobile }}px;
+    }
+  }
+  {% if section.settings.section_visibility == 'large' %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% elsif section.settings.section_visibility == 'small' %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% endif %}
+</style>
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  <div class="container-xs">
+    <div class="contact__form-box{% if section.settings.image != blank %} img-enabled image-{{ section.settings.image_position}}{% endif %} image-height-{{ section.settings.image_size }}">
+      <div class="row no-gutters">
+        {%- if section.settings.image != blank -%}
+          <div class="col-12 col-sm-6 col-md-6">
+            <div class="contact-form-img">
+              <div
+                class="image-wrapper"
+                style="padding-bottom:{{ imageRatio }}"
+              >
+                {%- render 'lazy-image', image: section.settings.image -%}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        <div class="col-12{% if section.settings.image != blank %} col-sm-6 col-md-6{% else %} col-sm-12 col-md-12{% endif%}">
+          <div class="contact__form">
+            {% if section.settings.contact_heading != blank %}
+              {%- capture higlightPrefix -%}
+            <span class="marker">
+          {%- endcapture -%}
+          {%- capture highlightSuffix -%}
+              {%- render 'marker-text-style' marker_style:section.settings.higlight_style -%}
+          {%- endcapture -%}
+              <div class="section-heading-box">
+                <h2
+                  class="section-heading-title text-center rte{% if section.settings.enable_highlight %} highlight-text{% endif %} {{ section.settings.heading_size }}"
+                  style="--outline-thickness:{{ section.settings.outline_thickness }};--marker-svg:{{ section.settings.marker_color }};--marker:{{ section.settings.marker_text_color }}"
+                >
+                  {{ section.settings.contact_heading | replace:"[[", higlightPrefix | replace:"]]",highlightSuffix }}
+                </h2>
+              </div>
+            {% endif %}
+            {%- form 'contact', id: 'ContactForm', class: 'get-in-touch-form' -%}
+              <div class="form-group">
+                <label class="hidden" for="ContactName">{{ 'templates.contact.form.name' | t }}</label>
+                <input
+                  type="text"
+                  class="form-control input-md"
+                  name="contact[name]"
+                  id="ContactName"
+                  autocomplete="email"
+                  autocapitalize="off"
+                  placeholder="{{ 'templates.contact.form.name' | t }}"
+                  required
+                >
+              </div>
+              <div class="form-group">
+                <label class="hidden" for="ContactEmail">{{ 'templates.contact.form.email' | t }}</label>
+                <input
+                  type="email"
+                  class="form-control input-md"
+                  name="contact[email]"
+                  id="ContactEmail"
+                  autocomplete="email"
+                  autocapitalize="off"
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  aria-required="true"
+                  spellcheck="false"
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                    aria-describedby="ContactForm-email-error"
+                  {% endif %}
+                  placeholder="{{ 'templates.contact.form.email' | t }}"
+                  pattern="^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$"
+                  required
+                >
+              </div>
+              <div class="form-group">
+                <label class="hidden" for="ContactNumber">{{ 'templates.contact.form.phone' | t }}</label>
+                <input
+                  type="number"
+                  class="form-control input-md"
+                  name="contact[number]"
+                  id="ContactNumber"
+                  autocomplete="phone"
+                  autocapitalize="off"
+                  placeholder="{{ 'templates.contact.form.phone' | t }}"
+                  required
+                >
+              </div>
+              <div class="form-group">
+                <label class="hidden" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+                <textarea
+                  id="ContactForm-body"
+                  name="contact[Message]"
+                  rows="3"
+                  placeholder="{{ 'templates.contact.form.comment' | t }}"
+                  class="form-control"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="button med-btn btn-block icon-btn right-icon {{ settings.button_style }}">
+                {% assign buttonText = 'templates.contact.form.send' | t  %}
+                {% render 'button-style', buttonText: buttonText %}
+        
+              </button>
+              {%- if form.errors -%}
+                <div
+                  class="form-message__wrapper error "
+                  autofocus
+                >
+                  <div class="form-message__title" tabindex="-1">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                      <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    {{ form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email }}
+                  </div>
+                </div>
+              {%- endif -%}
+              {%- if form.posted_successfully? -%}
+                <div class="form-message__wrapper success" role="status" tabindex="-1" autofocus>
+                  <p class="form-message__title" tabindex="-1">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="10" r="10" fill="#32A861"></circle>
+                      <path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="white"></path>
+                    </svg>
+                    {{- 'templates.contact.form.post_success' | t -}}
+                  </p>
+                </div>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.contact_page.name",
+  "tag": "section",
+  "class": "contact-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_page.settings.header.label"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_heading",
+      "default": "<p>Get in touch</p>",
+      "info":"t:common.marker_style.info",
+      "label": "t:common.heading.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_highlight",
+      "label": "t:common.highlight_text.label",
+      "info": "t:common.highlight_text.info"
+    },
+    {
+      "type":"select",
+      "id":"higlight_style",
+      "label":"t:common.marker_style.label",
+      "default": "basic",
+      "options":[
+        {
+          "value": "basic",
+          "label": "t:common.marker_style.options.basic.label"
+        },
+        {
+          "value": "curved",
+          "label": "t:common.marker_style.options.curved.label"
+        },
+        {
+          "value": "line",
+          "label": "t:common.marker_style.options.line.label"
+        },
+        {
+          "value": "box",
+          "label": "t:common.marker_style.options.box.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "outline_thickness",
+      "label": "t:common.outline_stroke.label",
+      "default": "1px",
+      "options": [
+        {
+          "value": "1px",
+          "label": "t:common.outline_stroke.options.thin.label"
+        },
+        {
+          "value": "2px",
+          "label": "t:common.outline_stroke.options.thick.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:common.heading_size.label",
+      "default": "h3",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.heading_size.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_space_desktop",
+      "label": "t:common.header.heading_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    },
+    {
+      "type": "range",
+      "id": "heading_space_mobile",
+      "label": "t:common.header.heading_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact_page.settings.media.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.contact_page.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "t:sections.contact_page.settings.image_size.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:sections.contact_page.settings.image_size.options.auto.label"
+        },
+        {
+          "value": "adaptive",
+          "label": "t:sections.contact_page.settings.image_size.options.adaptive_to_content.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.contact_page.settings.image_position.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.contact_page.settings.image_position.options.left.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.contact_page.settings.image_position.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradiant",
+      "label":"t:common.gradient.label",
+      "default":false
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "t:common.marker_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "marker_text_color",
+      "label": "t:common.marker_text_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact_page.presets.name"
+    }
+  ]
+}
+{% endschema %}

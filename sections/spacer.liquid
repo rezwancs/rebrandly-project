@@ -1,0 +1,92 @@
+<div
+  class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}"
+></div>
+<style>
+  #shopify-section-{{ section.id }} .section-wrapper {
+    padding-top:0px;
+    padding-bottom:0px;
+    height:{{ section.settings.desktop_height }}px;
+    {% if section.settings.custom_color != 'rgba(0,0,0,0)' %}
+    background:{{ section.settings.custom_color }} !important;
+    {% endif%}
+  }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section .section-wrapper{
+      height:{{ section.settings.mobile_height }}px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.section_divider.name",
+  "tag": "section",
+  "class": "divider-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gradiant",
+      "label": "t:common.gradient.label",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "custom_color",
+      "label": "t:sections.section_divider.settings.custom_color.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.section_height.label"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "t:common.desktop.label",
+      "default": 2,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "t:common.mobile.label",
+      "default": 2,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.section_divider.presets.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,127 @@
+.collection-card {
+    position: relative;
+}
+
+.collections__container {
+    padding-top: 20px;
+}
+
+.collections__container .row {
+    margin-right: -7px;
+    margin-left: -7px;
+}
+
+.collection-card-item {
+    margin-bottom: 15px;
+    padding-right: 7px;
+    padding-left: 7px;
+}
+
+.collection-card-img {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--image-bg);
+    border-radius: var(--image-radius);
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.collection-card-info {
+    padding-top: 10px;
+}
+
+.collection-card-title {
+    display: block;
+    color: var(--heading-color);
+}
+
+.content-overlay .collection-card-info {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    pointer-events: none;
+    transition: .6s ease-out;
+    background: var(--card-overlay-bg-color);
+}
+
+.content-overlay .collection-card-title {
+    pointer-events: all;
+    color: var(--card-overlay-text-color);
+    font-size: var(--h6);
+    line-height: normal;
+    max-height: 100%;
+    overflow: auto;
+    transition: .4s ease-out;
+}
+
+@media (min-width:768px) {
+    .collections__container .row {
+        margin-right: -10px;
+        margin-left: -10px;
+    }
+    .collection-card-item {
+        margin-bottom: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .content-overlay .collection-card-title {
+        font-size: var(--h4);
+    }
+    .collections__container {
+        padding-top: 40px;
+    }
+}
+
+@media (min-width:1025px) {
+    .content-on-hover .collection-card-info {
+        opacity: 0;
+    }
+    .content-on-hover .collection-card-title {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+    .content-on-hover:hover .collection-card-info {
+        opacity: 1;
+    }
+    .content-on-hover:hover .collection-card-title {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@media (min-width:1200px) {
+    .collections__container .row {
+        margin-right: -20px;
+        margin-left: -20px;
+    }
+    .collection-card-item {
+        margin-bottom: 40px;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    .content-overlay .collection-card-info {
+        padding: 20px;
+    }
+}
+
+@media (min-width:1441px) {
+    .content-overlay .collection-card-title {
+        font-size: var(--h3);
+    }
+}
+
+@media (max-width:575px) {
+    .collection-card-item .collection-card:not(.content-on-hover.content-overlay) {
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,264 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'promotional-text-rtl.css' | asset_url }}">
+  {{ 'promotional-text-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'promotional-text.css' | asset_url }}">
+  {{ 'promotional-text.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  <div class="container-xs">
+    <div class="promotional-text__multi-box text-center">
+      {% if section.settings.heading != blank %}
+        <h2 class="{{ section.settings.font_size }} promotional-text__multi-head rte">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+      {% if section.settings.animated_text != blank %}
+        <div
+          class="promotional-text__multi-text"
+          style="--outline-thickness:{{ section.settings.outline_thickness }}"
+          data-animation-box
+        >
+          {% for i in (1..4) %}
+            <h2
+              class="{{ section.settings.font_size }} promotional-text__multi-head rte outlined-text_{{ section.settings.enable_outlined }} {{ section.settings.font_family }}-font{% unless forloop.first %} promotional-text__multi-head-{{ forloop.index0 }}{% endunless%}"
+              {% unless forloop.first %}
+                data-animation-item
+              {% else %}
+                data-animation-first-item
+              {% endunless %}
+            >
+              {{ section.settings.animated_text }}
+            </h2>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} .section-wrapper{
+    {% if section.settings.background_gradient != blank %}
+      background: {{ section.settings.background_gradient }};
+    {% endif %}
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }} .section-wrapper{
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+  }
+  {% if section.settings.section_visibility == 'large' %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% elsif section.settings.section_visibility == 'small' %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "t:sections.promotional_text.name",
+  "class": "section promotional-text-section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:common.heading.label",
+      "default": "Promotional text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "animated_text",
+      "label": "t:sections.promotional_text.settings.animated_text.label",
+      "default": "SALE"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_outlined",
+      "label": "t:sections.promotional_text.settings.enable_outlined.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "outline_thickness",
+      "label": "t:common.outline_stroke.label",
+      "default": "1px",
+      "options": [
+        {
+          "value": "1px",
+          "label": "t:common.outline_stroke.options.thin.label"
+        },
+        {
+          "value": "2px",
+          "label": "t:common.outline_stroke.options.thick.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:sections.promotional_text.settings.font_size.label",
+      "default": "h1-med",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.promotional_text.settings.font_size.options.small.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.promotional_text.settings.font_size.options.medium.label"
+        },
+        {
+          "value": "h1-med",
+          "label": "t:sections.promotional_text.settings.font_size.options.large.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "t:sections.promotional_text.settings.font_family.label",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:sections.promotional_text.settings.font_family.options.heading.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.promotional_text.settings.font_family.options.body.label"
+        }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "secondary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "t:common.header.background_gradient.label"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 150,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 150,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 100,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 100,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.promotional_text.presets.name"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

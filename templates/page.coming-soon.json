@@ -1,0 +1,117 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "banner_height_desktop": "200px",
+        "banner_height_mobile": "100px",
+        "bannerbgcolor": "#222222",
+        "bgcoloropacity": "#000000",
+        "textcolor": "#807e7e",
+        "overlay_opacity": 50
+      }
+    },
+    "rich_text_dt87iT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Jet3He": {
+          "type": "heading",
+          "settings": {
+            "heading": "COMING SOON",
+            "higlight_style": "basic",
+            "size": "h2",
+            "style": "none",
+            "outline_thickness": "1px",
+            "heading_space_desktop": 0,
+            "heading_space_mobile": 0,
+            "animate_color1": "#94a5ff",
+            "animate_color2": "#ff3939",
+            "marker_color": "#000000",
+            "marker_text_color": "#000000"
+          }
+        },
+        "text_XQjN6D": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Get Ready for Back to School with Citizens School's Shop!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Jet3He",
+        "text_XQjN6D"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.presets.name",
+      "settings": {
+        "content_width": "large",
+        "text_alignment": "center",
+        "section_visibility": "always",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "top_space_desktop": 150,
+        "bottom_space_desktop": 150,
+        "top_space_mobile": 100,
+        "bottom_space_mobile": 100
+      }
+    },
+    "comming_soon_qFhnCX": {
+      "type": "comming-soon",
+      "blocks": {
+        "heading_R6jRCA": {
+          "type": "heading",
+          "settings": {
+            "heading": "COMING SOON",
+            "higlight_style": "basic",
+            "size": "h2",
+            "style": "none",
+            "outline_thickness": "1px",
+            "heading_space_desktop": 0,
+            "heading_space_mobile": 0,
+            "animate_color1": "#94a5ff",
+            "animate_color2": "#ff3939",
+            "marker_color": "#000000",
+            "marker_text_color": "#000000"
+          }
+        },
+        "subheading_cWJmi6": {
+          "type": "subheading",
+          "settings": {
+            "heading": "Get Ready for Back to School with Citizens School's Shop!"
+          }
+        }
+      },
+      "block_order": [
+        "heading_R6jRCA",
+        "subheading_cWJmi6"
+      ],
+      "name": "Comming Soon",
+      "settings": {
+        "content_width": "large",
+        "text_alignment": "center",
+        "section_visibility": "always",
+        "color_scheme": "primary",
+        "enable_gradiant": true,
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_dt87iT",
+    "comming_soon_qFhnCX"
+  ]
+}

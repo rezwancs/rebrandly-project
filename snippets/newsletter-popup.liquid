@@ -1,0 +1,115 @@
+{%- if settings.newsletter_pop_enable -%}
+  {% liquid
+    assign rtlEnable = false
+    if settings.languanges_code contains localization.language.iso_code and settings.content_direction
+      assign rtlEnable = true
+    endif
+  %}
+  {% if rtlEnable %}
+    <link rel="preload" as="style" href="{{ 'newsletter-popup-rtl.css' | asset_url }}">
+    {{ 'newsletter-popup-rtl.css' | asset_url | stylesheet_tag }}
+  {% else %}
+    <link rel="preload" as="style" href="{{ 'newsletter-popup.css' | asset_url }}">
+    {{ 'newsletter-popup.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  {% assign formStatus = false %}
+  {%- capture newsletterContent -%}
+<div class="newsletter__content">
+    <div class="newsletter__body text-center">
+        <p class="newsletter__subhead">{{ settings.newsletter_subheading }}</p>
+        <h4 class="newsletter__heading">{{ settings.newsletter_heading }}</h4>
+        <div class="newsletter__desc rte">{{ settings.newsletter_description }}</div>
+        
+        {%- form 'customer',id: 'newsletter-popup-form', class: 'news-letter__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="hidden" name="contact[context]" value="newsletter_popup">
+          {%- if form.posted_successfully -%}
+            {% assign formStatus = true %}
+            <div class="form-message__wrapper success">
+              <p id="Newsletter-success--{{ section.id }}" class="form-message__title" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="#32A861"></circle>
+                  <path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="white"></path>
+                </svg>
+                {{- 'newsletter.success' | t -}}
+              </p>
+            </div>
+          {%- endif -%}
+          {%- if form.errors and form.context == 'newsletter_popup' -%}              
+          <div class="form-message__wrapper error">
+            <div id="Newsletter-error--{{ section.id }}" class="form-message__title" tabindex="-1">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              {{- form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email -}}
+            </div>
+          </div>
+          {%- endif -%}
+            <div class="form-group">
+                <label class="hidden" for="CustomerName-{{section.id}}"> Name</label>
+                <input type="email" class="form-control" name="contact[email]" 
+                       id="CustomerName-{{section.id}}" 
+                       autocomplete="email"  
+                       autocapitalize="off" 
+                       placeholder="{{ 'newsletter.email_placeholder' | t }}" 
+                       pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)*[a-zA-Z]{2,}))$" 
+                       required
+                >
+            </div>
+            <button type="submit" name="commit" class="button btn-block icon-btn right-icon {{ settings.button_style }}">
+                {% assign buttonText ='newsletter.button_label' | t  %}
+                {% render 'button-style', buttonText:buttonText %}
+            </button>
+       
+    {% endform %}
+
+    </div>
+</div>
+{%- endcapture -%}
+  {%- if newsletterContent != blank -%}
+    {% render 'popup', id: 'newsLetter', class: 'newsletter-popup', popupContent: newsletterContent %}
+  {%- endif -%}
+  <script>
+    {% if formStatus %}
+      let newsletterForm = true;
+      {% else %}
+      let newsletterForm = false;
+    {% endif %}
+    /* NEWSLETTER POPUP STARTS */
+    document.addEventListener('DOMContentLoaded', function () {
+      var getnew_Pop = Cookies.get('Newsletter_closed');
+      if (getnew_Pop != 'true' && window.location.pathname.indexOf('/challenge') < 0) {
+        setTimeout(function () {
+          $('body').addClass('NewsletterActive').addClass('scrollHidden').addClass('no-scroll');
+          $('.newsletter-popup').addClass('popup--visible').trigger('focus');
+          focusElement = window;
+          if(newsletterForm){
+            var date = new Date();
+            date.setTime(date.getTime() + parseInt('{{ settings.popup_cookie }}') * 24 * 60 * 60 * 1000);
+            Cookies.set('Newsletter_closed', 'true', { expires: date, path: '/' });
+          }
+        }, 5000);
+      }
+      $('body').on('click', '.popup-close', function (e) {
+        e.preventDefault();
+        var form = $(this).parent().find('form');
+
+        var date = new Date();
+        date.setTime(date.getTime() + parseInt('{{ settings.popup_cookie }}') * 24 * 60 * 60 * 1000);
+        Cookies.set('Newsletter_closed', 'true', { expires: date, path: '/' });
+        $('.newsletter-popup').removeClass('popup--visible');
+        $('body').removeClass('NewsletterActive').removeClass('scrollHidden').removeClass('no-scroll');
+        window.focus();
+        focusElement = '';
+      });
+      $('button[name="commit"]').click(function (e) {
+        e.preventDefault();
+        var form = $(this).closest('form');
+        form.submit();
+      });
+    });
+    /* NEWSLETTER POPUP ENDS */
+  </script>
+{%- endif -%}

@@ -1,0 +1,52 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{%- assign pickupAvailabilities = current_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+
+<div id="pickup-availability__content" class="pickup-availability__content" data-pickup-availability-content>
+  {%- if pickupAvailabilities.size > 0 and current_variant.available -%}
+    {%- liquid
+      assign nearestLocation = pickupAvailabilities.first
+    -%}
+    <h6 class="pickup-availability__heading text">
+      <span class="pickup-icon">
+        <svg width="21" height="15" viewBox="0 0 21 15" fill="none">
+          <path d="M18.1364 3.75H15.2727V0H1.90909C0.854318 0 0 0.839062 0 1.875V12.1875H1.90909C1.90909 13.7391 3.19295 15 4.77273 15C6.3525 15 7.63636 13.7391 7.63636 12.1875H13.3636C13.3636 13.7391 14.6475 15 16.2273 15C17.807 15 19.0909 13.7391 19.0909 12.1875H21V7.5L18.1364 3.75ZM4.77273 13.5938C3.98045 13.5938 3.34091 12.9656 3.34091 12.1875C3.34091 11.4094 3.98045 10.7812 4.77273 10.7812C5.565 10.7812 6.20455 11.4094 6.20455 12.1875C6.20455 12.9656 5.565 13.5938 4.77273 13.5938ZM17.6591 5.15625L19.5348 7.5H15.2727V5.15625H17.6591ZM16.2273 13.5938C15.435 13.5938 14.7955 12.9656 14.7955 12.1875C14.7955 11.4094 15.435 10.7812 16.2273 10.7812C17.0195 10.7812 17.6591 11.4094 17.6591 12.1875C17.6591 12.9656 17.0195 13.5938 16.2273 13.5938Z" fill="currentColor"></path>
+        </svg>
+      </span>
+
+      {%- if nearestLocation.available -%}
+        {{
+          'products.product.pickup_availability.pick_up_available_at_html'
+          | t: location_name: nearestLocation.location.name
+        }}
+      {%- else -%}
+        {{
+          'products.product.pickup_availability.pick_up_unavailable_at_html'
+          | t: location_name: nearestLocation.location.name
+        }}
+      {%- endif -%}
+    </h6>
+    <div class="pickup-availability__inner-content text-xsmall">
+      <p class="pickup-availability__desc">{{ nearestLocation.pick_up_time }}</p>
+      <a
+        href="#pickup-availability-sidebar"
+        id="pickup-availability__button"
+        class="unstyled-link pickup-availability__button hyperlink"
+        aria-haspopup="dialog"
+        data-side-drawer-open
+      >
+        {%- if pickupAvailabilities.size == 1 -%}
+          {{ 'products.product.pickup_availability.view_store_info' | t }}
+        {%- else -%}
+          {{ 'products.product.pickup_availability.check_other_stores' | t }}
+        {%- endif -%}
+      </a>
+    </div>
+  {% endif %}
+</div>
+{% if showList %}
+  {% render 'pickupavailability-list',
+    product: product,
+    current_variant: current_variant,
+    pickupAvailabilities: pickupAvailabilities
+  %}
+{% endif %}

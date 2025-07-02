@@ -1,0 +1,53 @@
+<div
+  class="featured-circle-collection--parent {% if counter != 1%}_{{ counter }} {% endif %}"
+  data-horizontal-element
+  data-index="{{ loopPrefix | plus:counter }}"
+  data-color="{{ block.settings.collection_bg_color }}"
+  {{ block.shopify_attributes }}
+>
+  <h2
+    class="featured-circle-collection__head h3 {% if section.blocks.size > 3 %}hidden{% endif %}"
+    aria-label="{%- if block.settings.collection_heading != blank -%}{{ block.settings.collection_heading -}}{%- elsif collection != blank -%}{{- collection.title | strip_html -}}{%- else -%}{{- 'sections.onboarding_collection.title' | t -}}{%- endif %}"
+    {% if collection.url == blank %}
+      role="link" aria-disabled="true"
+    {% else %}
+      href="{{ collection.url | default : '#' }}"
+    {% endif %}
+    tabindex="-1"
+  >
+    {%- if block.settings.collection_heading != blank -%}
+      {{ block.settings.collection_heading -}}
+    {%- elsif collection != blank -%}
+      {{- collection.title | strip_html -}}
+    {%- else -%}
+      {{- 'sections.onboarding_collection.title' | t -}}
+    {%- endif %}
+  </h2>
+  <a
+    class="unstyled-link featured-collection-list__item-link collection-carousel-link"
+    aria-label="{%- if block.settings.collection_heading != blank -%}{{ block.settings.collection_heading -}}{%- elsif collection != blank -%}{{- collection.title | strip_html -}}{%- else -%}{{- 'sections.onboarding_collection.title' | t -}}{%- endif %}"
+    data-collection-carousel-link
+    {% if collection.url == blank %}
+      role="link" aria-disabled="true"
+    {% else %}
+      href="{{ collection.url | default : '#' }}"
+    {% endif %}
+  ></a>
+  <div class="featured-circle-collection__img">
+    <div class="featured-circle-collection__img-inner">
+      {%- if imageContent != blank -%}
+        {%- render 'lazy-image', image: imageContent, sizes: '[440]' -%}
+      {%- else -%}
+        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="border-frame">
+    <div>
+      <div></div>
+    </div>
+    <div>
+      <div></div>
+    </div>
+  </div>
+</div>

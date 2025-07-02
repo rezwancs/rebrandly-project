@@ -1,0 +1,81 @@
+{% capture selectedColorImages %}
+{% liquid 
+    assign mainImageStatus = false
+    assign colorImagesCount = 0
+    if variant.featured_media != blank
+        assign mainImage = variant.featured_media
+        assign mainImageStatus = true
+    endif
+    assign colorHandle = color | downcase | handleize
+    assign productImages = product.media | where : 'media_type', 'image'
+  %}
+    {% capture colorImages %}
+        {% for image in productImages %}
+            {% assign imageAlt = image.alt | downcase | handleize %}
+            {% if colorHandle == imageAlt %}
+                {% if mainImageStatus == false %} 
+                    {% assign mainImage = image %}
+                    {% assign mainImageStatus = true %}
+                {% elsif image.id != variant.featured_media.id %}
+                    {% if settings.grid_on_hover == 'second_image' %}
+                        <div id="productGrid-{{ section.id }}-{{ product.id }}-{{ colorImagesCount }}" class="product-slider__item{% if settings.pass_through_product_images %} pass-through-color{% endif %}">
+                        {% render 'lazy-image' image: image %}
+                        </div>
+                        {% assign colorImagesCount = colorImagesCount | plus: 1 %}
+                      {% if colorImagesCount > 0 %}
+                        {% break %}
+                        {% endif %}
+                    {% elsif settings.grid_on_hover == 'carousel' %}
+                        <div id="productGrid-{{ section.id }}-{{ product.id }}-{{ colorImagesCount }}" class="product-slider__item{% if settings.pass_through_product_images %} pass-through-color{% endif %}">
+                        {% render 'lazy-image' image: image %}
+                        </div>
+                        {% assign colorImagesCount = colorImagesCount | plus: 1 %}
+                      {% if colorImagesCount > 10 %}
+                        {% break %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %} 
+            {% endif %}
+       {% endfor %}
+    {% endcapture %}
+{% if mainImage != blank %}
+    <div data-color-main-image>
+        {%- render 'lazy-image',
+            image: mainImage
+          -%}
+    </div>
+{% endif %}
+{% if colorImages != blank %}
+    <div data-color-more-images>
+       {{ colorImages }}
+    </div> 
+    {% if colorImagesCount > 2 and settings.grid_on_hover == 'carousel' %}
+            <ul class="list-unstyled" data-slider-nav tabindex="-1">
+              {% if settings.product_grid_carousel_navigation == 'arrows' %}
+              <li class="disabled" data-prev-slide data-prev-next-slide tabindex="-1"> 
+                <span class="slider-arrow prev">
+                  <svg width="9" height="15" viewBox="0 0 9 15" fill="none">
+                    <path d="M8.10318 13.7984L1.64444 7.33968L8.10318 0.880952L7.28095 -3.1826e-07L3.20828e-07 7.33968L7.28095 14.6794L8.10318 13.7984Z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </li>
+            {% endif %}
+            {% for i in (1..colorImagesCount) %}
+                <li class="{% if forloop.first %}active{% endif %}{% if settings.product_grid_carousel_navigation == 'arrows' %} hidden{% endif %}" data-index="productGrid-{{ section.id }}-{{ product.id }}-{{ forloop.index0 }}" data-grid-slide-change tabindex="-1"><span></span></li>
+            {% endfor %}
+            {% if settings.product_grid_carousel_navigation == 'arrows' %}
+              <li data-next-slide data-prev-next-slide tabindex="-1">
+                <span class="slider-arrow next">
+                  <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.896824 13.7984L7.35556 7.33968L0.896825 0.880952L1.71905 -3.1826e-07L9 7.33968L1.71905 14.6794L0.896824 13.7984Z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </li>
+            {% endif %}
+            </ul>
+      {% endif %}
+{% endif %}
+{% endcapture %}
+<script>
+  {{- selectedColorImages | json -}}
+</script>

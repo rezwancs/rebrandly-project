@@ -1,0 +1,210 @@
+.video-banner__item {
+    position: relative;
+    height: var(--image-height);
+    overflow: hidden;
+}
+
+.video-banner__item.autoplay-false .video-banner__media {
+    max-height: 100%
+}
+
+.video-banner__media {
+    background: var(--image-bg);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container .video-banner__media {
+    border-radius: var(--image-radius);
+    overflow: hidden;
+}
+
+.video-banner__media video,
+.video-banner__media iframe {
+    position: absolute;
+    width: 101%;
+    height: 101%;
+    object-fit: cover;
+}
+
+.video-banner__media iframe {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.video-banner__item.autoplay-true::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    top: 0;
+    left: 0;
+}
+
+.video-banner__placeholder {
+    background: var(--image-bg);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.video-banner__placeholder img {
+    position: absolute;
+    width: calc(100% + 1px);
+    height: calc(100% + 1px);
+    object-fit: cover;
+}
+
+.video-background-play {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: .4s ease;
+    pointer-events: none;
+    color: var(--body-text-color);
+}
+
+.video-background-play svg {
+    width: 14px;
+}
+
+.video-banner__mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    padding: 20px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.video-banner__mask-inner {
+    position: relative;
+}
+
+.video-banner__mask-heading {
+    font-size: var(--video-font);
+    line-height: 1;
+    font-weight: 700;
+}
+
+.video-banner__mask-heading.text-shadow-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(6px, 8px);
+    color: #b5956e;
+    -webkit-text-stroke: 1px #fff;
+    -webkit-text-fill-color: #939393;
+    z-index: -1;
+}
+
+.video-banner__mask.dark-mode .video-banner__mask-heading {
+    color: #fff;
+}
+
+.video-banner__mask.light-mode .video-banner__mask-heading {
+    color: #000;
+}
+
+.video-banner__mask.dark-mode .video-banner__mask-heading.text-shadow-text {
+    -webkit-text-stroke: 2px #fff;
+    -webkit-text-fill-color: #000;
+}
+
+.video-banner__mask.light-mode .video-banner__mask-heading.text-shadow-text {
+    -webkit-text-stroke: 3px #000;
+    -webkit-text-fill-color: #fff;
+}
+
+.video-banner__mask.border-animation .video-banner__mask-heading.text-shadow-text {
+    -webkit-text-stroke-width: var(--video-border);
+}
+
+.border-animation .video-banner__mask-heading.text-shadow-text {
+    transform: translate(0px, 0px);
+}
+
+@media (min-width:576px) {
+    .video-banner-section .section-heading-desc {
+        max-width: 90%;
+    }
+}
+
+@media (min-width:768px) {
+    .video-banner-section .section-heading-desc {
+        max-width: 70%;
+    }
+}
+
+@media (min-width:1025px) {
+    .video-background-play {
+        cursor: none;
+    }
+    .video-background-play {
+        opacity: 0;
+    }
+    .video-banner__item:hover .video-background-play {
+        opacity: 1;
+        pointer-events: all;
+    }
+    .video-banner__item:hover .overlay-close {
+        transform: scale(1);
+    }
+    html.no-js .video-background-play {
+        cursor: pointer;
+    }
+    html.no-js .video-background-play {
+        opacity: 1;
+    }
+    html.no-js .video-background-play .overlay-close {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width:1024px) {
+    .video-background-play {
+        pointer-events: all;
+    }
+    .video-background-play .overlay-close {
+        position: absolute;
+        width: 46px;
+        height: 46px;
+        background: var(--body-bg);
+        color: var(--body-text-color);
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        translate: none!important;
+    }
+}
+
+@media (max-width:767px) {
+    .video-banner__mask-heading.text-shadow-text {
+        transform: translate(3px, 3px);
+    }
+}

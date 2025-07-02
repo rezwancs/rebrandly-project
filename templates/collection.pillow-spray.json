@@ -1,0 +1,200 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e": {
+      "type": "apps",
+      "blocks": {
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/product-filter/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "collection_image": true,
+        "color_id": "#ffffff",
+        "banner_height_desktop": "300px",
+        "banner_height_mobile": "350px",
+        "collection_title": true,
+        "heading_overy": true,
+        "collection_description": false,
+        "products_per_page": 16,
+        "infinte_scroll": false,
+        "infinte_scroll_type": "onscroll",
+        "grid_image_size": "portrait",
+        "grid_image_fit": "cover",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "bannerbgcolor": "#202020",
+        "bgcoloropacity": "#eeeeee",
+        "textcolor": "#4c4c4c",
+        "overlay_opacity": 0,
+        "filter_bar_background": "#000000",
+        "filter_bar_text": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 20
+      }
+    },
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa": {
+      "type": "apps",
+      "blocks": {
+        "bf692365-b985-4446-9230-49ff7e76628a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-101021",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "bf692365-b985-4446-9230-49ff7e76628a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a": {
+      "type": "apps",
+      "blocks": {
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-888610",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 25
+      }
+    },
+    "3a7af5b8-58a7-4e3f-a009-a86b0e4a5e1f": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "ul {list-style-type: disc;}",
+        "h1,.h1 {font-size: 25px;}",
+        "h2,.h2 {font-size: 25px;}",
+        "h3,.h3 {font-size: 25px;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"content description-container\">\n<h1>Deep Sleep Pillow Spray: Enhance Your Restorative Slumber\n</h1>\n<br>\n<p>Rebrand is where we are prepared to work with you to create novel approaches to revolutionize your rest. In today's fast-paced world, a good night's sleep is more of a rarity than ever before. Rest like never before with the help of our cutting-edge Deep Sleep Pillow Spray. Take a deep breath and relax as the soothing effects of this carefully crafted remedy wash over you.\n<br>\nOur white-labeled product proves the high quality we can achieve with careful planning and the help of industry veterans. Forget those sleepless evenings and welcome a new era of deep relaxation. The Deep Sleep Pillow Spray is more than a product; it's a portal to a tranquil haven where the day's stresses melt away. Dive into a quiet world where the scent of natural essences calms your racing mind. Your journey toward a restful night's sleep begins here.\n</p>\n<br>\n<h2>Directions for Use of Deep Sleep Pillow Spray:</h2>\n<br>\n<ul>\n<li>\nShake and Spritz:\n</li>\n<p>Gently shake the bottle to awaken the magic within. Then, with a single spritz or two, apply the Deep Sleep Pillow Spray to your pillowcase and bedding. The ultra-fine mist disperses evenly, ensuring a delightful aroma all around.</p>\n<br>\n<li>Pre-Bed Ritual:</li>\n<p>Incorporate the spray into your pre-bedtime ritual. As you spritz the pillow, take a deep breath and let the calming aroma wrap around you. This simple act signals to your mind and body that it’s time to unwind and embrace tranquility.\n</p>\n<br>\n<li>Mindful Breathing:</li>\n<p>After spraying, lie down and indulge in a few moments of mindful breathing. Inhale the soothing blend of natural essences deeply, allowing your senses to become attuned to relaxation. Exhale the worries of the day, making space for peaceful thoughts.</p>\n<br>\n<li>Adjustable Use:</li>\n<p>The Deep Sleep Pillow Spray is versatile. Customize the intensity of the aroma by adjusting the number of spritzes. Whether you prefer a subtle scent or a more pronounced one, this spray caters to your preference.\n</p>\n<br>\n<li>Daily Consistency:</li>\n<p>Incorporate the spray into your nightly routine. Consistency is critical to reaping the full benefits of the spray. Over time, your mind associates the scent with rest, signaling your brain to enter the sleep zone effortlessly.\n</p>\n</ul>\n<br>\n        <div class=\"more-content\">\n\n<h3>Uses of Deep Sleep Pillow Spray:</h3>\n<br>\n<ul>\n<li>Insomnia Relief:\n</li>\n<p>Tired of staring at the ceiling? Our Deep Sleep Pillow Spray is a non-intrusive aid to tackle insomnia. The natural ingredients gently coax your mind into a state of serenity, paving the way for a peaceful slumber.\n</p>\n<br>\n<li>Stress Reduction:</li>\n<p>The demands of modern life often translate into a racing mind at bedtime. The spray’s essential oil composition, including lavender and chamomile, has been thoughtfully chosen to alleviate stress and anxiety.\n</p>\n<br>\n<li>Sleep Quality Enhancement:</li>\n<p>It’s not just about sleep duration; it’s about sleep quality. The Deep Sleep Pillow Spray enhances the overall quality of your sleep, helping you wake up refreshed and ready to conquer the day.\n</p>\n<br>\n<li>Nighttime Routine Enhancement:</li>\n<p>Transform your nighttime routine into a self-care sanctuary. Spraying the pillow becomes a mindful practice that signals your body to switch gears, letting go of the day’s worries.\n</p>\n<br>\n<li>Travel Companion:</li>\n<p>Jet lag and unfamiliar surroundings can disrupt sleep while traveling. The portable Deep Sleep Pillow Spray is your trusty companion, creating a cocoon of familiarity and comfort wherever you go.\n</p>\n</ul>\n<br>\n<h3>Ingredients of Deep Sleep Pillow Spray:</h3>\n<br>\n<ul>\n<li>Lavender Essential Oil:\n</li>\n<p>A renowned sleep aid, lavender oil is known for its soothing properties. Its aroma promotes relaxation and helps regulate heart rate and reduce blood pressure, setting the stage for deep sleep.\n</p>\n<br>\n<li>Chamomile Essential Oil:</li>\n<p>Chamomile has been used for centuries to induce calmness. Its gentle fragrance in the spray assists in winding down after a hectic day.\n</p>\n<br>\n<li>Bergamot Essential Oil:</li>\n<p>This citrusy gem is like a sunshine burst in a bottle. It adds a touch of happiness to the blend and has relaxing properties that can alleviate tension.\n</p>\n<br>\n<li>Frankincense Essential Oil:</li>\n<p>Known for its spiritual and grounding attributes, frankincense contributes to a serene environment that supports sleep.\n</p>\n<br>\n<li>Distilled Water:</li>\n<p>The base of the spray, distilled water, ensures a light mist that doesn't overwhelm your senses. It also helps in diffusing the essential oils evenly.\n</p>\n</ul>\n</div>\n\n        <button id=\"toggle-button\">Read More</button>\n    </div>\n\n\n<style>.more-content {\n    display: none;\n}\n\n.expanded .more-content {\n    display: block;\n}\n\n#toggle-button {\n    cursor: pointer;\n    border: none;\n    background: none;\n    color: #910008;\n    text-decoration: underline;\n    font-size: 15px;\n}\n\n.description-container {\n /*padding-top: 160px;\n  max-width: 1200px;\n  margin: -150px auto 0 auto;*/\n}\n\n@media screen and (max-width: 750px) {\n  .description-container {\n  padding-top:0px;\n  padding-right:15px;;\n  padding-left:15px;\n  padding-bottom:unset;\n  margin-bottom:0px;\n  margin-right:unset;\n  margin-left:unset;\n  margin-top:unset;\n}\n}\n</style>",
+        "text_alignment": "left",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 50,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 20
+      }
+    },
+    "7f23ca0e-5af3-4116-b4c3-19af401f6e5c": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--21577983131942__7f23ca0e-5af3-4116-b4c3-19af401f6e5c-content-1": {
+          "type": "content",
+          "settings": {
+            "heading": "What are the active ingredients in the pillow spray?",
+            "content": "<p>Lavender, chamomile, bergamot, and frankincense essential oils, along with distilled water, create the potent blend of our Deep Sleep Pillow Spray.</p>"
+          }
+        },
+        "template--21577983131942__7f23ca0e-5af3-4116-b4c3-19af401f6e5c-content-2": {
+          "type": "content",
+          "settings": {
+            "heading": "How long does it take for the spray to work?",
+            "content": "<p>Within 15-20 minutes, the spray's calming aroma interacts with your senses, facilitating relaxation and gradually preparing you for a peaceful sleep.</p>"
+          }
+        },
+        "template--21577983131942__7f23ca0e-5af3-4116-b4c3-19af401f6e5c-content-3": {
+          "type": "content",
+          "settings": {
+            "heading": "Are there any side effects associated with the spray?",
+            "content": "<p>Our spray comprises all-natural ingredients, minimizing the chances of adverse effects. However, individual sensitivities may vary. Conduct a patch test if concerned.</p>"
+          }
+        },
+        "65a482cf-9a53-46dd-830a-fef6145755b8": {
+          "type": "content",
+          "settings": {
+            "heading": "How does deep sleep pillow spray work?",
+            "content": "<p>The carefully chosen essential oils' aromatic molecules influence the limbic system, promoting relaxation and reducing stress, thus priming your body and mind for deep sleep.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21577983131942__7f23ca0e-5af3-4116-b4c3-19af401f6e5c-content-1",
+        "template--21577983131942__7f23ca0e-5af3-4116-b4c3-19af401f6e5c-content-2",
+        "template--21577983131942__7f23ca0e-5af3-4116-b4c3-19af401f6e5c-content-3",
+        "65a482cf-9a53-46dd-830a-fef6145755b8"
+      ],
+      "custom_css": [
+        ".accordion__item[open] {background: rgb(248, 248, 248);}",
+        ".accordion__heading-icon {background: white;}"
+      ],
+      "settings": {
+        "heading": "<strong>FAQs</strong>",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "show_first_default": false,
+        "section_visibility": "always",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "marker_color": "#ffffff",
+        "marker_text_color": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e",
+    "main-collection",
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa",
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a",
+    "3a7af5b8-58a7-4e3f-a009-a86b0e4a5e1f",
+    "7f23ca0e-5af3-4116-b4c3-19af401f6e5c"
+  ],
+  "wrapper": ".boost-sd__product-filter-fallback"
+}

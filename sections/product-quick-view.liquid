@@ -1,0 +1,149 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="stylesheet" href="{{ 'main-product-rtl.css' | asset_url }}">
+{% else %}
+  <link rel="stylesheet" href="{{ 'main-product.css' | asset_url }}">
+{% endif %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div class="quickview-popup__container">
+  {% if settings.enable_title_marquee %}
+    <div class="sticky-item quickview__header">
+      <div class="quickview__heading-item" data-marquee-text>
+        <h2 class="quickview__heading h1-med" data-marque-node>{{ product.title }}</h2>
+        <h2 class="quickview__heading h1-med" data-marque-node>{{ product.title }}</h2>
+        <h2 class="quickview__heading h1-med" data-marque-node>{{ product.title }}</h2>
+        <h2 class="quickview__heading h1-med" data-marque-node>{{ product.title }}</h2>
+        <h2 class="quickview__heading h1-med" data-marque-node>{{ product.title }}</h2>
+        <h2 class="quickview__heading h1-med" data-marque-node>{{ product.title }}</h2>
+      </div>
+    </div>
+  {% endif %}
+  <div class="quickview-popup__content shopify-section" product-content-wrapper>
+    <div class="row no-gutters">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="quickview-popup__img">
+          {% render 'product-template-media' product, gridClass: 'grid-two' %}
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="quickview-popup__detail sticky-item">
+          {% render 'product-template-info', product, section, current_variant : current_variant,quickView:true, designClass: 'divider-variant' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- liquid
+  assign opacity = settings.quick_view_opacity | divided_by: 100.0
+-%}
+<style>
+  .quickview__header{
+    --marque-opacity: {{ opacity }};
+  }
+</style>
+<script type="application/json" id="product3DModel-{{ product.id }}">
+  {{ product.media | where: 'media_type', 'model' | json }}
+</script>
+{% schema %}
+{
+  "name": "Product quick view",
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "sku",
+      "name": "Sku",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "review_rating",
+      "name": "Review rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To display ratings, add [Product Review app](https://apps.shopify.com/product-reviews)."
+        }
+      ]
+    },
+    {
+      "type": "social_icons",
+      "name": "Social sharing",
+      "limit": 1
+    },
+    {
+      "type": "variant",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "button",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "dynamic_checkout_btn",
+          "default": true,
+          "label": "Show dynamic checkout button"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_quantity",
+          "default": true,
+          "label": "Enable quantity"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "title"
+      },
+      {
+        "type": "sku"
+      },
+      {
+        "type": "review_rating"
+      },
+      {
+        "type": "price"
+      },
+      {
+        "type": "variant"
+      },
+      {
+        "type": "button",
+        "settings": {
+          "dynamic_checkout_btn": true
+        }
+      },
+      {
+        "type": "social_icons"
+      }
+    ]
+  }
+}
+{% endschema %}

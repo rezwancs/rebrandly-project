@@ -1,0 +1,144 @@
+<ul class="list-unstyled header__menus">
+  {%- for link in linklists[section.settings.menu].links -%}
+    {%- liquid
+      assign menuTitle = link.title | handleize
+      assign blockData = ''
+      for block in section.blocks
+        assign blockParent = block.settings.title | handleize
+        if blockParent == menuTitle
+          assign blockData = block
+          break
+        endif
+      endfor
+    -%}
+    {% capture megamenuContent %}
+        {%- for i in (1..4) -%}
+            {%- liquid 
+                assign imageIndex = 'image' | append: i
+                assign headingIndex = 'heading' | append: i
+                assign linkIndex = 'link' | append: i
+                assign image = blockData.settings[imageIndex]
+                assign heading = blockData.settings[headingIndex]
+                assign imageLink = blockData.settings[linkIndex] 
+            -%}
+            {%- if image != blank or heading != blank  -%}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="header__megamenu-col">
+                <a href="{{ imageLink }}" class="unstyled-link header__megamenu-collection img-zoom" aria-label="Menu link">
+                  {%- if image != blank -%}
+                    <div class="header__megamenu-collection-img fixed-height">
+                      <div class="image-wrapper">
+                          {%- render 'lazy-image', image: image -%}
+                      </div>
+                    </div>
+                  {% endif %}
+                    {% if heading != blank %}
+                        <div class="header__megamenu-collection-heading">
+                        <p>{{ heading }}</p>
+                        </div>
+                    {% endif %}
+                </a>
+                </div>
+            </div>
+            {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+    <li class="header__menus-item {% if link.levels == 2 or megamenuContent != blank %}has-megamenu{% endif %}">
+      {%- if link.links != blank or megamenuContent != blank -%}
+        <!-- add "opened" class to open megamenu in above <li> -->
+        <a href="{{ link.url }}" class="unstyled-link header__menus-link">
+          {% if section.settings.desktop_font_bold %}
+            <strong>{{ link.title | escape }}</strong>
+          {% else %}
+            {{ link.title | escape }}
+          {% endif %}
+          <svg
+            version="1.1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 11 7"
+            style="enable-background:new 0 0 11 7;"
+          >
+            <polygon points="9.5,0.6 5.5,4.6 1.5,0.6 0.6,1.5 5.5,6.4 10.4,1.5 "/>
+          </svg>
+        </a>
+        {% if link.levels == 2 or megamenuContent != blank %}
+          <div
+            class="header__megamenu collection-enabled {{ section.settings.megamenu_color_scheme }}-color-scheme"
+            tabindex="-1"
+          >
+            <div class="container">
+              {% if link.links != blank %}
+                {% if link.levels == 2 %}
+                  <div class="row">
+                    {%- for childlink in link.links -%}
+                      <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+                        <div class="header__megamenu-col">
+                          <div class="header__megamenu-heading text-small">
+                            <a href="{{ childlink.url }}" class="unstyled-link">{{- childlink.title | escape -}}</a>
+                          </div>
+                          {%- if childlink.links != blank -%}
+                            <ul class="list-unstyled header__megamenu-items">
+                              {%- for grandchildlink in childlink.links -%}
+                                <li class="header__megamenu-item">
+                                  <a
+                                    href="{{ grandchildlink.url }}"
+                                    class="unstyled-link header__megamenu-link text-small"
+                                  >
+                                    {{- grandchildlink.title | escape -}}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                {% else %}
+                  <ul class="list-unstyled header__megamenu-items">
+                    {%- for childlink in link.links -%}
+                      <li class="header__megamenu-item">
+                        <a href="{{ childlink.url }}" class="unstyled-link header__megamenu-link">
+                          {{- childlink.title | escape -}}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {% endif %}
+              {% endif %}
+              {% if megamenuContent != blank %}
+                {% if link.links != blank %}
+                  <div class="header__megamenu-divider"></div>
+                {% endif %}
+                <div class="row">
+                  {{ megamenuContent }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% else %}
+          <div class="header__menus-dropdown {{ section.settings.megamenu_color_scheme }}-color-scheme">
+            <ul class="list-unstyled dropdown-links">
+              {%- for childlink in link.links -%}
+                <li class="dropdown-links-item">
+                  <a href="{{ childlink.url }}" class="unstyled-link dropdown-links-item-link">
+                    {{- childlink.title | escape -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {% endif %}
+      {% else %}
+        <a href="{{ link.url }}" class="unstyled-link header__menus-link">
+          {% if section.settings.desktop_font_bold %}
+            <strong>{{ link.title | escape }}</strong>
+          {% else %}
+            {{ link.title | escape }}
+          {% endif %}
+        </a>
+      {% endif %}
+    </li>
+  {%- endfor -%}
+</ul>

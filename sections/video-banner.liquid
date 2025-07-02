@@ -1,0 +1,570 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'video-banner-rtl.css' | asset_url }}">
+  {{ 'video-banner-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'video-banner.css' | asset_url }}">
+  {{ 'video-banner.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+<div class="container">    
+   
+{% if section.settings.heading != blank or section.settings.description != blank %}
+  <div class="section-heading-box text-{{ section.settings.text_alignment }}">
+    {% if section.settings.heading != blank %}
+      {%- capture higlightPrefix -%}
+        <span class="marker">
+      {%- endcapture -%}
+      {%- capture highlightSuffix -%}
+          {%- render 'marker-text-style' marker_style:section.settings.higlight_style -%}
+      {%- endcapture -%}
+      <h2 class="section-heading-title rte {% if section.settings.enable_highlight %} highlight-text{% endif %} {{ section.settings.heading_size }}" style="--outline-thickness:{{ section.settings.outline_thickness }};--marker-svg:{{ section.settings.marker_color }};--marker:{{ section.settings.marker_text_color }}">
+        {{ section.settings.heading | replace:"[[", higlightPrefix | replace:"]]",highlightSuffix }}
+      </h2>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <p class="section-heading-desc text-large ">
+        {{ section.settings.description }}
+      </p>
+    {% endif %}
+  </div>
+{% endif %}
+    
+  {% if section.settings.fullwidth %}
+    </div>
+  {% endif %}
+  {% comment %} when full width option enabled remove container div {% endcomment %}
+  <div class="video-banner__item autoplay-{{ section.settings.autoplay }}">
+    <div class="video-banner__media">
+      {%- if section.settings.videourl != blank -%}
+          {%- liquid
+            assign videoUrl = section.settings.videourl
+            assign videoSource = 'mp4'
+            if videoUrl contains 'youtube.com/watch'
+              assign videoSource = 'youtube'
+              assign video_id = videoUrl | split: 'v='
+              assign video_id = video_id[1] | split: '&' | first
+            elsif videoUrl contains 'youtu.be/'
+              assign videoSource = 'youtube'
+              assign video_id = videoUrl | split: '.be/'
+              assign video_id = video_id[1] | split: '&' | first
+            elsif videoUrl contains 'vimeo.com/'
+              assign videoSource = 'vimeo'
+              assign video_id = videoUrl | split: '.com/'
+              assign video_id = video_id[1] | split: '/' | first
+            endif
+          -%}
+          {%- if videoSource == 'youtube' -%}
+              <div
+                id="youtTubeVideo-{{ section.id }}"
+                data-id="{{ video_id }}"
+                class="youtubeAutoPlayVideo" data-autoplay="{{ section.settings.autoplay }}"></div>
+          {%- elsif videoSource == 'vimeo' -%}
+              <iframe
+                width="640"
+                height="360"
+                src="https://player.vimeo.com/video/{{ video_id }}{% if section.settings.autoplay %}?autopause=0&autoplay=1&background=1&byline=0&controls=0&loop=1&muted=1&playsinline=1&title=0&transparent=1{% endif %}"
+                class="no-js-hidden vimeoAutoPlayVideo"
+                data-id="{{ video_id }}" 
+                data-autoplay="{{ section.settings.autoplay }}"
+                allowfullscreen></iframe>
+          {%- elsif videoSource == 'mp4' -%}
+            <video
+              class="videoBackgroundFile"
+              {% if section.settings.autoplay %}
+              autoplay
+              muted
+              loop
+              playsinline 
+              {% else %}
+                controls
+              {% endif %}
+              data-autoplay="{{ section.settings.autoplay }}">
+              <source src="{{ section.settings.videourl }}" type="video/mp4">
+            </video>
+          {%- endif -%}
+        {%- endif -%}
+    </div>
+    {% if section.settings.poster != blank and section.settings.autoplay == false %}
+      <div class="video-banner__placeholder" data-side-drawer>
+        {% render 'lazy-image', image: section.settings.poster %}
+        <a href="" class="unstyled-link video-background-play" data-side-drawer-close data-moving-cursor aria-label="{{ 'sections.video.background_play' | t }}">
+          <span class="overlay-close"> 
+            <svg  with="20" viewBox="0 0 365.7 487" fill="currentColor">
+              <g>
+                <path d="M11.2,485c-1.8,0-3.6-0.4-5.3-1.3C2.3,481.8,0,478,0,473.8V11.2c0-4.1,2.3-7.9,5.9-9.9C9.6-0.6,14-0.4,17.5,1.9
+                  l343.3,231.3c3.1,2.1,4.9,5.6,4.9,9.3s-1.9,7.2-4.9,9.3L17.5,483.1C15.6,484.4,13.4,485,11.2,485L11.2,485z"/>
+              </g>
+            </svg>
+          </span>
+        </a>
+      </div>
+    {% endif %}
+    {% if section.settings.masked_text != blank and section.settings.autoplay %}
+      <div class="video-banner__mask {{ section.settings.masked_text_background }}-mode{% if section.settings.masked_effect_on_border %} border-animation{% endif%}" 
+        style="{%- if section.settings.masked_text_background == 'light' -%}
+          background:#ffffff;
+          mix-blend-mode: screen;
+          {% if section.settings.masked_effect_on_border %}
+            -webkit-text-fill-color: #ffffff;
+          {% endif %}
+          {%- else -%}
+          background:#000000;
+          mix-blend-mode: multiply;
+          {% if section.settings.masked_effect_on_border %}
+            -webkit-text-fill-color: #000000;
+          {% endif %}
+        {%- endif -%}
+       ">
+        <div class="video-banner__mask-inner">
+          <h2 class="video-banner__mask-heading {{ section.settings.font_family }}-font">{{section.settings.masked_text | slice : 0,14 }}</h2>
+          <h2 class="video-banner__mask-heading text-shadow-text {{ section.settings.font_family }}-font">{{section.settings.masked_text | slice : 0,14 }}</h2>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% unless section.settings.fullwidth %}
+</div>
+    {% endunless %}
+</div>
+<style>
+  #shopify-section-{{ section.id }}{
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+    --image-height:{{ section.settings.desktop_height }}px;
+    --video-font:{{ section.settings.desktop_font_size }}vw;
+     --video-border:{{ section.settings.desktop_video_border }}px;
+  }
+  #shopify-section-{{ section.id }} .section-heading-title{
+    padding-bottom:{{ section.settings.heading_space_desktop }}px;
+  }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{      
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+      --image-height:{{ section.settings.mobile_height }}px;   
+      --video-font:{{ section.settings.mobile_font_size }}vw;
+      --video-border:{{ section.settings.mobile_video_border }}px;                             
+    }
+    #shopify-section-{{ section.id }} .section-heading-title{
+      padding-bottom:{{ section.settings.heading_space_mobile }}px;
+    }
+  }
+  {% if section.settings.section_visibility == 'large' %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      
+      }
+    }
+  {% elsif section.settings.section_visibility == 'small' %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+{% endif %}
+</style>
+{% schema %}
+{
+  "name": "t:sections.video_banner.name",
+  "class": "video-banner-section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+    },
+  "settings": [  {
+    "type": "select",
+    "id": "section_visibility",
+    "label": "t:common.section_visibility.label",
+    "default": "always",
+    "options": [
+      {
+        "label": "t:common.section_visibility.options.always.label",
+        "value": "always"
+      },
+      {
+        "label": "t:common.section_visibility.options.small_devices.label",
+        "value": "small"
+      },
+      {
+        "label": "t:common.section_visibility.options.large_devices.label",
+        "value": "large"
+      }
+    ]
+  },
+    {
+      "type": "text",
+      "id": "videourl",
+      "label": "t:sections.video_banner.settings.video_url.label",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "t:sections.video_banner.settings.cover_image.label",
+      "info": "t:sections.video_banner.settings.cover_image.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "fullwidth",
+      "default": true,
+      "label": "t:sections.video_banner.settings.full_width.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "default": true,
+      "label": "t:sections.video_banner.settings.autoplay.label",
+      "info": "t:sections.video_banner.settings.autoplay.info"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.text.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:common.heading.label",
+      "info": "t:common.marker_style.info",
+      "default": "Video banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_highlight",
+      "label": "t:common.highlight_text.label",
+      "info":"t:common.marker_style.info",
+      "info": "t:common.highlight_text.info"
+    },
+    {
+      "type":"select",
+      "id":"higlight_style",
+      "label":"t:common.marker_style.label",
+      "default": "basic",
+      "options":[
+        {
+          "value": "basic",
+          "label": "t:common.marker_style.options.basic.label"
+        },
+        {
+          "value": "curved",
+          "label": "t:common.marker_style.options.curved.label"
+        },
+        {
+          "value": "line",
+          "label": "t:common.marker_style.options.line.label"
+        },
+        {
+          "value": "box",
+          "label": "t:common.marker_style.options.box.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "outline_thickness",
+      "label": "t:common.outline_stroke.label",
+      "default": "1px",
+      "options": [
+        {
+          "value": "1px",
+          "label": "t:common.outline_stroke.options.thin.label"
+        },
+        {
+          "value": "2px",
+          "label": "t:common.outline_stroke.options.thick.label"
+        }
+        
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:common.heading_size.label",
+      "default": "h5",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label":"t:common.heading_size.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.heading_size.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:sections.video_banner.settings.text_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:common.alignment.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:common.alignment.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:common.alignment.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_space_desktop",
+      "label": "t:common.header.heading_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    },
+    {
+      "type": "range",
+      "id": "heading_space_mobile",
+      "label": "t:common.header.heading_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    }, 
+    {
+      "type": "header",
+      "content": "t:sections.video_banner.settings.masked_text.heading",
+      "info": "t:sections.video_banner.settings.masked_text.heading_info"
+    },
+    {
+      "type": "text",
+      "id": "masked_text",
+      "label": "t:sections.video_banner.settings.masked_text.label",
+      "info": "t:sections.video_banner.settings.masked_text.info"
+    },
+    {
+      "type": "range", 
+      "id":"desktop_font_size",
+      "label": "t:sections.video_banner.settings.desktop_font_size.label",
+      "max":16,
+      "min":10,
+      "step":1,
+      "unit":"vw",
+      "default":16
+    },
+    {
+      "type": "range", 
+      "id":"mobile_font_size",
+      "label": "t:sections.video_banner.settings.mobile_font_size.label",
+      "max":16,
+      "min":10,
+      "step":1,
+      "unit":"vw",
+      "default":16
+    },
+    {
+      "type": "checkbox",
+      "id": "masked_effect_on_border",
+      "label": "t:sections.video_banner.settings.masked_effect_on_border.label",
+      "default": false
+    },
+    {
+      "type": "range", 
+      "id":"desktop_video_border",
+      "label": "t:sections.video_banner.settings.desktop_video_border.label",
+      "max":6,
+      "min":2,
+      "step":1,
+      "unit":"px",
+      "default":2
+    },
+    {
+      "type": "range", 
+      "id":"mobile_video_border",
+      "label": "t:sections.video_banner.settings.mobile_video_border.label",
+      "max":4,
+      "min":1,
+      "step":1,
+      "unit":"px",
+      "default":2
+    },
+    {
+      "type": "select",
+      "id": "masked_text_background",
+      "label": "t:sections.video_banner.settings.masked_text_background.label",
+      "default": "dark",
+      "options": [
+        {
+          "value": "light",
+          "label": "t:sections.video_banner.settings.masked_text_background.options.light.label"
+        },
+        {
+          "value": "dark",
+          "label": "t:sections.video_banner.settings.masked_text_background.options.dark.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "t:sections.video_banner.settings.masked_text.font_family.label",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:sections.video_banner.settings.masked_text.font_family.options.heading.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.video_banner.settings.masked_text.font_family.options.body.label"
+        }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.height.label"
+    },
+    {
+      "type": "range",
+      "label": "t:sections.video_banner.settings.desktop_height.label",
+      "id": "desktop_height",
+      "min": 300,
+      "max": 850,
+      "step": 10,
+      "unit": "px",
+      "default": 650
+    },
+    {
+      "type": "range",
+      "label": "t:sections.video_banner.settings.mobile_height.label",
+      "id": "mobile_height",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 350
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradiant",
+      "label":"t:common.gradient.label",
+      "default":false
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "t:common.marker_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "marker_text_color",
+      "label": "t:common.marker_text_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.video_banner.presets.name"
+    }
+  ]
+}
+{% endschema %}

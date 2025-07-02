@@ -1,0 +1,55 @@
+{%- if settings.age_verification_pop_enable -%}
+  {%- capture ageVerifyContent -%}
+    <div class="age-verifiction__box" data-age-verification-container>
+      {%- if settings.age_verification_logo != blank -%}
+        <div class="age-verification__logo">
+            {%- liquid
+              assign logoWidth = settings.age_verification_logo.width |  at_most: 300
+              assign image_2x_size = logoWidth | times: 2 | at_most: 2560 
+              -%}
+            <img class="header__logo-img"
+              srcset="{{ settings.age_verification_logo | image_url: width: logoWidth }} 1x, {{ settings.age_verification_logo | image_url: width: image_2x_size }} 2x"
+              src="{{ settings.age_verification_logo | image_url: width: logoWidth }}"
+              loading="lazy"
+              width="{{ logoWidth }}"
+              height="{{ logoWidth | divided_by : settings.age_verification_logo.aspect_ratio | round }}"
+              alt="{{ settings.age_verification_logo.alt | default: shop.name | escape }}"
+            >
+        </div>
+      {% endif %}
+        {% if settings.age_verification_heading %}
+          <h2 class="h2 age-verifiction__heading rte{% if settings.age_verification_heading_highlight %} highlight-text{% endif %}">{{ settings.age_verification_heading }}</h2>
+        {% endif %}
+        {% if settings.age_verification_sub-heading %}
+          <div class="age-verifiction__desc rte">{{ settings.age_verification_sub-heading }}</div>
+        {% endif %}
+        {% if settings.approve_btn_text != blank or settings.decline_btn_text != blank %}
+          <div class="age-verifiction__btn btn-group">
+            {% if settings.approve_btn_text != blank %}
+              <button class="button submit-age" data-over-age-button>{{ settings.approve_btn_text }}</button>
+            {% endif %}
+              {% if settings.decline_btn_text != blank %}
+              <button class="button secondary-button reject-age" data-under-age-button>{{ settings.decline_btn_text }}</button>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if settings.age_verification_description %}
+          <div class="age-verification__comment rte">{{ settings.age_verification_description }}</div>
+        {% endif %}
+    </div>
+    <div class="age-verifiction__box decline__box hidden" data-under-age-container>
+      <h4 class="age-verifiction__heading">{{ settings.decline_heading }}</h4>
+      <div class="age-verifiction__desc rte">{{ settings.decline_sub-heading }}</div>
+      <div class="age-verifiction__btn btn-group">
+          <button class="button submit-age" data-age-decline-button>{{ settings.age-decline_btn_text }}</button>
+      </div> 
+    </div>
+  {%- endcapture -%}
+  {%- if ageVerifyContent != blank -%}
+    {% render 'popup',
+      id: 'ageVerify',
+      class: 'age-verification-popup popup-fullwidth',
+      popupContent: ageVerifyContent
+    %}
+  {%- endif -%}
+{%- endif -%}

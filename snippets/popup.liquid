@@ -1,0 +1,50 @@
+<div
+  class="{% if class contains 'quickview-popup' %} {{ settings.quickview_color_scheme }}-color-scheme {% else %} {{ settings.popup_color_scheme }}-color-scheme {% endif %}  {{ class }} popup"
+  id="{{ id }}"
+  data-side-drawer
+>
+  {% unless class contains 'age-verification-popup' %}
+    <a href="#" class="unstyled-link popup-background" data-side-drawer-close data-moving-cursor>
+      <span class="overlay-close" aria-label="Close">
+        {% render 'icons', icon: 'close' %}
+      </span>
+    </a>
+  {% endunless %}
+  {% if class contains 'quickview' %}
+    <a href="#" class="unstyled-link popup-close" aria-label="Close" data-side-drawer-close>
+      {% render 'icons', icon: 'close' %}
+    </a>
+  {% endif %}
+  <div class="popup-container">
+    <div class="popup-body">
+      {% liquid
+        assign popUpClose = false
+        unless class contains 'age-verification-popup'
+          if class contains 'quickview'
+            if settings.enable_quickview_fullwidth
+              assign popUpClose = true
+            endif
+          else
+            assign popUpClose = true
+          endif
+        endunless
+      %}
+      {% if popUpClose %}
+        <a
+          href="#"
+          class="unstyled-link popup-close"
+          aria-label="Close"
+          data-side-drawer-close
+        >
+          {% render 'icons', icon: 'close' %}
+        </a>
+      {% endif %}
+      <div class="popup-body-inner{% if class contains 'quickview' and  settings.enable_title_marquee %} quickview-marquee-enabled{%endif %}">
+        {{ popupContent }}
+      </div>
+    </div>
+  </div>
+</div>
+{% if class contains 'quickview' and settings.enable_quickview_fullwidth %}
+  <div class="quickview-circle {{ settings.quickview_color_scheme }}-color-scheme"></div>
+{% endif %}

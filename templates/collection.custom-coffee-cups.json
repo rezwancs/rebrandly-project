@@ -1,0 +1,208 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e": {
+      "type": "apps",
+      "blocks": {
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/product-filter/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "collection_image": true,
+        "color_id": "#ffffff",
+        "banner_height_desktop": "300px",
+        "banner_height_mobile": "350px",
+        "collection_title": true,
+        "heading_overy": true,
+        "collection_description": false,
+        "products_per_page": 16,
+        "infinte_scroll": false,
+        "infinte_scroll_type": "onscroll",
+        "grid_image_size": "portrait",
+        "grid_image_fit": "cover",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "bannerbgcolor": "#202020",
+        "bgcoloropacity": "#eeeeee",
+        "textcolor": "#4c4c4c",
+        "overlay_opacity": 0,
+        "filter_bar_background": "#000000",
+        "filter_bar_text": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 20
+      }
+    },
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa": {
+      "type": "apps",
+      "blocks": {
+        "bf692365-b985-4446-9230-49ff7e76628a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-101021",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "bf692365-b985-4446-9230-49ff7e76628a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a": {
+      "type": "apps",
+      "blocks": {
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-888610",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 25
+      }
+    },
+    "f55d1770-17c3-4487-ae12-26ae1a2d4701": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "ul {list-style-type: disc;}",
+        "h1,.h1 {font-size: 25px;}",
+        "h2,.h2 {font-size: 25px;}",
+        "h3,.h3 {font-size: 25px;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"content description-container\">\n<h1>Custom Coffee Cups That Make Every Sip Special</h1>\n<br>\n<p>In a world where personalization is the key to standing out, even your morning coffee deserves a touch of individuality. At Rebrand, we understand that your coffee experience extends beyond the brew itself – it's about the cup you hold, the design that reflects your style, and the joy it brings to your daily routine. We bring you a comprehensive range of custom coffee cups that redefine your coffee moments. From sleek minimalism to vibrant expressions, we have the perfect cup for every coffee lover. </p>\n<br>\n<h2>Different Types of Custom Coffee Cups</h2>\n<br>\n<ul>\n<li>\nClassic Elegance\n</li>\n<p>Boost your coffee-drinking experience with our Classic Elegance collection. Crafted with precision, these coffee cups exude sophistication. Choose from a range of timeless designs, from delicate patterns to minimalistic aesthetics, each capturing the essence of refined indulgence. Perfect for those who appreciate the blend of tradition and modernity in their coffee rituals.</p>\n<br>\n<li>Contemporary Charm</li>\n<p>Embrace the allure of modern design with our Contemporary Charm coffee cups. These cups are a fusion of creativity and functionality, reflecting the vibrancy of today's coffee culture. Whether you prefer bold colors, striking geometric shapes, or abstract motifs, our Contemporary Charm collection adds a touch of avant-garde to your daily brew.\n</p>\n<br>\n<li>Rustic Appeal</li>\n<p>For the connoisseurs of rustic aesthetics, our Rustic Appeal coffee cups capture the beauty of imperfections. These cups celebrate the art of handcrafted pottery, each piece narrating its own story. With earthy tones, textured finishes, and a tactile experience, this collection transports you to a cozy café in a quaint village.</p>\n<br>\n<li>Personalized Masterpieces</li>\n<p>Unleash your creativity with our Personalized Masterpieces collection. These cups are your canvas to imprint your identity. Whether it's a cherished quote, a memorable date, or a unique artwork, our customization options let you curate a coffee cup that resonates with your soul. Make your coffee breaks truly your own.\n</p>\n</ul>\n<br>\n        <div class=\"more-content\">\n\n<h3>Benefits of Custom Coffee Cups</h3>\n<br>\n<ul>\n<li>Uniqueness Redefined</li>\n<p>Our custom coffee cups are as unique as you are. Our custom coffee cups set you apart from the crowd, making your indulgence exceptional. Each sip becomes a celebration of your individuality. Let your mornings resonate with the essence of your personality, as every cup reflects your distinct taste and style.\n</p>\n<br>\n<li>Conversation Starters</li>\n<p>Imagine the delight of your guests as they're handed a cup adorned with a quirky quote or a mesmerizing design. Our custom coffee cups enhance your moments and spark conversations and connections. Watch as the intricate artwork on your cup becomes an icebreaker, inviting friends and strangers alike to share stories and laughter over a cup of your favorite brew.\n</p>\n<br>\n<li>Branding Reinvented</li>\n<p>For businesses, our custom coffee cups are an innovative branding tool. Transform your café's identity with cups that reflect your values and aesthetics. Let your customers take home a beverage and a piece of your brand. Extend your brand's reach beyond your establishment's walls as your customers proudly carry your uniquely designed cups, spreading your message with every sip.</p>\n<br>\n<li>Gifts from the Heart</li>\n<p>Show your loved ones how much you care with a thoughtfully crafted gift. Our custom coffee cups make for heartwarming presents, allowing you to express your emotions through artful designs and personalized touches. Every time they enjoy their favorite brew, they'll be reminded of the warmth and love that went into selecting or designing that perfect cup, making it a cherished keepsake.</p>\n<li>Quality Craftsmanship</li>\n<p>At Rebrand, we believe in merging aesthetics with functionality. Our coffee cups are not just visually captivating; they are also meticulously crafted to ensure durability and comfort in every sip. Experience the difference that quality craftsmanship brings to your coffee moments. Feel the ergonomic design of our cups, carefully created to fit comfortably in your hand while exuding an air of sophistication.</p>\n<br>\n<li>Aesthetic Immersion</li>\n<p>Immerse yourself in an aesthetic experience with our diverse collections. Whether you're sipping alone or sharing a coffee moment, our cups add a layer of visual pleasure that enhances the overall ambiance. Transform your surroundings with the visual poetry of our cups' designs. Feel the artistic energy they infuse into your space, making every coffee break a mini-retreat into beauty and style.</p>\n</ul>\n</div>\n\n        <button id=\"toggle-button\">Read More</button>\n    </div>\n\n\n<style>.more-content {\n    display: none;\n}\n\n.expanded .more-content {\n    display: block;\n}\n\n#toggle-button {\n    cursor: pointer;\n    border: none;\n    background: none;\n    color: #910008;\n    text-decoration: underline;\n    font-size: 15px;\n}\n\n.description-container {\n /*padding-top: 160px;\n  max-width: 1200px;\n  margin: -150px auto 0 auto;*/\n}\n\n@media screen and (max-width: 750px) {\n  .description-container {\n  padding-top:0px;\n  padding-right:15px;;\n  padding-left:15px;\n  padding-bottom:unset;\n  margin-bottom:0px;\n  margin-right:unset;\n  margin-left:unset;\n  margin-top:unset;\n}\n}\n</style>",
+        "text_alignment": "left",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 50,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 20
+      }
+    },
+    "62ec3557-8c62-44c8-8d09-d7c0ab5c4572": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--21576229028134__62ec3557-8c62-44c8-8d09-d7c0ab5c4572-content-1": {
+          "type": "content",
+          "settings": {
+            "heading": "How are custom coffee cups made?",
+            "content": "<p>Custom coffee cups are made through design creation, material selection, molding, firing, glazing, and quality checks.</p>"
+          }
+        },
+        "template--21576229028134__62ec3557-8c62-44c8-8d09-d7c0ab5c4572-content-2": {
+          "type": "content",
+          "settings": {
+            "heading": "How long does it take to make a custom coffee cup?",
+            "content": "<p>The time to make a custom coffee cup varies, but it generally takes 2-4 weeks from design to finished product.</p>"
+          }
+        },
+        "template--21576229028134__62ec3557-8c62-44c8-8d09-d7c0ab5c4572-content-3": {
+          "type": "content",
+          "settings": {
+            "heading": "What are the dimensions of a custom coffee cup?",
+            "content": "<p>Dimensions of custom coffee cups range, but a standard size is approximately 3.5 inches in diameter and 4 inches in height.</p>"
+          }
+        },
+        "00a8da09-8033-4464-991b-7a5f5017c37c": {
+          "type": "content",
+          "settings": {
+            "heading": "Who manufactures the chilly bottle coffee cup?",
+            "content": "<p>The chilly bottle coffee cup is manufactured by the company \"Rebrand.\"</p>"
+          }
+        },
+        "d5a1afd9-0234-4283-92ff-bf1deff3e006": {
+          "type": "content",
+          "settings": {
+            "heading": "Who decides on the materials used for the chilly bottle coffee cup?",
+            "content": "<p>The materials used for the chilly bottle coffee cup are decided by the design and engineering teams at the company.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21576229028134__62ec3557-8c62-44c8-8d09-d7c0ab5c4572-content-1",
+        "template--21576229028134__62ec3557-8c62-44c8-8d09-d7c0ab5c4572-content-2",
+        "template--21576229028134__62ec3557-8c62-44c8-8d09-d7c0ab5c4572-content-3",
+        "00a8da09-8033-4464-991b-7a5f5017c37c",
+        "d5a1afd9-0234-4283-92ff-bf1deff3e006"
+      ],
+      "custom_css": [
+        ".accordion__item[open] {background: rgb(248, 248, 248);}",
+        ".accordion__heading-icon {background: white;}"
+      ],
+      "settings": {
+        "heading": "<strong>FAQs</strong>",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "show_first_default": true,
+        "section_visibility": "always",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "marker_color": "#ffffff",
+        "marker_text_color": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e",
+    "main-collection",
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa",
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a",
+    "f55d1770-17c3-4487-ae12-26ae1a2d4701",
+    "62ec3557-8c62-44c8-8d09-d7c0ab5c4572"
+  ],
+  "wrapper": ".boost-sd__product-filter-fallback"
+}

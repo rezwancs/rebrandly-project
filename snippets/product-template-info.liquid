@@ -1,0 +1,570 @@
+
+
+{% assign assign product_form_id = 'product-form-' | append: section.id %}
+{% for block in section.blocks %}
+  {% case block.type %}
+    {%- when '@app' -%}
+      {% render block %}
+    {% when 'title' %}
+      {% if quickView %}
+        <a
+          class="unstyled-link product-detail-title h4 heading-font"
+          href="{{ product.url }}"
+          {{ block.shopify_attributes }}
+        >
+          {{- product.title | strip_html -}}
+        </a>
+      {% else %}
+        <h4 class="product-detail-title" {{ block.shopify_attributes }}>{{ product.title | strip_html }}</h4>
+      {% endif %}
+    {% when 'text' %}
+      <p class="product-detail-desc" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+    
+    {% when 'icon_text' %}
+      <div class="icon-text">
+        <img src="{{ block.settings.icon | img_url:'auto' }}">
+        <p class="product-detail-desc" {{ block.shopify_attributes }}>{{ block.settings.icon-text }}</p>
+      </div>
+
+    {% when 'icon_text_date' %}
+      <div class="icon-text-date">
+        <img src="{{ block.settings.icon-date | img_url:'auto' }}">
+        <p class="product-detail-desc date-text" {{ block.shopify_attributes }}>{{ block.settings.icon-text-date }} <span id="fromDate"></span>&nbsp;-&nbsp;<span id="toDate"></span></p>
+      </div>
+    
+    {% when 'sku' %}
+      <p class="product-detail-item" data-variant-sku {{ block.shopify_attributes }}>{{ current_variant.sku }}</p>
+    {% when 'description' %}
+      <div class="product-detail-desc rich-text-editor-content rte" {{ block.shopify_attributes }}>
+        {{
+          product.description
+          | replace: '<table', '<div class="table-responsive"><table '
+          | replace: '</table>', '</table></div>'
+        }}
+      </div>
+    {%- when 'review_rating' -%}
+      {%- if product.metafields.reviews.rating_count > 0 -%}
+        {% liquid
+          assign productRating = product.metafields.reviews.rating.value.rating | floor
+          assign decimalProductRating = 0
+          assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+          if decimal >= 0.3 and decimal <= 0.7
+            assign decimalProductRating = 0.5
+          endif
+        -%}
+        <div class="ratingbox" {{ block.shopify_attributes }}>
+          <span class="star-ratings">
+            {{ product.metafields.reviews.rating.value.rating }}
+
+            <svg class="fill-review" viewBox="0 0 380 362" width="15" height="19">
+              <path fill-rule="evenodd" fill="currentcolor"
+                d="m204.7 10.5l37.5 116.1l122-0.3c15.4 0 21.2 19.1 7.7 28.9l-97.5 70.5l37.9 115.9c4.9 14.8-12.9 26.5-24.6 16.5l-97.6-71.2l-98.6 71.9c-13.4 9.7-28.2-3.4-22.6-20.4l36.9-112.7l-98.8-71.5c-12.6-9.1-5.2-28.9 10.1-27.9l120.9 0.3l37.5-116.1c4.5-14.2 24.7-14.1 29.2 0z" />
+            </svg>
+          </span>
+          <span class="review-count">
+            {{- product.metafields.reviews.rating_count }}
+            {{ product.metafields.reviews.rating_count | pluralize: 'review', 'reviews' -}}
+          </span>
+        </div>
+      {%- endif -%}
+    {% when 'price' %}
+      <div
+        class="pricebox-outer no-js-hidden"
+        id="price-{{ section.id }}"
+        role="status"
+        data-price-wrapper
+        {{ block.shopify_attributes }}
+      >
+        {% render 'product-price', target: product %}
+        {% unless block.settings.hide_shipping_content %}
+          {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+            <p class="text-small product-tax-shipping">
+              {%- if cart.taxes_included -%}
+                {{ 'products.product.tax_included' | t }}
+              {%- endif -%}
+              {%- if shop.shipping_policy.body != blank -%}
+                {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+        {% endunless %}
+        <div {{ block.shopify_attributes }}>
+          {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+          {%- form 'product', product, id: product_form_installment_id -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {{ form | payment_terms }}
+          {%- endform -%}
+        </div>
+      </div>
+    {% when 'variant' %}
+      {%- unless product.has_only_default_variant -%}
+        <div class="product-option-selector-box" {{ block.shopify_attributes }}>
+          {%- for option in product.options_with_values -%}
+            {%- liquid
+              assign colorOptions = settings.color_name | downcase
+              assign downOption = option.name | downcase
+              assign optionIndex = forloop.index
+            -%}
+            {% if settings.option_style == 'swatch' %}
+              <div
+                class="select-{{ downOption }} product-option-selector no-js-hidden {{ designClass }} {% if colorOptions contains downOption %}color_option{% if settings.show_variant_image %} image_option{% endif %}{% endif %}"
+              >
+              <div class="abz-size-title">
+                <p class="variant-title">
+                  {{ option.name }} : <span class="abz-option-value">{{ option.selected_value }}</span> 
+              
+          {% comment %}   {%- for value in option.values -%}
+                    {% liquid
+                      assign variantOption = 'option' | append: option.position
+                      assign colorVariant = product.variants | where: variantOption, value | first
+                      assign variantValue = product.variants | where: variantOption, value | compact: 'featured_media' | first
+                    -%}
+                    <li class="abz-option-size variant_option{% if option.selected_value == value %} selected{% endif %}">
+                      <label class="hidden" for="option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}">
+                        {{- value -}}
+                      </label>
+                      <input
+                        class="productOption"
+                        id="option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                        form="{{ product_form_id }}"
+                        type="radio"
+                        name="option-{{ optionIndex }}"
+                        value="{{ value | escape }}"
+                        title="{{ value }}"
+                        {% if option.selected_value == value %}
+                          checked
+                        {% endif %}
+                      >
+                      <span
+                        class="option"
+                        {% if colorOptions contains downOption %}
+                          {% if variantValue and settings.show_variant_image %}
+                            style="background-image:url({{ variantValue.featured_media.preview_image | image_url: width: 100 }});"
+                          {% else %}
+                            data-color="{{ value }}"
+                            style="background-color:{{ value }};"
+                          {% endif %}
+                        {% endif %}
+                      >
+                        {% unless colorOptions contains downOption -%}
+                          {{- value -}}
+                        {%- endunless -%}
+                      </span>
+                    </li>
+                  {% endfor %} {% endcomment %}
+              
+                  {%- if colorOptions contains downOption -%}
+                    : <span selected-option-value>{{ option.selected_value }}</span>
+                  {%- endif %}
+                </p>
+              </div>
+              
+                <ul class="list-unstyled product-loop-variants  {{ settings.color_swatches_style }}">
+                  {%- for value in option.values -%}
+                    {% liquid
+                      assign variantOption = 'option' | append: option.position
+                      assign colorVariant = product.variants | where: variantOption, value | first
+                      assign variantValue = product.variants | where: variantOption, value | compact: 'featured_media' | first
+                    -%}
+                    <li class="variant_option{% if option.selected_value == value %} selected{% endif %}">
+                      <label class="hidden" for="option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}">
+                        {{- value -}}
+                      </label>
+                      <input
+                        class="productOption"
+                        id="option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                        form="{{ product_form_id }}"
+                        type="radio"
+                        name="option-{{ optionIndex }}"
+                        value="{{ value | escape }}"
+                        title="{{ value }}"
+                        {% if option.selected_value == value %}
+                          checked
+                        {% endif %}
+                      >
+                      <span
+                        class="option"
+                        {% if colorOptions contains downOption %}
+                          {% if variantValue and settings.show_variant_image %}
+                            style="background-image:url({{ variantValue.featured_media.preview_image | image_url: width: 100 }});"
+                          {% else %}
+                            data-color="{{ value }}"
+                            style="background-color:{{ value }};"
+                          {% endif %}
+                        {% endif %}
+                      >
+                        {% unless colorOptions contains downOption -%}
+                          {{- value -}}
+                        {%- endunless -%}
+                      </span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% else %}
+              <div class="form-group">
+                <label>{{ option.name -}}</label>
+                <div class="custom-select">
+                  <div class="selectBtn form-control" data-type="{{ option.selected_value }}">
+                    {{ option.selected_value }}
+                  </div>
+                  <div class="selectDropdown product-loop-variants">
+                    {%- for value in option.values -%}
+                      {% liquid
+                        assign variantOption = 'option' | append: option.position
+                        assign colorVariant = product.variants | where: variantOption, value | first
+                        assign variantValue = product.variants | where: variantOption, value | compact: 'featured_media' | first
+                      -%}
+                      <input
+                        class="productOption hidden"
+                        id="option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                        form="{{ product_form_id }}"
+                        type="radio"
+                        name="option-{{ optionIndex }}"
+                        value="{{ value | escape }}"
+                        title="{{ value }}"
+                        {% if option.selected_value == value %}
+                          checked
+                        {% endif %}
+                        custom-dropdown
+                      >
+                      <label
+                        class="option"
+                        for="option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                        data-type="{{- value -}}"
+                      >
+                        {{- value -}}
+                      </label>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor -%}
+          <noscript>
+            <div class="product-option-selector">
+              <p class="variant-title">{{ 'products.product.product_variants' | t }}</p>
+              <div class="select-box">
+                <select class="form-control" name="id" form="{{ product_form_id }}">
+                  {%- for variant in product.variants -%}
+                    <option
+                      {% if variant == product.selected_or_first_available_variant %}
+                        selected="selected"
+                      {% endif %}
+                      {% if variant.available == false %}
+                        disabled
+                      {% endif %}
+                      value="{{ variant.id }}"
+                    >
+                      {{ variant.title }}
+                      {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                      - {{ variant.price | money | strip_html }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            </div>
+          </noscript>
+        </div>
+      {% endunless %}
+    {% when 'sizeChart' %}
+      {%- liquid
+        for option in product.options
+          assign sizeOptions = settings.size_name | downcase
+          assign downOption = option | downcase
+          assign optionIndex = forloop.index
+          if sizeOptions contains downOption
+            render 'size-chart', block: block, downOption: downOption, sizeTrigger: true
+          endif
+        endfor
+      -%}
+    {% when 'inventory_status' %}
+      {% render 'product-inventory-bar', product: product, current_variant: current_variant, block: block %}
+    {% when 'button' %}
+      <div {{ block.shopify_attributes }}>
+        {%- form 'product',
+          product,
+          id: product_form_id,
+          class: 'form main-product-form',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          {% liquid
+            assign preorder = false
+            if settings.enable_preorder and current_variant.inventory_policy == 'continue' and current_variant.inventory_quantity <= 0
+              assign preorder = true
+            endif
+          %}
+          <script type="application/json" data-name="main-product">
+            {{ product.variants | json }}
+          </script>
+          <script type="application/json" data-name="main-product-options">
+            {{ product.options_with_values | json }}
+          </script>
+          <script type="application/json" data-name="main-product-inventories">
+            [
+            {% for variant in product.variants %}
+              {
+                "id": {{- variant.id -}},
+                "inventory_management": "{{- variant.inventory_management -}}",
+                "inventory_policy": "{{- variant.inventory_policy -}}",
+                "inventory_quantity": "{{- variant.inventory_quantity -}}"
+              }{%- unless forloop.last -%},{%- endunless -%}
+            {% endfor %}
+            ]
+          </script>
+          <input type="hidden" name="id" value="{{ current_variant.id }}" disabled>
+          {%- liquid
+            assign gift_card_recipient_feature_active = false
+            if block.settings.show_recipient_form and product.gift_card?
+              assign gift_card_recipient_feature_active = true
+            endif
+            assign show_dynamic_checkout = false
+            if block.settings.dynamic_checkout_btn and gift_card_recipient_feature_active == false
+              assign show_dynamic_checkout = true
+            endif
+          -%}
+          {% if gift_card_recipient_feature_active %}
+            {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+          {% endif %}
+          <div class="productErrors form-message__wrapper error text-small" style="display:none" role="status">
+            <p class="form-message__title">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span data-error-text></span>
+            </p>
+          </div>
+
+          <div class="checkout-btn dynamic-checkout-enabled {% unless block.settings.enable_quantity %}no-quantity{% endunless %}">
+            {% if block.settings.enable_quantity %}
+              <div class="product-quantity-selector {{ designClass }}">
+                <p class="variant-title" for="product-quantity-{{ product_form_id }}">
+                  {{ 'products.product.quantity.label' | t }}
+                </p>
+                <div class="quantity" data-quantity-wrapper>
+                  <button
+                    type="button"
+                    class="quantity-button quantity-down  focus-inside"
+                    aria-label="{{- 'products.product.quantity.decrease' | t: product: product.title | strip_html -}}"
+                    data-quantity-decrement
+                  >
+                    <span class="hidden">
+                      {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+                    </span>
+                    <svg x="0px" y="0px" width="14px" height="14px" viewBox="0 0 14 14">
+                      <rect x="6" transform="matrix(6.123234e-17 -1 1 6.123234e-17 0 14)" width="2.1" height="14"></rect>
+                    </svg>
+                  </button>
+                  <label class="hidden" for="product-quantity">Quantity</label>
+                  <input
+                    id="product-quantity-{{ product_form_id }}"
+                    class="quantity-input focus-inside"
+                    type="number"
+                    name="quantity"
+                    min="1"
+                    step="1"
+                    value="1"
+                    form="{{ product_form_id }}"
+                    data-quantity-input
+                    aria-label="{{ 'products.product.quantity.label' | t }}"
+                  >
+                  <button
+                    type="button"
+                    class="quantity-button quantity-up  focus-inside"
+                    aria-label="{{- 'products.product.quantity.increase' | t: product: product.title | strip_html -}}"
+                    data-quantity-increment
+                  >
+                    <span class="hidden">
+                      {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+                    </span>
+                    <svg x="0px" y="0px" width="12px" height="12px" viewBox="0 0 14 14">
+                      <polygon points="14,6 8,6 8,0 6,0 6,6 0,6 0,8 6,8 6,14 8,14 8,8 14,8 "></polygon>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            {% endif %}
+            {% render 'product-form-button',
+              current_variant: current_variant,
+              form: form,
+              block: block,
+              preorder: preorder,
+              quickView: quickView,
+              show_dynamic_checkout: block.settings.dynamic_checkout_btn
+            %}
+            {% if quickView %}
+              <div class="quickView-atc-button d-block d-sm-none">
+                {% render 'product-form-button', current_variant: current_variant, form: form, block: block %}
+                <div class="dynamic-checkout-button">
+                  {{ form | payment_button }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endform %}
+      </div>
+    {% when 'custom_liquid' %}
+      <div class="custom-liquid" {{ block.shopify_attributes }}>
+        {{
+          block.settings.custom_liquid
+          | replace: '<table', '<div class="table-responsive"><table '
+          | replace: '</table>', '</table></div>'
+        }}
+      </div>
+    {% when 'complementary_products' %}
+      {%- liquid
+        if section.settings.gallery_style == 'carousel' and section.settings.fullwidth_carousel
+          if block.settings.right_side == false
+            render 'complementary_products' product , section, block: block
+          endif
+        else
+          render 'complementary_products' product , section, block: block
+        endif
+      -%}
+    {% when 'pickup' %}
+      {%- assign pickupAvailabilities = current_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+      <div
+        class="pickup-availability__container"
+        id="pickup-availability__container"
+        data-root-url="{{ routes.root_url }}"
+        {% if current_variant.available and pickupAvailabilities.size > 0 %}
+          available
+        {% endif %}
+        data-pickup-availability
+        {{ block.shopify_attributes }}
+      >
+        {% render 'pickup-availability-content', product: product, current_variant: current_variant, showList: false %}
+      </div>
+    {%- when 'social-icons' -%}
+      <div class="product-social__box">
+        <span class="product-social__item cursor-pointer">
+          {{ 'products.product.share' | t }}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M13.5 0.000214572C12.1191 0.000214572 10.9999 1.11957 10.9999 2.50016C10.9999 2.63513 11.0184 2.76174 11.039 2.89078L4.29693 6.25794C3.84229 5.78728 3.20612 5.50005 2.50004 5.50005C1.11921 5.50005 3.30059e-07 6.6194 3.30059e-07 8C3.30059e-07 9.3806 1.11921 10.4999 2.50004 10.4999C3.20612 10.4999 3.84229 10.2049 4.29693 9.73443L11.039 13.1016C11.0184 13.2306 10.9999 13.3651 10.9999 13.5001C10.9999 14.8806 12.1191 16 13.5 16C14.8808 16 16 14.8806 16 13.5001C16 12.1195 14.8808 11.0001 13.5 11.0001C12.792 11.0001 12.1579 11.2927 11.7031 11.7656L4.9686 8.39847C4.98987 8.26698 4.99981 8.13741 4.99981 8C4.99981 7.8652 4.989 7.73058 4.9686 7.60154L11.7031 4.23437C12.1577 4.70503 12.7939 4.99989 13.5 4.99989C14.8808 4.99989 16 3.88054 16 2.49995C16 1.11935 14.8808 0 13.5 0V0.000214572Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <div class="product-social__expand">
+          {%- render 'social-sharing',
+            share_title: product.title,
+            share_permalink: product.url,
+            share_image: product
+          -%}
+        </div>
+      </div>
+    {%- when 'line_item_property' -%}
+      {% render 'product-line-item-properties', block: block, formId: product_form_id %}
+    {% when 'custom_label' %}
+      <ul class="list-unstyled product-card-label-container">
+        {% for i in (1..5) %}
+          {% liquid
+            assign valueIndex = 'custom_value_' | append: forloop.index
+            assign tagValue = settings[valueIndex]
+          %}
+          {% if tagValue != blank %}
+            {% liquid
+              assign key = tagValue | split: '.' | first
+              assign value = tagValue | split: '.' | last
+            %}
+            {% if product.metafields[key][value] != blank %}
+              <li class="product-card-label">
+                {{ product.metafields[key][value] }}
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {%- when 'query_form' -%}
+      {%- liquid
+        if block.settings.title != blank
+          render 'product-query-form', block: block, formTrigger: true
+        endif
+      -%}
+    {% when 'back_in_stock' %}
+      <div
+        class="stock-notify-box {% unless request.design_mode %}{% if current_variant == available %}hidden{% endif %}{% endunless %}"
+        data-back-in-stock
+        {{ block.settings.shopify_attributes }}
+      >
+        <fieldset class="stock-notify">
+          {% if block.settings.heading != blank %}
+            <legend class="stock-notify__heading">{{ block.settings.heading }}</legend>
+          {% endif %}
+          {% assign formId = 'productBackInStockForm' | append: product.id | append: '_' | append: section.id %}
+          {%- form 'contact', id: formId, class: 'stock-notify__form' -%}
+            <input
+              type="hidden"
+              name="return_to"
+              value="{{ product.url }}?variant={{current_variant.id}}&contact_posted=true"
+              data-variant-url
+            >
+            <input type="hidden" name="contact[Message]" value="Customer has filled the notify me form.">
+            <input type="hidden" name="contact[Product]" value="{{ product.id }}">
+            <input
+              type="hidden"
+              name="contact[Product Title]"
+              value="{{ product.title }} - {{ current_variant.title }}"
+              data-variant-title
+            >
+
+            <div class="form-group">
+              <label class="hidden" for="backInStockEmail">{{ 'templates.contact.form.email' | t }}</label>
+              <input
+                type="email"
+                class="form-control"
+                name="contact[email]"
+                id="backInStockEmail"
+                autocomplete="email"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                spellcheck="false"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactForm-email-error"
+                {% endif %}
+                placeholder="{% if block.settings.placeholder != blank %}{{block.settings.placeholder}}{% else %}{{ 'templates.contact.form.email' | t }}{% endif %}"
+                pattern="^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$"
+                required
+              >
+            </div>
+            <button type="submit" class="notify__button button btn-block {{ settings.button_style}}">
+              {% assign buttonText = block.settings.btn_text | defaut: 'Notify me' %}
+              {% render 'button-style', buttonText: buttonText %}
+            </button>
+            {%- if form.errors -%}
+              <div
+                class="form-message__wrapper error "
+                autofocus
+              >
+                <div class="form-message__title" tabindex="-1">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                    <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  {{ form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email }}
+                </div>
+              </div>
+            {%- endif -%}
+            {%- if form.posted_successfully? -%}
+              <div class="form-message__wrapper success" role="status" tabindex="-1" autofocus>
+                <p class="form-message__title" tabindex="-1">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="10" fill="#32A861"></circle>
+                    <path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="white"></path>
+                  </svg>
+                  {% if block.settings.success_message != blank %}
+                    {{ block.settings.success_message }}
+                  {% else %}
+                    {{- 'templates.contact.form.post_success' | t -}}
+                  {% endif %}
+                </p>
+              </div>
+            {%- endif -%}
+          {% endform %}
+        </fieldset>
+      </div>
+  {% endcase %}
+{% endfor %}

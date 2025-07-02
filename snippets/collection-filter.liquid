@@ -1,0 +1,337 @@
+<div
+  class="filters-sidebar sd-sidebar sd-sidebar--left {{ settings.drawer_color_scheme }}-color-scheme"
+  aria-hidden="true"
+  id="filters-sidebar"
+  data-side-drawer
+>
+  <a href="#" class="unstyled-link sd-sidebar-background" data-side-drawer-close data-moving-cursor>
+    <span class="overlay-close" aria-label="Close">
+      {% render 'icons', icon: 'close' %}
+    </span>
+  </a>
+  <div class="sd-sidebar-container" role="dialog" aria-modal="true">
+    <div class="sd-sidebar-head">
+      <h6 class="sd-sidebar-title">
+        <span>
+          <svg width="30" viewBox="0 0 30 18" fill="none">
+            <path d="M1 4.99906H1.142C1.36027 5.85665 1.85806 6.61706 2.55672 7.16017C3.25537 7.70328 4.11507 7.99813 5 7.99813C5.88493 7.99813 6.74463 7.70328 7.44328 7.16017C8.14194 6.61706 8.63973 5.85665 8.858 4.99906H29C29.2652 4.99906 29.5196 4.89371 29.7071 4.70617C29.8946 4.51863 30 4.26428 30 3.99906C30 3.73385 29.8946 3.47949 29.7071 3.29196C29.5196 3.10442 29.2652 2.99906 29 2.99906H8.858C8.63973 2.14148 8.14194 1.38107 7.44328 0.837956C6.74463 0.294846 5.88493 0 5 0C4.11507 0 3.25537 0.294846 2.55672 0.837956C1.85806 1.38107 1.36027 2.14148 1.142 2.99906H1C0.734784 2.99906 0.48043 3.10442 0.292893 3.29196C0.105357 3.47949 0 3.73385 0 3.99906C0 4.26428 0.105357 4.51863 0.292893 4.70617C0.48043 4.89371 0.734784 4.99906 1 4.99906ZM5 1.99906C5.39556 1.99906 5.78224 2.11636 6.11114 2.33613C6.44004 2.55589 6.69638 2.86825 6.84776 3.2337C6.99913 3.59915 7.03874 4.00128 6.96157 4.38925C6.8844 4.77721 6.69392 5.13357 6.41421 5.41328C6.13451 5.69298 5.77814 5.88346 5.39018 5.96064C5.00222 6.03781 4.60009 5.9982 4.23463 5.84682C3.86918 5.69545 3.55682 5.4391 3.33706 5.1102C3.1173 4.78131 3 4.39463 3 3.99906C3 3.46863 3.21071 2.95992 3.58579 2.58485C3.96086 2.20978 4.46957 1.99906 5 1.99906ZM29 12.9991H28.858C28.6397 12.1415 28.1419 11.3811 27.4433 10.838C26.7446 10.2948 25.8849 10 25 10C24.1151 10 23.2554 10.2948 22.5567 10.838C21.8581 11.3811 21.3603 12.1415 21.142 12.9991H1C0.734784 12.9991 0.48043 13.1044 0.292893 13.292C0.105357 13.4795 0 13.7338 0 13.9991C0 14.2643 0.105357 14.5186 0.292893 14.7062C0.48043 14.8937 0.734784 14.9991 1 14.9991H21.142C21.3603 15.8566 21.8581 16.6171 22.5567 17.1602C23.2554 17.7033 24.1151 17.9981 25 17.9981C25.8849 17.9981 26.7446 17.7033 27.4433 17.1602C28.1419 16.6171 28.6397 15.8566 28.858 14.9991H29C29.2652 14.9991 29.5196 14.8937 29.7071 14.7062C29.8946 14.5186 30 14.2643 30 13.9991C30 13.7338 29.8946 13.4795 29.7071 13.292C29.5196 13.1044 29.2652 12.9991 29 12.9991ZM25 15.9991C24.6044 15.9991 24.2178 15.8818 23.8889 15.662C23.56 15.4422 23.3036 15.1299 23.1522 14.7644C23.0009 14.399 22.9613 13.9968 23.0384 13.6089C23.1156 13.2209 23.3061 12.8646 23.5858 12.5849C23.8655 12.3051 24.2219 12.1147 24.6098 12.0375C24.9978 11.9603 25.3999 11.9999 25.7654 12.1513C26.1308 12.3027 26.4432 12.559 26.6629 12.8879C26.8827 13.2168 27 13.6035 27 13.9991C27 14.5295 26.7893 15.0382 26.4142 15.4133C26.0391 15.7884 25.5304 15.9991 25 15.9991Z" fill="currentColor"/>
+          </svg>
+        </span>
+        {{- 'sections.collection_template.filter_by_label' | t }}
+      </h6>
+      <a href="#" class="unstyled-link sd-sidebar-close" aria-label="Close" data-side-drawer-close>
+        {% render 'icons', icon: 'close' %}
+      </a>
+    </div>
+    <div class="sd-sidebar-content">
+      <form id="FiltersForm" class="filterby__list">
+        {%- if results.terms -%}
+          <input type="hidden" name="q" value="{{ results.terms | escape }}">
+          <input name="options[prefix]" type="hidden" value="last">
+        {%- endif -%}
+        {% if results.current_vendor or results.current_type %}
+          <input type="hidden" name="q" value="{{ results.current_vendor }}{{ results.current_type }}">
+        {% endif %}
+        {%- for filter in results.filters -%}
+          {% assign colorOptions = settings.color_name | downcase %}
+          {%- assign filterLabel = filter.label | downcase -%}
+          {% assign filterLimit = 100 %}
+          {% if colorOptions contains filterLabel %}
+            {% assign filterLimit = 100 %}
+          {% endif %}
+          <details class="detail-box filterby__list-item {% if  colorOptions contains filterLabel %}color-filter-item {% endif %}">
+            <summary class="detail-summary filter-name">
+              {{ filterLabel | escape | capitalize }}
+              <span class="detail-summary-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path class="vertical-line" d="M5 0H7V12H5V0Z" fill="currentColor"></path>
+                  <path class="horizontal-line" d="M0 5H12V7H0V5Z" fill="currentColor"></path>
+                </svg>
+              </span>
+            </summary>
+            <div class="detail-expand filter-name-list">
+              {%- case filter.type -%}
+                {%- when 'boolean', 'list' -%}
+                  <ul class="list-unstyled">
+                    {%- for value in filter.values limit: filterLimit -%}
+                      <li class="filter-name-list-item {% if value.count == 0 and value.active == false %}disabled{% endif %}">
+                        <input
+                          type="checkbox"
+                          class="checkmark-input"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          title="{{ value.label | escape }}"
+                          id="Filter-{{ filter.label | handle }}-{{ forloop.index }}"
+                          {% if value.active %}
+                            checked
+                          {% endif %}
+                        >
+                        <span class="checkmark"></span>
+                        <label
+                          {% if colorOptions contains filterLabel %}
+                            data-color="{{ value.label | escape }}"
+                            style="background-color:{{ value.label | escape }}"
+                          {% endif %}
+                          class="cursor-pointer"
+                          for="Filter-{{ filter.label | handle }}-{{ forloop.index }}"
+                          title="{{ value.label | escape }}"
+                        >
+                          {{- value.label | escape -}}
+                        </label>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  {%- if filter.values.size > filterLimit -%}
+                    <ul class="list-unstyled more-options" style="display:none">
+                      {%- for value in filter.values offset: filterLimit -%}
+                        <li class="filter-name-list-item {% if value.count == 0 and value.active == false %}disabled{% endif %}">
+                          <input
+                            type="checkbox"
+                            class="checkmark-input"
+                            name="{{ value.param_name }}"
+                            value="{{ value.value }}"
+                            title="{{ value.label | escape }}"
+                            id="Filter-1-{{ filter.label | handle }}-{{ forloop.index }}"
+                            {% if value.active %}
+                              checked
+                            {% endif %}
+                          >
+                          <span class="checkmark"></span>
+                          <label
+                            class="cursor-pointer"
+                            for="Filter-1-{{ filter.label | handle }}-{{ forloop.index }}"
+                            title="{{ value.label | escape }}"
+                          >
+                            {{- value.label | escape -}}
+                          </label>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    <a href="" class="unstyled-link filters-expand no-js-hidden">
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path class="vertical" d="M6 0H7V13H6V0Z" fill="currentColor"/>
+                        <path d="M0 6H13V7H0V6Z" fill="currentColor"/>
+                      </svg>
+                      <span>{{ 'sections.collection_template.filter_show_more' | t }}</span>
+                    </a>
+                  {%- endif -%}
+                {% when 'price_range' %}
+                  {% liquid
+                    assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+                    assign uses_comma_decimals = false
+                    if currencies_using_comma_decimals contains cart.currency.iso_code
+                      assign uses_comma_decimals = true
+                    endif
+                  %}
+                  {%- liquid
+                    if uses_comma_decimals
+                      assign max_value = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | floor
+                      assign min_value = filter.range_min | money_without_currency | replace: '.', '' | replace: ',', '.' | floor
+                    else
+                      assign max_value = filter.range_max | money_without_currency
+                      assign min_value = filter.range_min | money_without_currency
+                    endif
+
+                    if filter.max_value.value
+                      assign max_value = filter.max_value.value | money_without_currency
+                    endif
+                    if filter.min_value.value
+                      assign min_value = filter.min_value.value | money_without_currency
+                    endif
+
+                    if uses_comma_decimals
+                      assign minpricevalue = min_value | replace: '.', '' | replace: ',', '.' | floor
+                      assign maxpricevalue = min_value | replace: '.', '' | replace: ',', '.' | floor
+                      assign filtermax = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | floor
+                    else
+                      assign minpricevalue = min_value | replace: ',', '' | floor
+                      assign maxpricevalue = max_value | replace: ',', '' | floor
+                      assign filtermax = filter.range_max | money_without_currency | replace: ',', '' | floor
+                    endif
+
+                    assign minRange = minpricevalue | times: 100.0 | divided_by: filtermax
+                    assign maxrangeminus = maxpricevalue | times: 100.0 | divided_by: filtermax
+                    assign maxRange = 100 | minus: maxrangeminus
+                  -%}
+
+                  <div class="mg-slider">
+                    <div
+                      class="progress"
+                      id="priceSilderProgress"
+                      style="left: {{ minRange }}%; right: {{ maxRange }}%"
+                    ></div>
+                  </div>
+
+                  <div
+                    class="mall-slider-handles price-range-select no-js-hidden mg-range-input"
+                    id="slider-round"
+                    data-target="price"
+                  >
+                    {%- if uses_comma_decimals -%}
+                      <input
+                        type="range"
+                        class="priceslider-range-min"
+                        min="{{ filter.range_min | money_without_currency | replace: '.', '' | replace: ',', '.' | floor }}"
+                        max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | floor }}"
+                        value="{{ min_value | replace: '.', '' | replace: ',', '.' | floor }}"
+                        step="5"
+                      >
+                      <input
+                        type="range"
+                        class="priceslider-range-max"
+                        min="{{ filter.range_min | money_without_currency | replace: '.', '' | replace: ',', '.' | floor }}"
+                        max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | floor }}"
+                        value="{{ max_value | replace: '.', '' | replace: ',', '.' | floor }}"
+                        step="5"
+                      >
+                    {%- else -%}
+                      <input
+                        type="range"
+                        class="priceslider-range-min"
+                        min="{{ filter.range_min | money_without_currency | replace: ',', '' | floor }}"
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' | floor }}"
+                        value="{{ min_value | replace: ',', '' | floor }}"
+                        step="5"
+                      >
+                      <input
+                        type="range"
+                        class="priceslider-range-min"
+                        min="{{ filter.range_min | money_without_currency | replace: ',', '' | floor }}"
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' | floor }}"
+                        value="{{ max_value | replace: ',', '' | floor }}"
+                        step="5"
+                      >
+                    {% endif %}
+                  </div>
+                  <div class="price-range-value mg-price-input">
+                    <span class="hidden">
+                      {%- if uses_comma_decimals -%}
+                        {{ filter.min_value.value | money_without_currency | replace: ',', '.' | floor }}
+                      {%- else -%}
+                        {{ filter.min_value.value | money_without_currency | replace: ',', '' | floor -}}
+                      {%- endif -%}
+                    </span>
+                    <span class="hidden">
+                      {%- if uses_comma_decimals -%}
+                        {{
+                          filter.max_value.value
+                          | money_without_currency
+                          | replace: '.', ''
+                          | replace: ',', '.'
+                          | floor
+                        }}
+                      {%- else -%}
+                        {{ filter.max_value.value | money_without_currency | replace: ',', '' | floor -}}
+                      {%- endif -%}
+                    </span>
+                    <div class="field">
+                      <label class="field__name small-text" for="Filter-{{ filter.label | escape }}-GTE">From</label>
+                      <div class="field-wrapper">
+                        <span class="filter-currency">{{ cart.currency.symbol }}</span>
+                        <input
+                          class="mg-input-min field__input"
+                          name="{{ filter.min_value.param_name }}"
+                          id="Filter-{{ filter.label | escape }}-GTE"
+                          type="number"
+                          min="0"
+                          {%- if uses_comma_decimals -%}
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '.' | floor }}"
+                            placeholder="{{ min_value | replace: ',', '.' | floor }}"
+                            {% if filter.min_value.value %}
+                              value="{{ min_value | replace: ',', '.' | floor }}"
+                              data-min-value="{{ min_value | replace: ',', '.' | floor }}"
+                            {% endif %}
+                          {%- else -%}
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '' | floor }}"
+                            placeholder="{{ min_value | replace: ',', '' | floor }}"
+                            {% if filter.min_value.value %}
+                              value="{{ min_value | replace: ',', '' | floor }}"
+                              data-min-value="{{ min_value | replace: ',', '' | floor }}"
+                            {% endif %}
+                          {% endif %}
+                        >
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="field__name small-text" for="Filter-{{ filter.label | escape }}-LTE">To</label>
+                      <div class="field-wrapper">
+                        <span class="filter-currency">{{ cart.currency.symbol }}</span>
+                        <input
+                          class="field__input mg-input-max"
+                          name="{{ filter.max_value.param_name }}"
+                          id="Filter-{{ filter.label | escape }}-LTE"
+                          type="number"
+                          min="0"
+                          {% if uses_comma_decimals %}
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '.' | floor }}"
+                            placeholder="{{ max_value | replace: ',', '.' | floor }}"
+                            {% if filter.max_value.value %}
+                              value="{{ max_value | replace: ',', '.' | floor }}"
+                              data-max-value="{{ max_value | replace: ',', '.' | floor }}"
+                            {% endif %}
+                          {% else %}
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '' | floor }}"
+                            placeholder="{{ max_value | replace: ',', '' | floor }}"
+                            {% if filter.min_value.value %}
+                              value="{{ max_value | replace: ',', '' | floor }}"
+                              data-max-value="{{ max_value | replace: ',', '' | floor }}"
+                            {% endif %}
+                          {% endif %}
+                        >
+                      </div>
+                    </div>
+                  </div>
+              {%- endcase -%}
+            </div>
+          </details>
+        {% endfor %}
+
+        <div class="filters__button-box">
+          <noscript>
+            <button type="submit" class="filter-apply__button button icon-btn right-icon btn-block {{ settings.button_style }}">
+              {% assign buttonText = 'sections.collection_template.apply' | t %}
+              {% render 'button-style', buttonText:buttonText %}
+            </button>
+          </noscript>
+
+          <div class="filter-apply d-flex d-md-none">
+            <button type="submit" class="filter-apply__button button icon-btn right-icon btn-block {{ settings.button_style }}">
+              {% assign buttonText = 'sections.collection_template.apply' | t  %}
+              {% render 'button-style', buttonText:buttonText %}
+            </button>
+            <a href="{{ clearAll }}" class="button icon-btn right-icon btn-block secondary-button">
+              <span>{{- 'sections.collection_template.clear_all' | t -}}</span>
+              <span class="btn-icon">
+                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.08384 12.2352C6.05671 12.2352 6.02879 12.2298 6.00322 12.2172C5.93422 12.1849 5.89001 12.1156 5.89001 12.0384V6.73893L1.0474 1.08983C0.997815 1.03155 0.986105 0.949687 1.01714 0.879614C1.04896 0.809544 1.11718 0.764648 1.19321 0.764648H12.2771C12.3531 0.764648 12.4221 0.809544 12.4531 0.879614C12.4849 0.949685 12.4725 1.03234 12.4229 1.08983L7.5803 6.73893V10.8929C7.5803 10.9495 7.55629 11.0039 7.51364 11.0416L6.20954 12.1872C6.1747 12.2187 6.12961 12.2352 6.08384 12.2352ZM1.61875 1.15752L6.2295 6.5359C6.25976 6.57207 6.27684 6.61776 6.27684 6.66494V11.6087L7.19397 10.8032V6.6658C7.19397 6.61862 7.21095 6.57293 7.2412 6.53676L11.852 1.15838L1.61875 1.15752Z" fill="currentColor"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.19397 10.8032V6.6658C7.19397 6.61862 7.21095 6.57293 7.2412 6.53676L11.852 1.15838L1.61949 1.15838L6.2295 6.5359C6.25976 6.57207 6.27684 6.61776 6.27684 6.66494V11.6087L7.19397 10.8032ZM10.9822 1.55838L6.93752 6.27642L6.93437 6.28013C6.84537 6.38655 6.79397 6.52258 6.79397 6.6658V10.6222L6.67684 10.725V6.66494C6.67684 6.52116 6.62497 6.38526 6.53634 6.27928L2.48927 1.55838H10.9822ZM5.89001 12.0384C5.89001 12.1156 5.93422 12.1849 6.00322 12.2172C6.02879 12.2298 6.05671 12.2352 6.08384 12.2352C6.12961 12.2352 6.1747 12.2187 6.20954 12.1872L7.51364 11.0416C7.55629 11.0039 7.5803 10.9495 7.5803 10.8929V6.73893L12.4229 1.08983C12.4725 1.03234 12.4849 0.949685 12.4531 0.879614C12.4221 0.809544 12.3531 0.764648 12.2771 0.764648H1.19321C1.11718 0.764648 1.04896 0.809544 1.01714 0.879614C0.986105 0.949687 0.997815 1.03155 1.0474 1.08983L5.89001 6.73893V12.0384ZM5.8302 12.5779C5.62202 12.4788 5.49001 12.269 5.49001 12.0384V6.88691L0.742734 1.34902C0.593072 1.17311 0.558486 0.927425 0.65141 0.717625L0.652913 0.714233C0.747711 0.505453 0.955738 0.364648 1.19321 0.364648H1.38975L1.40579 0.294523L1.46591 0.364648H12.2771C12.5113 0.364648 12.723 0.502622 12.8181 0.716139C12.9137 0.928455 12.8762 1.17622 12.7263 1.35051C12.7261 1.35069 12.7265 1.35032 12.7263 1.35051L7.9803 6.88691V10.8929C7.9803 11.0622 7.90857 11.2262 7.7788 11.3411L7.77763 11.3421L6.4751 12.4864C6.36441 12.5852 6.22386 12.6352 6.08384 12.6352C6.00535 12.6352 5.91696 12.6198 5.8302 12.5779Z" fill="currentColor"/>
+                  <path d="M12.4046 11C12.3013 11 12.198 10.9612 12.1187 10.8821C11.9604 10.7237 11.9604 10.4702 12.1187 10.312L15.3109 7.11864C15.4693 6.96045 15.7229 6.96045 15.8813 7.11864C16.0396 7.27702 16.0396 7.53219 15.8813 7.68894L12.6889 10.8821C12.6112 10.9595 12.5081 11 12.4046 11Z" fill="currentColor"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9772 11.0234C11.741 10.787 11.7409 10.4069 11.9772 10.1706C11.9772 10.1706 11.9772 10.1706 11.9772 10.1706L15.1694 6.97724C15.406 6.7411 15.7861 6.74096 16.0227 6.97711C16.2584 7.21306 16.2597 7.59521 16.0225 7.83066C16.0223 7.83078 16.0226 7.83053 16.0225 7.83066L12.8303 11.0235C12.7144 11.1391 12.5599 11.2 12.4046 11.2C12.251 11.2 12.0958 11.1417 11.9772 11.0234ZM15.8813 7.68894C16.0396 7.53219 16.0396 7.27702 15.8813 7.11864C15.7229 6.96045 15.4693 6.96045 15.3109 7.11864L12.1187 10.312C11.9604 10.4702 11.9604 10.7237 12.1187 10.8821C12.198 10.9612 12.3013 11 12.4046 11C12.5081 11 12.6112 10.9595 12.6889 10.8821L15.8813 7.68894Z" fill="currentColor"/>
+                  <path d="M15.5968 11C15.4935 11 15.3902 10.9612 15.3109 10.8821L12.1187 7.68894C11.9604 7.53219 11.9604 7.27702 12.1187 7.11864C12.2771 6.96045 12.5305 6.96045 12.6889 7.11864L15.8813 10.312C16.0396 10.4702 16.0396 10.7237 15.8813 10.8821C15.8036 10.9595 15.7003 11 15.5968 11Z" fill="currentColor"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1694 11.0235L11.9779 7.83102C11.9778 7.8309 11.978 7.83115 11.9779 7.83102C11.7407 7.59558 11.7415 7.21323 11.9772 6.97729C12.2137 6.74115 12.5937 6.74096 12.8302 6.97711L16.0227 10.1705C16.2591 10.4069 16.259 10.787 16.0228 11.0234C15.9068 11.1391 15.752 11.2 15.5968 11.2C15.4432 11.2 15.2881 11.1418 15.1694 11.0235ZM15.8813 10.8821C16.0396 10.7237 16.0396 10.4702 15.8813 10.312L12.6889 7.11864C12.5305 6.96045 12.2771 6.96045 12.1187 7.11864C11.9604 7.27702 11.9604 7.53219 12.1187 7.68894L15.3109 10.8821C15.3902 10.9612 15.4935 11 15.5968 11C15.7003 11 15.8036 10.9595 15.8813 10.8821Z" fill="currentColor"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <a
+            class="filter-clear__button hyperlink button icon-btn right-icon btn-block secondary-button med-btn"
+            href="{{ clearAll }}"
+            id="removeFilterdata"
+          >
+            <span>{{- 'sections.collection_template.filter_clear' | t }}</span>
+            <span class="btn-icon">
+              <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.08384 12.2352C6.05671 12.2352 6.02879 12.2298 6.00322 12.2172C5.93422 12.1849 5.89001 12.1156 5.89001 12.0384V6.73893L1.0474 1.08983C0.997815 1.03155 0.986105 0.949687 1.01714 0.879614C1.04896 0.809544 1.11718 0.764648 1.19321 0.764648H12.2771C12.3531 0.764648 12.4221 0.809544 12.4531 0.879614C12.4849 0.949685 12.4725 1.03234 12.4229 1.08983L7.5803 6.73893V10.8929C7.5803 10.9495 7.55629 11.0039 7.51364 11.0416L6.20954 12.1872C6.1747 12.2187 6.12961 12.2352 6.08384 12.2352ZM1.61875 1.15752L6.2295 6.5359C6.25976 6.57207 6.27684 6.61776 6.27684 6.66494V11.6087L7.19397 10.8032V6.6658C7.19397 6.61862 7.21095 6.57293 7.2412 6.53676L11.852 1.15838L1.61875 1.15752Z" fill="currentColor"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.19397 10.8032V6.6658C7.19397 6.61862 7.21095 6.57293 7.2412 6.53676L11.852 1.15838L1.61949 1.15838L6.2295 6.5359C6.25976 6.57207 6.27684 6.61776 6.27684 6.66494V11.6087L7.19397 10.8032ZM10.9822 1.55838L6.93752 6.27642L6.93437 6.28013C6.84537 6.38655 6.79397 6.52258 6.79397 6.6658V10.6222L6.67684 10.725V6.66494C6.67684 6.52116 6.62497 6.38526 6.53634 6.27928L2.48927 1.55838H10.9822ZM5.89001 12.0384C5.89001 12.1156 5.93422 12.1849 6.00322 12.2172C6.02879 12.2298 6.05671 12.2352 6.08384 12.2352C6.12961 12.2352 6.1747 12.2187 6.20954 12.1872L7.51364 11.0416C7.55629 11.0039 7.5803 10.9495 7.5803 10.8929V6.73893L12.4229 1.08983C12.4725 1.03234 12.4849 0.949685 12.4531 0.879614C12.4221 0.809544 12.3531 0.764648 12.2771 0.764648H1.19321C1.11718 0.764648 1.04896 0.809544 1.01714 0.879614C0.986105 0.949687 0.997815 1.03155 1.0474 1.08983L5.89001 6.73893V12.0384ZM5.8302 12.5779C5.62202 12.4788 5.49001 12.269 5.49001 12.0384V6.88691L0.742734 1.34902C0.593072 1.17311 0.558486 0.927425 0.65141 0.717625L0.652913 0.714233C0.747711 0.505453 0.955738 0.364648 1.19321 0.364648H1.38975L1.40579 0.294523L1.46591 0.364648H12.2771C12.5113 0.364648 12.723 0.502622 12.8181 0.716139C12.9137 0.928455 12.8762 1.17622 12.7263 1.35051C12.7261 1.35069 12.7265 1.35032 12.7263 1.35051L7.9803 6.88691V10.8929C7.9803 11.0622 7.90857 11.2262 7.7788 11.3411L7.77763 11.3421L6.4751 12.4864C6.36441 12.5852 6.22386 12.6352 6.08384 12.6352C6.00535 12.6352 5.91696 12.6198 5.8302 12.5779Z" fill="currentColor"/>
+                <path d="M12.4046 11C12.3013 11 12.198 10.9612 12.1187 10.8821C11.9604 10.7237 11.9604 10.4702 12.1187 10.312L15.3109 7.11864C15.4693 6.96045 15.7229 6.96045 15.8813 7.11864C16.0396 7.27702 16.0396 7.53219 15.8813 7.68894L12.6889 10.8821C12.6112 10.9595 12.5081 11 12.4046 11Z" fill="currentColor"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9772 11.0234C11.741 10.787 11.7409 10.4069 11.9772 10.1706C11.9772 10.1706 11.9772 10.1706 11.9772 10.1706L15.1694 6.97724C15.406 6.7411 15.7861 6.74096 16.0227 6.97711C16.2584 7.21306 16.2597 7.59521 16.0225 7.83066C16.0223 7.83078 16.0226 7.83053 16.0225 7.83066L12.8303 11.0235C12.7144 11.1391 12.5599 11.2 12.4046 11.2C12.251 11.2 12.0958 11.1417 11.9772 11.0234ZM15.8813 7.68894C16.0396 7.53219 16.0396 7.27702 15.8813 7.11864C15.7229 6.96045 15.4693 6.96045 15.3109 7.11864L12.1187 10.312C11.9604 10.4702 11.9604 10.7237 12.1187 10.8821C12.198 10.9612 12.3013 11 12.4046 11C12.5081 11 12.6112 10.9595 12.6889 10.8821L15.8813 7.68894Z" fill="currentColor"/>
+                <path d="M15.5968 11C15.4935 11 15.3902 10.9612 15.3109 10.8821L12.1187 7.68894C11.9604 7.53219 11.9604 7.27702 12.1187 7.11864C12.2771 6.96045 12.5305 6.96045 12.6889 7.11864L15.8813 10.312C16.0396 10.4702 16.0396 10.7237 15.8813 10.8821C15.8036 10.9595 15.7003 11 15.5968 11Z" fill="currentColor"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1694 11.0235L11.9779 7.83102C11.9778 7.8309 11.978 7.83115 11.9779 7.83102C11.7407 7.59558 11.7415 7.21323 11.9772 6.97729C12.2137 6.74115 12.5937 6.74096 12.8302 6.97711L16.0227 10.1705C16.2591 10.4069 16.259 10.787 16.0228 11.0234C15.9068 11.1391 15.752 11.2 15.5968 11.2C15.4432 11.2 15.2881 11.1418 15.1694 11.0235ZM15.8813 10.8821C16.0396 10.7237 16.0396 10.4702 15.8813 10.312L12.6889 7.11864C12.5305 6.96045 12.2771 6.96045 12.1187 7.11864C11.9604 7.27702 11.9604 7.53219 12.1187 7.68894L15.3109 10.8821C15.3902 10.9612 15.4935 11 15.5968 11C15.7003 11 15.8036 10.9595 15.8813 10.8821Z" fill="currentColor"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<div id="menu" class="full-menu-sidebar{% if section.settings.blur_background %} blur-background{% endif %}">
+  <a href="#" action="menu.close" aria-label="Close Menu" class="close-menu">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path d="M35.6706 34.079L19.5907 17.9931L35.6706 1.90722C36.0918 1.47117 36.0918 0.779726 35.6706 0.343539C35.239 -0.103501 34.5268 -0.115866 34.0799 0.315925L18 16.4018L1.92016 0.316063C1.48427 -0.10515 0.793086 -0.10515 0.35706 0.316063C-0.0898146 0.747853 -0.102174 1.46031 0.329457 1.90735L16.4093 17.9931L0.329457 34.0789C0.118517 34.2899 2.81332e-08 34.576 2.81332e-08 34.8744C-0.000137449 35.4959 0.503592 35.9999 1.12488 36C1.4233 36.0003 1.70949 35.8816 1.92016 35.6701L18 19.5844L34.0799 35.6703C34.2906 35.8817 34.5769 36.0004 34.8753 36C35.1735 35.9999 35.4594 35.8814 35.6703 35.6706C36.1098 35.2311 36.1099 34.5185 35.6706 34.079Z" fill="currentColor"></path>
+    </svg>
+  </a>
+  <div class="menu_container">
+    <div class="menu_outer_main">
+      <div class="menu_outer">
+        <ul class="main-menu list-unstyled">
+          {%- for link in linklists[section.settings.menu].links -%}
+            {%- liquid
+              assign menuTitle = link.title | handleize
+              assign blockData = ''
+              for block in section.blocks
+                assign blockParent = block.settings.title | handleize
+                if blockParent == menuTitle
+                  assign blockData = block
+                  break
+                endif
+              endfor
+            -%}
+            {% capture megamenuContent %}
+                {%- for i in (1..4) -%}
+                    {%- liquid 
+                        assign imageIndex = 'image' | append: i
+                        assign headingIndex = 'heading' | append: i
+                        assign linkIndex = 'link' | append: i
+                        assign image = blockData.settings[imageIndex]
+                        assign heading = blockData.settings[headingIndex]
+                        assign imageLink = blockData.settings[linkIndex] 
+                    -%}
+                    {%- if image != blank or heading != blank  -%}
+                    <div class="col-12 col-sm-6 col-md-6">
+                        <div class="header__megamenu-col">
+                        <a href="{{ imageLink }}" class="unstyled-link header__megamenu-collection img-zoom" aria-label="Menu link">
+                          {%- if image != blank -%}
+                            <div class="header__megamenu-collection-img fixed-height">
+                            <div class="image-wrapper">
+                                {%- render 'lazy-image', image: image -%}
+                            </div>
+                            </div>
+                          {% endif %}
+                            {% if heading != blank %}
+                                <div class="header__megamenu-collection-heading">
+                                <p>{{ heading }}</p>
+                                </div>
+                            {% endif %}
+                        </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+              {% endcapture %}
+            {% if link.links != blank or megamenuContent != blank %}
+              <li class="nav-menu">
+                <a
+                  href="{{- link.url -}}"
+                  class="unstyled-link nav-menu-link dropdown-menu heading-font{% if link.levels > 1 %} has-submenu{% endif %}"
+                  data-text="{{- link.title | escape }}"
+                >
+                  {{- link.title | escape }}
+                  <span>
+                    <svg fill="currentColor" viewBox="0 0 23.04 8.94">
+                      <g><polygon points="18.57 0 17.3 1.27 19.86 3.83 0 3.83 0 5.12 19.86 5.12 17.3 7.67 18.57 8.94 23.04 4.47 18.57 0"></polygon></g>
+                    </svg>
+                  </span>
+                </a>
+                <div class="dropdown-menus-main">
+                  {%- for childlink in link.links -%}
+                    <div class="dropdown-menus-inner">
+                      <a
+                        href="{{ childlink.url }}"
+                        class="unstyled-link summenu-title heading-font h6"
+                      >
+                        {{- childlink.title | escape -}}
+                      </a>
+                      {% if childlink.links != blank %}
+                        <ul class="list-unstyled dropdown-menus ">
+                          {%- for grandchildlink in childlink.links -%}
+                            <li class="nav-megamenu">
+                              <a class="unstyled-link nav-menu-link" href="{{ grandchildlink.url }}">
+                                <svg
+                                  width="17"
+                                  fill="currentColor"
+                                  viewBox="0 0 14.64 14.68"
+                                  style="margin-right: 7px; "
+                                >
+                                  <g><path d="m7.32,0c.18,0,.32.14.32.32v1.92c0,1.22.3,2.12.74,2.78.44.66,1.03,1.11,1.63,1.41.6.3,1.2.45,1.66.53.23.04.42.06.55.07.07,0,.12,0,.15,0,.02,0,.03,0,.04,0h0s0,0,0,0h1.91c.18,0,.32.14.32.32s-.14.32-.32.32h-1.91c-1.22,0-2.11.3-2.77.74-.66.44-1.1,1.03-1.4,1.63-.3.6-.45,1.21-.53,1.67-.04.23-.06.42-.07.55,0,.07,0,.12,0,.15,0,.02,0,.03,0,.04h0s0,0,0,0v1.92c0,.18-.14.32-.32.32s-.32-.14-.32-.32v-1.92c0-1.22-.3-2.12-.74-2.78-.44-.66-1.03-1.11-1.63-1.41-.6-.3-1.2-.45-1.66-.53-.23-.04-.42-.06-.55-.07-.07,0-.12,0-.15,0-.02,0-.03,0-.04,0h0s0,0,0,0H.32c-.18,0-.32-.14-.32-.32s.14-.32.32-.32h1.91c1.22,0,2.11-.3,2.77-.74.66-.44,1.1-1.03,1.4-1.63.3-.6.45-1.21.53-1.67.04-.23.06-.42.07-.55,0-.07,0-.12,0-.15,0-.02,0-.03,0-.04h0s0,0,0,0V.32c0-.18.14-.32.32-.32Z"></path></g>
+                                </svg>
+                                {{- grandchildlink.title | escape -}}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  {%- endfor -%}
+                  {% if megamenuContent != blank %}
+                    <div class="dropdown-menus-inner">
+                      <div class="row justify-content-end">
+                        {{ megamenuContent }}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </li>
+            {% else %}
+              <li class="nav-menu">
+                <a
+                  class="unstyled-link nav-menu-link heading-font"
+                  href="{{- link.url -}}"
+                  data-text="{{- link.title | escape }}"
+                >
+                  {{- link.title | escape }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  {%- assign transitionDelay = 0.4 -%}
+  {%- for link in linklists[section.settings.menu].links -%}
+    {%- assign transitionDelay = transitionDelay | plus : 0.1 -%}
+  .menu--visible .nav-menu:nth-child({{ forloop.index }})>.nav-menu-link{
+    transition-delay: {{ transitionDelay }}s;
+  }
+    {% endfor %}
+</style>

@@ -1,0 +1,110 @@
+{% if formTrigger == true %}
+  <a href="#productQueryForm" class="unstyled-link variant-info text-medium" data-side-drawer-open>
+    <span>{{ block.settings.title }}</span>
+  </a>
+{% else -%}
+  {%- capture popupContent -%}
+      <div class="product-query__content">
+        <div class="product-query__body rte">
+          <h6 class="product-query__heading text-center">{{ block.settings.title }}</h6>
+          {% assign formId = 'productQueryForm' | append:product.id | append :'_' | append:section.id %}
+          {%- form 'contact', id: formId, class: 'get-in-touch-form' -%}
+            <input type="hidden" name="contact[form title]" value="{{ block.settings.title }}">
+            <input type="hidden" name="contact[product]" value="{{ product.title | strip_html | escape }}">
+            <input type="hidden" name="contact[product url]" value="{{ shop.url }}{{ product.url }}">
+            <div class="form-group">
+              <label class="hidden" for="ContactName">{{ 'templates.contact.form.name' | t }}</label>
+              <input
+                type="text"
+                class="form-control"
+                name="contact[name]"
+                id="ContactName"
+                autocomplete="email"
+                autocapitalize="off"
+                placeholder="{{ 'templates.contact.form.name' | t }}"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label class="hidden" for="ContactEmail">{{ 'templates.contact.form.email' | t }}</label>
+              <input
+                type="email"
+                class="form-control"
+                name="contact[email]"
+                id="ContactEmail"
+                autocomplete="email"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                spellcheck="false"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactForm-email-error"
+                {% endif %}
+                placeholder="{{ 'templates.contact.form.email' | t }}"
+                pattern="^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label class="hidden" for="ContactNumber">{{ 'templates.contact.form.phone' | t }}</label>
+              <input
+                type="number"
+                class="form-control"
+                name="contact[number]"
+                id="ContactNumber"
+                autocomplete="phone"
+                autocapitalize="off"
+                placeholder="{{ 'templates.contact.form.phone' | t }}"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label class="hidden" for="ContactForm-body">{{ 'templates.contact.form.message' | t }}</label>
+              <textarea
+                id="ContactForm-body"
+                name="contact[message]"
+                rows="3"
+                placeholder="{{ 'templates.contact.form.message' | t }}"
+                class="form-control"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="button med-btn btn-block icon-btn right-icon {{ settings.button_style }}">
+              {% assign buttonText = 'templates.contact.form.send' | t %}
+              {% render 'button-style', buttonText:buttonText %}
+            </button>
+            {%- if form.errors -%}
+              <div
+                class="form-message__wrapper error "
+                autofocus
+              >
+                <div class="form-message__title" tabindex="-1">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                    <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  {{ form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email }}
+                </div>
+              </div>
+            {%- endif -%}
+            {%- if form.posted_successfully? -%}
+              <div class="form-message__wrapper success" role="status" tabindex="-1" autofocus>
+                <p class="form-message__title" tabindex="-1">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="10" fill="#32A861"></circle>
+                    <path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="white"></path>
+                  </svg>
+                  {{- 'templates.contact.form.post_success' | t -}}
+                </p>
+              </div>
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+      </div>
+    {%- endcapture -%}
+  {% if popupContent != blank %}
+    {% render 'popup', id: 'productQueryForm', class: 'product-query-popup small-width', popupContent: popupContent %}
+  {% endif %}
+{% endif %}

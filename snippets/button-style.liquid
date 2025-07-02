@@ -1,0 +1,27 @@
+{% if settings.button_style == "style1"%}
+    <span {{ buttonType }}>{{ buttonText }}</span>
+    <span class="btn-icon">
+      {% render 'icons', icon: 'arrow' %}
+    </span>
+{% else %}
+
+    {% assign button_text = buttonText %}
+    {% assign buttonsize = button_text | size %}
+    {% assign space = "&nbsp;"%}
+    <span class="btn-text" btn-split-text {{ buttonType }}>
+        {% for i in (0..buttonsize)  %}
+            {% assign buttonValue = button_text | slice:i %}
+            {% if buttonValue == blank %}
+                <span>{{ space }}</span>
+                {% else %}
+                <span class="char">{{ button_text | slice:i }}</span>
+            {% endif %}
+        {% endfor %} 
+    </span>
+    <span class="btn-icon">
+        <span class="btn-icon-bg">
+        </span>
+        {% render 'icons', icon: 'button-arrow' %}
+    </span>
+
+{% endif %}

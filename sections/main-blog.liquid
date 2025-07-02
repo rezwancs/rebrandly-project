@@ -1,0 +1,222 @@
+{% assign limit = section.settings.artical_per_page %}
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  {% render 'breadcrumb' %}
+  {%- paginate blog.articles by limit -%}
+    <div id="main-blog-{{ section.id }}" class="page-content text-{{ section.settings.text_alignment }}">
+      <div class="container">
+        <div class="page-content__text">
+          <h2 class="page-content__title">{{ blog.title | escape }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="post-list__container">
+      <div class="container">
+        {% if blog.articles_count > 0 %}
+          <div class="row">
+            {%- for article in blog.articles -%}
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                {% render 'post-grid',
+                  article: article,
+                  section: section,
+                  gridImageSize: section.settings.grid_image_size,
+                  index:forloop.index0
+                %}
+              </div>
+            {% endfor %}
+          </div>
+          {% liquid
+            if paginate.pages > 1
+              render 'pagination', paginate: paginate
+            endif
+          %}
+        {% else %}
+          <div class="artical__notfound">
+            <div class="artical__empty empty__state-box">
+              <h4 class="empty__state-heading">{{ 'blogs.article.notfound' | t }}</h4>
+              <p class="empty__state-desc text">{{ 'blogs.article.notfound_subheading' | t }}</p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endpaginate %}
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }} {
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.blog.name",
+  "tag": "section",
+  "class": "section post-list-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.blog.settings.show_article_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:sections.blog.settings.show_author.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "default": true,
+      "label": "t:sections.blog.settings.show_article_tags.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "default": true,
+      "label": "t:sections.blog.settings.show_article_excerpt.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comment_count",
+      "default": true,
+      "label": "t:sections.blog.settings.show_article_comments_count.label"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:common.heading_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:common.heading_alignment.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:common.heading_alignment.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:common.heading_alignment.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "artical_per_page",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 12,
+      "label": "t:sections.blog.settings.post_per_page.label"
+    },
+    {
+      "type": "select",
+      "id": "grid_image_size",
+      "label": "t:common.grid_image_size.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:common.grid_image_size.options.auto.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:common.grid_image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:common.grid_image_size.options.portrait.label"
+        },
+        {
+          "value": "square",
+          "label": "t:common.grid_image_size.options.square.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_singular_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradiant",
+      "label":"t:common.gradient.label",
+      "default":false
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 30,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 60,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 30,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ]
+}
+{% endschema %}

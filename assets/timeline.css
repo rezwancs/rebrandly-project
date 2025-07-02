@@ -1,0 +1,126 @@
+.timeline__content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.timeline__item {
+    position: relative;
+    display: grid;
+    width: 100%;
+    align-items: center;
+    grid-auto-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-columns: 1.5rem 1fr;
+}
+
+.timeline__item+.timeline__item {
+    padding-top: 40px;
+}
+
+.timeline__image {
+    position: relative;
+    width: 100%;
+    background-color: var(--image-bg);
+    border-radius: var(--image-radius);
+    overflow: hidden;
+}
+
+.timeline__icon-wrapper {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+.timeline__icon {
+    position: sticky;
+    top: 50vh;
+    display: flex;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--body-bg);
+    box-shadow: 0 0 0 1.5rem var(--body-bg);
+    width: 20px;
+    color: var(--divider-color);
+}
+
+.timeline__heading {
+    margin-bottom: 20px;
+    position: relative;
+    -webkit-text-stroke: 1px var(--heading-color);
+    color: var(--body-bg);
+}
+
+.timeline__heading::after {
+    position: absolute;
+    content: attr(data-text);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 101%;
+    clip-path: inset(0 100% 0 0);
+    color: var(--heading-color);
+    transition: clip-path 2s ease;
+    transition-delay: 0.6s;
+}
+
+.timeline__item.active .timeline__heading:after {
+    clip-path: inset(0);
+}
+
+.timeline-video_full_width {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.timeline__progress {
+    position: absolute;
+    z-index: 0;
+    width: 1px;
+    height: 100%;
+    background-color: var(--divider-color);
+}
+
+.timeline__progress-bar {
+    height: var(--timeline-height, 0px);
+    background: var(--text-hightlight-color);
+}
+
+@media (min-width: 768px) {
+    .timeline__item {
+        grid-template-columns: 1fr 5rem 1fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    .timeline__item {
+        grid-template-columns: 1fr 8rem 1fr;
+    }
+    .timeline__heading {
+        font-size: var(--h2);
+    }
+}
+
+@media(max-width:767px) {
+    .timeline__item {
+        grid-column-gap: 15px;
+        grid-row-gap: 20px;
+    }
+    .timeline__image {
+        grid-area: 2 / 2 / 3 / 3;
+    }
+    .timeline__content {
+        grid-area: 1 / 2 / 2 / 3;
+    }
+    .timeline__progress {
+        left: 0.75rem;
+    }
+    .timeline__icon {
+        box-shadow: 0 0 0 0.5rem var(--body-bg);
+    }
+}

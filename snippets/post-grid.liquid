@@ -1,0 +1,111 @@
+{%- liquid
+  if gridImageSize == 'landscape'
+    assign postImageRatio = 'var(--img-landscape)'
+  elsif gridImageSize == 'square'
+    assign postImageRatio = 'var(--img-square)'
+  elsif gridImageSize == 'portrait'
+    assign postImageRatio = 'var(--img-portrait)'
+  else
+    if article.image != blank
+      assign postImageRatio = 1 | divided_by: article.image.aspect_ratio | times: 100 | append: '%'
+    else
+      assign postImageRatio = 100 | append: '%'
+    endif
+  endif
+-%}
+{% if postGrid == 'featured-blog' %}
+  <div class="{{ class }}" {{ block.shopify_attributes }}>
+{% endif %}
+<div
+  class="post__item img-zoom{% if section.settings.enable_grayscale %} grayscale{% endif %}"
+  {% if settings.enable_animations %}
+    data-aos="fade-up" data-aos-easing="ease" data-aos-offset="0" data-aos-duration="1000"
+    data-aos-delay="{{ index | plus: 1 | times: 100}}"
+  {% endif %}
+>
+  {%- if article != blank -%}
+    <a href="{{- article.url -}}" class="unstyled-link post__img">
+  {% else %}
+    <div class="post__img">
+  {% endif %}
+  {%- if article.image -%}
+    <div class="image-wrapper" style="padding-bottom:{{ postImageRatio }}">
+      {% render 'lazy-image', image: article.image %}
+    </div>
+  {%- else -%}
+    <div class="image-wrapper no-article-image" style="padding-bottom:{{ postImageRatio }}">
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+  {%- if article != blank -%}
+    </a>
+  {% else %}
+    </div>
+  {% endif %}
+  <div class="post__content">
+    {%- capture postContent -%}
+        {%- if section.settings.show_date -%}
+          {%- if article != blank -%}
+            <span>{{ article.published_at | date: "%B %d, %Y" }}</span>
+            {% else %}
+              <span>{{ 'blogs.onboarding_article.date' | t }}</span>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if article != blank and section.settings.show_author -%}
+          
+          <span>{{ article.author }}</span>
+        {%- endif -%}
+        {%- if article.comments_count > 0 and blog.comments_enabled? and section.settings.show_comment_count -%}
+         
+          <span class="post-date">
+            {{ 'blogs.article.comments' | t: count: article.comments_count }}
+          </span>
+        {%- endif -%}
+        {%- endcapture -%}
+    {% if postContent != blank %}
+      <div class="post__author">
+        {{ postContent }}
+      </div>
+    {%- endif -%}
+    <a
+      class="unstyled-link post__title{% if postGrid == 'featured-blog' %} h5{% elsif postGrid == 'searchDrawer' %} text-xsmall{% else %} h6{% endif %} heading-font"
+      {% if article != blank %}
+        href="{{- article.url -}}"
+      {% else %}
+        role="link"
+        aria-disabled="true"
+      {% endif %}
+    >
+      {% liquid
+        if article != blank
+          echo article.title
+        else
+          echo 'blogs.onboarding_article.title' | t
+        endif
+      %}
+    </a>
+    {%- if section.settings.show_excerpt or show_excerpt -%}
+      <p class="post__desc rte">
+        {% liquid
+          if article != blank
+            echo article.excerpt_or_content | strip_html | truncatewords: 10
+          else
+            echo 'blogs.onboarding_article.content' | t
+          endif
+        %}
+      </p>
+    {% endif %}
+    {% if section.settings.show_tags %}
+      <ul class="list-unstyled post__tags">
+        {% for tag in article.tags %}
+          <li>
+            <a class="unstyled-link" href="{{ blog.url }}/tagged/{{tag}}">{{ tag }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% if postGrid == 'featured-blog' %}
+  </div>
+{% endif %}

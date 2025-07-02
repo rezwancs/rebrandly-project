@@ -1,0 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "settings": {
+        "marque_enable": false,
+        "marque_opacity": 10,
+        "login_text": "Customer Login",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "reset_text": "Reset Password",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 60,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,170 @@
+{%- capture footerBlocks -%}
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'link_list' %}
+      {% unless block.settings.menu == blank and block.settings.heading_link == blank %}
+        {% if block.settings.heading != blank %}
+          <div class="footer-menu-grid" {{ block.shopify_attributes }}>
+            <div class="footer-menu-accordion">
+              <a
+                href="{% if block.settings.menu == blank and block.settings.heading_link != blank %}{{ block.settings.heading_link }}{% else %}#footerMenuList{{ forloop.index }}{% endif%}"
+                class="unstyled-link footer-menu-head heading-font text-medium{% if block.settings.menu == blank and block.settings.heading_link != blank %} with-link{% endif %}"
+              >
+                {% if block.settings.menu != blank %}
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.94457 0H22V19.0556H19.2238V4.73921L1.96305 22L0 20.037L17.2608 2.77616H2.94457V0Z" fill="currentColor"></path>
+                  </svg>
+                {% endif %}
+                {{ block.settings.heading }}
+              </a>
+                <ul class="list-unstyled {% if block.settings.menu.links.size < 3 %} footer-menu-center {% endif %}">
+                  {% for link in block.settings.menu.links %}
+                    <li>
+                      <a class="unstyled-link footer-menu-link" href="{{ link.url }}">
+                        {{- link.title | escape -}}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+            </div>
+          </div>
+        {% endif %}
+      {% endunless %}
+    {% when 'social_links' %}
+      {% liquid
+        capture socialLinks
+          render 'social-media-icons'
+        endcapture
+      %}
+      {% if block.settings.heading != blank and socialLinks != blank %}
+        <div class="footer-menu-grid">
+          <div class="footer-menu-accordion">
+            <a
+              href="#footerMenuList{{ forloop.index }}"
+              class="unstyled-link footer-menu-head text-medium heading-font"
+            >
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.94457 0H22V19.0556H19.2238V4.73921L1.96305 22L0 20.037L17.2608 2.77616H2.94457V0Z" fill="currentColor"></path>
+              </svg>
+              {{ block.settings.heading }}
+            </a>
+            {% render 'social-media-icons' %}
+            <a href="#shopify-section-{{ section.id }}" class="unstyled-link footer-menu-close">
+              <span>
+                <svg width="16" height="16" viewBox="0 0 22 22" fill="currentColor">
+                  <path d="M21.7987 20.826L11.9721 10.9958L21.7987 1.16552C22.0561 0.899047 22.0561 0.476499 21.7987 0.20994C21.5349 -0.0632507 21.0997 -0.0708067 20.8266 0.193065L11 10.0233L1.17343 0.193149C0.907055 -0.0642582 0.484664 -0.0642582 0.218204 0.193149C-0.0548867 0.457021 -0.0624398 0.892415 0.201335 1.16561L10.0279 10.9958L0.201335 20.826C0.0724268 20.9549 1.71925e-08 21.1298 1.71925e-08 21.3122C-8.39964e-05 21.692 0.307751 21.9999 0.687425 22C0.869793 22.0002 1.04469 21.9276 1.17343 21.7984L11 11.9682L20.8266 21.7985C20.9553 21.9277 21.1303 22.0002 21.3127 22C21.4949 21.9999 21.6696 21.9275 21.7985 21.7987C22.0671 21.5301 22.0672 21.0946 21.7987 20.826Z"></path>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      {% endif %}
+  {% endcase %}
+{% endfor %}
+{%- endcapture -%}
+{% liquid
+  assign leftSideStatus = false
+  if section.settings.footer_description != blank or section.settings.logo != blank
+    assign leftSideStatus = true
+  endif
+%}
+<div class="footer-grid-container">
+  <div class="{% if section.settings.enable_stacked_fullwidth %}container-full{% else %}container-fluid{% endif %}">
+    <div class="footer-grid-box{% if section.settings.enable_stacked_border %} border-enabled{% endif %}">
+      {% if footerBlocks != blank or leftSideStatus %}
+        <div class="footer-grid-content">
+          {%- capture footerLogo -%}
+          {% if section.settings.logo != blank %}
+            <a
+              href="{{ routes.root_url }}"
+              aria-label="{{ shop.name }}"
+              class="unstyled-link footer-img"
+            >
+              {%- assign image_2x_size = section.settings.logo_width | times: 2 | at_most: 2560 -%}
+              <img
+                srcset="{{ section.settings.logo | image_url: width: section.settings.logo_width }} 1x, {{ section.settings.logo | image_url: width: image_2x_size }} 2x"
+                src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}"
+                loading="lazy"
+                width="{{ section.settings.logo_width }}"
+                height="{{ section.settings.logo_width | divided_by : section.settings.logo.aspect_ratio | round }}"
+                alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+              >
+            </a>
+          {% endif %}
+          {%- endcapture -%}
+          <div class="footer-top{% if footerBlocks == blank and leftSideStatus %} left-enabled{% elsif leftSideStatus == false and footerBlocks != blank %} right-enabled{% endif %}">
+            <div class="footer-left-grid">
+              <div class="footer-logo-content logo-position-{{ section.settings.logo_position }}">
+                {% liquid
+                  if section.settings.logo_position == 'top'
+                    echo footerLogo
+                  endif
+                %}
+                {% if section.settings.footer_description != blank %}
+                  <div class="footer-desc">
+                    {{ section.settings.footer_description | replace: '<p></p>', '<br>' }}
+                  </div>
+                {% endif %}
+                {% liquid
+                  if section.settings.logo_position == 'bottom'
+                    echo footerLogo
+                  endif
+                %}
+              </div>
+            </div>
+            {% if footerBlocks != blank %}
+              <div class="footer-right-grid">{{ footerBlocks }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+      <div class="footer-bottom">
+        <div class="footer-grid-content">
+          
+          <div class="row align-items-center">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+              <p class="copyright-content text-xsmall">
+                &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link -}}
+              </p>
+            </div>
+            {% liquid
+              assign followStatus = false
+              if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop
+                assign followStatus = true
+              endif
+            %}
+            {%- if followStatus
+              or section.settings.payment_enable
+              or section.settings.enable_language_selector
+              or section.settings.enable_currency_selector
+            -%}
+              <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                <div class="footer-right-content">
+                  {%- if section.settings.enable_language_selector or section.settings.enable_currency_selector -%}
+                    {%- render 'localization' -%}
+                  {%- endif -%}
+                  {%- if section.settings.payment_enable -%}
+                    <div class="payment-box">
+                      <ul class="list-unstyled list list-payment">
+                        {%- for type in shop.enabled_payment_types -%}
+                          <li class="list-payment__item">
+                            {{ type | payment_type_svg_tag: class: 'icon' }}
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endif -%}
+                  {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+                    <div class="footer-follow-on-shop">
+                      {{ shop | login_button: action: 'follow' }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

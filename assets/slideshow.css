@@ -1,0 +1,351 @@
+.slideshow__wrapper {
+    overflow: hidden;
+}
+
+.slideshow-section .slideshow__heading {
+    font-size: var(--slideshow-heading);
+    overflow: hidden;
+}
+
+.slideshow__item {
+    position: relative;
+    width: 100%;
+    flex: 0 0 100%;
+    overflow: hidden;
+}
+
+.slideshow__media-wrapper {
+    background: var(--image-bg);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: 0.4s ease-in;
+    overflow: hidden;
+}
+
+.slideshow__media-wrapper:after {
+    position: absolute;
+    content: "";
+    background: var(--slideshow-overlay-bg);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: var(--slideshow-overlay-opacity);
+}
+
+.iframe-video-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slideshow__item img,
+.slideshow__item video,
+.slideshow__item iframe,
+.slideshow__media-wrapper svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slideshow__item iframe {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.desktop-height-fixed .slideshow__container {
+    height: var(--slider-height);
+}
+
+.desktop-height-adapt .slideshow__container {
+    height: 0;
+    padding-bottom: var(--slider-img-ratio);
+}
+
+.slideshow__container {
+    position: relative;
+}
+
+.slideshow__content {
+    position: absolute;
+    width: 100%;
+    max-width: 90%;
+}
+
+.slideshow__desc {
+    margin-top: 15px;
+}
+
+.slideshow__button {
+    margin-top: 35px;
+}
+
+.slideshow-section .flickity-prev-next-button.previous {
+    left: unset;
+    right: calc(15px + 54px);
+}
+
+.slideshow-section .flickity-prev-next-button.next {
+    right: 15px;
+    left: unset;
+}
+
+.slideshow_main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slideshow-section .flickity-prev-next-button {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+}
+
+html.no-js .flickity-button[data-custom-slider-button] {
+    display: none;
+}
+
+.fade-animate {
+    transform: translate3d(0, 30px, 0);
+    opacity: 0;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+}
+
+.translate-animate {
+    display: block;
+    opacity: 0;
+    transform: translateY(100%) rotateX(-80deg);
+    transform-origin: center top;
+    transform-style: preserve-3d;
+    transition: opacity 0s cubic-bezier(.215, .61, .355, 1), transform 0s cubic-bezier(.215, .61, .355, 1);
+}
+
+.zoom-animate {
+    transform: scale(1.2);
+    will-change: transform;
+    transition: transform 2s cubic-bezier(.21, .6, .35, 1);
+}
+
+.fade-animate:nth-child(1) {
+    transition-delay: .6s;
+}
+
+.fade-animate:nth-child(2) {
+    transition-delay: .8s;
+}
+
+.fade-animate:nth-child(3) {
+    transition-delay: 1s;
+}
+
+.translate-animate:nth-child(1) {
+    transition-delay: .4s;
+}
+
+.zoom-animate:nth-child(1) {
+    transition-delay: 1s;
+}
+
+.slideshow__item.is-selected .aos-animate .fade-animate {
+    opacity: 1;
+    transform: translateZ(0);
+}
+
+.slideshow__item.is-selected .aos-animate .translate-animate {
+    opacity: 1;
+    transform: none;
+    transition-duration: 1s;
+}
+
+.slideshow__item.is-selected .aos-animate .zoom-animate {
+    transform: scale(1);
+}
+
+.line-heading {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.is-selected.is-animated .line-heading {
+    animation: 0.3s swift-up ease-in-out forwards;
+}
+
+.line-heading-up {
+    position: relative;
+    top: calc(var(--slideshow-heading) * var(--heading-font-line-height));
+}
+
+.is-selected.is-animated .line-heading-up {
+    animation: 0.5s swift-up ease-in-out forwards;
+}
+
+@keyframes swift-up {
+    to {
+        top: 0;
+    }
+}
+
+.text-shadow-true .line-heading {
+    padding-right: 3px;
+}
+
+@media (min-width: 576px) {
+    .slideshow__content {
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 768px) {
+    .slideshow-section .slideshow__heading {
+        font-size: calc(var(--slideshow-heading) * 0.8);
+    }
+    .slideshow__content.content-width-small {
+        max-width: 40%;
+    }
+    .slideshow__content.content-width-medium {
+        max-width: 55%;
+    }
+    .slideshow__content.content-width-large {
+        max-width: 75%;
+    }
+    html.js [data-custom-slider-animation] .flickity-button {
+        display: none;
+    }
+    .slideshow-section .flickity-page-dots {
+        bottom: 40px;
+        width: auto;
+        right: 30px;
+    }
+    html.js [data-custom-slider-animation] .slideshow__item.is-selected .slideshow__container {
+        opacity: 1;
+        transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1.3s;
+    }
+    html.js [data-custom-slider-animation] .container.slideshow__container {
+        opacity: 0;
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html.js [data-custom-slider-animation] .slideshow__media-wrapper,
+    html.js [data-custom-slider-animation] .is-previous .slideshow__media-wrapper,
+    html.js [data-custom-slider-animation] .is-next .slideshow__media-wrapper {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: scale(0.8);
+    }
+    html.js [data-custom-slider-animation] .is-selected .slideshow__media-wrapper {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+        transform: scale(1);
+    }
+    .slideshow__content[class*=d-bottom-right] {
+        padding-bottom: 60px;
+    }
+    .slideshow__content[class*=d-top-left],
+    .slideshow__content[class*=d-top-center],
+    .slideshow__content[class*=d-top-right] {
+        top: calc(40px + var(--transparentHeaderHeightFixed, 0px) + var(--announceheightfixed, 0px));
+    }
+}
+
+@media (min-width: 1025px) {
+    .slideshow-section .flickity-prev-next-button.next {
+        right: 20px;
+    }
+    .slideshow-section .flickity-prev-next-button.previous {
+        left: unset;
+        right: calc(20px + 60px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .slideshow__content.content-width-small {
+        max-width: 30%;
+    }
+    .slideshow__content.content-width-medium {
+        max-width: 45%;
+    }
+    .slideshow__content.content-width-large {
+        max-width: 65%;
+    }
+    .slideshow-section .slideshow__heading {
+        font-size: calc(var(--slideshow-heading) * 1);
+    }
+    .slideshow__desc {
+        margin-top: 25px;
+    }
+    .slideshow__button {
+        margin-top: 45px;
+    }
+}
+
+@media (min-width: 1441px) {
+    .slideshow-section .slideshow__heading {
+        font-size: calc(var(--slideshow-heading) * 1);
+    }
+    .slideshow-section .flickity-prev-next-button.previous {
+        left: unset;
+        right: calc(20px + 70px);
+    }
+}
+
+@media (max-width: 1440px) {
+    .slideshow__desc {
+        font-size: var(--text);
+    }
+}
+
+@media (max-width: 767px) {
+    .slideshow__content[class*=m-bottom-left],
+    .slideshow__content[class*=m-bottom-center],
+    .slideshow__content[class*=m-bottom-right] {
+        padding-bottom: 60px;
+    }
+    .slideshow__content[class*=m-top-left],
+    .slideshow__content[class*=m-top-center],
+    .slideshow__content[class*=m-top-right] {
+        top: calc(30px + var(--transparentHeaderHeightFixed, 0px) + var(--announceheightfixed, 0px));
+    }
+    .mobile-height-fixed .slideshow__container {
+        height: var(--slider-height);
+        padding-bottom: 0;
+    }
+    .mobile-height-adapt .slideshow__container {
+        height: 0;
+        padding-bottom: var(--slider-img-ratio);
+    }
+    .content-below-image .slideshow__content {
+        position: unset;
+        max-width: 100%;
+        transform: unset;
+        padding: 25px 0 70px;
+    }
+    .slideshow__button {
+        margin-top: 25px;
+    }
+    .content-below-image .slideshow__media-wrapper {
+        height: var(--slider-height);
+        position: relative;
+    }
+    .mobile-height-fixed.content-below-image .slideshow__container {
+        height: auto;
+        padding-bottom: 0;
+    }
+    .mobile-height-adapt.content-below-image .slideshow__media-wrapper {
+        padding-bottom: var(--slider-img-ratio);
+        height: auto;
+    }
+    .slideshow-section .flickity-button {
+        bottom: 15px;
+        top: unset;
+        transform: unset;
+    }
+    .flickity-button[data-custom-slider-button] {
+        display: none;
+    }
+}

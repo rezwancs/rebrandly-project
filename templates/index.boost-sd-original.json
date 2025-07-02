@@ -1,0 +1,769 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "3da8c6dc-33c1-412a-9abe-97476c5cc0da": {
+      "type": "slider",
+      "blocks": {
+        "template--19243988943139__3da8c6dc-33c1-412a-9abe-97476c5cc0da-1685703227e58bf1ac-0": {
+          "type": "slide",
+          "settings": {
+            "heading": "Slide title",
+            "enable_highlight": false,
+            "enable_text_shadow": false,
+            "outline_thickness": "1px",
+            "heading_space_desktop": 0,
+            "heading_space_mobile": 0,
+            "description": "Use this text to share information about your brand with your customers.",
+            "btn_text": "Button text",
+            "btn_link": "shopify://collections/all",
+            "size": "med",
+            "content_width": "medium",
+            "desktop_content_position": "d-center",
+            "mobile_content_position": "m-center",
+            "overlay_color": "#ffffff",
+            "overlay_opacity": 0,
+            "bg_color": "#000000",
+            "bg_gradient": "",
+            "heading_color": "#b3b3b3",
+            "heading_animate": "#b3b3b3",
+            "shadow_color_desktop": "",
+            "desc_color": "#ffffff",
+            "btn_bg_color": "#0b0e0d",
+            "btn_text_color": "#ffffff",
+            "btn_border_color": "#5c5b5b",
+            "btn_hover_bg_color": "#0b0e0d",
+            "btn_hover_text_color": "#ffffff",
+            "btn_hover_border_color": "#5c5b5b",
+            "m_heading_color": "#ffffff",
+            "m_heading_animate": "#0b0e0d",
+            "m_shadow_color": "",
+            "m_desc_color": "#ffffff",
+            "m_btn_bg_color": "#0b0e0d",
+            "m_btn_text_color": "#ffffff",
+            "m_btn_border_color": "#b3b3b3"
+          }
+        }
+      },
+      "block_order": [
+        "template--19243988943139__3da8c6dc-33c1-412a-9abe-97476c5cc0da-1685703227e58bf1ac-0"
+      ],
+      "disabled": true,
+      "settings": {
+        "slider_animation": false,
+        "content_below_image": false,
+        "navigation_style": "arrows",
+        "rotate": false,
+        "interval": 5,
+        "section_visibility": "always",
+        "font_family": "heading",
+        "desktop_font": 70,
+        "mobile_font": 40,
+        "desktop_height": "750px",
+        "mobile_height": "550px",
+        "bg_color": "#000000",
+        "bg_gradient": ""
+      }
+    },
+    "668ee0f7-8866-4d85-8ea5-d97a83bdd4e8": {
+      "type": "abz_split-slider",
+      "blocks": {
+        "template--21299324485926__668ee0f7-8866-4d85-8ea5-d97a83bdd4e8-slide-1": {
+          "type": "slide",
+          "settings": {
+            "heading": "<strong>BRING IDEAS</strong> TO LIFE",
+            "enable_highlight": true,
+            "outline_thickness": "1px",
+            "description": "Through Our Custom Gifting Solutions",
+            "btn_text": "SHOP NOW",
+            "btn_link": "shopify://collections/all",
+            "size": "small",
+            "image_desktop": "shopify://shop_images/Luxury_box_mockup_fcacdea4-f3f0-415d-94a8-2d85d868004b.jpg",
+            "heading_color": "#ffffff",
+            "heading_animate": "#ffffff",
+            "background_color": "#0b0e0d",
+            "desc_color": "#c7c7c7",
+            "btn_bg_color": "#ffffff",
+            "btn_text_color": "#1a1a1a",
+            "btn_border_color": "#292929",
+            "btn_hover_bg_color": "#0b0e0d",
+            "btn_hover_text_color": "#ffffff",
+            "btn_hover_border_color": "#5c5b5b",
+            "m_heading_color": "#ffffff",
+            "m_heading_animate": "#ffffff",
+            "m_desc_color": "#ffffff",
+            "m_btn_bg_color": "#ffffff",
+            "m_btn_text_color": "#1a1a1a",
+            "m_btn_border_color": "#ffffff"
+          }
+        },
+        "template--21299324485926__668ee0f7-8866-4d85-8ea5-d97a83bdd4e8-slide-2": {
+          "type": "slide",
+          "settings": {
+            "heading": "A GIFT FOR <strong>EVERYONE</strong>",
+            "enable_highlight": true,
+            "outline_thickness": "1px",
+            "description": "Personalize your gift now!",
+            "btn_text": "SHOP NOW",
+            "btn_link": "shopify://collections/all",
+            "size": "med",
+            "image_desktop": "shopify://shop_images/IMG_3141_copy.jpg",
+            "heading_color": "#ffffff",
+            "heading_animate": "#ffffff",
+            "background_color": "#0b0e0d",
+            "desc_color": "#c7c7c7",
+            "btn_bg_color": "#ffffff",
+            "btn_text_color": "#1a1a1a",
+            "btn_border_color": "#292929",
+            "btn_hover_bg_color": "#0b0e0d",
+            "btn_hover_text_color": "#ffffff",
+            "btn_hover_border_color": "#5c5b5b",
+            "m_heading_color": "#ffffff",
+            "m_heading_animate": "#ffffff",
+            "m_desc_color": "#ffffff",
+            "m_btn_bg_color": "#ffffff",
+            "m_btn_text_color": "#1a1a1a",
+            "m_btn_border_color": "#ffffff"
+          }
+        },
+        "template--21299324485926__668ee0f7-8866-4d85-8ea5-d97a83bdd4e8-slide-3": {
+          "type": "slide",
+          "settings": {
+            "heading": "HOME <strong>FRAGRANCE</strong>",
+            "enable_highlight": true,
+            "outline_thickness": "1px",
+            "description": "Experience serenity and style",
+            "btn_text": "SHOP NOW",
+            "btn_link": "shopify://collections/all",
+            "size": "med",
+            "image_desktop": "shopify://shop_images/IMG_2694.jpg",
+            "heading_color": "#ffffff",
+            "heading_animate": "#ffffff",
+            "background_color": "#0b0e0d",
+            "desc_color": "#c7c7c7",
+            "btn_bg_color": "#ffffff",
+            "btn_text_color": "#1a1a1a",
+            "btn_border_color": "#292929",
+            "btn_hover_bg_color": "#0b0e0d",
+            "btn_hover_text_color": "#ffffff",
+            "btn_hover_border_color": "#5c5b5b",
+            "m_heading_color": "#ffffff",
+            "m_heading_animate": "#ffffff",
+            "m_desc_color": "#ffffff",
+            "m_btn_bg_color": "#ffffff",
+            "m_btn_text_color": "#1a1a1a",
+            "m_btn_border_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__668ee0f7-8866-4d85-8ea5-d97a83bdd4e8-slide-1",
+        "template--21299324485926__668ee0f7-8866-4d85-8ea5-d97a83bdd4e8-slide-2",
+        "template--21299324485926__668ee0f7-8866-4d85-8ea5-d97a83bdd4e8-slide-3"
+      ],
+      "settings": {
+        "navigation_style": "image",
+        "rotate": true,
+        "interval": 3,
+        "section_visibility": "always",
+        "section_background": "#171717",
+        "font_family": "heading",
+        "desktop_font": 130,
+        "mobile_font": 50,
+        "desktop_height": "750px",
+        "mobile_height": "650px"
+      }
+    },
+    "33c985c5-f1ce-4dae-bcee-d73619df232c": {
+      "type": "abz_rich-text",
+      "blocks": {
+        "template--21299324485926__33c985c5-f1ce-4dae-bcee-d73619df232c-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "WELCOME TO THE WORLD OF CUSTOMIZATION",
+            "higlight_style": "basic",
+            "size": "h2",
+            "style": "animated-text",
+            "outline_thickness": "1px",
+            "heading_space_desktop": 0,
+            "heading_space_mobile": 0,
+            "animate_color1": "#ff767d",
+            "animate_color2": "#ff3939",
+            "marker_color": "#000000",
+            "marker_text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__33c985c5-f1ce-4dae-bcee-d73619df232c-heading-1"
+      ],
+      "settings": {
+        "content_width": "large",
+        "text_alignment": "center",
+        "section_visibility": "always",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "top_space_desktop": 100,
+        "bottom_space_desktop": 110,
+        "top_space_mobile": 80,
+        "bottom_space_mobile": 80
+      }
+    },
+    "af3f949b-c8c9-4b3f-b580-3156499bbda1": {
+      "type": "abz_featured-media-grid",
+      "blocks": {
+        "template--21299324485926__af3f949b-c8c9-4b3f-b580-3156499bbda1-grid-1": {
+          "type": "grid",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_1267_1.png",
+            "heading": "Accessories",
+            "description": "",
+            "link": "shopify://collections/accessories",
+            "border_color": "#00ff0f"
+          }
+        },
+        "template--21299324485926__af3f949b-c8c9-4b3f-b580-3156499bbda1-grid-2": {
+          "type": "grid",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_1267_2.png",
+            "heading": "Accessories",
+            "description": "",
+            "link": "",
+            "border_color": "#00ff0f"
+          }
+        },
+        "template--21299324485926__af3f949b-c8c9-4b3f-b580-3156499bbda1-grid-3": {
+          "type": "grid",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_1267_3.png",
+            "heading": "Accessories",
+            "description": "",
+            "link": "",
+            "border_color": "#00ff0f"
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__af3f949b-c8c9-4b3f-b580-3156499bbda1-grid-1",
+        "template--21299324485926__af3f949b-c8c9-4b3f-b580-3156499bbda1-grid-2",
+        "template--21299324485926__af3f949b-c8c9-4b3f-b580-3156499bbda1-grid-3"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Featured Collections",
+        "view_all_button_text": "VIEW ALL",
+        "btn_link": "shopify://collections/all",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_text_alignment": "center",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "section_visibility": "always",
+        "grid_style": "grid",
+        "grids_per_row": 3,
+        "direction": "rtl",
+        "scrolling_speed": 3,
+        "scrolling_speed_mobile": 3,
+        "grids_gap": 20,
+        "grid_border_width": 0,
+        "grid_border_radius": 0,
+        "grid_inner_space": false,
+        "hide_grid_background": true,
+        "text_alignment": "left",
+        "hide_grid_text": false,
+        "grid_image_size": "square",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "cb703f97-4a16-4d9e-930b-4fa6ae01aa95": {
+      "type": "abz_collection-carousel",
+      "blocks": {
+        "template--21299324485926__cb703f97-4a16-4d9e-930b-4fa6ae01aa95-collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "apparel",
+            "image": "shopify://shop_images/Apparel_2024.png",
+            "collection_heading": "",
+            "collection_bg_color": "#252525"
+          }
+        },
+        "template--21299324485926__cb703f97-4a16-4d9e-930b-4fa6ae01aa95-collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories",
+            "image": "shopify://shop_images/Accessories_2024.png",
+            "collection_heading": "Accessories",
+            "collection_bg_color": ""
+          }
+        },
+        "template--21299324485926__cb703f97-4a16-4d9e-930b-4fa6ae01aa95-collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "home-fragrance",
+            "image": "shopify://shop_images/Home_fragrance_2024.png",
+            "collection_heading": "",
+            "collection_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__cb703f97-4a16-4d9e-930b-4fa6ae01aa95-collection-1",
+        "template--21299324485926__cb703f97-4a16-4d9e-930b-4fa6ae01aa95-collection-2",
+        "template--21299324485926__cb703f97-4a16-4d9e-930b-4fa6ae01aa95-collection-3"
+      ],
+      "settings": {
+        "carousel_style": "carousel-1",
+        "heading": "Featured Collections",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "view_all_button_text": "View all",
+        "btn_link": "shopify://collections/all",
+        "radius_enable": false,
+        "section_visibility": "always",
+        "title_color": "#ffffff",
+        "title_alignment": "left",
+        "color_scheme": "primary",
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "background_gradient": "",
+        "bottom_gradient": "",
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "e8f6d85f-851d-46d9-bb21-6d507b46ad54": {
+      "type": "abz_featured-collection",
+      "settings": {
+        "section_visibility": "always",
+        "stacked_products": false,
+        "collection": "accessories",
+        "products_count": 4,
+        "grid_image_size": "auto",
+        "grid_image_fit": "cover",
+        "heading": "Top Selling Products",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "view_all_button_text": "View all",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "0285cd80-471e-400c-9d49-e97b972df0e8": {
+      "type": "abz_multi-image-with-text",
+      "blocks": {
+        "template--21299324485926__0285cd80-471e-400c-9d49-e97b972df0e8-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "START <span class=\"text-color\"> Rebranding </span>"
+          }
+        },
+        "template--21299324485926__0285cd80-471e-400c-9d49-e97b972df0e8-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At Rebrand, we specialize in white labeling, empowering businesses to put their unique stamp on products and services.</p><p>With our expertise in design, marketing, and innovation, we help clients create memorable, custom-branded experiences that drive growth.</p>"
+          }
+        },
+        "b41514af-fe6d-4476-acb5-604e4a5e1796": {
+          "type": "button",
+          "settings": {
+            "text": "MORE INFO",
+            "link": "#",
+            "size": "med",
+            "button_style": "main",
+            "button_as_link": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__0285cd80-471e-400c-9d49-e97b972df0e8-heading-1",
+        "template--21299324485926__0285cd80-471e-400c-9d49-e97b972df0e8-text-1",
+        "b41514af-fe6d-4476-acb5-604e4a5e1796"
+      ],
+      "settings": {
+        "border_radius_range": 0,
+        "section_visibility": "always",
+        "heading": "",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h6",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "text_position": "flex-start",
+        "text_alignment": "flex-start_left",
+        "content_width": "medium",
+        "enable_background_color": false,
+        "image_position": "left",
+        "main_image": "shopify://shop_images/Rectangle_1358.png",
+        "full_width_image": false,
+        "border_main_image": true,
+        "second_image": "shopify://shop_images/Rectangle_1357.png",
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "border_color": "#dddddd",
+        "content_background": "",
+        "color_scheme": "tertiary",
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "432244ab-7306-4146-ba4a-5cc5683bfaf4": {
+      "type": "abz_marquee-text",
+      "blocks": {
+        "template--21299324485926__432244ab-7306-4146-ba4a-5cc5683bfaf4-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "MEGA OFFERS <strong>WINTER SALE </strong>NEW COLLECTION <strong>WINTER SALE </strong>",
+            "outline_thickness": "1px",
+            "enable_highlight": true,
+            "enable_text_shadow": false,
+            "text_gap": 15,
+            "scrolling_speed": 15,
+            "scrolling_speed_mobile": 15,
+            "font_family": "heading",
+            "desktop_font": 88,
+            "mobile_font": 40,
+            "color": "#ffffff",
+            "highlight_color": "",
+            "shadow_color": "",
+            "custom_icon": "",
+            "small_icon": false,
+            "icon_color": "",
+            "text_icon_gap": 15,
+            "default_color": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__432244ab-7306-4146-ba4a-5cc5683bfaf4-text-1"
+      ],
+      "settings": {
+        "enable_autoplay": true,
+        "direction": "rtl",
+        "text_angle": 0,
+        "min_height_desktop": 400,
+        "min_height_mobile": 200,
+        "section_visibility": "always",
+        "bgcolor": "#981b22",
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "top_space_desktop": 35,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "95a0b38e-44ee-41f1-9710-84e1c8d748eb": {
+      "type": "abz_featured-product",
+      "blocks": {
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-title-1": {
+          "type": "title",
+          "settings": {}
+        },
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-price-1": {
+          "type": "price",
+          "settings": {
+            "hide_shipping_content": true
+          }
+        },
+        "b0fee801-fd52-4343-b8e7-403005243a45": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{{product.description}}"
+          }
+        },
+        "c4b591a7-2741-4235-8216-5968bf17167a": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-review_rating-1": {
+          "type": "review_rating",
+          "settings": {}
+        },
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-variant-1": {
+          "type": "variant",
+          "settings": {}
+        },
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-buttons-1": {
+          "type": "buttons",
+          "settings": {
+            "dynamic_checkout_btn": true,
+            "enable_quantity": true
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-title-1",
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-price-1",
+        "b0fee801-fd52-4343-b8e7-403005243a45",
+        "c4b591a7-2741-4235-8216-5968bf17167a",
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-review_rating-1",
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-variant-1",
+        "template--21299324485926__95a0b38e-44ee-41f1-9710-84e1c8d748eb-buttons-1"
+      ],
+      "settings": {
+        "product": "5003-bucket-hat-kaki",
+        "enable_fullwidth": false,
+        "section_visibility": "always",
+        "heading": "",
+        "enable_highlight": false,
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "scrolling_speed": 10,
+        "enable_fixed_height": false,
+        "media_height_desktop": "700px",
+        "media_height_mobile": "500px",
+        "media_fit": "cover",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "inner_color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "3d4b0232-d1a6-4b19-ab8b-b1fba3e54657": {
+      "type": "abz_video-zoom",
+      "disabled": true,
+      "settings": {
+        "videourl": "shopify://files/videos/test.mp4",
+        "heading": "Rebrand Collection",
+        "font_family": "heading",
+        "style": "shadow",
+        "outline_thickness": "1px",
+        "section_visibility": "always",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "text_shadow_color": "#d3000b",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 0
+      }
+    },
+    "8fba4603-5e1f-410b-9f54-f5f809fba649": {
+      "type": "abz_marquee-text",
+      "blocks": {
+        "template--21299324485926__8fba4603-5e1f-410b-9f54-f5f809fba649-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "FOLLOW US ON <strong>INSTAGRAM</strong>",
+            "outline_thickness": "1px",
+            "enable_highlight": true,
+            "enable_text_shadow": false,
+            "text_gap": 15,
+            "scrolling_speed": 15,
+            "scrolling_speed_mobile": 15,
+            "font_family": "heading",
+            "desktop_font": 88,
+            "mobile_font": 40,
+            "color": "#ffffff",
+            "highlight_color": "",
+            "shadow_color": "",
+            "custom_icon": "",
+            "small_icon": false,
+            "icon_color": "",
+            "text_icon_gap": 15,
+            "default_color": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__8fba4603-5e1f-410b-9f54-f5f809fba649-text-1"
+      ],
+      "settings": {
+        "enable_autoplay": true,
+        "direction": "rtl",
+        "text_angle": 0,
+        "min_height_desktop": 400,
+        "min_height_mobile": 200,
+        "section_visibility": "always",
+        "bgcolor": "#981b22",
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "top_space_desktop": 35,
+        "bottom_space_desktop": 35,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "16990086840502bf35": {
+      "type": "apps",
+      "blocks": {
+        "e6899dfd-c8ff-47bc-8e5c-d119bbfa3987": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "e6899dfd-c8ff-47bc-8e5c-d119bbfa3987"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "45fd96a8-56d8-4e35-b7f7-5fd1fd85f18d": {
+      "type": "abz_featured-blog",
+      "disabled": true,
+      "settings": {
+        "section_visibility": "always",
+        "heading": "Featured Blog here",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "button_text": "View all",
+        "button_link": "",
+        "blog": "news",
+        "post_limit": 2,
+        "show_author": false,
+        "show_date": true,
+        "show_excerpt": true,
+        "swipe_on_mobile": true,
+        "show_content_below": true,
+        "overlay_bg_color": "#000000",
+        "overlay_opacity": 10,
+        "grid_image_size": "auto",
+        "color_scheme": "primary",
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "enable_gradiant": false,
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "d8139314-794d-4413-89ee-353f005af117": {
+      "type": "abz_newsletter",
+      "disabled": true,
+      "settings": {
+        "heading": "Subscribe our newsletter",
+        "heading_size": "h3",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "description": "",
+        "placeholder": "Enter Your Email",
+        "stacked": false,
+        "section_visibility": "always",
+        "color_scheme": "tertiary",
+        "enable_gradiant": false,
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3": {
+      "type": "abz_text-with-icons",
+      "blocks": {
+        "template--21299324485926__c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3-column-1": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping",
+            "custom_svg": "<svg width=\"129\" height=\"129\" viewbox=\"0 0 129 129\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"64.5\" cy=\"64.5\" r=\"64\" stroke=\"#DDDDDD\"></circle>\n<g clip-path=\"url(#clip0_0_213)\">\n<path d=\"M89.4725 31.3784C88.948 31.1573 88.344 31.403 88.1228 31.9258C88.0699 32.0503 88.0421 32.184 88.0409 32.3192C88.0398 32.4544 88.0653 32.5886 88.1161 32.7139C88.1668 32.8393 88.2418 32.9534 88.3368 33.0497C88.4317 33.1461 88.5447 33.2227 88.6693 33.2754C93.4329 35.2861 96.9636 40.0477 96.9636 45.7969C96.9636 58.2543 81.4519 64.1909 73.1923 54.8053C68.5224 49.5427 68.5758 41.369 73.7588 36.186C76.8216 33.1216 80.9632 31.8227 84.9815 32.2991C85.5461 32.3637 86.0582 31.9631 86.1255 31.3977C86.1927 30.833 85.7891 30.321 85.2245 30.2536C71.7336 28.6504 62.8138 43.8481 70.5684 54.8054H48.9892C48.0269 54.8054 47.2461 55.5877 47.2461 56.5486V69.87L45.3118 73.6715C44.9454 74.3924 44.3344 74.9303 43.6096 75.2054C43.6096 73.6164 42.3637 72.5142 40.971 72.5142H36.9991C35.6292 72.5142 34.3592 73.5769 34.3592 75.2587H31.8059C30.2588 75.2587 29 76.5175 29 78.0657V79.3127C28.9999 79.4479 29.0265 79.5818 29.0782 79.7067C29.13 79.8316 29.2058 79.9451 29.3014 80.0407C29.3971 80.1363 29.5106 80.2121 29.6356 80.2638C29.7605 80.3155 29.8944 80.342 30.0296 80.3419C30.598 80.3419 31.0594 79.881 31.0594 79.3128V78.0657C31.0594 77.6528 31.3942 77.3181 31.8059 77.3181H34.3594V91.5716H31.8059C31.6079 91.5713 31.4182 91.4926 31.2782 91.3526C31.1383 91.2127 31.0596 91.0229 31.0594 90.8249V83.4309C31.0595 83.2957 31.0329 83.1617 30.9812 83.0367C30.9294 82.9118 30.8536 82.7982 30.7579 82.7026C30.6623 82.607 30.5488 82.5311 30.4238 82.4794C30.2988 82.4277 30.1649 82.4011 30.0296 82.4011C29.8943 82.4009 29.7603 82.4274 29.6353 82.4791C29.5103 82.5308 29.3967 82.6067 29.301 82.7024C29.2054 82.798 29.1296 82.9117 29.0779 83.0367C29.0262 83.1617 28.9998 83.2958 29 83.431V90.8251C29 92.3722 30.2588 93.6309 31.8059 93.6309H34.3594C34.3594 95.3138 35.6315 96.3765 36.9993 96.3765H40.971C42.1806 96.3765 43.2018 95.5584 43.5121 94.4465C44.7783 94.785 41.2905 94.651 87.3774 94.651C88.4386 94.651 89.3021 93.7875 89.3021 92.7263V60.2898C102.107 55.0491 102.3 36.811 89.4726 31.3785L89.4725 31.3784ZM41.5502 84.3852V93.7366C41.5502 94.0511 41.2853 94.3177 40.9708 94.3177H36.9991C36.6851 94.3177 36.4186 94.0511 36.4186 93.7366V75.1544C36.4186 74.8383 36.6851 74.5733 36.9991 74.5733H40.9708C41.2854 74.5733 41.5504 74.8383 41.5504 75.1544L41.5502 84.3852ZM60.3651 56.8641H68.2168V64.9434L65.1648 62.5555C64.9152 62.3605 64.6075 62.2546 64.2908 62.2546C63.9741 62.2546 63.6664 62.3605 63.4168 62.5555L60.3652 64.9432L60.3651 56.8641ZM60.1285 92.5861C43.7811 92.592 44.5768 92.6946 43.6095 92.3143V77.3505C45.1299 77.0152 46.3898 76.0876 47.2459 74.4101C47.4734 73.963 49.1701 70.629 49.5825 69.8193C49.9237 69.1374 51.8517 70.8613 50.9428 72.6461L49.9489 74.5997C49.2791 75.9167 50.2339 77.4745 51.7117 77.4745L64.6103 77.4702C65.2485 77.4702 65.7938 77.9936 65.7868 78.603C65.7799 79.2075 65.2811 79.7015 64.6744 79.7048H56.6255C56.3525 79.7048 56.0906 79.8132 55.8976 80.0063C55.7045 80.1994 55.596 80.4612 55.596 80.7343C55.596 80.8695 55.6226 81.0034 55.6743 81.1283C55.726 81.2533 55.8019 81.3668 55.8975 81.4624C55.9931 81.558 56.1066 81.6339 56.2315 81.6856C56.3564 81.7374 56.4903 81.764 56.6255 81.764L68.6441 81.7629C69.1626 81.7629 69.7036 82.2394 69.7874 82.7019C69.937 83.4484 69.499 83.9953 68.7279 83.9953C68.7247 83.9953 67.131 83.9964 56.5391 83.9964C56.4029 83.9948 56.2678 84.0203 56.1415 84.0713C56.0153 84.1223 55.9004 84.1979 55.8035 84.2937C55.7066 84.3894 55.6298 84.5034 55.5773 84.6291C55.5248 84.7548 55.4978 84.8896 55.4978 85.0258C55.4978 85.162 55.5248 85.2968 55.5773 85.4225C55.6298 85.5482 55.7066 85.6622 55.8035 85.7579C55.9004 85.8537 56.0153 85.9293 56.1415 85.9803C56.2678 86.0313 56.4029 86.0568 56.5391 86.0552C56.545 86.0552 66.8576 86.0552 66.8634 86.0558C67.8519 86.092 68.2889 87.2868 67.609 87.9623C67.5059 88.0664 67.3831 88.1489 67.2477 88.205C67.1124 88.2611 66.9673 88.2897 66.8208 88.2891C58.928 88.294 61.1176 88.2934 55.55 88.2934C54.9812 88.2934 54.5205 88.7543 54.5205 89.3231C54.5205 89.8918 54.9812 90.3527 55.55 90.3527C60.4532 90.3527 60.4805 90.2433 60.9189 90.6791C61.6163 91.3786 61.1207 92.5861 60.1285 92.5861ZM87.2426 92.5916H81.337V72.7957C81.3369 72.5226 81.2284 72.2608 81.0353 72.0677C80.8422 71.8746 80.5803 71.766 80.3073 71.7659C80.172 71.7659 80.0381 71.7925 79.9132 71.8442C79.7882 71.896 79.6747 71.9718 79.5791 72.0675C79.4835 72.1631 79.4077 72.2766 79.356 72.4016C79.3043 72.5266 79.2777 72.6605 79.2778 72.7957V92.5915H63.0952C63.3804 91.8433 63.3762 91.0567 63.1085 90.3512L66.8208 90.3485C69.107 90.3485 70.6419 88.0024 69.7325 85.9062C72.0209 85.198 72.5773 82.3434 70.924 80.6835C69.8121 79.5717 68.7027 79.7037 67.6416 79.7037C68.4373 77.6075 66.8314 75.4109 64.6103 75.4109L51.8447 75.4152L52.7783 73.5813C54.3441 70.5018 51.6386 67.1063 49.3053 67.6612V56.8641H58.3058V66.2582C58.3058 67.0407 58.9429 67.6772 59.7258 67.6772C60.3601 67.6772 60.2316 67.6618 64.2908 64.4867C68.2947 67.619 68.2071 67.6772 68.8556 67.6772C69.639 67.6772 70.2761 67.0407 70.2761 66.2582V56.8643H72.305C74.2698 58.8289 76.6649 60.2073 79.2776 60.9085V68.6775C79.2776 68.8127 79.3041 68.9466 79.3559 69.0716C79.4076 69.1965 79.4834 69.3101 79.579 69.4057C79.6747 69.5014 79.7882 69.5772 79.9131 69.6289C80.0381 69.6807 80.172 69.7073 80.3073 69.7072C80.5803 69.7071 80.8422 69.5986 81.0353 69.4055C81.2284 69.2124 81.3369 68.9505 81.337 68.6775V61.3176C83.2965 61.5714 85.3162 61.456 87.2426 60.9679V92.5916Z\" fill=\"white\"></path>\n<path d=\"M76.5744 45.61C76.4849 45.5087 76.3762 45.4261 76.2546 45.3668C76.1331 45.3076 76.001 45.2729 75.8661 45.2647C75.7311 45.2565 75.5958 45.275 75.468 45.3191C75.3402 45.3632 75.2223 45.4321 75.1211 45.5219C75.0198 45.6115 74.9372 45.7201 74.8779 45.8417C74.8187 45.9632 74.784 46.0953 74.7758 46.2303C74.7676 46.3653 74.7861 46.5005 74.8303 46.6283C74.8744 46.7562 74.9433 46.874 75.0331 46.9752L79.18 51.6571C79.979 52.5586 81.3853 52.557 82.1831 51.6614L91.7063 40.9734C92.085 40.5493 92.0472 39.8982 91.6225 39.52C91.4187 39.3384 91.151 39.2451 90.8784 39.2607C90.6058 39.2764 90.3505 39.3996 90.1688 39.6034L80.6834 50.2484L76.5744 45.61Z\" fill=\"white\"></path>\n</g>\n<defs>\n<clippath id=\"clip0_0_213\">\n<rect width=\"70\" height=\"70\" fill=\"white\" transform=\"translate(29 30)\"></rect>\n</clippath>\n</defs>\n</svg>",
+            "heading": "FREE SHIPPING",
+            "text_abz": ""
+          }
+        },
+        "template--21299324485926__c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3-column-2": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping",
+            "custom_svg": "<svg width=\"129\" height=\"129\" viewbox=\"0 0 129 129\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"64.5\" cy=\"64.5\" r=\"64\" stroke=\"#DDDDDD\"></circle>\n<path d=\"M64.0079 83.1471C63.8603 83.1467 63.7145 83.1143 63.5807 83.0521L45.4857 74.3488C45.3204 74.2668 45.1812 74.1406 45.0834 73.9841C44.9856 73.8277 44.9331 73.6471 44.9319 73.4627V53.9831C44.9314 53.8167 44.9732 53.6529 45.0534 53.5071C45.1336 53.3613 45.2496 53.2383 45.3905 53.1497C45.5313 53.0611 45.6924 53.0098 45.8585 53.0005C46.0247 52.9913 46.1904 53.0245 46.3402 53.0969L64.4352 61.8002C64.6004 61.8822 64.7397 62.0085 64.8375 62.1649C64.9353 62.3214 64.9877 62.5019 64.989 62.6864V82.166C64.989 82.3319 64.947 82.4952 64.8667 82.6405C64.7864 82.7858 64.6706 82.9084 64.5301 82.9967C64.3742 83.0962 64.1928 83.1484 64.0079 83.1471ZM46.8941 72.8613L63.0268 80.631V63.3114L46.8941 55.5418V72.8613Z\" fill=\"white\"></path>\n<path d=\"M64.0079 63.6597C63.871 63.6694 63.7336 63.6506 63.6044 63.6043L45.5094 54.901C45.3414 54.8228 45.1993 54.6982 45.0997 54.5419C45 54.3856 44.9471 54.2041 44.9471 54.0188C44.9471 53.8335 45 53.652 45.0997 53.4957C45.1993 53.3394 45.3414 53.2149 45.5094 53.1366L63.6044 44.3937C63.7367 44.3311 63.8813 44.2986 64.0277 44.2986C64.1741 44.2986 64.3187 44.3311 64.451 44.3937L82.5459 53.097C82.7124 53.1776 82.8527 53.3035 82.9506 53.4602C83.0486 53.617 83.1003 53.7983 83.0998 53.9832C83.0998 54.1669 83.0478 54.3469 82.9497 54.5024C82.8517 54.6578 82.7117 54.7823 82.5459 54.8614L64.3956 63.6043C64.2714 63.6486 64.1395 63.6675 64.0079 63.6597ZM48.1837 53.9753L64.0079 61.5946L79.8321 53.9911L64.0079 46.3639L48.1837 53.9753Z\" fill=\"white\"></path>\n<path d=\"M64.0079 83.1471C63.823 83.1485 63.6416 83.0963 63.4857 82.9968C63.3452 82.9084 63.2294 82.7859 63.1491 82.6406C63.0689 82.4953 63.0268 82.332 63.0268 82.166V62.6943C63.0263 62.5095 63.078 62.3282 63.1759 62.1714C63.2739 62.0146 63.4142 61.8887 63.5807 61.8082L81.6756 53.1049C81.8254 53.0324 81.9912 52.9993 82.1573 53.0085C82.3235 53.0177 82.4845 53.0691 82.6254 53.1577C82.7662 53.2463 82.8822 53.3693 82.9624 53.5151C83.0426 53.6609 83.0845 53.8246 83.084 53.991V73.4548C83.0845 73.6397 83.0328 73.821 82.9348 73.9777C82.8368 74.1345 82.6965 74.2604 82.5301 74.3409L64.3956 83.0522C64.2742 83.11 64.1423 83.1423 64.0079 83.1471ZM64.989 63.3115V80.6073L81.1218 72.8376V55.5418L64.989 63.3115ZM54.9565 59.308C54.7362 59.3057 54.5231 59.2294 54.3514 59.0913C54.1798 58.9532 54.0596 58.7614 54.0103 58.5466C53.9609 58.3319 53.9853 58.1069 54.0794 57.9077C54.1736 57.7085 54.332 57.5468 54.5292 57.4486L72.6321 48.7453C72.8662 48.6338 73.1349 48.6194 73.3795 48.7054C73.6242 48.7914 73.8248 48.9708 73.9376 49.2042C73.9939 49.32 74.0267 49.4457 74.0341 49.5742C74.0415 49.7027 74.0233 49.8313 73.9806 49.9528C73.9379 50.0742 73.8716 50.1859 73.7854 50.2815C73.6993 50.3771 73.595 50.4547 73.4787 50.5097L55.3837 59.213C55.2496 59.2745 55.104 59.3069 54.9565 59.308ZM57.3855 67.853C57.2378 67.8537 57.0918 67.8212 56.9582 67.7581L51.6176 65.1867C51.5013 65.1316 51.397 65.0541 51.3108 64.9584C51.2247 64.8628 51.1583 64.7511 51.1157 64.6297C51.073 64.5083 51.0548 64.3796 51.0622 64.2511C51.0696 64.1226 51.1024 63.9969 51.1587 63.8812C51.2715 63.6477 51.4721 63.4683 51.7167 63.3823C51.9614 63.2964 52.2301 63.3107 52.4642 63.4223L57.8048 65.9779C58.0015 66.0757 58.1597 66.2367 58.254 66.4351C58.3482 66.6335 58.3732 66.8578 58.3249 67.0721C58.2766 67.2864 58.1577 67.4783 57.9874 67.617C57.8171 67.7557 57.6051 67.8332 57.3855 67.8372V67.853Z\" fill=\"white\"></path>\n<path d=\"M34.2822 76.8412C34.0907 76.8443 33.9025 76.7912 33.7408 76.6886C33.5792 76.5859 33.451 76.4382 33.3723 76.2636C30.4026 68.9194 30.1724 60.7522 32.7239 53.2524C35.2753 45.7526 40.4382 39.4202 47.2705 35.4106C54.1028 31.401 62.149 29.9816 69.9408 31.4114C77.7327 32.8412 84.7507 37.0249 89.7143 43.199C89.8063 43.2973 89.8772 43.4135 89.9224 43.5403C89.9676 43.6672 89.9862 43.8019 89.9771 43.9363C89.9679 44.0706 89.9312 44.2016 89.8693 44.3212C89.8073 44.4407 89.7214 44.5462 89.6169 44.6312C89.5124 44.7161 89.3915 44.7786 89.2618 44.8147C89.1321 44.8509 88.9964 44.86 88.863 44.8414C88.7296 44.8229 88.6015 44.7771 88.4866 44.7069C88.3717 44.6366 88.2725 44.5435 88.1952 44.4333C83.5259 38.6434 76.9337 34.7217 69.6174 33.3815C62.3011 32.0412 54.7468 33.3713 48.3284 37.1301C41.9099 40.8888 37.0537 46.8263 34.643 53.8628C32.2322 60.8994 32.4271 68.5674 35.1921 75.4724C35.2515 75.6212 35.2736 75.7823 35.2564 75.9415C35.2393 76.1008 35.1834 76.2534 35.0936 76.3861C35.0039 76.5188 34.883 76.6275 34.7415 76.7027C34.6001 76.7779 34.4424 76.8173 34.2822 76.8175V76.8412ZM64.0475 96.9063C59.1073 96.918 54.2277 95.82 49.7688 93.6932C45.3098 91.5665 41.3856 88.4653 38.2857 84.6188C38.122 84.409 38.0484 84.1427 38.0811 83.8786C38.1137 83.6145 38.2499 83.3741 38.4598 83.2105C38.6696 83.0468 38.9359 82.9732 39.2 83.0058C39.4641 83.0385 39.7044 83.1747 39.8681 83.3845C44.5659 89.1676 51.1862 93.0689 58.5212 94.3767C65.8562 95.6845 73.4169 94.3116 79.8239 90.5085C86.2308 86.7054 91.0569 80.7256 93.4216 73.6602C95.7863 66.5947 95.532 58.9146 92.705 52.021C92.6519 51.9014 92.6232 51.7724 92.6207 51.6415C92.6182 51.5106 92.6419 51.3806 92.6904 51.259C92.7389 51.1374 92.8113 51.0268 92.9032 50.9336C92.9952 50.8404 93.1048 50.7666 93.2257 50.7164C93.3466 50.6663 93.4763 50.6408 93.6072 50.6416C93.7381 50.6423 93.8675 50.6693 93.9878 50.7208C94.1082 50.7723 94.217 50.8474 94.3078 50.9416C94.3987 51.0358 94.4698 51.1473 94.5169 51.2694C97.2125 57.867 97.7156 65.1564 95.9519 72.0617C94.1881 78.9671 90.2511 85.1224 84.7218 89.6193C78.8679 94.3437 71.57 96.916 64.0475 96.9063Z\" fill=\"white\"></path>\n<path d=\"M89.0338 44.8685H88.9231L79.7846 43.8795C79.5392 43.8363 79.3194 43.7013 79.1699 43.502C79.0204 43.3027 78.9523 43.0539 78.9795 42.8062C79.0067 42.5585 79.1271 42.3304 79.3163 42.1683C79.5055 42.0061 79.7493 41.922 79.9982 41.9331L88.1319 42.8113L89.0418 34.6461C89.0477 34.512 89.0811 34.3806 89.1399 34.2599C89.1986 34.1393 89.2815 34.032 89.3834 33.9446C89.4854 33.8573 89.6041 33.7918 89.7323 33.7522C89.8605 33.7126 89.9955 33.6997 90.1289 33.7144C90.2623 33.729 90.3913 33.7708 90.5079 33.8373C90.6245 33.9038 90.7262 33.9935 90.8067 34.1008C90.8872 34.2082 90.9449 34.3309 90.9761 34.4615C91.0073 34.592 91.0114 34.7275 90.9881 34.8597L90.007 43.9982C89.9776 44.2567 89.8467 44.4929 89.6431 44.6549C89.4709 44.7945 89.2555 44.87 89.0338 44.8685ZM38.0088 94.0421H37.898C37.6402 94.0142 37.4039 93.8853 37.2408 93.6837C37.0777 93.4821 37.0011 93.224 37.0277 92.9661L38.0167 83.8276C38.029 83.6999 38.0669 83.5759 38.128 83.4631C38.1892 83.3503 38.2724 83.2509 38.3727 83.1709C38.5753 83.0078 38.834 82.931 39.0927 82.9573L48.2312 83.9384C48.4755 83.982 48.6941 84.1165 48.8432 84.3148C48.9922 84.5132 49.0606 84.7606 49.0345 85.0073C49.0084 85.2541 48.8899 85.4818 48.7026 85.6446C48.5154 85.8074 48.2735 85.8932 48.0255 85.8848L39.8681 85.0065L38.9741 93.1718C38.9487 93.4103 38.8362 93.6311 38.658 93.7917C38.4799 93.9523 38.2487 94.0415 38.0088 94.0421Z\" fill=\"white\"></path>\n</svg>",
+            "heading": "EASY RETURNS",
+            "text_abz": ""
+          }
+        },
+        "template--21299324485926__c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3-column-3": {
+          "type": "column",
+          "settings": {
+            "icon": "shipping",
+            "custom_svg": "<svg width=\"129\" height=\"129\" viewbox=\"0 0 129 129\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"64.5\" cy=\"64.5\" r=\"64\" stroke=\"#DDDDDD\"></circle>\n<path d=\"M91.6691 49.7999C91.6552 49.7618 91.6367 49.7282 91.6193 49.6924C91.5745 49.6029 91.5182 49.5197 91.4517 49.445C91.4286 49.4172 91.4089 49.3895 91.3823 49.364C91.2892 49.2732 91.1813 49.1989 91.0632 49.1443L83.6597 45.8548C84.298 44.961 84.7281 43.9239 84.8009 42.7156C84.9778 39.8007 83.0515 37.2558 80.0071 36.384C77.6426 35.7064 74.9786 36.2371 72.3065 37.9172C71.4856 38.434 70.682 39.0561 69.9084 39.744L64.4694 37.3275C64.3217 37.2617 64.1617 37.2277 64 37.2277C63.8383 37.2277 63.6783 37.2617 63.5306 37.3275L58.1089 39.7359C55.6923 37.6119 52.8942 36.0938 50.0787 36.0938C49.3677 36.0938 48.6647 36.1909 47.9929 36.384C44.9473 37.2558 43.021 39.8007 43.1991 42.7167C43.2731 43.925 43.702 44.961 44.3403 45.8548L36.9368 49.1455C36.8187 49.2001 36.7108 49.2744 36.6177 49.3652C36.5922 49.3883 36.5714 49.4172 36.5483 49.445C36.4818 49.5197 36.4255 49.6029 36.3807 49.6924C36.3633 49.7282 36.346 49.7618 36.3309 49.7999C36.2798 49.9281 36.2524 50.0644 36.25 50.2023V80.9308C36.25 81.1545 36.3148 81.3734 36.4368 81.561C36.5587 81.7486 36.7324 81.8968 36.9368 81.9876L63.5306 93.8068C63.5467 93.8138 63.5652 93.8114 63.5837 93.8184C63.7179 93.8704 63.8566 93.9062 64 93.9062C64.1434 93.9062 64.2821 93.8704 64.4163 93.8172C64.4336 93.8114 64.4532 93.8137 64.4694 93.8057L91.0632 81.9876C91.2677 81.8969 91.4415 81.7488 91.5634 81.5611C91.6854 81.3735 91.7502 81.1546 91.75 80.9308V50.2023C91.7475 50.0644 91.7201 49.9281 91.6691 49.7999ZM62.8438 62.7731V90.9694L51.2812 85.831V57.6347L62.8438 62.7731ZM64 60.7554L53.011 55.8714L62.1477 51.902C62.1662 51.8951 62.1777 51.8789 62.1939 51.8696C62.6021 51.8997 63.0114 51.9321 63.4161 51.961L64.0208 51.998C64.0555 51.998 64.5828 51.961 64.5828 51.961C64.9874 51.9321 65.3979 51.8997 65.8061 51.8708C65.8234 51.8789 65.8338 51.8939 65.8523 51.902L74.989 55.8714L64 60.7554ZM77.8577 54.5972L70.5455 51.421C72.1793 51.2175 73.8131 50.9539 75.4249 50.5492C77.0009 50.1549 79.7955 49.2669 81.9277 47.6158L87.7471 50.2023L77.8577 54.5972ZM73.5379 39.8747C75.0919 38.8965 76.5557 38.4051 77.912 38.4051C78.4138 38.4051 78.9006 38.4722 79.37 38.6074C81.0154 39.078 82.6191 40.4875 82.4931 42.5745C82.3185 45.4339 78.4369 47.4111 74.8618 48.3072C71.8544 49.0611 68.6898 49.3455 65.5898 49.571C66.7345 46.6341 69.8021 42.2265 73.5379 39.8747ZM64 39.6481L68.1417 41.4888C66.4189 43.37 64.9643 45.5079 64.0092 47.447C63.0738 45.5091 61.6389 43.37 59.893 41.4738L64 39.6481ZM48.63 38.6074C49.1012 38.4733 49.5888 38.4056 50.0787 38.4062C55.0668 38.4062 60.7567 45.2223 62.4206 49.5722C59.3172 49.3455 56.1491 49.0634 53.137 48.3072C49.5642 47.4111 45.6815 45.4339 45.5058 42.5757C45.3797 40.4887 46.9835 39.078 48.63 38.6074ZM46.0723 47.6158C48.2056 49.2669 50.9991 50.1549 52.5751 50.5492C54.1869 50.9539 55.8207 51.2175 57.4545 51.421L50.1435 54.5972L40.2529 50.2023L46.0723 47.6158ZM38.5625 51.9818L48.9688 56.6068V84.8042L38.5625 80.1792V51.9818ZM65.1562 62.7731L76.7188 57.6335V85.8322L65.1562 90.9705V62.7731ZM79.0312 84.8042V56.6056L89.4375 51.9806V80.1792L79.0312 84.8042Z\" fill=\"white\"></path>\n</svg>",
+            "heading": "GIFT PACKAGE",
+            "text_abz": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324485926__c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3-column-1",
+        "template--21299324485926__c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3-column-2",
+        "template--21299324485926__c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3-column-3"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_left": true,
+        "icon_size": "large",
+        "section_visibility": "always",
+        "color_scheme": "quaternary",
+        "enable_gradiant": false,
+        "top_space_desktop": 30,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "3da8c6dc-33c1-412a-9abe-97476c5cc0da",
+    "668ee0f7-8866-4d85-8ea5-d97a83bdd4e8",
+    "33c985c5-f1ce-4dae-bcee-d73619df232c",
+    "af3f949b-c8c9-4b3f-b580-3156499bbda1",
+    "cb703f97-4a16-4d9e-930b-4fa6ae01aa95",
+    "e8f6d85f-851d-46d9-bb21-6d507b46ad54",
+    "0285cd80-471e-400c-9d49-e97b972df0e8",
+    "432244ab-7306-4146-ba4a-5cc5683bfaf4",
+    "95a0b38e-44ee-41f1-9710-84e1c8d748eb",
+    "3d4b0232-d1a6-4b19-ab8b-b1fba3e54657",
+    "8fba4603-5e1f-410b-9f54-f5f809fba649",
+    "16990086840502bf35",
+    "45fd96a8-56d8-4e35-b7f7-5fd1fd85f18d",
+    "d8139314-794d-4413-89ee-353f005af117",
+    "c4eb5923-0d01-45af-b2b8-e1ced4bbf3f3"
+  ]
+}

@@ -1,0 +1,317 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'account-rtl.css' | asset_url }}">
+  {{ 'account-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'account.css' | asset_url }}">
+  {{ 'account.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  <div class="account__form-box">
+    <div class="account__form-block" id="signup">
+      {%- if section.settings.marque_enable and section.settings.marque_text != blank -%}
+        <div class="account__main-heading-item" data-marquee-text>
+          {%- for i in (1..6) -%}
+            <h2 class="account__main-heading h1-large" data-marque-node>{{ section.settings.marque_text }}</h2>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <div class="container">
+        {%- if section.settings.marque_text != blank -%}
+          <h3 class="account__form-heading {{ section.settings.heading_size }}">
+            {{ section.settings.marque_text }}
+          </h3>
+        {%- endif -%}
+        {%- form 'create_customer', novalidate: 'novalidate', class: 'account__form' -%}
+          {%- if form.errors -%}
+            <div class="form-message__wrapper error">
+              <div class="form-message__title" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                  <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                {{ 'templates.contact.form.error_heading' | t }}
+              </div>
+              <ul class="list-unstyled">
+                {%- for field in form.errors -%}
+                  <li>
+                    {%- if field == 'form' -%}
+                      {{ form.errors.messages[field] }}
+                    {%- else -%}
+                      <a href="#Customer-{{ field }}">
+                        {{ form.errors.translated_fields[field] | capitalize }}
+                        {{ form.errors.messages[field] }}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+          <div class="form-group">
+            <label class="hidden" for="Customerfirst_name">{{ 'customer.register.first_name' | t }}</label>
+            <input
+              type="text"
+              class="form-control input-md"
+              name="customer[first_name]"
+              id="Customerfirst_name"
+              autocomplete="given-name"
+              autocapitalize="off"
+              {% if form.first_name %}
+                value="{{ form.first_name }}"
+              {% endif %}
+              placeholder="{{ 'customer.register.first_name' | t }}"
+            >
+          </div>
+          <div class="form-group">
+            <label class="hidden" for="Customer-last_name">{{ 'customer.register.last_name' | t }}</label>
+            <input
+              type="text"
+              class="form-control input-md"
+              name="customer[last_name]"
+              id="Customer-last_name"
+              autocomplete="family-name"
+              autocapitalize="off"
+              {% if form.last_name %}
+                value="{{ form.last_name }}"
+              {% endif %}
+              placeholder="{{ 'customer.register.last_name' | t }}"
+            >
+          </div>
+          <div class="form-group">
+            <label class="hidden" for="Customer-email">{{ 'customer.register.email' | t }}</label>
+            <input
+              type="email"
+              class="form-control input-md"
+              name="customer[email]"
+              id="Customer-email"
+              autocomplete="email"
+              autocapitalize="off"
+              {% if form.email %}
+                value="{{ form.email }}"
+              {% endif %}
+              spellcheck="false"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="Customer-Email-error"
+              {% endif %}
+              placeholder="{{ 'customer.register.email' | t }}"
+              pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)*[a-zA-Z]{2,}))$"
+            >
+          </div>
+          <div class="form-group">
+            <label class="hidden" for="Customer-password">{{ 'customer.register.password' | t }}</label>
+            <input
+              type="password"
+              class="form-control input-md"
+              name="customer[password]"
+              id="Customer-password"
+              autocapitalize="off"
+              {% if form.errors contains 'password' %}
+                aria-invalid="true"
+                aria-describedby="signUpForm-password-error"
+              {% endif %}
+              placeholder="{{ 'customer.register.password' | t }}"
+            >
+          </div>
+          <button class="button med-btn btn-block icon-btn right-icon {{ settings.button_style }}">
+            {% assign buttonText = 'customer.register.submit' | t %}
+            {% render 'button-style', buttonText: buttonText %}
+          </button>
+          <div class="accpunt__form-text text-center">
+            <p class="text-small">
+              {{ 'customer.register.login_heading' | t }}
+              <a href="{{ routes.account_login_url }}" class="hyperlink">{{ 'customer.register.login_button' | t }}</a>
+            </p>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} .section-wrapper {
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+  #shopify-section-{{ section.id }} .account__form-heading{
+    padding-bottom:{{ section.settings.heading_space_desktop }}px;
+  }
+  #shopify-section-{{ section.id }}{
+    --marque-opacity: {{ section.settings.marque_opacity | divided_by: 100.0 }};
+  }
+  @media screen and (max-width:767px){
+    #shopify-section-{{ section.id }} .section-wrapper {
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .account__form-heading{
+      padding-bottom:{{ section.settings.heading_space_mobile }}px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.main_register.name",
+  "class": "section account-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "marque_enable",
+      "default": true,
+      "label": "t:sections.main_register.settings.enable_marquee.label"
+    },
+    {
+      "type": "range",
+      "id": "marque_opacity",
+      "label": "t:common.marquee_text_opacity.label",
+      "default": 10,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "marque_text",
+      "default": "Create an account",
+      "label": "t:common.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:common.heading_size.label",
+      "default": "h5",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.heading_size.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_space_desktop",
+      "label": "t:common.header.heading_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_space_mobile",
+      "label": "t:common.header.heading_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gradiant",
+      "label": "t:common.gradient.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{% if settings.enableScrollToTop %}
+  <button
+    class="scroll__top pos-{{ settings.scrollToTop_position }}"
+    onclick="topFunction()"
+    id="scroll__top"
+    title="Go to top"
+    style="--vertical-position:{{ settings.scrollToTop_position_vertical }}px"
+  >
+    <span class="scroll__top-text">
+      {% if settings.custom_scrollToTop_svg != blank %}
+        {{ settings.custom_scrollToTop_svg }}
+      {% else %}
+        <svg viewBox="0 0 249.91 285.16">
+          <g><path d="m123.43,285.16c6.18,0,11.2-5.02,11.2-11.2V36.73s96.15,96.15,96.15,96.15c2.19,2.18,5.05,3.28,7.92,3.28s5.73-1.09,7.93-3.28c4.38-4.38,4.38-11.46,0-15.84L132.88,3.28c-4.38-4.38-11.46-4.38-15.84,0L3.28,117.03c-4.38,4.38-4.38,11.46,0,15.84,4.38,4.38,11.46,4.38,15.84,0L112.23,39.76v234.2c0,6.18,5.02,11.2,11.2,11.2h0Z"></path></g>
+        </svg>
+      {% endif %}
+    </span>
+  </button>
+  <script>
+    //Get the button
+    var mybutton = document.getElementById('scroll__top');
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 900 || document.documentElement.scrollTop > 900) {
+        mybutton.classList.add('show');
+      } else {
+        mybutton.classList.remove('show');
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      jQuery('html, body').animate({ scrollTop: 0 });
+    }
+  </script>
+{% endif %}

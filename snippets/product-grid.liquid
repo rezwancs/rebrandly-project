@@ -1,0 +1,357 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign productImageSize = '450x'
+  if imageSize
+    assign productImageSize = imageSize
+  endif
+  if gridImageSize == 'landscape'
+    assign productImageRatio = 'var(--img-landscape)'
+  elsif gridImageSize == 'square'
+    assign productImageRatio = 'var(--img-square)'
+  elsif gridImageSize == 'portrait'
+    assign productImageRatio = 'var(--img-portrait)'
+  else
+    if product.featured_media != blank
+      assign productImageRatio = 1 | divided_by: product.featured_media.preview_image.aspect_ratio | times: 100 | append: '%'
+    else
+      assign productImageRatio = 100 | append: '%'
+    endif
+  endif
+  assign current = current | default: 1
+-%}
+{% capture productColorSwatchs %}
+    {% if settings.show_swatches%}
+      {%- for option in product.options_with_values -%}
+                  {%- liquid
+                    assign colorOptions = settings.color_name | downcase
+                    assign downOption = option.name | downcase
+                  -%}
+                  {% if colorOptions contains downOption %}
+                    <ul class="list-unstyled product-loop-variants circle color_option image_option" tabindex="-1">
+                      {%- for value in option.values limit: 3 -%}
+                        {% liquid 
+                          if forloop.first
+                          endif
+                        assign variantOption = 'option' | append: option.position 
+                        assign colorVariant = product.variants | where: variantOption, value | first
+                        assign variantValue = product.variants | where: variantOption, value | compact: 'featured_media' | first
+                        if product.url contains '?'
+                          assign productUrl =  product.url | split : '&variant=' | first | append:'&variant=' | append: colorVariant.id
+                        else
+                          assign productUrl =  product.url | append:'?variant=' | append: colorVariant.id
+                        endif
+                        -%}
+                        <li class="variant_option" grid-color-option tabindex="-1" data-url="{{ productUrl }}">
+                          <label class="hidden" for="product-{{ product.id }}_option-{{ forloop.index }}-{{ section.id }}-{{ index }}-{{ block.id }}-{{  value | handle }}-[[option_location]]">{{ value | escape }}</label>
+                          <input
+                            class="productOption"
+                            id="product-{{ product.id }}_option-{{ forloop.index }}-{{ section.id }}-{{ index }}-{{ block.id }}-{{  value | handle }}-[[option_location]]"
+                            type="radio"
+                            name="option-{{ forloop.index }}"
+                            value="{{ value | escape }}"
+                            title="{{ value | escape }}"
+                            tabindex="-1"
+                          >
+                          <span
+                            class="option"
+                            {% if variantValue and settings.show_variant_image %}
+                              style="background-image:url({{ variantValue.featured_media.preview_image | image_url: width: 100 }});"
+                            {% else %}
+                              data-color="{{ value }}"
+                              style="background-color:{{ value }};"
+                            {% endif %}
+                          ></span>
+                          {% render 'product-card-color-media',
+                            product: product,
+                            variant: variantValue,
+                            color: value
+                          %}
+                        </li>
+                      {% endfor %}
+                      {% if option.values.size > 3 %}
+                        <li class="variant_option more" tabindex="-1">
+                          <a href="{{ product.url | within : collection }}" class="unstyled-link option" tabindex="-1"
+                            >+{{ option.values.size | minus: 3 -}}
+                          </a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  {% endif %}
+                {% endfor %}
+      {% endif %}        
+{% endcapture %}
+<div class="product-card-item" data-product-grid>
+  <div
+    class="product-card {% if settings.border_enabled %}border-enabled {% endif %} box-shadow-{{ settings.show_product_grid_shadow }}{% if product != blank %} hover-options{% endif %}"
+    {% if settings.enable_animations %}
+      aria-hidden="true"
+      data-aos="fade-up"
+      data-aos-easing="ease"
+      data-aos-offset="0"
+      data-aos-duration="500"
+      data-aos-delay="{{ index | times: 100 }}"
+    {% endif %}
+  >
+    <div
+      class="product-card-img{% if settings.pass_through_product_images %} pass-through-color{% endif %} {% if product != blank and product.media.size > 1%}on-hover-img{% endif %}"
+      tabindex="-1"
+    >
+      <a
+        class="unstyled-link product-img"
+        {% if product == blank %}
+          role="link"
+          aria-disabled="true"
+        {% else %}
+          a
+          href="{{ product.url | within: collection }}"
+        {% endif %}
+        style="--img-ratio:{{ productImageRatio }}"
+        tabindex="-1"
+        aria-label="{{ product.title | escape }} "
+      >
+        {% if product != blank %}
+          <div
+            class="image-wrapper"
+            data-main-image
+          >
+            {%- if product.featured_media != blank -%}
+              {%- render 'lazy-image',
+                image: product.featured_media.preview_image,
+                class: '',
+                width: productImageSize
+              -%}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+          {% if settings.grid_on_hover == 'second_image' %}
+            <div class="product-second-img" data-more-images>
+              {% for media in product.media limit: 5 %}
+                {% if media.id != product.featured_media.id %}
+                  {%- render 'lazy-image', image: media.preview_image, class: '', width: productImageSize -%}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% elsif settings.grid_on_hover == 'carousel' %}
+            <div
+              class="product__slider"
+              data-more-images
+            >
+              {% for media in product.media limit: 6 %}
+                {% if media.id != product.featured_media.id %}
+                  <div
+                    id="productGrid-{{ section.id }}-{{ product.id }}-{{ forloop.index }}"
+                    class="product-slider__item{% if settings.pass_through_product_images %} pass-through-color{% endif %}"
+                  >
+                    {%- render 'lazy-image', image: media.preview_image, class: '', width: productImageSize -%}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% else %}
+          <div
+            class="image-wrapper"
+          >
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+      </a>
+      {% if product != blank %}
+        {% unless hideOptions == true %}
+          {% liquid
+            assign onlyQuickview = true
+            if productColorSwatchs != blank
+              assign onlyQuickview = false
+            endif
+          %}
+
+          {% capture addtocartButton %}
+          {% if settings.show_atc_button%}
+            {%- if product.has_only_default_variant or product.variants.size == 1 -%}
+                {% if current_variant.available %}
+                  {%- form 'product',
+                    product,
+                    id: product_form_id,
+                    class: 'form main-product-form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+                  -%}
+                    <input type="hidden" name="id" value="{{ current_variant.id }}">
+                    <button
+                      class="product-quickView cart-action-link"
+                      {% if settings.enable_cartdrawer %}data-add-to-cart{% endif %}
+                      tabindex="-1"
+                      aria-label="Product quick view"
+                    >
+                      <span>
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                          <g clip-path="url(#clip0_18_82)">
+                          <path d="M35.9643 33.6315L34.5024 20.3137C34.4668 19.9297 34.2885 19.5806 33.9676 19.3013C33.6645 19.0395 33.2366 18.8824 32.9157 18.9173H30.705V18.6031C30.705 17.1195 30.0989 15.6708 29.0292 14.6235C26.8898 12.4591 23.1102 12.4591 20.953 14.6061C19.8655 15.6708 19.2771 17.0846 19.2771 18.5857V18.9173H17.1378C16.7277 18.8824 16.3355 19.0395 15.9968 19.3188C15.6937 19.5806 15.5332 19.9471 15.4976 20.2962L14 33.6664C14 33.7886 14 33.9282 14 33.9631C14 34.7661 14.3209 35.5341 14.9092 36.1101C15.4976 36.6861 16.282 37.0002 17.1021 37.0002H33.2188C33.6288 36.9479 34.0211 36.8257 34.3776 36.6337C34.7342 36.4417 35.0373 36.1799 35.3047 35.8657C35.5543 35.5515 35.7504 35.2024 35.8574 34.8184C35.9643 34.4344 36 34.033 35.9643 33.6315ZM21.8444 18.5857C21.8444 17.7653 22.1831 16.9624 22.7715 16.3864C23.3598 15.793 24.1621 15.4788 25 15.4788C25.8379 15.4788 26.6224 15.793 27.2285 16.3864C27.8169 16.9624 28.1556 17.7653 28.1556 18.5857V18.8999H21.8622V18.5857H21.8444ZM33.3793 34.1202C33.3793 34.1202 33.3258 34.2599 33.2901 34.2948C33.2366 34.3471 33.1831 34.3995 33.1297 34.4344C33.0762 34.4693 33.0049 34.4868 33.0762 34.4868H17.1021C16.9595 34.4868 16.8347 34.4344 16.7277 34.3471C16.6207 34.2424 16.5673 34.1028 16.5673 33.9108L17.9579 21.4482H29.3857C29.3857 21.4482 29.457 21.4482 29.4927 21.4482H32.0421L33.4149 33.9282C33.4149 33.9282 33.4149 34.0679 33.4149 34.1377L33.3793 34.1202Z" fill="currentColor"/>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0_18_82">
+                          <rect width="22" height="24" fill="currentColor" transform="translate(14 13)"/>
+                          </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </button>
+                  {% endform %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+      {% endcapture %}
+          {% liquid
+            assign colorSwatchStatus = false
+            if productColorSwatchs != blank
+              if settings.color_swatch_position_desktop == 'above' or settings.color_swatch_position_mobile == 'above'
+                assign colorSwatchStatus = true
+              endif
+            endif
+          %}
+          {% if settings.grid_on_hover == 'carousel'
+            and product.media.size > 2
+            and settings.product_grid_carousel_navigation == 'arrows'
+          %}
+            <div class="slider_nav navigation-arrows">
+              <ul class="list-unstyled" data-slider-nav>
+                <li class="disabled" data-prev-slide data-prev-next-slide tabindex="-1">
+                  <span class="slider-arrow prev">
+                    <svg width="9" height="15" viewBox="0 0 9 15" fill="none">
+                      <path d="M8.10318 13.7984L1.64444 7.33968L8.10318 0.880952L7.28095 -3.1826e-07L3.20828e-07 7.33968L7.28095 14.6794L8.10318 13.7984Z" fill="currentColor"/>
+                    </svg>
+                  </span>
+                </li>
+                {% assign sliderCount = 1 %}
+                {% for media in product.media limit: 6 %}
+                  {% if media.id != product.featured_media.id %}
+                    <li
+                      class="{% if sliderCount == 1 %}active{% endif %} hidden"
+                      data-index="productGrid-{{ section.id }}-{{ product.id }}-{{ forloop.index }}"
+                      data-grid-slide-change
+                    >
+                      <span></span>
+                    </li>
+                    {% assign sliderCount = sliderCount | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+                <li data-next-slide data-prev-next-slide tabindex="-1">
+                  <span class="slider-arrow next">
+                    <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0.896824 13.7984L7.35556 7.33968L0.896825 0.880952L1.71905 -3.1826e-07L9 7.33968L1.71905 14.6794L0.896824 13.7984Z" fill="currentColor"/>
+                    </svg>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          {% endif %}
+          <div
+            class="product-hover-options no-js-hidden{% if onlyQuickview %} no-variant{% endif %} {% if settings.show_quickview == false and addtocartButton == blank and colorSwatchStatus == false %}no-options{% endif%} color-swatch-desktop-{% if settings.color_swatch_position_desktop == 'above' %}true{% else %}false{% endif %} color-swatch-mobile-{% if settings.color_swatch_position_mobile == 'above' %}true{% else %}false{% endif %}"
+            tabindex="-1"
+          >
+            {% if settings.grid_on_hover == 'carousel'
+              and product.media.size > 2
+              and settings.product_grid_carousel_navigation == 'tiles'
+            %}
+              <div class="slider_nav navigation-tiles">
+                <ul class="list-unstyled" data-slider-nav>
+                  {% assign sliderCount = 1 %}
+                  {% for media in product.media limit: 6 %}
+                    {% if media.id != product.featured_media.id %}
+                      <li
+                        class="{% if sliderCount == 1 %}active{% endif %}"
+                        data-index="productGrid-{{ section.id }}-{{ product.id }}-{{ forloop.index }}"
+                        data-grid-slide-change
+                      >
+                        <span></span>
+                      </li>
+                      {% assign sliderCount = sliderCount | plus: 1 %}
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+            {% if settings.show_quickview or addtocartButton != blank or colorSwatchStatus %}
+              <div class="product-options" tabindex="-1">
+                {% if colorSwatchStatus %}
+                  <div class="{% if settings.color_swatch_position_desktop == 'above' and settings.color_swatch_position_mobile == 'below' %}d-none d-md-block{% elsif settings.color_swatch_position_desktop == 'below' and settings.color_swatch_position_mobile == 'above' %}d-block d-md-none{% endif %}">
+                    {{ productColorSwatchs | replace: '[[option_location]]', 'above' }}
+                  </div>
+                {% endif %}
+                {% if settings.show_quickview or addtocartButton != blank %}
+                  <div class="product-view-option">
+                    {% if settings.show_quickview %}
+                      <a
+                        {% if product == blank %}
+                          role="link"
+                          aria-disabled="true"
+                        {% else %}
+                          href="{{ product.url | within: collection }}"
+                        {% endif %}
+                        class="unstyled-link product-quickView quickView-action-link"
+                        tabindex="-1"
+                        aria-label="{{ product.tite }} quick view link"
+                      >
+                        <span>
+                          <img src="{{ 'quickview.gif' | asset_url }}" width="44" height="44" alt="{{ product.title }}">
+                        </span>
+                      </a>
+                    {% endif %}
+                    {% if addtocartButton != blank %}
+                      {{ addtocartButton }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endunless %}
+      {% endif %}
+      {%- if product.available == false -%}
+        {% if product.tags contains 'sd_comingsoon'
+          and product.selected_or_first_available_variant.inventory_quantity <= 0
+          and product.selected_or_first_available_variant.inventory_policy == 'deny'
+        %}
+          <div class="product-badge coming-soon">Coming soon</div>
+        {% else %}
+          <div class="product-badge sold-badge">
+            {{ 'products.product.sold_out' | t }}
+          </div>
+        {% endif %}
+      {%- else -%}
+        {% if product.tags contains 'sd_preorder'
+          and product.selected_or_first_available_variant.inventory_quantity <= 0
+          and product.selected_or_first_available_variant.inventory_policy == 'continue'
+        %}
+          <div class="product-badge preorder-badge">
+            {{ 'products.product.preorder' | t }}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      {% if product.available %}
+        {%- if product.compare_at_price_min > product.price_min -%}
+          {% if settings.show_savings %}
+            {% assign offText = 'products.product.off' | t %}
+            <span class="product-percent-off">
+              {{-
+                product.compare_at_price_min
+                | minus: product.price_min
+                | times: 100
+                | divided_by: product.compare_at_price_min
+                | append: '% '
+                | append: offText
+              -}}
+            </span>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    {% render 'product-info',
+      product: product,
+      current_variant: current_variant,
+      productColorSwatchs: productColorSwatchs
+    %}
+  </div>
+</div>

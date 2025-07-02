@@ -1,0 +1,22 @@
+{% if section.settings.banner_image != blank %}
+  <div class="page-banner">
+    {%- render 'lazy-image', image: section.settings.banner_image, class: 'page-banner__img' -%}
+  </div>
+{% endif %}
+<div class="page-content">
+  <div class="container-sm">
+    <div class="page-content__text">
+      <h4 class="page-content__title">
+        {% if section.settings.heading != blank %}
+          {{ section.settings.heading }}
+        {% else %}
+          {{ 'customer.account.title' | t -}}
+        {%- endif %}
+      </h4>
+      <a class="unstyled-link button xsmall-btn icon-btn right-icon {{ settings.button_style }}" href="{{ routes.account_logout_url }}">
+        {% assign buttonText = 'customer.log_out' | t %}
+        {% render 'button-style', buttonText:buttonText %}
+      </a>
+    </div>
+  </div>
+</div>

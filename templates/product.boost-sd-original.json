@@ -1,0 +1,411 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "5bb9d774-d2f1-4969-a7f7-b2b5edeef118": {
+          "type": "title",
+          "settings": {}
+        },
+        "0c253e61-5816-4cf1-9699-b86e3806e62f": {
+          "type": "sku",
+          "settings": {}
+        },
+        "a3211a74-8d27-4cd1-955e-c504fbe100b0": {
+          "type": "review_rating",
+          "settings": {}
+        },
+        "06062878-216f-4e9d-acce-a6b0d9633dd4": {
+          "type": "price",
+          "settings": {
+            "hide_shipping_content": false
+          }
+        },
+        "624cc141-8549-41a6-9108-3962beac8f48": {
+          "type": "sizeChart",
+          "settings": {
+            "size_chart": "contact"
+          }
+        },
+        "6ae321bc-c519-451b-9cf8-565ebc9e89d0": {
+          "type": "variant",
+          "settings": {}
+        },
+        "8ce38ec0-4227-49aa-8753-ecd32a5f0c83": {
+          "type": "button",
+          "settings": {
+            "dynamic_checkout_btn": true,
+            "enable_sticky_atc": true,
+            "enable_quantity": true,
+            "show_recipient_form": false
+          }
+        },
+        "58f77b2c-25e0-4c9f-a345-2716ee8e4b49": {
+          "type": "pickup",
+          "settings": {}
+        },
+        "31769def-e890-4623-975b-7cb9fa1ef753": {
+          "type": "icon_text_date",
+          "settings": {
+            "icon-date": "shopify://shop_images/Group_39933.svg",
+            "icon-text-date": "Estimated Delivery- 1-2 working days"
+          }
+        },
+        "6249094e-19ff-44f6-a87c-532966d119f0": {
+          "type": "icon_text",
+          "settings": {
+            "icon": "shopify://shop_images/Group.svg",
+            "icon-text": "30 days easy return policy"
+          }
+        },
+        "16134641-e2f7-4fa3-b208-a807a2190c55": {
+          "type": "social-icons",
+          "settings": {}
+        },
+        "a60265c3-3f9e-4325-84a6-b102d88c6615": {
+          "type": "complementary_products",
+          "settings": {
+            "heading": "Pairs well with",
+            "products_count": 2,
+            "right_side": true
+          }
+        }
+      },
+      "block_order": [
+        "5bb9d774-d2f1-4969-a7f7-b2b5edeef118",
+        "0c253e61-5816-4cf1-9699-b86e3806e62f",
+        "a3211a74-8d27-4cd1-955e-c504fbe100b0",
+        "06062878-216f-4e9d-acce-a6b0d9633dd4",
+        "624cc141-8549-41a6-9108-3962beac8f48",
+        "6ae321bc-c519-451b-9cf8-565ebc9e89d0",
+        "8ce38ec0-4227-49aa-8753-ecd32a5f0c83",
+        "58f77b2c-25e0-4c9f-a345-2716ee8e4b49",
+        "31769def-e890-4623-975b-7cb9fa1ef753",
+        "6249094e-19ff-44f6-a87c-532966d119f0",
+        "16134641-e2f7-4fa3-b208-a807a2190c55",
+        "a60265c3-3f9e-4325-84a6-b102d88c6615"
+      ],
+      "settings": {
+        "gallery_style": "grid",
+        "fullwidth_carousel": true,
+        "free_day": "{{ product.metafields.custom.order_ships_to.value }}",
+        "free_day1": "{{ product.metafields.custom.order_ship.value }}",
+        "enable_first_big_list": false,
+        "enable_fixed_height": false,
+        "media_height_desktop": "800px",
+        "media_height_mobile": "400px",
+        "media_fit": "cover",
+        "thumbs_position": "center",
+        "content_style": "accordion",
+        "show_description": true,
+        "description_heading": "Description",
+        "custom_heading_1": "",
+        "custom_description_1": "",
+        "custom_heading_2": "",
+        "custom_description_2": "",
+        "custom_heading_3": "",
+        "custom_description_3": "",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 20
+      }
+    },
+    "e592b7f2-e584-403e-9cf7-d25b37231b2e": {
+      "type": "abz_marquee-text",
+      "blocks": {
+        "template--21299324715302__e592b7f2-e584-403e-9cf7-d25b37231b2e-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "MEGA OFFERS <strong>WINTER SALE </strong>NEW COLLECTION <strong>WINTER SALE</strong>",
+            "outline_thickness": "1px",
+            "enable_highlight": true,
+            "enable_text_shadow": false,
+            "text_gap": 15,
+            "scrolling_speed": 15,
+            "scrolling_speed_mobile": 15,
+            "font_family": "heading",
+            "desktop_font": 112,
+            "mobile_font": 40,
+            "color": "",
+            "highlight_color": "",
+            "shadow_color": "",
+            "custom_icon": "",
+            "small_icon": false,
+            "icon_color": "",
+            "text_icon_gap": 15,
+            "default_color": false
+          }
+        },
+        "7a3870dd-9e79-412e-9fff-8a132cefc090": {
+          "type": "text",
+          "settings": {
+            "text": "BRANDS OFFER BIGGEST",
+            "outline_thickness": "1px",
+            "enable_highlight": false,
+            "enable_text_shadow": false,
+            "text_gap": 15,
+            "scrolling_speed": 15,
+            "scrolling_speed_mobile": 15,
+            "font_family": "heading",
+            "desktop_font": 36,
+            "mobile_font": 28,
+            "color": "#d3000b",
+            "highlight_color": "",
+            "shadow_color": "",
+            "custom_icon": "",
+            "small_icon": false,
+            "icon_color": "",
+            "text_icon_gap": 15,
+            "default_color": false
+          }
+        },
+        "ece4ff98-9ba1-411f-b890-fbaf0c2a4203": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>LUXURY FASHION </strong>BRANDS NEW STYLE",
+            "outline_thickness": "1px",
+            "enable_highlight": true,
+            "enable_text_shadow": false,
+            "text_gap": 15,
+            "scrolling_speed": 15,
+            "scrolling_speed_mobile": 15,
+            "font_family": "heading",
+            "desktop_font": 112,
+            "mobile_font": 40,
+            "color": "",
+            "highlight_color": "",
+            "shadow_color": "",
+            "custom_icon": "",
+            "small_icon": false,
+            "icon_color": "",
+            "text_icon_gap": 15,
+            "default_color": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324715302__e592b7f2-e584-403e-9cf7-d25b37231b2e-text-1",
+        "7a3870dd-9e79-412e-9fff-8a132cefc090",
+        "ece4ff98-9ba1-411f-b890-fbaf0c2a4203"
+      ],
+      "settings": {
+        "enable_autoplay": true,
+        "direction": "rtl",
+        "text_angle": -5,
+        "min_height_desktop": 400,
+        "min_height_mobile": 200,
+        "section_visibility": "always",
+        "bgcolor": "",
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "top_space_desktop": 100,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "0e9b6e9e-8679-4450-a68e-fa13da34613f": {
+      "type": "multi-image-with-text",
+      "blocks": {
+        "template--18467116613954__0e9b6e9e-8679-4450-a68e-fa13da34613f-1680074369a4865bee-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Heading here"
+          }
+        },
+        "template--18467116613954__0e9b6e9e-8679-4450-a68e-fa13da34613f-1680074369a4865bee-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this section to welcome customers to your store, say a bit about your brand, or share news and seasonal promotions.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--18467116613954__0e9b6e9e-8679-4450-a68e-fa13da34613f-1680074369a4865bee-0",
+        "template--18467116613954__0e9b6e9e-8679-4450-a68e-fa13da34613f-1680074369a4865bee-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "border_radius_range": 0,
+        "section_visibility": "always",
+        "heading": "Multi image with text",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h6",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "text_position": "center",
+        "text_alignment": "flex-start_left",
+        "content_width": "medium",
+        "enable_background_color": false,
+        "image_position": "left",
+        "full_width_image": false,
+        "border_main_image": false,
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "border_color": "#dddddd",
+        "content_background": "",
+        "color_scheme": "secondary",
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You May Also Like",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "products_count": 8,
+        "grid_image_size": "auto",
+        "grid_image_fit": "cover",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "8ffc0d32-0b8d-4db8-830f-706381cf3105": {
+      "type": "abz_multi-image-with-text",
+      "blocks": {
+        "template--21299324715302__8ffc0d32-0b8d-4db8-830f-706381cf3105-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rebrand’s Buckle Back White Cap"
+          }
+        },
+        "template--21299324715302__8ffc0d32-0b8d-4db8-830f-706381cf3105-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At Rebrand, we specialize in white labeling, empowering businesses to put their unique stamp on products and services.</p><p>With our expertise in design, marketing, and innovation, we help clients create memorable, custom-branded experiences that drive growth.</p>"
+          }
+        },
+        "c3b91b39-236b-436f-9d69-5e8e8173298b": {
+          "type": "button",
+          "settings": {
+            "text": "READ MORE",
+            "link": "#",
+            "size": "med",
+            "button_style": "main",
+            "button_as_link": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324715302__8ffc0d32-0b8d-4db8-830f-706381cf3105-heading-1",
+        "template--21299324715302__8ffc0d32-0b8d-4db8-830f-706381cf3105-text-1",
+        "c3b91b39-236b-436f-9d69-5e8e8173298b"
+      ],
+      "settings": {
+        "border_radius_range": 0,
+        "section_visibility": "always",
+        "heading": "",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h6",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "text_position": "center",
+        "text_alignment": "flex-start_left",
+        "content_width": "medium",
+        "enable_background_color": false,
+        "image_position": "left",
+        "main_image": "shopify://shop_images/Rectangle_1358_1.png",
+        "full_width_image": false,
+        "border_main_image": true,
+        "second_image": "shopify://shop_images/Rectangle_1357_1.png",
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "border_color": "#dddddd",
+        "content_background": "",
+        "color_scheme": "tertiary",
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "b025e2d9-f9ac-402a-be72-71c298697900": {
+      "type": "abz_marquee-text",
+      "blocks": {
+        "template--21299324715302__b025e2d9-f9ac-402a-be72-71c298697900-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "MEGA OFFERS <strong>WINTER SALE </strong>NEW COLLECTION <strong>WINTER SALE</strong>",
+            "outline_thickness": "1px",
+            "enable_highlight": true,
+            "enable_text_shadow": false,
+            "text_gap": 15,
+            "scrolling_speed": 15,
+            "scrolling_speed_mobile": 15,
+            "font_family": "heading",
+            "desktop_font": 100,
+            "mobile_font": 40,
+            "color": "",
+            "highlight_color": "",
+            "shadow_color": "",
+            "custom_icon": "",
+            "small_icon": false,
+            "icon_color": "",
+            "text_icon_gap": 15,
+            "default_color": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324715302__b025e2d9-f9ac-402a-be72-71c298697900-text-1"
+      ],
+      "settings": {
+        "enable_autoplay": true,
+        "direction": "rtl",
+        "text_angle": 0,
+        "min_height_desktop": 400,
+        "min_height_mobile": 200,
+        "section_visibility": "always",
+        "bgcolor": "#981b22",
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "top_space_desktop": 30,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "e592b7f2-e584-403e-9cf7-d25b37231b2e",
+    "0e9b6e9e-8679-4450-a68e-fa13da34613f",
+    "related-products",
+    "8ffc0d32-0b8d-4db8-830f-706381cf3105",
+    "b025e2d9-f9ac-402a-be72-71c298697900"
+  ]
+}

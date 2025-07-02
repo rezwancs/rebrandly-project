@@ -1,0 +1,149 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "banner_height_desktop": "550px",
+        "banner_height_mobile": "350px",
+        "bannerbgcolor": "#222222",
+        "bgcoloropacity": "#000000",
+        "textcolor": "#807E7E",
+        "overlay_opacity": 50
+      }
+    },
+    "main": {
+      "type": "contact-page-template",
+      "settings": {
+        "section_visibility": "always",
+        "contact_heading": "<p>Get in touch</p>",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h3",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "image_size": "auto",
+        "image_position": "left",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "6dd189af-1539-4ac6-a16c-e0d4e1f02303": {
+      "type": "map",
+      "disabled": true,
+      "settings": {
+        "social_heading": "Map",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "mapaddress": "",
+        "map_style": "roadmap",
+        "contact_heading": "",
+        "phone_heading": "",
+        "phone_number": "",
+        "email_heading": "",
+        "email": "",
+        "location_heading": "",
+        "location": "",
+        "show_social_icons": false,
+        "section_visibility": "always",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 60,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "d5bf5d92-2d26-485a-96e0-c265e25e1e18": {
+      "type": "marquee-text",
+      "blocks": {
+        "template--18467116482882__d5bf5d92-2d26-485a-96e0-c265e25e1e18-16800759063321dffb-0": {
+          "type": "text",
+          "settings": {
+            "text": "MARQUEE TEXT HERE",
+            "outline_thickness": "1px",
+            "enable_highlight": false,
+            "enable_text_shadow": false,
+            "text_gap": 15,
+            "scrolling_speed": 15,
+            "scrolling_speed_mobile": 15,
+            "font_family": "heading",
+            "desktop_font": 112,
+            "mobile_font": 40,
+            "color": "",
+            "highlight_color": "",
+            "shadow_color": "",
+            "custom_icon": "",
+            "small_icon": false,
+            "icon_color": "",
+            "text_icon_gap": 15,
+            "default_color": false
+          }
+        }
+      },
+      "block_order": [
+        "template--18467116482882__d5bf5d92-2d26-485a-96e0-c265e25e1e18-16800759063321dffb-0"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_autoplay": false,
+        "direction": "rtl",
+        "text_angle": 0,
+        "min_height_desktop": 400,
+        "min_height_mobile": 200,
+        "section_visibility": "always",
+        "bgcolor": "",
+        "background_effect": false,
+        "effect_color": "radial-gradient(circle, rgba(255, 205, 193, 1) 0%, rgb(254 224 224 / 0%) 100%)",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "626f57fd-b261-49d0-9294-9a1c8f912f51": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "heading": "Join Our Newsletter",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "description": "Sign up it only takes a second to be the news.",
+        "placeholder": "Email Address",
+        "stacked": true,
+        "section_visibility": "always",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "main",
+    "6dd189af-1539-4ac6-a16c-e0d4e1f02303",
+    "d5bf5d92-2d26-485a-96e0-c265e25e1e18",
+    "626f57fd-b261-49d0-9294-9a1c8f912f51"
+  ]
+}

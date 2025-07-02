@@ -1,0 +1,438 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'image-carousel-rtl.css' | asset_url }}">
+  {{ 'image-carousel-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'image-carousel.css' | asset_url }}">
+  {{ 'image-carousel.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  <div class="container-sm">
+    {% if section.settings.heading != blank %}
+      {%- capture higlightPrefix -%}
+        <span class="marker">
+      {%- endcapture -%}
+      {%- capture highlightSuffix -%}
+          {%- render 'marker-text-style' marker_style:section.settings.higlight_style -%}
+      {%- endcapture -%}
+      <div class="section-heading-box d-block d-md-none">
+        <h2
+          class="section-heading-title rte{% if section.settings.enable_highlight %} highlight-text{% endif %} {{ section.settings.heading_size }}"
+          style="--outline-thickness:{{ section.settings.outline_thickness }};--marker-svg:{{ section.settings.marker_color }};--marker:{{ section.settings.marker_text_color }}"
+        >
+          {{ section.settings.heading | replace:"[[", higlightPrefix | replace:"]]",highlightSuffix }}
+        </h2>
+      </div>
+    {% endif %}
+    <div class="row align-items-center">
+      {% if section.blocks.size > 0 %}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+          <div
+            class="slider"
+            data-theme-slider='
+              {
+              "cellAlign": "left",
+              "wrapAround": true,
+              "contain": true,
+              "fade": true,
+              "resize": true,
+              "pageDots": false,
+              "prevNextButtons": false,
+              "groupCells": true,
+              "draggable":false
+              }
+            '
+            data-hover-slider
+          >
+            {% for block in section.blocks %}
+              <div
+                class="image-carousel__item{% if section.settings.round_image %} rounded {% if section.settings.show_border %} border-enabled{% endif %}{% endif %}{% if section.settings.image_overlay %} image_overlay{% endif %}"
+                id="image-carousel__item{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >
+                <a {% if block.settings.image_url  == blank %}role="link"aria-disabled="true" {% else %} href="{{ block.settings.image_url }}" {% endif %} class="image-carousel__img" title="{{ block.settings.image.alt | default: block.settings.heading }}">
+                  <div
+                    class="image-wrapper"
+                    style="--img-ratio:{% if block.settings.image != blank %}{{ 1 | divided_by : block.settings.image.aspect_ratio | times: 100 }}{%else%}100{%endif%}%"
+                  >
+                    {% if block.settings.image != blank %}
+                      {% render 'lazy-image', image: block.settings.image %}
+                    {% else %}
+                      {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif %}
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+          <div class="image-carousel__content-outer">
+            {% if section.settings.heading != blank %}
+              {%- capture higlightPrefix -%}
+            <span class="marker">
+          {%- endcapture -%}
+          {%- capture highlightSuffix -%}
+              {%- render 'marker-text-style' marker_style:section.settings.higlight_style -%}
+          {%- endcapture -%}
+              <div class="section-heading-box d-none d-md-block">
+                <h2
+                  class="section-heading-title rte{% if section.settings.enable_highlight %} highlight-text{% endif %} {{ section.settings.heading_size }}"
+                  style="--outline-thickness:{{ section.settings.outline_thickness }};--marker-svg:{{ section.settings.marker_color }};--marker:{{ section.settings.marker_text_color }}"
+                >
+                  {{ section.settings.heading | replace:"[[", higlightPrefix | replace:"]]",highlightSuffix }}
+                </h2>
+              </div>
+            {% endif %}
+            <ul class="list-unstyled image-carousel__content">
+              {% for block in section.blocks %}
+                {% if block.settings.heading != blank %}
+                  <li
+                    class="image-carousel__text {% if forloop.first %}active{% endif %}"
+                    {{ block.shopify_attributes }}
+                  >
+                    <a
+                      href="#image-carousel__item{{ block.id }}"
+                      class="unstyled-link image-carousel__link h5"
+                      data-index="{{ forloop.index0 }}"
+                      data-hover-trigger
+                    >
+                      <svg fill="currentColor" viewBox="0 0 14.64 14.68">
+                        <g><path d="m7.32,0c.18,0,.32.14.32.32v1.92c0,1.22.3,2.12.74,2.78.44.66,1.03,1.11,1.63,1.41.6.3,1.2.45,1.66.53.23.04.42.06.55.07.07,0,.12,0,.15,0,.02,0,.03,0,.04,0h0s0,0,0,0h1.91c.18,0,.32.14.32.32s-.14.32-.32.32h-1.91c-1.22,0-2.11.3-2.77.74-.66.44-1.1,1.03-1.4,1.63-.3.6-.45,1.21-.53,1.67-.04.23-.06.42-.07.55,0,.07,0,.12,0,.15,0,.02,0,.03,0,.04h0s0,0,0,0v1.92c0,.18-.14.32-.32.32s-.32-.14-.32-.32v-1.92c0-1.22-.3-2.12-.74-2.78-.44-.66-1.03-1.11-1.63-1.41-.6-.3-1.2-.45-1.66-.53-.23-.04-.42-.06-.55-.07-.07,0-.12,0-.15,0-.02,0-.03,0-.04,0h0s0,0,0,0H.32c-.18,0-.32-.14-.32-.32s.14-.32.32-.32h1.91c1.22,0,2.11-.3,2.77-.74.66-.44,1.1-1.03,1.4-1.63.3-.6.45-1.21.53-1.67.04-.23.06-.42.07-.55,0-.07,0-.12,0-.15,0-.02,0-.03,0-.04h0s0,0,0,0V.32c0-.18.14-.32.32-.32Z"/></g>
+                      </svg>
+                      {{- block.settings.heading }}
+                      <span class="image-carousel__link-arrow">
+                        <svg fill="currentColor" viewBox="0 0 23.04 8.94">
+                          <g><polygon points="18.57 0 17.3 1.27 19.86 3.83 0 3.83 0 5.12 19.86 5.12 17.3 7.67 18.57 8.94 23.04 4.47 18.57 0"></polygon></g>
+                        </svg>
+                      </span>
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+    --overlay-background:{{ section.settings.overlay_color}};
+    --overlay-opacity:{{ section.settings.overlay_opacity | divided_by : 100.0 }};
+  }
+ 
+  @media only screen and (max-width:767px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+  }
+  {% if section.settings.section_visibility == 'large' %}
+      @media (max-width: 767px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+    {% elsif section.settings.section_visibility == 'small' %}
+      @media (min-width: 768px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "t:sections.images_carousel.name",
+  "tag": "section",
+  "class": "section image-carousel-section",
+  "max_blocks": 5,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "round_image",
+      "label": "t:sections.images_carousel.settings.enable_round_image.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "default": false,
+      "label": "t:sections.images_carousel.settings.show_border.label",
+      "info": "t:sections.images_carousel.settings.show_border.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_overlay",
+      "label": "t:sections.images_carousel.settings.enable_overlay_on_image.label",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Images carousel",
+      "label": "t:sections.images_carousel.settings.heading.label",
+      "info": "t:sections.images_carousel.settings.heading.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_highlight",
+      "label": "t:common.highlight_text.label",
+      "info": "t:common.highlight_text.info",
+      "default": false
+    },
+    {
+      "type":"select",
+      "id":"higlight_style",
+      "label":"t:common.marker_style.label",
+      "default": "basic",
+      "options":[
+        {
+          "value": "basic",
+          "label": "t:common.marker_style.options.basic.label"
+        },
+        {
+          "value": "curved",
+          "label": "t:common.marker_style.options.curved.label"
+        },
+        {
+          "value": "line",
+          "label": "t:common.marker_style.options.line.label"
+        },
+        {
+          "value": "box",
+          "label": "t:common.marker_style.options.box.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "outline_thickness",
+      "label": "t:common.outline_stroke.label",
+      "default": "1px",
+      "options": [
+        {
+          "value": "1px",
+          "label": "t:common.outline_stroke.options.thin.label"
+        },
+        {
+          "value": "2px",
+          "label": "t:common.outline_stroke.options.thick.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:common.heading_size.label",
+      "default": "h1",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.heading_size.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradiant",
+      "label":"t:common.gradient.label",
+      "default":false
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "t:common.marker_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "marker_text_color",
+      "label": "t:common.marker_text_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:sections.images_carousel.settings.overlay_color.label"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:sections.images_carousel.settings.overlay_opacity.label",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "t:sections.images_carousel.blocks.image.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.images_carousel.blocks.image.settings.image.label",
+          "info": "t:sections.images_carousel.blocks.image.settings.image.info"
+        },
+        {
+          "type":"url",
+          "id":"image_url",
+          "label":"Image link"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Heading here",
+          "label": "t:sections.images_carousel.blocks.image.settings.heading.label",
+          "info": "t:sections.images_carousel.blocks.image.settings.heading.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.images_carousel.presets.name",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

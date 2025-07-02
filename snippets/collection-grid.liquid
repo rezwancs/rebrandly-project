@@ -1,0 +1,66 @@
+{%- liquid
+  assign featuredImage = collection.featured_image
+  if gridImageSize == 'landscape'
+    assign collectionImageRatio = 'var(--img-landscape)'
+  elsif gridImageSize == 'square'
+    assign collectionImageRatio = 'var(--img-square)'
+  elsif gridImageSize == 'portrait'
+    assign collectionImageRatio = 'var(--img-portrait)'
+  else
+    if featuredImage != blank
+      assign collectionImageRatio = 1 | divided_by: featuredImage.aspect_ratio | times: 100 | append: '%'
+    else
+      assign collectionImageRatio = 100 | append: '%'
+    endif
+  endif
+-%}
+<div class="col-6 col-sm-4 col-md-4 col-lg-4 collection-card-item">
+  <div
+    class="collection-card img-zoom {% if section.settings.title_hover == 'hover' %}content-overlay content-on-hover {% elsif section.settings.title_hover == 'overlay' %} content-overlay {% endif %}"
+    {% if settings.enable_animations %}
+      data-aos="fade-up"
+      data-aos-easing="ease"
+      data-aos-offset="0"
+      data-aos-duration="1000"
+    {% endif %}
+  >
+    <a
+      {% if collection != blank %}
+        href="{{ collection.url }}"
+      {% else %}
+        role="link"
+        aria-disabled="true"
+      {% endif %}
+      class="unstyled-link collection-card-img"
+    >
+      {%- if featuredImage != blank -%}
+        <div
+          class="image-wrapper"
+          style="--img-ratio:{{ collectionImageRatio }}"
+        >
+          {% render 'lazy-image', image: featuredImage %}
+        </div>
+      {% else %}
+        <div
+          class="image-wrapper"
+          style="--img-ratio:{{ collectionImageRatio }}"
+        >
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+    </a>
+    <div class="collection-card-info text-{{ section.settings.title_alignment }}">
+      <a
+        href="{{ collection.url }}"
+        class="unstyled-link collection-card-title h6 heading-font"
+        aria-label="{{- collection.title -}}"
+      >
+        {% if collection != blank %}
+          {{- collection.title -}}
+        {% else %}
+          {{ 'sections.onboarding_collection.title' | t }}
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</div>

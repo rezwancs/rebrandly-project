@@ -1,0 +1,61 @@
+<div
+  class="complimentory-product"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.products_count }}&intent=complementary"
+  product-recommendations
+  {{ block.shopify_attributes }}
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <h6 class="complimentory__heading text">{{ block.settings.heading }}</h6>
+    <div
+      id="complementary_products-{{ section.id }}"
+      class="complimentory__slider"
+      tabindex="0"
+    >
+      {%- for product in recommendations.products limit: block.settings.products_count -%}
+        <div class="complimentory__item">
+          <div class="complimentory__inner-item">
+            <a href="{{ product.url }}" class="unstyled-link complimentory__img {% if settings.pass_through_product_images %} pass-through-color{% endif %}">
+              {%- if product.featured_media != blank -%}
+                <div
+                  class="image-wrapper"
+                  style="padding-bottom:{{ 1 | divided_by : product.featured_media.preview_image.aspect_ratio | times: 100 }}%"
+                >
+                  {%- render 'lazy-image',
+                    image: product.featured_media.preview_image,
+                    class: 'lazypreload',
+                    width: '110x'
+                  -%}
+                </div>
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </a>
+            <div class="complimentory__detail">
+              <a href="{{ product.url }}" class="unstyled-link product-title text-msmall">
+                {{- product.title | strip_html -}}
+              </a>
+              <div class="product-prizebox">
+                {%- assign price_min = product.price_min | money -%}
+                <span class="product-actual-price text-small">
+                  {%- if product.price_varies -%}
+                    {{- 'products.product.price.from_price_html' | t: price: price_min -}}
+                  {%- else -%}
+                    {{ price_min }}
+                  {%- endif -%}
+                </span>
+                {%- if product.compare_at_price_min > product.price_min -%}
+                  <span class="product-compare-price text-small">
+                    {{ product.compare_at_price_min | money -}}
+                  </span>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="complimentory__btn">
+              <a href="{{ product.url }}" class="unstyled-link button link-btn"> {{ 'products.product.view_product' | t}} </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {%- endif -%}
+</div>

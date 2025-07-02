@@ -1,0 +1,102 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h5",
+        "heading_overlay": false,
+        "banner_height_desktop": "200px",
+        "banner_height_mobile": "350px",
+        "title_hover": "hover",
+        "title_alignment": "left",
+        "collections_per_page": 20,
+        "sort": "alphabetical",
+        "grid_image_size": "square",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "bgcolor": "#F8F3EB",
+        "bgcoloropacity": "#000000",
+        "textcolor": "#ffffff",
+        "overlay_opacity": 50,
+        "collection_overlay_color": "#000000",
+        "collection_overlay_opacity": 40,
+        "collection_overlay_text_color": "#FFFFFF",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 50,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 20
+      }
+    },
+    "fe589d63-1809-4d6f-99e7-3eab88c511a3": {
+      "type": "collections-list",
+      "blocks": {
+        "f176beb3-4f58-4f50-9ee1-75debf61c98a": {
+          "type": "collection",
+          "settings": {
+            "collection": "our-products"
+          }
+        },
+        "template--21299324518694__fe589d63-1809-4d6f-99e7-3eab88c511a3-collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "apparel"
+          }
+        },
+        "template--21299324518694__fe589d63-1809-4d6f-99e7-3eab88c511a3-collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories"
+          }
+        },
+        "template--21299324518694__fe589d63-1809-4d6f-99e7-3eab88c511a3-collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "home-fragrance"
+          }
+        }
+      },
+      "block_order": [
+        "f176beb3-4f58-4f50-9ee1-75debf61c98a",
+        "template--21299324518694__fe589d63-1809-4d6f-99e7-3eab88c511a3-collection-1",
+        "template--21299324518694__fe589d63-1809-4d6f-99e7-3eab88c511a3-collection-2",
+        "template--21299324518694__fe589d63-1809-4d6f-99e7-3eab88c511a3-collection-3"
+      ],
+      "settings": {
+        "section_visibility": "always",
+        "heading": "Collections",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "text_alignment": "left",
+        "title_alignment": "center",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "grid_image_size": "square",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "fe589d63-1809-4d6f-99e7-3eab88c511a3"
+  ]
+}

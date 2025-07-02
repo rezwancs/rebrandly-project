@@ -1,0 +1,351 @@
+<div
+  class="minicart__outerbox {% if cart.item_count == 0 %}empty-mini-cart{% endif %}  {% if settings.enable_gift_wrap %}giftwrap-enable{% endif %}"
+  data-section="ajax-cart"
+  data-cart-wrapper
+  data-item-count="{{ cart.item_count }}"
+>
+
+ 
+  {% if cart.item_count > 0 %}
+
+    <div class="minicart__box">
+      {%- if settings.enable_shipping and settings.shipping_rate != blank  and cart.item_count > 0  -%}
+        {%liquid
+           assign shippingRate = settings.shipping_rate | times:100 
+          assign cartTotal = cart.total_price  
+          assign shippingPrice = shippingRate | minus: cartTotal 
+          if shippingPrice > 0 
+            assign shippingPrice=shippingPrice| money
+            assign shippingMessage = settings.shipping_text | replace:"||amount||", shippingPrice
+          else 
+            assign shippingMessage = settings.free_shipping_text 
+          endif
+    
+          assign shippingPercentage= cartTotal | times:100 | divided_by: shippingRate
+          if shippingPercentage > 10 and shippingPercentage < 100 
+           assign shippingPercentage = shippingPercentage | minus: 5
+          elsif shippingPercentage > 100 
+            assign shippingPercentage = 100
+          endif  
+       %}
+        <div class="shipping-bar" data-free-shipping-container>
+          <p data-free-shipping-text>{{ shippingMessage }}</p>
+          <div class="shipping-bar__progress">
+            <div
+              class="shipping-bar__progress-width"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style="width:{{ shippingPercentage }}%"
+              data-free-shipping-bar
+            ></div>
+            
+          </div>
+        </div>
+      {%- endif -%}
+      <form
+        action="{{ routes.cart_url }}"
+        class="minicart__form "
+        method="post"
+        id="cart"
+        data-cart-form
+      >
+        {% assign giftWrapProductStatus = false %}
+        {% for item in cart.items %}
+          {% liquid
+            assign isGiftWrapProduct = false
+            if item.product_id == settings.gift_wrap_product.id
+              assign giftWrapProductStatus = true
+              assign isGiftWrapProduct = true
+            endif
+          %}
+          <div class="cart__item {% if settings.border_enabled %}border-enabled{% endif %}" data-cart-item>
+            <a
+              class="unstyled-link cart__img d-block{% if settings.pass_through_product_images %} pass-through-color{% endif %}"
+              href="{{ item.url }}"
+              aria-label="{{ item.product.title | strip_html }}"
+              tabindex="-1"
+            >
+              {%- if item.image != blank -%}
+                <div
+                  class="image-wrapper"
+                  style="--img-ratio: {{ 1 | divided_by: item.image.aspect_ratio | times: 100 }}%;"
+                >
+                  {%- render 'lazy-image', image: item.image -%}
+                </div>
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder-svg' }}
+              {%- endif -%}
+            </a>
+            <div class="cart__detail">
+              <a
+                class="unstyled-link product-title text-xsmall"
+                href="{{ item.url }}"
+                aria-label="{{ item.product.title | strip_html }}"
+              >
+                {{- item.product.title | strip_html -}}
+              </a>
+              {%- unless item.product.has_only_default_variant -%}
+                <p class="product-variant-title text-xsmall">{{ item.variant.title | strip_html }}</p>
+              {%- endunless -%}
+              {%- if item.selling_plan_allocation -%}
+                <p class="product-variant-title text-xsmall">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+              {%- endif -%}
+              {%- for property in item.properties -%}
+                {%- assign property_first_char = property.first | slice: 0 -%}
+                {%- if property.last != blank and property_first_char != '_' -%}
+                  <p class="product-variant-title text-xsmall">
+                    <span class="line-item-property">{{ property.first }} :</span>
+                    {%- if property.last contains '/uploads/' -%}
+                      <a
+                        class="unstyled-link line-item-property"
+                        href="{{ property.last }}"
+                        target="_blank"
+                        aria-label="{{ property.first }}"
+                      >
+                        {{ property.last | split: '/' | last }}
+                      </a>
+                    {%- else -%}
+                      {{ property.last }}
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if item.discounts.size > 0 -%}
+                <div class="cart__coupans">
+                  {%- for discount in item.discounts -%}
+                    <div class="cart__discount">
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.92896 0L12.1162 0.884384L13 7.07195L7.25466 12.817C7.13745 12.9342 6.9785 13 6.81276 13C6.64703 13 6.48808 12.9342 6.37086 12.817L0.183002 6.62944C0.065826 6.51224 0 6.35329 0 6.18756C0 6.02183 0.065826 5.86289 0.183002 5.74568L5.92896 0ZM7.69657 5.3038C7.81267 5.41986 7.9505 5.51191 8.10218 5.57471C8.25386 5.6375 8.41642 5.66981 8.58059 5.66978C8.74475 5.66975 8.90731 5.63739 9.05897 5.57454C9.21062 5.51169 9.34842 5.41959 9.46448 5.30349C9.58054 5.18739 9.6726 5.04957 9.7354 4.8979C9.7982 4.74623 9.8305 4.58367 9.83047 4.41951C9.83044 4.25535 9.79808 4.09281 9.73523 3.94116C9.67238 3.78951 9.58027 3.65172 9.46417 3.53566C9.34807 3.4196 9.21024 3.32755 9.05856 3.26476C8.90688 3.20196 8.74431 3.16966 8.58015 3.16969C8.2486 3.16975 7.93065 3.3015 7.69625 3.53597C7.46185 3.77044 7.3302 4.08842 7.33026 4.41995C7.33032 4.75149 7.46208 5.06942 7.69657 5.3038Z" fill="currentColor"></path>
+                      </svg>
+                      <p>{{ discount.title }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <div class="product-prizebox">
+                {%- if item.original_line_price != item.final_line_price -%}
+                  <span class="product-actual-price">{{- item.final_line_price | money -}}</span>
+                  <span class="product-compare-price">{{- item.original_line_price | money -}}</span>
+                {%- else -%}
+                  <span class="product-actual-price">{{- item.original_line_price | money -}}</span>
+                {%- endif -%}
+                {%- if item.unit_price_measurement -%}
+                  <span class="product-unit-price text-xsmall">
+                    {{ item.variant.unit_price | money }}
+                    /
+                    {%- if item.variant.unit_price_measurement.reference_value != 1 %}
+                      {{ item.variant.unit_price_measurement.reference_value -}}
+                    {%- endif %}
+                    {{ item.variant.unit_price_measurement.reference_unit }}
+                  </span>
+                {%- endif -%}
+              </div>
+              <div class="cart__btn">
+                {% unless isGiftWrapProduct %}
+                  <div class="quantity small-quantity" data-quantity-wrapper>
+                    <button
+                      type="button"
+                      class="quantity-button quantity-down no-js-hidden ajax-cart-update focus-inside"
+                      data-quantity-decrement
+                    >
+                      <span class="hidden">{{ 'cart.headings.decrease_qty' | t }}</span>
+                      <svg x="0px" y="0px" width="14px" height="14px" viewBox="0 0 14 14">
+                        <rect x="6" transform="matrix(6.123234e-17 -1 1 6.123234e-17 0 14)" width="2.1" height="14"></rect>
+                      </svg>
+                    </button>
+                    <label class="hidden" for="line-item-quantity-{{ forloop.index }}">Quantity</label>
+                    <input
+                      id="line-item-quantity-{{ forloop.index }}"
+                      class="quantity-input ajax-cart-update focus-inside"
+                      type="number"
+                      name="updates[]"
+                      min="1"
+                      step="1"
+                      value="{{ item.quantity }}"
+                      data-previous-value="{{ item.quantity }}"
+                      data-page="cart-drawer"
+                      data-quantity-input
+                      data-line="{{ forloop.index }}"
+                      aria-label="{{ 'cart.headings.select_qty' | t }}"
+                    >
+                    <button
+                      type="button"
+                      class="quantity-button quantity-up no-js-hidden ajax-cart-update focus-inside"
+                      data-quantity-increment
+                    >
+                      <span class="hidden">{{ 'cart.headings.increase_qty' | t }}</span>
+                      <svg x="0px" y="0px" width="14px" height="14px" viewBox="0 0 14 14">
+                        <polygon points="14,6 8,6 8,0 6,0 6,6 0,6 0,8 6,8 6,14 8,14 8,8 14,8 "></polygon>
+                      </svg>
+
+                    </button>
+                  </div>
+                {% endunless %}
+                <button
+                  class="cart-item-remove"
+                  data-line="{{ forloop.index }}"
+                  data-cart-item-remove
+                >
+                  <svg viewBox="0 0 17.5 17.51" fill="currentColor">
+                    <g><g><path d="m16.75,3.95h-1.76s-.03,0-.05,0-.03,0-.05,0h-.87c.02-.07.04-.13.04-.2v-1.49C13.98.94,12.85-.07,11.53,0h-5.56c-1.31-.05-2.42.95-2.5,2.26v1.49c0,.07.02.13.04.2H.75c-.41,0-.75.34-.75.75s.34.75.75.75h1v9.79s0,.02,0,.03c.09,1.32,1.24,2.32,2.56,2.23h8.88s.02,0,.03,0c1.32.07,2.46-.94,2.53-2.26V5.45h1c.41,0,.75-.34.75-.75s-.34-.75-.75-.75Zm-11.78-.2v-1.49c0-.41.45-.76,1-.76h5.59c.52,0,1,.35,1,.76v1.49s0,.01,0,.02c0,.06.02.12.04.18h-7.67c.02-.07.04-.13.04-.2Zm9.16,11.49c0,.41-.44.76-1,.76H4.25c-.53,0-1-.35-1-.76V5.45h10.88v9.79Z"/><path d="m6.97,13.75s0,0,.01,0c.41,0,.75-.35.74-.76v-4.52c0-.41-.34-.75-.75-.75s-.75.34-.75.75v4.53c0,.41.34.74.75.75Z"/><path d="m10.53,13.75c.42,0,.75-.34.75-.76v-4.52c0-.41-.34-.75-.75-.75s-.75.34-.75.75v4.53c0,.41.34.75.75.75Z"/></g></g>
+                  </svg>
+                </button>
+              </div>
+              <div
+                id="cartItemError-{{ forloop.index }}"
+                class="cart-item-error form-message__wrapper small-error error"
+                style="display: none;"
+                role="status"
+              >
+                <p class="form-message__title">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                    <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  <span data-error-text></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </form>
+    </div>
+    <div class="bottom-cart-box">
+      <div class="bottom-cart-text">
+        {% if settings.enable_cartdrawer_note %}
+          <div class="leave-order-note" data-cart-note-wrapper>
+            <button class="order-Note cursor-pointer">
+              {{ 'cart.note_heading' | t }}
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none">
+                <path d="M12.6667 1.08398L6.83333 6.91732L1 1.08398" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+
+            </button>
+            <div class="order-note-content">
+              <p class="text-small">{{ 'cart.note_heading' | t }}</p>
+              <a href="#" class="unstyled-link note-close" data-note-close>
+                <svg width="10" viewBox="0 0 23.1 23.08" fill="currentColor">
+                  <g>
+                    <path d="m13.3,11.55L22.75,2.09c.46-.48.46-1.23,0-1.72-.23-.23-.54-.36-.87-.36h-.01c-.33,0-.65.13-.88.35l-9.44,9.44L2.1.35c-.48-.47-1.23-.46-1.72,0C.15.58.01.9,0,1.23c0,.33.12.65.35.89l9.43,9.43L.36,20.99c-.23.24-.36.55-.36.87s.12.64.36.87c.44.44,1.31.44,1.75,0l9.44-9.44,9.44,9.44c.22.22.54.35.87.35s.65-.13.87-.35c.23-.23.36-.55.36-.88s-.13-.64-.36-.87l-9.43-9.43Z"></path>
+                  </g>
+                </svg>
+              </a>
+              <textarea
+                class="form-control"
+                rows="4"
+                name="note"
+                placeholder="{{ 'cart.note_placeholder' | t }}"
+                form="cart"
+                data-cart-note
+              >{{ cart.note }}</textarea>
+            </div>
+          </div>
+        {% endif %}
+        <p class="tax-content text-xsmall">
+          {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+            {{ 'cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+          {%- elsif cart.taxes_included -%}
+            {{ 'cart.taxes_included_but_shipping_at_checkout' | t }}
+          {%- elsif shop.shipping_policy.body != blank -%}
+            {{ 'cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+          {%- else -%}
+            {{ 'cart.taxes_and_shipping_at_checkout' | t }}
+          {%- endif -%}
+        </p>
+      </div>
+      <ul class="list-unstyled cart-total-box" data-cart-prices>
+        {%- if cart.cart_level_discount_applications.size > 0 -%}
+          <li>
+            <span class="text-small">{{ 'cart.subtotal' | t }}</span
+            ><strong class="text-small">{{ cart.original_total_price | money }}</strong>
+          </li>
+          <li>
+            {%- for discount in cart.cart_level_discount_applications -%}
+              <div class="cart__discount ">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.92896 0L12.1162 0.884384L13 7.07195L7.25466 12.817C7.13745 12.9342 6.9785 13 6.81276 13C6.64703 13 6.48808 12.9342 6.37086 12.817L0.183002 6.62944C0.065826 6.51224 0 6.35329 0 6.18756C0 6.02183 0.065826 5.86289 0.183002 5.74568L5.92896 0ZM7.69657 5.3038C7.81267 5.41986 7.9505 5.51191 8.10218 5.57471C8.25386 5.6375 8.41642 5.66981 8.58059 5.66978C8.74475 5.66975 8.90731 5.63739 9.05897 5.57454C9.21062 5.51169 9.34842 5.41959 9.46448 5.30349C9.58054 5.18739 9.6726 5.04957 9.7354 4.8979C9.7982 4.74623 9.8305 4.58367 9.83047 4.41951C9.83044 4.25535 9.79808 4.09281 9.73523 3.94116C9.67238 3.78951 9.58027 3.65172 9.46417 3.53566C9.34807 3.4196 9.21024 3.32755 9.05856 3.26476C8.90688 3.20196 8.74431 3.16966 8.58015 3.16969C8.2486 3.16975 7.93065 3.3015 7.69625 3.53597C7.46185 3.77044 7.3302 4.08842 7.33026 4.41995C7.33032 4.75149 7.46208 5.06942 7.69657 5.3038Z" fill="currentColor"></path>
+                </svg>
+                <p>{{ discount.title }}</p>
+              </div>
+              <strong class="text-small">-{{ discount.total_allocated_amount | money }}</strong>
+            {%- endfor -%}
+          </li>
+        {% endif %}
+      </ul>
+
+      {% if settings.enable_gift_wrap %}
+        <div data-gift-wrap>
+          {% if settings.gift_wrap_product != blank
+            and settings.gift_wrap_text != blank
+            and settings.gift_wrap_product.available
+            and giftWrapProductStatus == false
+          %}
+            <div class="gift__wrap-box">
+              {%- form 'product',
+                settings.gift_wrap_product,
+                id: product_form_id,
+                class: 'form main-product-form',
+                novalidate: 'novalidate',
+                data-type: 'add-to-cart-form'
+              -%}
+                <input
+                  type="hidden"
+                  name="id"
+                  value="{{ settings.gift_wrap_product.first_available_variant.id }}"
+                >
+              {% endform %}
+              <div class="custom-checkbox">
+                <input
+                  class="checkmark-input"
+                  type="checkbox"
+                  id="gift_wrap"
+                  value=""
+                >
+                <span class="checkmark"></span>
+                <label for="gift_wrap" class="cursor-pointer text-small">{{ settings.gift_wrap_text }}</label>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="cart-btn-container" data-cart-checkout-buttons>
+        <button
+          type="submit"
+          name="checkout"
+          id="cartCheckout"
+          form="cart"
+          class="button med-btn btn-block icon-btn right-icon"
+        >
+          <span> {{ 'cart.checkout' | t }}</span>
+          <span class="btn-price" data-cart-total-price>{{ cart.total_price | money }}</span>
+          {% comment %}
+            <span class="btn-icon">
+              {% render 'icons', icon: 'arrow' %}
+            </span>
+          {% endcomment %}
+        </button>
+        <a
+          href="{{ routes.cart_url }}"
+          class="continue-btn hyperlink text-small"
+          aria-label="{{ 'cart.view_cart' | t }}"
+        >
+          {{- 'cart.view_cart' | t -}}
+        </a>
+      </div>
+    </div>
+  {% else %}
+    <div class="cart__empty empty__state-box" data-cart-empty>
+      {% render 'empty-icon' %}
+      <h4 class="empty__state-heading">{{ 'cart.empty.heading' | t }}</h4>
+      <p class="empty__state-desc">{{ 'cart.empty.description' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}"
+        class="unstyled-link button small-btn icon-btn right-icon {{ settings.button_style }}"
+        aria-label="{{ 'general.continue_shopping' | t }} ">
+        {% assign buttonText = 'general.continue_shopping' | t %}
+        {% render 'button-style', buttonText:buttonText %}
+      </a>
+    </div>
+  {% endif %}
+</div>

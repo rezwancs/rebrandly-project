@@ -1,0 +1,213 @@
+<div class="product__viewbar sticky-bottom hidden" data-sticky-products-wrapper>
+  <a href="#" class="unstyled-link product__viewbar-close">
+    <span>
+      <svg width="8" viewBox="0 0 10 10" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.44916 0.532147C9.69542 0.77403 9.69896 1.16974 9.45708 1.416L5.91999 5.01698L9.52098 8.55406C9.76723 8.79594 9.77077 9.19166 9.52889 9.43791C9.287 9.68416 8.89129 9.68771 8.64504 9.44582L5.0415 5.90623L1.43797 9.44582C1.19172 9.68771 0.796003 9.68416 0.55412 9.43791C0.312237 9.19166 0.315779 8.79594 0.562032 8.55406L4.16301 5.01698L0.625931 1.416C0.384048 1.16974 0.387591 0.77403 0.633843 0.532147C0.880096 0.290264 1.27581 0.293807 1.51769 0.54006L5.0415 4.12753L8.56532 0.54006C8.8072 0.293807 9.20291 0.290264 9.44916 0.532147Z" fill="currentColor"></path>
+      </svg>
+    </span>
+  </a>
+  <div class="Product-view__box">
+    <div class="Product-view__item">
+      <div class="product__img{% if settings.pass_through_product_images %} pass-through-color{% endif %}">
+        {%- if product.selected_or_first_available_variant.featured_media != null -%}
+          {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+        {% else %}
+          {%- assign featured_media = product.featured_media -%}
+        {% endif %}
+        <div
+          class="image-wrapper"
+          style="--img-ratio:100%"
+        >
+          {% if featured_media != blank %}
+            <img src="{{featured_media | image_url:width: 100 }}" loading="lazy" data-sticky-image>
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="product__detail">
+        <p class="product-title text-small">{{ product.title | escape }}</p>
+        {% render 'product-price', target: product, priceSize: 'xsmall', stickySize: true, unitSize: true %}
+      </div>
+      <div class="cursor-pointer product__viewbar-collapse" data-stciky-options-wrapper>
+        <svg width="5" height="3" viewBox="0 0 5 3" fill="none">
+          <path d="M0.15 2.15C-0.05 2.35 -0.05 2.65 0.15 2.85C0.35 3.05 0.65 3.05 0.85 2.85L2.5 1.2L4.15 2.85C4.25 2.95 4.35 3 4.5 3C4.8 3 5 2.8 5 2.5C5 2.35 4.95 2.25 4.85 2.15L2.85 0.15C2.65 -0.0499998 2.35 -0.0499998 2.15 0.15L0.15 2.15Z" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
+    <div class="product-view__options">
+      <div class="product-view__options-inner">
+        {%- unless product.has_only_default_variant -%}
+          <div class="product-option-selector-box">
+            {%- for option in product.options_with_values -%}
+              {%- liquid
+                assign colorOptions = settings.color_name | downcase
+                assign downOption = option.name | downcase
+                assign optionIndex = forloop.index
+              -%}
+              {% if settings.option_style == 'swatch' %}
+                <div
+                  class="select-{{ downOption }} product-option-selector no-js-hidden {{ designClass }} {% if colorOptions contains downOption %}color_option{% if settings.show_variant_image %} image_option{% endif %}{% endif %}"
+                >
+                  <p class="variant-title">
+                    {{ option.name -}}
+                    {%- if colorOptions contains downOption -%}
+                      : <span selected-option-value>{{ option.selected_value }}</span>
+                    {%- endif %}
+                  </p>
+                  <ul class="list-unstyled product-loop-variants  {{ settings.color_swatches_style }}">
+                    {%- for value in option.values -%}
+                      {% liquid
+                        assign variantOption = 'option' | append: option.position
+                        assign colorVariant = product.variants | where: variantOption, value | first
+                        assign variantValue = product.variants | where: variantOption, value | compact: 'featured_media' | first
+                      -%}
+                      <li class="variant_option{% if option.selected_value == value %} selected{% endif %}">
+                        <label
+                          class="hidden"
+                          for="sticky-option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                        >
+                          {{- value -}}
+                        </label>
+                        <input
+                          class="productOption"
+                          id="sticky-option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                          form="{{ product_form_id }}"
+                          type="radio"
+                          name="option-{{ optionIndex }}"
+                          value="{{ value | escape }}"
+                          title="{{ value }}"
+                          {% if option.selected_value == value %}
+                            checked
+                          {% endif %}
+                        >
+                        <span
+                          class="option"
+                          {% if colorOptions contains downOption %}
+                            {% if variantValue and settings.show_variant_image %}
+                              style="background-image:url({{ variantValue.featured_media.preview_image | image_url: width: 100 }});"
+                            {% else %}
+                              data-color="{{ value }}"
+                              style="background-color:{{ value }};"
+                            {% endif %}
+                          {% endif %}
+                        >
+                          {% unless colorOptions contains downOption -%}
+                            {{- value -}}
+                          {%- endunless -%}
+                        </span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% else %}
+                <div class="form-group">
+                  <label>{{ option.name -}}</label>
+                  <div class="custom-select">
+                    <div class="selectBtn form-control" data-type="{{ option.selected_value }}">
+                      {{ option.selected_value }}
+                    </div>
+                    <div class="selectDropdown product-loop-variants">
+                      {%- for value in option.values -%}
+                        {% liquid
+                          assign variantOption = 'option' | append: option.position
+                          assign colorVariant = product.variants | where: variantOption, value | first
+                          assign variantValue = product.variants | where: variantOption, value | compact: 'featured_media' | first
+                        -%}
+                        <input
+                          class="productOption hidden"
+                          id="sticky-option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                          form="{{ product_form_id }}"
+                          type="radio"
+                          name="option-{{ optionIndex }}"
+                          value="{{ value | escape }}"
+                          title="{{ value }}"
+                          {% if option.selected_value == value %}
+                            checked
+                          {% endif %}
+                          custom-dropdown
+                        >
+                        <label
+                          class="option"
+                          for="sticky-option-{{ optionIndex }}-{{ forloop.index }}-{{ section.id }}"
+                          data-type="{{- value -}}"
+                        >
+                          {{- value -}}
+                        </label>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor -%}
+            <noscript>
+              <div class="product-option-selector">
+                <p class="variant-title">{{ 'products.product.product_variants' | t }}</p>
+                <div class="select-box">
+                  <select class="form-control" name="id" form="{{ product_form_id }}">
+                    {%- for variant in product.variants -%}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}
+                          selected="selected"
+                        {% endif %}
+                        {% if variant.available == false %}
+                          disabled
+                        {% endif %}
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                        {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                        - {{ variant.price | money | strip_html }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+            </noscript>
+          </div>
+        {% endunless %}
+
+        {% liquid
+          assign preorder = false
+          if settings.enable_preorder and product.selected_or_first_available_variant.inventory_policy == 'continue' and product.selected_or_first_available_variant.inventory_quantity <= 0
+            assign preorder = true
+          endif
+        %}
+        <div class="product__detail-btn">
+          <button
+            class="button xsmall-btn btn-block {{ settings.button_style}}"
+            {% if settings.enable_cartdrawer %}
+              data-add-to-cart
+            {% endif %}
+            form="{{ 'product-form-' | append: section.id  }}"
+            data-sticky-atc-wrapper
+            {% unless product.selected_or_first_available_variant.available %}
+              disabled
+            {% endunless %}
+          >
+    
+              {%- unless product.selected_or_first_available_variant.available -%}
+                {% assign buttonText = 'products.product.sold_out' | t  %}
+                {% render 'button-style', buttonText:buttonText,  buttonType:'data-atc-button-text' %}
+              {%- else -%}
+                {%- if preorder -%}
+                  {% assign buttonText = 'products.product.preorder' | t  %}
+                {%- else -%}
+                  {% assign buttonText = 'products.product.add_to_cart' | t  %}
+                {%- endif -%}
+                {% render 'button-style', buttonText:buttonText, buttonType:'data-atc-button-text' %}
+              {%- endunless -%}
+         
+            <span class="btn-loader">
+              <svg width="25" height="25" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="6" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+                  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
+                  </circle>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

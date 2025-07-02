@@ -1,0 +1,66 @@
+<div
+  class="pickup-availability-sidebar sd-sidebar sd-sidebar--bottom {{ settings.drawer_color_scheme }}-color-scheme"
+  aria-hidden="true"
+  id="pickup-availability-sidebar"
+  data-pickup-location-list
+  data-side-drawer
+>
+  {%- if pickupAvailabilities.size > 0 and current_variant.available -%}
+    <a href="#" class="unstyled-link sd-sidebar-background" data-side-drawer-close data-moving-cursor>
+      <span class="overlay-close" aria-label="Close">
+        {% render 'icons', icon: 'close' %}
+      </span>
+    </a>
+    <div class="sd-sidebar-container" role="dialog" aria-modal="true">
+      <div class="sd-sidebar-head">
+        <h6 class="sd-sidebar-title">
+          {{- product.title | escape }}
+        </h6>
+        <a href="#" class="unstyled-link sd-sidebar-close" aria-label="Close" data-side-drawer-close>
+          {% render 'icons', icon: 'close' %}
+        </a>
+      </div>
+      <div class="sd-sidebar-content">
+        <div class="pickup-availability-sidebar-content">
+          <ul class="list-unstyled pickup-availability__list" data-store-availability-drawer-content="">
+            {%- for pickuplocation in pickupAvailabilities -%}
+              <li class="pickup-availability__list-item">
+                <p class="pickup-availability__title">
+                  <svg width="15" height="18" viewBox="0 0 15 18" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.25 7.5C14.25 12.75 7.5 17.25 7.5 17.25C7.5 17.25 0.75 12.75 0.75 7.5C0.75 5.70979 1.46116 3.9929 2.72703 2.72703C3.9929 1.46116 5.70979 0.75 7.5 0.75C9.29021 0.75 11.0071 1.46116 12.273 2.72703C13.5388 3.9929 14.25 5.70979 14.25 7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M7.5 9.75C8.74264 9.75 9.75 8.74264 9.75 7.5C9.75 6.25736 8.74264 5.25 7.5 5.25C6.25736 5.25 5.25 6.25736 5.25 7.5C5.25 8.74264 6.25736 9.75 7.5 9.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  {{- pickuplocation.location.name | escape -}}
+                </p>
+                <p class="pickup-availability__preview">
+                  {%- if pickuplocation.available -%}
+                    <svg width="14" height="11" viewBox="0 0 14 11" fill="none">
+                      <path d="M0 5.09649L0.989947 4.05939L5.9397 9.24484L4.94975 10.2819L0 5.09649Z" fill="currentColor"></path>
+                      <path d="M12.7845 0L13.7744 1.03709L4.94975 10.2819L3.95979 9.24484L12.7845 0Z" fill="currentColor"></path>
+                    </svg>
+                    {{ 'products.product.pickup_availability.pick_up_available' | t }},
+                    {{- pickuplocation.pick_up_time | downcase -}}
+                  {% else %}
+                    <svg viewBox="0 0 23.1 23.08" style="fill: currentColor;">
+                      <g>
+                        <path d="m13.3,11.55L22.75,2.09c.46-.48.46-1.23,0-1.72-.23-.23-.54-.36-.87-.36h-.01c-.33,0-.65.13-.88.35l-9.44,9.44L2.1.35c-.48-.47-1.23-.46-1.72,0C.15.58.01.9,0,1.23c0,.33.12.65.35.89l9.43,9.43L.36,20.99c-.23.24-.36.55-.36.87s.12.64.36.87c.44.44,1.31.44,1.75,0l9.44-9.44,9.44,9.44c.22.22.54.35.87.35s.65-.13.87-.35c.23-.23.36-.55.36-.88s-.13-.64-.36-.87l-9.43-9.43Z"></path>
+                      </g>
+                    </svg>
+                    {{ 'products.product.pickup_availability.pick_up_unavailable' | t }}
+                  {% endif %}
+                </p>
+                {%- assign address = pickuplocation.location.address -%}
+                <address class="pickup-availability__address">
+                  {{ address | format_address }}
+                  {%- if address.phone.size > 0 -%}
+                    <a href="tel:{{ address.phone }}" class="unstyled-link">{{ address.phone }}</a>
+                  {%- endif -%}
+                </address>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>

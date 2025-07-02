@@ -1,0 +1,17 @@
+{% if settings.enable_cookie_banner %}
+  <div class="privacy__banner pos-right">
+    <div class="privacy__banner-inner">
+      {% if settings.description != blank %}
+        <div class="privacy__banner-text rte">{{ settings.description | replace: '<a', '<a class="hyperlink"' }}</div>
+      {% endif %}
+      <div class="privacy__banner-btn">
+        {% if settings.decline_cookie_btn_text != blank %}
+          <a href="#" class="hyperlink" onclick="handleDecline()">{{ settings.decline_cookie_btn_text }}</a>
+        {% endif %}
+        {% if settings.accept_cookie_btn_text != blank %}
+          <button class="button small-btn" onclick="handleAccept()">{{ settings.accept_cookie_btn_text }}</button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

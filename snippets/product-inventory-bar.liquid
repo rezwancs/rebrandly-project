@@ -1,0 +1,38 @@
+<script>
+  var invAvailableStatus = '{{ block.settings.inventory_available_status }}';
+  var invLowStatus = '{{ block.settings.inventory_less_status }}';
+  var minInventroyQty = {{ block.settings.minimun_inventory }};
+</script>
+{%- liquid
+  assign variantQuantity = current_variant.inventory_quantity
+  assign showBar = false
+  assign hideInventoryStatus = false
+  if variantQuantity > 0 and variantQuantity <= block.settings.minimun_inventory and current_variant.inventory_policy == 'deny'
+    assign showBar = true
+  endif
+  if variantQuantity <= 0
+    assign hideInventoryStatus = true
+  endif
+-%}
+<div
+  class="product__inventory{% if hideInventoryStatus %} hidden{% endif %}{% if showBar %} low-inventory{% else %} full-inventory{% endif %}"
+  data-product-inventory-bar-wrapper
+  {{ block.shopify_attributes }}
+>
+  <span class="inventroy-stock-text text-small" data-inventory-message>
+    {% liquid
+      if showBar
+        assign lowInventoryContent = variantQuantity | prepend: '<strong>' | append: '</strong>'
+        echo block.settings.inventory_less_status | replace: '||inventory||', lowInventoryContent
+      else
+        echo block.settings.inventory_available_status
+      endif
+    -%}
+  </span>
+  <span
+    class="inventroy-status-bar {% unless showBar %}hide-bar{% endunless %}"
+    data-quantity="{{ current_variant.inventory_quantity }}"
+    data-inventory-bar
+  >
+  </span>
+</div>

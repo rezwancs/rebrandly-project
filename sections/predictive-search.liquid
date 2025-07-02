@@ -1,0 +1,101 @@
+{%- if predictive_search.performed -%}
+  {%- if predictive_search.resources.products.size > 0
+    or predictive_search.resources.articles.size > 0
+    or predictive_search.resources.pages.size > 0
+    or predictive_search.resources.queries.size > 0
+    or predictive_search.resources.collections.size > 0           
+  -%}
+    <div class="searchbar__result-container">
+
+      <div class="searchbar__result-box">
+        {%- if predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 -%}
+        <ul class="list-unstyled related-query__list">
+        {%- for query in predictive_search.resources.queries -%}
+          <li id="predictive-search-option-query-{{ forloop.index }}" class="related-query__item" role="option" aria-selected="false">
+            <a href="{{ query.url }}" class="unstyled-link related-query__link" tabindex="-1" aria-label="{{ query.text }}">
+              <svg width="18"  viewBox="0 0 24 23" fill="none">
+                <path d="M9.68421 18.3684C14.4804 18.3684 18.3684 14.4804 18.3684 9.68421C18.3684 4.88805 14.4804 1 9.68421 1C4.88805 1 1 4.88805 1 9.68421C1 14.4804 4.88805 18.3684 9.68421 18.3684Z" stroke="currentColor" stroke-width="2"></path>
+                <path d="M16.0526 16.0527L23 21.8422" stroke="currentColor" stroke-width="2"></path>
+              </svg>
+              <span>{{ query.styled_text }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+        {%- for collection in predictive_search.resources.collections -%}
+          <li id="predictive-search-option-query-{{ forloop.index }}" class="related-query__item" role="option" aria-selected="false">
+            <a href="{{ collection.url }}" class="unstyled-link related-query__link" tabindex="-1" aria-label="{{ collection.title }}">
+              <svg width="18"  viewBox="0 0 24 23" fill="none">
+                <path d="M9.68421 18.3684C14.4804 18.3684 18.3684 14.4804 18.3684 9.68421C18.3684 4.88805 14.4804 1 9.68421 1C4.88805 1 1 4.88805 1 9.68421C1 14.4804 4.88805 18.3684 9.68421 18.3684Z" stroke="currentColor" stroke-width="2"></path>
+                <path d="M16.0526 16.0527L23 21.8422" stroke="currentColor" stroke-width="2"></path>
+              </svg>
+              <span>  {{ collection.title }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {% endif %}
+      <p class="searchbar__result-heading">
+        {{ 'templates.search.result_html' | t: terms: predictive_search.terms }}
+      </p>
+        {%- if predictive_search.resources.products.size > 0 -%}
+          <div class="searchbar__result-content searchbar__result-product">
+            <h6 class="searchbar__result-content-heading text">{{ 'templates.search.product' | t }}</h6>
+            <div class="row no-gutters product-card-outer">
+              {%- for item in predictive_search.resources.products limit: 6 -%}
+                <div class="col-12 col-sm-12 col-md-2 col-lg-3 col-xl-2">
+                    {% render 'product-grid', product: item,
+                      gridImageSize: settings.results_product_grid_image_size, hideOptions: true %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {%- endif -%}
+        {%- if predictive_search.resources.articles.size > 0 -%}
+          <div class="searchbar__result-content searchbar__result-post">
+            <h6 class="searchbar__result-content-heading text">{{ 'templates.search.blogs' | t }}</h6>
+            <div class="row">
+              {%- for article in predictive_search.resources.articles limit: 3 -%}
+                <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                  {% render 'post-grid', article: article,
+                    gridImageSize: settings.results_article_grid_image_size, postGrid:'searchDrawer' %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+        {%- if predictive_search.resources.pages.size > 0 -%}
+          <div class="searchbar__result-content searchbar__result-page">
+              <h6 class="searchbar__result-content-heading text">{{ 'templates.search.page' | t }}</h6>
+              <ul class="list-unstyled pages-result__list">
+                {%- for page in predictive_search.resources.pages limit: 4 -%}
+                  <li class="pages-result__item">
+                    <a class="pages-result__link hyperlink" href="{{ page.url }}" title="{{ page.title | truncate: 50 | escape }}">
+                      {{ page.title | truncate: 50 | escape }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+        {%- endif -%}
+      </div>
+      <div class="searchbar__result-all">
+        <a
+          class="unstyled-link page__result-link button xsmall-btn {{ settings.button_style }}"
+          href="/search?q={{ predictive_search.terms }}&options%5Bprefix%5D=last"
+          title="{{ 'templates.search.drawer_all_results' | t }}"
+        >
+          {% assign buttonText = 'templates.search.drawer_all_results' | t %}
+          {% render 'button-style', buttonText:buttonText %}
+        </a>
+      </div>
+    </div>
+    {% comment %} <div class="searchbar__recent" data-recent-search></div> {% endcomment %}
+  {%- else -%}
+    <div class="searchbar__notfound">
+      <div class="search__empty empty__state-box">
+        <h4 class="empty__state-heading">{{ 'templates.search.no_results_simple' | t }}</h4>
+        <p class="empty__state-desc ">{{ 'templates.search.no_results_sub'| t }}</p>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+

@@ -1,0 +1,208 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e": {
+      "type": "apps",
+      "blocks": {
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/product-filter/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b2dfa035-93ee-4007-a4ac-d9082834b39a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "collection_image": true,
+        "color_id": "#ffffff",
+        "banner_height_desktop": "300px",
+        "banner_height_mobile": "350px",
+        "collection_title": true,
+        "heading_overy": true,
+        "collection_description": false,
+        "products_per_page": 16,
+        "infinte_scroll": false,
+        "infinte_scroll_type": "onscroll",
+        "grid_image_size": "portrait",
+        "grid_image_fit": "cover",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "bannerbgcolor": "#202020",
+        "bgcoloropacity": "#eeeeee",
+        "textcolor": "#4c4c4c",
+        "overlay_opacity": 0,
+        "filter_bar_background": "#000000",
+        "filter_bar_text": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 30,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 20
+      }
+    },
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa": {
+      "type": "apps",
+      "blocks": {
+        "bf692365-b985-4446-9230-49ff7e76628a": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-101021",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "bf692365-b985-4446-9230-49ff7e76628a"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a": {
+      "type": "apps",
+      "blocks": {
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f": {
+          "type": "shopify://apps/boost-ai-search-discovery/blocks/recommendation/7fc998ae-a150-4367-bab8-505d8a4503f7",
+          "settings": {
+            "widgetId": "collectionpage-888610",
+            "additional_classes": "",
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "6f4cd3d3-5dab-4e02-b393-3aadcee9530f"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 40,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 25
+      }
+    },
+    "14162647-55ca-42fc-9ab7-e1ebb2d2aefd": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "ul {list-style-type: disc;}",
+        "h1,.h1 {font-size: 25px;}",
+        "h2,.h2 {font-size: 25px;}",
+        "h3,.h3 {font-size: 25px;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"content description-container\">\n<h1>Introducing Rebrand Room Spray, Your Gateway to Invigorating Environments\n</h1>\n<br>\n<p>Rebrand is where we transform ordinary spaces into captivating realms of freshness and vitality. When you use our Room Freshener Spray, you'll be treated to something more than simply a pleasant aroma. Explore the power of alluring odors to transform your home into an oasis of relaxation with each inhale. </p>\n<br>\n<h2>Ingredients of Room Freshener Spray</h2>\n<br>\n<ul>\n<li>\nEssential Oils\n</li>\n<p>Our Room Freshener Spray uses the potency of essential oils, which are infused with the olfactory marvels of nature. Plants like lavender, citrus, and eucalyptus yield volatile extracts that smell wonderful and have medicinal uses. Citrus refreshes, lavender calms, and eucalyptus stimulate. The result? A sensory journey that promotes health and happiness.</p>\n<br>\n<li>Odor-Neutralizing Agents</li>\n<p>With our cutting-edge odor-neutralizing formula, foul scents are a thing of the past. These substances seek odor-causing particles and neutralize them, leaving your room smelling clean and pleasant. Our Room Freshener Spray eliminates residual aromas, such as those left by cooking or pets, at their source, leaving behind a pleasant fragrance that lasts for hours.\n</p>\n<br>\n<li>Ethanol</li>\n<p>Ethanol is the foundation of our room spray because it not only carries perfumes but also kills germs. The elimination of microorganisms in the air makes your home a safer and healthier place to be. Our painstakingly crafted solution has just the correct amount of ethanol to kill germs while not being overbearing to the taste buds.</p>\n<br>\n<li>Water-Based Formula</li>\n<p>We adhere to a strict, uncompromising moral code. Our water-based formulation offers a soft, uniform aroma spread throughout the room. This careful equilibration of essential oils, ethanol, and water ensures a constant and enduring smell that will turn any space into a haven of peace.\n</p>\n</ul>\n<br>\n        <div class=\"more-content\">\n\n<h3>Benefits of Room Freshener Spray</h3>\n<br>\n<ul>\n<li>Instant Atmosphere Enhancement\n</li>\n<p>Improve your space's aura with a single spritz of Rebrand's Room Freshener Spray. Envision entering a serene space first thing in the morning that smells wonderful and echoes the peace you're seeking. Unlike other air fresheners, our room spray improves the quality of your environment. \n<br>\nOur spray can adjust to your mood smoothly, turning even the most ordinary moments into something extraordinary, whether it's a productive afternoon that requires concentration or a peaceful evening that asks for relaxation. Permeate yourself with a mesmerizing symphony of fragrances that boost your spirits and enhance your experiences, and watch the atmosphere alter easily as you go about your day.\n</p>\n<br>\n<li>Subtle Elegance</li>\n<p>Put those artificial, overbearing scents out of your mind. The Rebrand Room Freshener Spray is the epitome of class and nuance. We know the significance of a perfume that doesn't compete with its surroundings. Our spray was carefully crafted to release a scent that complements rather than overpowers the ambiance of your home. \n<br>\nThe result is subtle elegance that resonates with everyone who enters. Envision your guests entering your space to a scent that envelopes them like a loving embrace and stays with them even after they've left. Allow your impeccable taste to shine by designing an environment guests will never forget.\n</p>\n<br>\n<li>Therapeutic Retreat</li>\n<p>Learn about aromatherapy and its many benefits with the help of Rebrand's Air Freshener Spray. Our spray was created not just for its aromatic appeal but also to provide therapeutic relief from the stresses of daily life. Submerge yourself in an environment where essential oils have been used for more than simply their pleasant aroma. With just a few sprigs of lavender, you can turn any space into a serene oasis where you can forget your worries. \n<br>\nDuring stressful work hours, the zesty undertones of citrus can help you stay on task by energizing your senses. When you need to clear your head, you can escape to the refreshing scent of eucalyptus. Allow our room spray to become an indispensable aid in your quest for harmony and wholeness, transforming your home into a haven where you may rest, recharge, and seek refuge from the stresses of the outside world.\n</p>\n<br>\n<li>Lasting Impression</li>\n<p>The combination of different sensory inputs is what makes an event unforgettable. The aromatic experience of using Rebrand's Room Freshener Spray extends far beyond mere air fragrance. Enter a world where the smells are more than simply an afterthought and become permanent features of your memories. Envision is greeted by the impressive decor of a hotel's foyer and its distinctive aroma. \n<br>\nImagine a store where patrons are immersed in a magical, one-of-a-kind experience rather than merely shopping. Picture yourself in a warm, welcoming home surrounded by your loved ones as a soothing aroma fills the air. A spritz of our room spray may completely alter a location, creating an effect that lasts long after you've moved on.\n</p>\n</ul>\n</div>\n\n        <button id=\"toggle-button\">Read More</button>\n    </div>\n\n\n<style>.more-content {\n    display: none;\n}\n\n.expanded .more-content {\n    display: block;\n}\n\n#toggle-button {\n    cursor: pointer;\n    border: none;\n    background: none;\n    color: #910008;\n    text-decoration: underline;\n    font-size: 15px;\n}\n\n.description-container {\n /*padding-top: 160px;\n  max-width: 1200px;\n  margin: -150px auto 0 auto;*/\n}\n\n@media screen and (max-width: 750px) {\n  .description-container {\n  padding-top:0px;\n  padding-right:15px;;\n  padding-left:15px;\n  padding-bottom:unset;\n  margin-bottom:0px;\n  margin-right:unset;\n  margin-left:unset;\n  margin-top:unset;\n}\n}\n</style>",
+        "text_alignment": "left",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 50,
+        "top_space_mobile": 10,
+        "bottom_space_mobile": 20
+      }
+    },
+    "6b144638-9f32-4c93-b7b5-2d413ced2f39": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--21577792749862__6b144638-9f32-4c93-b7b5-2d413ced2f39-content-1": {
+          "type": "content",
+          "settings": {
+            "heading": "Is the room freshener spray safe to use around children and pets?",
+            "content": "<p>Our room freshener spray is safe for children and pets, as it's free from harmful chemicals.</p>"
+          }
+        },
+        "template--21577792749862__6b144638-9f32-4c93-b7b5-2d413ced2f39-content-2": {
+          "type": "content",
+          "settings": {
+            "heading": "How long does the room freshener spray last?",
+            "content": "<p>The room freshener spray lasts up to 8 hours, offering extended freshness throughout the day.</p>"
+          }
+        },
+        "template--21577792749862__6b144638-9f32-4c93-b7b5-2d413ced2f39-content-3": {
+          "type": "content",
+          "settings": {
+            "heading": "How often should the room freshener spray be used?",
+            "content": "<p>Maintain a comfortable environment by spraying the air every 4 to 6 hours.</p>"
+          }
+        },
+        "20a58fa1-b4c6-4386-942d-2461a825424d": {
+          "type": "content",
+          "settings": {
+            "heading": "What are the side effects of using the room freshener spray?",
+            "content": "<p>No negative impacts have been recorded on health or well-being from using our room freshener spray.</p>"
+          }
+        },
+        "dd8866f7-404c-437f-a6cd-2dd873de036c": {
+          "type": "content",
+          "settings": {
+            "heading": "Is the room freshener spray organic?",
+            "content": "<p>No doubt about it: Our spray deodorizer is made with organic botanical infusions for a genuinely natural scent.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21577792749862__6b144638-9f32-4c93-b7b5-2d413ced2f39-content-1",
+        "template--21577792749862__6b144638-9f32-4c93-b7b5-2d413ced2f39-content-2",
+        "template--21577792749862__6b144638-9f32-4c93-b7b5-2d413ced2f39-content-3",
+        "20a58fa1-b4c6-4386-942d-2461a825424d",
+        "dd8866f7-404c-437f-a6cd-2dd873de036c"
+      ],
+      "custom_css": [
+        ".accordion__item[open] {background: rgb(248, 248, 248);}",
+        ".accordion__heading-icon {background: white;}"
+      ],
+      "settings": {
+        "heading": "<strong>FAQs</strong>",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "show_first_default": false,
+        "section_visibility": "always",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "marker_color": "#ffffff",
+        "marker_text_color": "#ffffff",
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "c8e5af46-68d5-4705-9f07-3cc2b9840e9e",
+    "main-collection",
+    "6f554fdb-7e51-41bf-aa6b-bc51024635fa",
+    "72dac47c-cc41-49c1-9b0b-d3dfa55fd51a",
+    "14162647-55ca-42fc-9ab7-e1ebb2d2aefd",
+    "6b144638-9f32-4c93-b7b5-2d413ced2f39"
+  ],
+  "wrapper": ".boost-sd__product-filter-fallback"
+}

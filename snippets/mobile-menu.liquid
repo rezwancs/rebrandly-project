@@ -1,0 +1,152 @@
+<div class="menu-sidebar " data-menu-items>
+  <div class="menu-sidebar-outer-container">
+    <div class="menu-sidebar-container">
+      <div class="menu-wrapper">
+        <ul class="list-unstyled navbar-sidebar">
+          {%- for link in linklists[section.settings.menu].links -%}
+            {%- liquid
+              assign menuTitle = link.title | handleize
+              assign blockData = ''
+              for block in section.blocks
+                assign blockParent = block.settings.title | handleize
+                if blockParent == menuTitle
+                  assign blockData = block
+                  break
+                endif
+              endfor
+            -%}
+            {% capture megamenuContent %}
+                  {%- for i in (1..4) -%} 
+                      {%- liquid 
+                          assign imageIndex = 'image' | append: i
+                          assign headingIndex = 'heading' | append: i
+                          assign linkIndex = 'link' | append: i
+                          assign image = blockData.settings[imageIndex]
+                          assign heading = blockData.settings[headingIndex]
+                          assign imageLink = blockData.settings[linkIndex] 
+                      -%}
+                      {%- if image != blank or heading != blank  -%}
+                      <div class="col-12 col-sm-6 col-md-6">
+                          <div class="header__megamenu-col">
+                          <a href="{{ imageLink }}" class="unstyled-link header__megamenu-collection img-zoom" aria-label="mobile menu">
+                            {%- if image != blank -%}
+                              <div class="header__megamenu-collection-img fixed-height">
+                              <div class="image-wrapper">
+                                  {%- render 'lazy-image', image: image -%}
+                              </div>
+                              </div>
+                            {%- endif -%}
+                              {% if heading != blank %}
+                                  <div class="header__megamenu-collection-heading">
+                                  <p>{{ heading }}</p>
+                                  </div>
+                              {% endif %}
+                          </a>
+                          </div>
+                      </div>
+                      {% endif %}
+                  {% endfor %}
+                {% endcapture %}
+            <li class="navbar__item {% if link.links != blank or megamenuContent != blank %}dropdown{% endif %}">
+              {% if link.links != blank or megamenuContent != blank %}
+                <div class="navbar__link {% if link.links != blank or megamenuContent != blank %}menu-dropdwon{% endif %}">
+                  {{ link.title | escape }}
+                </div>
+                <div class="inner-navbar">
+                  <div class="inner-navbar__innerbox">
+                    <div class="inner-navbar__title" data-item-pannel="0" data-menu-navbarback>
+                      <svg width="8" height="15" viewBox="0 0 8 15" fill="none">
+                        <path  fill-rule="evenodd" clip-rule="evenodd" d="M7.72322 14.207C7.96511 13.9608 7.96156 13.565 7.71531 13.3232L1.93958 7.64992L7.61282 1.87418C7.85471 1.62793 7.85116 1.23222 7.60491 0.990332C7.35866 0.748449 6.96294 0.751991 6.72106 0.998244L0.609848 7.21986C0.367965 7.46611 0.371507 7.86183 0.61776 8.10371L6.83938 14.2149C7.08563 14.4568 7.48134 14.4533 7.72322 14.207Z" fill="currentColor"/>
+                      </svg>
+                      {{ link.title | escape }}
+                    </div>
+                    {% if link.links != blank %}
+                      <ul class="list-unstyled">
+                        {%- for childlink in link.links -%}
+                          <li class="navbar__item {% if childlink.links != blank %}dropdown{% endif %}">
+                            {%- if childlink.links != blank -%}
+                              <div class="navbar__link {% if link.links != blank %}menu-dropdwon{% endif %}">
+                                {{- childlink.title | escape -}}
+                              </div>
+                              <div class="grand-inner-navbar">
+                                <div class="grand-inner-navbar__innerbox">
+                                  <div class="inner-navbar__title" data-item-pannel="1" data-menu-navbarback>
+                                    <svg width="8" height="15" viewBox="0 0 8 15" fill="none">
+                                      <path  fill-rule="evenodd" clip-rule="evenodd" d="M7.72322 14.207C7.96511 13.9608 7.96156 13.565 7.71531 13.3232L1.93958 7.64992L7.61282 1.87418C7.85471 1.62793 7.85116 1.23222 7.60491 0.990332C7.35866 0.748449 6.96294 0.751991 6.72106 0.998244L0.609848 7.21986C0.367965 7.46611 0.371507 7.86183 0.61776 8.10371L6.83938 14.2149C7.08563 14.4568 7.48134 14.4533 7.72322 14.207Z" fill="currentColor"/>
+                                    </svg>
+                                    {{- childlink.title | escape -}}
+                                  </div>
+                                  <ul class="list-unstyled">
+                                    {%- for grandchildlink in childlink.links -%}
+                                      <li class="navbar__item">
+                                        <a href="{{ grandchildlink.url }}" class="unstyled-link navbar__link">
+                                          {{- grandchildlink.title | escape -}}
+                                        </a>
+                                      </li>
+                                    {% endfor %}
+                                  </ul>
+                                </div>
+                              </div>
+                            {% else %}
+                              <a href="{{ childlink.url }}" class="unstyled-link navbar__link">{{- childlink.title | escape -}}</a>
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                    {% if megamenuContent != blank %}
+                      <div class="navbar__collection">
+                        <div class="row">
+                          {{ megamenuContent }}
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% else %}
+                <a href="{{ link.url }}" class="unstyled-link navbar__link">{{ link.title | escape }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+          {%- if customer -%}
+            <a href="{{ routes.account_url }}" class="unstyled-link navbar__link">
+              {{ 'customer.account' | t }}
+            </a>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="menu-bottom-wrapper">
+        {%- if shop.customer_accounts_enabled -%}
+          <div class="lower-nav">
+            <div class="menu-login-btn">
+              {%- if customer -%}
+                <a class="unstyled-link button secondary-button icon-btn right-icon btn-block" href="{{ routes.account_logout_url }}">
+                  <span>
+                    {{ 'customer.log_out' | t }}
+                  </span>
+                  <span class="btn-icon">
+                    {% render 'icons', icon: 'arrow' %}
+                  </span>
+                </a>
+              {%- else -%}
+                <a class="unstyled-link button secondary-button  icon-btn right-icon btn-block {{ settings.button_style }}" href="{{ routes.account_login_url }}">
+                  {% assign buttonText = 'customer.log_in' | t %}
+                  {% render 'button-style', buttonText:buttonText %}
+                </a>
+                <div class="text-center menu-login-link">
+                  <p class="">
+                    {{ 'customer.login_page.account_heading' | t }}
+                    <a href="{{ routes.account_register_url }}" class="hyperlink">
+                      {{- 'customer.login_page.account_subtext' | t -}}
+                    </a>
+                  </p>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {% endif %}
+        {%- render 'social-media-icons' -%}
+      </div>
+    </div>
+  </div>
+</div>

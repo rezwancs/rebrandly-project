@@ -1,0 +1,29 @@
+{%- if block.settings.size_chart != blank -%}
+  {% assign sizeChart = pages[block.settings.size_chart] %}
+  {% if sizeTrigger == true %}
+    {% if sizeChart != blank %}
+      <a href="#sizeChart" class="unstyled-link variant-info text-medium" data-side-drawer-open>
+        <span>{{ 'products.product.size_chart_label' | t }}</span>
+        <svg width="20" viewBox="0 0 24 15" fill="none">
+          <path d="M11.7659 13.8634V10.8378M18.8357 13.8634V10.8378M15.3014 13.8634V11.9349M8.23159 13.8634V11.9349M4.69602 13.8634V10.8378M1 4.68075V10.3193C1 11.2955 1.3928 12.2317 2.092 12.922C2.7912 13.6123 3.73954 14 4.72836 14H23V8.36142H4.72836C3.73954 8.36142 2.79127 7.97366 2.09208 7.28339C1.39288 6.59312 1 5.65694 1 4.68075ZM1 4.68075C1 3.70456 1.39288 2.76833 2.09208 2.07806C2.79127 1.38779 3.73959 1 4.7284 1H15.7594C16.7482 1 17.6966 1.38779 18.3958 2.07806C19.095 2.76833 19.4878 3.70454 19.4878 4.68072C19.4878 5.65691 19.095 6.59312 18.3958 7.28339C17.6966 7.97366 16.7482 8.36145 15.7594 8.36145M15.7671 4.68075H4.71922" stroke="currentColor" stroke-width="1.6" stroke-miterlimit="10"/>
+        </svg>
+      </a>
+    {% endif %}
+  {% else -%}
+    {%- capture popupContent -%}
+    <div class="size-chart__content">
+      <div class="size-chart__body rte">
+        <h4 class="size-chart__heading">{{ sizeChart.title }}</h4>
+        {{
+          sizeChart.content
+          | replace: '<table', '<div class="size-chart-table table-responsive"><table'
+          | replace: '</table>', '</table></div>'
+        }}
+      </div>
+    </div>
+  {%- endcapture -%}
+    {% if popupContent != blank %}
+      {% render 'popup', id: 'sizeChart', class: 'size-chart-popup', popupContent: popupContent %}
+    {% endif %}
+  {% endif %}
+{% endif %}

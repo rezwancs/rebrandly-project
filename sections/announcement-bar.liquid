@@ -1,0 +1,285 @@
+<style>
+  #shopify-section-{{ section.id }}{
+    --announce-bg: {{ section.settings.bgcolor2 }};
+    --annouce-bg-color: {{ section.settings.bgcolor }};
+    --annouce-text-color: {{ section.settings.fontcolor }};
+  }
+  {% if section.blocks.size == 0 %}
+    #shopify-section-{{ section.id }}{
+      display:none;
+    }
+  {% endif %}
+  .announcement-inner {
+    position: relative;
+    padding: 5px;
+    {%- if section.settings.bg_style == 'gradient' -%}
+         background: var(--announce-bg);
+    {%- else -%}
+         background-color: var(--annouce-bg-color);
+    {%- endif -%}
+  }
+  .announcement-inner p {
+    color: var(--annouce-text-color);
+  }
+  .announcement-inner p a{
+    --link-color: {{ section.settings.link_color }};
+  }
+  .announcement-inner p a:hover{
+  --link-hover-color: {{ section.settings.link_hover_color }};
+  }
+  @media (min-width: 992px) {
+    .header.desktop-transparent-header+ #shopify-section-{{ section.id }}{
+      position: absolute;
+      top: var(--header-height);
+      z-index: 2;
+      width: 100%;
+    }
+  }
+  @media (max-width: 991px) {
+    .header.mobile-transparent-header+ #shopify-section-{{ section.id }}{
+      position: absolute;
+      top: var(--header-height);
+      z-index: 2;
+      width: 100%;
+    }
+  }
+  {% if section.settings.section_visibility == 'large' %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% elsif section.settings.section_visibility == 'small' %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% endif %}
+</style>
+
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'announcement-bar-rtl.css' | asset_url }}">
+  {{ 'announcement-bar-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'announcement-bar.css' | asset_url }}">
+  {{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<div class="announcement_bar" id="announcement-{{ section.id }}">
+  <div class="announcement-inner">
+    <div class="container-xs">
+      <div
+        class="announce-slider slider"
+        {%- if section.blocks.size > 1 -%}
+          data-manual="true"
+          data-theme-slider='
+            {
+            "wrapAround":true,
+            "contain": true,
+            "pauseAutoPlayOnHover": false,
+            "resize": true,
+            "touchVerticalScroll": false,
+            "pageDots": false,
+            "prevNextButtons":true,
+            "selectedAttraction": 0.01,
+            "friction": 0.17,
+            "autoPlay":{%- if section.settings.rotate -%}{{ section.settings.interval | times: 1000 }}{%- else -%}false{%- endif -%},
+            "rightToLeft":{%- if rtlEnable  -%}true{%- else -%}false{%- endif -%},
+            "arrowShape": "{%- render 'icons' icon:'flickity-arrow' -%}"
+            }
+          '
+        {%- endif -%}
+      >
+        {% for block in section.blocks %}
+          {% unless block.settings.text == blank %}
+            <div class="announce-slider-item text-center" {{ block.shopify_attributes }}>
+              {%- if block.settings.text != blank -%}
+                <p class="rte">
+                  <span>{{- block.settings.text -}}</span>
+                </p>
+              {%- endif -%}
+            </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var annoucementFixedHeight = 0;
+  function announementHeight() {
+    let announcementSection = document.querySelector('.announcement-bar-section');
+    if (!announcementSection) return false;
+    setTimeout(() => {
+      let annoucementHeight = announcementSection.offsetHeight;
+      annoucementFixedHeight = annoucementHeight;
+      let scrollTop = window.scrollY;
+      document.querySelector('body').style.setProperty('--announceheightfixed', `${annoucementFixedHeight}px`);
+      if (scrollTop > annoucementHeight) {
+        document.querySelector('body').style.setProperty('--announce-height', `0px`);
+      } else {
+        let annouceHeight = Math.max(annoucementHeight - scrollTop, 0);
+        document.querySelector('body').style.setProperty('--announce-height', `${annouceHeight}px`);
+      }
+    }, 500);
+  }
+  function announementHeightOnScroll() {
+    let announcementSection = document.querySelector('.announcement-bar-section');
+    if (!announcementSection) return false;
+    let annoucementHeight = announcementSection.offsetHeight;
+    let scrollTop = window.scrollY;
+    if (scrollTop > annoucementHeight) {
+      document.querySelector('body').style.setProperty('--announce-height', `0px`);
+    } else {
+      let annouceHeight = Math.max(annoucementHeight - scrollTop, 0);
+      document.querySelector('body').style.setProperty('--announce-height', `${annouceHeight}px`);
+    }
+  }
+  window.addEventListener('resize', announementHeight, false);
+  window.addEventListener('scroll', announementHeightOnScroll, false);
+  document.addEventListener('DOMContentLoaded', announementHeight, false);
+  document.addEventListener('shopify:section:load', announementHeight, false);
+  document.addEventListener('shopify:section:unload', announementHeight, false);
+</script>
+{% schema %}
+{
+  "name": "t:sections.announcement_bar.name",
+  "class": "announcement-bar-section",
+  "max_blocks": 3,
+  "disabled_on": {
+    "groups": ["footer"]
+  },
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement_bar.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:common.header.text.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "t:common.heading.label",
+          "default": "Announcement Here"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "rotate",
+      "label": "t:sections.announcement_bar.settings.auto-rotate.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "t:sections.announcement_bar.settings.interval.label",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "color",
+      "id": "fontcolor",
+      "default": "#ffffff",
+      "label": "t:sections.announcement_bar.settings.font_color.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.announcement_bar.settings.background.label"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "t:sections.announcement_bar.settings.background.style.label",
+      "default": "solid",
+      "options": [
+        {
+          "label": "t:sections.announcement_bar.settings.background.style.options.solid.label",
+          "value": "solid"
+        },
+        {
+          "label": "t:sections.announcement_bar.settings.background.style.options.gradient.label",
+          "value": "gradient"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "default": "#181818",
+      "label": "t:sections.announcement_bar.settings.background.solid.label"
+    },
+    {
+      "type": "color_background",
+      "id": "bgcolor2",
+      "label": "t:sections.announcement_bar.settings.background.gradient.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.announcement_bar.settings.link.label"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "default": "#ffffff",
+      "label": "t:sections.announcement_bar.settings.link.text_color.label"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "default": "#A3A3A3",
+      "label": "t:sections.announcement_bar.settings.link.text_hover_color.label"
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "announcement"
+      }
+    ]
+  }
+}
+{% endschema %}

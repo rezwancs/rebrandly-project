@@ -1,0 +1,4163 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "common": {
+    "section_visibility": {
+      "label": "部分可見性",
+      "options": {
+        "always": {
+          "label": "總是"
+        },
+        "small_devices": {
+          "label": "僅限小型設備"
+        },
+        "large_devices": {
+          "label": "僅限大型設備"
+        }
+      }
+    },
+    "marker_style": {
+      "info": "將文本換行在 [[ ]] 之間以添加標記。例如：此 [[標記]] 將為標記文本添加下劃線。"
+    },
+    "section_fullwidth": {
+      "label": "啟用部分全寬"
+    },
+    "content_position": {
+      "label": "內容位置",
+      "heading": {
+        "label_desktop": {
+          "label": "桌面"
+        },
+        "label_mobile": {
+          "label": "移動的"
+        }
+      },
+      "options": {
+        "bottom-center": {
+          "label": "底部中心"
+        },
+        "bottom-left": {
+          "label": "左下方"
+        },
+        "bottom-right": {
+          "label": "右下方"
+        },
+        "center": {
+          "label": "中心"
+        },
+        "center-left": {
+          "label": "中左"
+        },
+        "center-right": {
+          "label": "中右"
+        },
+        "top-center": {
+          "label": "頂部中心"
+        },
+        "top-left": {
+          "label": "左上方"
+        },
+        "top-right": {
+          "label": "右上"
+        },
+        "left": {
+          "label": "左邊"
+        },
+        "right": {
+          "label": "正確的"
+        }
+      }
+    },
+    "header": {
+      "back_in_stock": {
+        "label": "每次有人填寫此表格時，您都會收到一封電子郵件。當產品可用時，電子郵件警報不會自動發送給客戶 - 您需要這樣做。"
+      },
+      "back_in_stock_form": {
+        "label": "注意：返回庫存表單始終在主題編輯器中可見。"
+      },
+      "background_gradient": {
+        "label": "背景漸變"
+      },
+      "product_label": {
+        "content": "產品標籤",
+        "info": "使用動態源通過創建產品標籤來突出獨特的屬性。[Learn more](https:\/\/shinedezign.gitbook.io\/fame-documentations\/overview\/theme-settings#product-labels)."
+      },
+      "size": {
+        "label": "尺寸"
+      },
+      "button": {
+        "label": "按鈕"
+      },
+      "button_alternate": {
+        "label": "按鈕交替"
+      },
+      "gift_card": {
+        "label": "禮物卡"
+      },
+      "cart": {
+        "label": "大車"
+      },
+      "main_button": {
+        "label": "主按鈕"
+      },
+      "product": {
+        "label": "產品"
+      },
+      "discount": {
+        "label": "折扣"
+      },
+      "form_input": {
+        "label": "表單輸入"
+      },
+      "slider_arrows": {
+        "label": "滑塊箭頭"
+      },
+      "others": {
+        "label": "其他的"
+      },
+      "popular_search": {
+        "label": "熱門搜索"
+      },
+      "color_section": {
+        "label": "顏色"
+      },
+      "suggestions": {
+        "label": "建議"
+      },
+      "search_results": {
+        "label": "搜索結果"
+      },
+      "drawer": {
+        "label": "抽屜"
+      },
+      "popup": {
+        "label": "彈出窗口"
+      },
+      "quick_view": {
+        "label": "快速瀏覽",
+        "enable_quickview_fullwidth": {
+          "label": "啟用全角"
+        },
+        "enable_title_marquee": {
+          "label": "啟用產品標題字幕"
+        }
+      },
+      "social_accounts": {
+        "label": "社交賬號"
+      },
+      "color_singular_section": {
+        "label": "顏色"
+      },
+      "content_alignment_section": {
+        "label": "內容對齊"
+      },
+      "desktop_color": {
+        "label": "桌面顏色"
+      },
+      "mobile_color": {
+        "label": "手機顏色"
+      },
+      "font": {
+        "label": "字體"
+      },
+      "fonts": {
+        "label": "字體"
+      },
+      "height": {
+        "label": "高度"
+      },
+      "text": {
+        "label": "文本"
+      },
+      "images": {
+        "label": "圖片"
+      },
+      "image": {
+        "label": "圖像"
+      },
+      "logo": {
+        "label": "標識"
+      },
+      "search": {
+        "label": "搜索"
+      },
+      "link": {
+        "label": "關聯"
+      },
+      "banner": {
+        "label": "橫幅"
+      },
+      "section_height": {
+        "label": "截面高度"
+      }
+    },
+    "button_style": {
+      "label": "按鈕樣式",
+      "options": {
+        "main": {
+          "label": "主按鈕"
+        },
+        "alternate": {
+          "label": "備用按鈕"
+        }
+      }
+    },
+    "style": {
+      "label": "風格"
+    },
+    "grid_image_fit": {
+      "label": "網格圖像適合",
+      "options": {
+        "cover": {
+          "label": "覆蓋"
+        },
+        "contain": {
+          "label": "包含"
+        }
+      }
+    },
+    "media_fit": {
+      "label": "適合媒體"
+    },
+    "highlight_text": {
+      "label": "啟用高亮文本",
+      "info": "突出顯示文本適用於標題的粗體和斜體文本。[Learn more](https:\/\/shinedezign.gitbook.io\/fame-documentations\/overview\/theme-settings#product-labels)."
+    },
+    "color_scheme": {
+      "label": "配色方案",
+      "options": {
+        "primary": {
+          "label": "基本的"
+        },
+        "secondary": {
+          "label": "中學"
+        },
+        "tertiary": {
+          "label": "第三"
+        },
+        "quaternary": {
+          "label": "第四紀"
+        }
+      }
+    },
+    "section_spacing": {
+      "label": "截面間距",
+      "top_space_desktop": {
+        "label": "頂部間距（桌面）"
+      },
+      "bottom_space_desktop": {
+        "label": "底部間距（桌面）"
+      },
+      "top_space_mobile": {
+        "label": "頂部間距（移動）"
+      },
+      "bottom_space_mobile": {
+        "label": "底部間距（移動）"
+      }
+    },
+    "heading": {
+      "label": "標題"
+    },
+    "text": {
+      "label": "文本"
+    },
+    "image": {
+      "label": "圖像"
+    },
+    "link": {
+      "label": "關聯"
+    },
+    "description": {
+      "label": "描述"
+    },
+    "alignment": {
+      "options": {
+        "left": {
+          "label": "左邊"
+        },
+        "center": {
+          "label": "中心"
+        },
+        "right": {
+          "label": "正確的"
+        }
+      }
+    },
+    "text_alignment": {
+      "label": "文本對齊",
+      "options": {
+        "top": {
+          "label": "頂部"
+        },
+        "left": {
+          "label": "左邊"
+        },
+        "center": {
+          "label": "中心"
+        },
+        "right": {
+          "label": "正確的"
+        }
+      }
+    },
+    "heading_alignment": {
+      "label": "航向對齊",
+      "options": {
+        "left": {
+          "label": "左邊"
+        },
+        "center": {
+          "label": "中心"
+        },
+        "right": {
+          "label": "正確的"
+        }
+      }
+    },
+    "outline_stroke": {
+      "label": "輪廓描邊",
+      "options": {
+        "thin": {
+          "label": "薄的"
+        },
+        "thick": {
+          "label": "厚的"
+        }
+      }
+    },
+    "grid_image_size": {
+      "label": "網格圖像比例",
+      "options": {
+        "auto": {
+          "label": "汽車"
+        },
+        "landscape": {
+          "label": "景觀"
+        },
+        "portrait": {
+          "label": "肖像"
+        },
+        "square": {
+          "label": "正方形"
+        }
+      }
+    },
+    "banner": {
+      "image": {
+        "label": "橫幅圖片",
+        "info": "建議使用 1920 x 200 像素。"
+      },
+      "height": {
+        "options": {
+          "auto": {
+            "label": "汽車"
+          },
+          "small": {
+            "label": "小的"
+          },
+          "medium": {
+            "label": "中等的"
+          },
+          "large": {
+            "label": "大的"
+          }
+        }
+      },
+      "desktop_height": {
+        "label": "桌面高度"
+      },
+      "mobile_height": {
+        "label": "移動高度"
+      }
+    },
+    "desktop": {
+      "label": "桌面"
+    },
+    "mobile": {
+      "label": "移動的"
+    },
+    "button_size": {
+      "label": "按鈕尺寸",
+      "options": {
+        "xsmall": {
+          "label": "特別小"
+        },
+        "small": {
+          "label": "小的"
+        },
+        "medium": {
+          "label": "中等的"
+        },
+        "large": {
+          "label": "大的"
+        }
+      }
+    },
+    "button_as_link": {
+      "label": "將按鈕顯示為鏈接"
+    },
+    "video": {
+      "label": "視頻"
+    },
+    "button_hover": {
+      "background": {
+        "label": "懸停背景"
+      },
+      "text": {
+        "label": "懸停文字"
+      },
+      "border": {
+        "label": "懸停邊框"
+      }
+    },
+    "heading_size": {
+      "label": "標題大小",
+      "options": {
+        "h1": {
+          "label": "H1"
+        },
+        "h2": {
+          "label": "氫氣"
+        },
+        "h3": {
+          "label": "H3"
+        },
+        "h4": {
+          "label": "H4"
+        },
+        "h5": {
+          "label": "H5"
+        },
+        "h6": {
+          "label": "H6"
+        }
+      }
+    }
+  },
+  "sections": {
+    "404": {
+      "name": "主要404"
+    },
+    "store_locator": {
+      "name": "商店定位器",
+      "setting": {
+        "desktop_height": {
+          "label": "桌面高度"
+        },
+        "mobile_height": {
+          "label": "移動高度"
+        }
+      },
+      "blocks": {
+        "store": {
+          "name": "店鋪",
+          "settings": {
+            "store_name": {
+              "label": "店鋪名稱",
+              "info": "商店名稱需要與[位置設置](\/admin\/settings\/locations) 中定義的商店名稱匹配"
+            },
+            "store_detail": {
+              "label": "店鋪詳情"
+            },
+            "store_image": {
+              "label": "店鋪形象"
+            },
+            "location": {
+              "label": "地點",
+              "info": "確保您已在主題設置>Google 地圖中添加了 Google 地圖 API。"
+            }
+          }
+        }
+      }
+    },
+    "slider": {
+      "name": "幻燈片",
+      "info": "可拖動不適用於動畫。",
+      "settings": {
+        "navigation_style": {
+          "label": "導航風格",
+          "options": {
+            "arrows": {
+              "label": "箭頭"
+            },
+            "count": {
+              "label": "數數"
+            },
+            "dots": {
+              "label": "點"
+            }
+          }
+        },
+        "animation": {
+          "label": "啟用動畫",
+          "info": "如果啟用了自動旋轉功能，則動畫將不起作用。"
+        },
+        "auto_rotate_slide": {
+          "label": "自動旋轉幻燈片"
+        },
+        "background": {
+          "label": "背景"
+        },
+        "background_gradient": {
+          "label": "背景漸變"
+        },
+        "color_header_info": {
+          "info": "僅適用於啟用動畫且移動設備上圖片下方的內容。"
+        },
+        "content_below_image": {
+          "label": "在手機上顯示圖片下方的內容"
+        },
+        "desktop_font_size": {
+          "label": "桌面字體大小"
+        },
+        "desktop_height": {
+          "label": "桌面",
+          "options": {
+            "options__1": {
+              "label": "650px"
+            },
+            "options__2": {
+              "label": "750px"
+            },
+            "options__3": {
+              "label": "850px"
+            },
+            "options__4": {
+              "label": "100vh"
+            },
+            "options__5": {
+              "label": "自動適應第一張幻燈片"
+            }
+          }
+        },
+        "interval": {
+          "label": "每隔一段時間換一張幻燈片"
+        },
+        "heading_font_family": {
+          "label": "標題字體系列",
+          "options": {
+            "heading": {
+              "label": "標題"
+            },
+            "body": {
+              "label": "身體"
+            }
+          }
+        },
+        "mobile_font_size": {
+          "label": "手機字體大小"
+        },
+        "mobile_height": {
+          "label": "移動的",
+          "options": {
+            "options__1": {
+              "label": "550px"
+            },
+            "options__2": {
+              "label": "650px"
+            },
+            "options__3": {
+              "label": "750px"
+            },
+            "options__4": {
+              "label": "100vh"
+            },
+            "options__5": {
+              "label": "自動適應第一張幻燈片"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "滑動",
+          "settings": {
+            "desktop_image": {
+              "label": "圖片（桌面）"
+            },
+            "mobile_image": {
+              "label": "圖片（手機）"
+            },
+            "video": {
+              "label": "背景視頻",
+              "info": "它僅支持 .mp4 視頻。"
+            },
+            "heading": {
+              "label": "標題"
+            },
+            "description": {
+              "label": "描述"
+            },
+            "button_text": {
+              "label": "文本"
+            },
+            "link": {
+              "label": "關聯",
+              "info": "如果按鈕文本為空白，則鏈接將應用於整個圖像。"
+            },
+            "background": {
+              "label": "背景"
+            },
+            "background_gradient": {
+              "label": "背景漸變"
+            },
+            "heading_color": {
+              "label": "標題"
+            },
+            "highlight_text": {
+              "label": "高亮文本"
+            },
+            "description_color": {
+              "label": "描述"
+            },
+            "button_background": {
+              "label": "按鈕背景"
+            },
+            "button_text_color": {
+              "label": "按鈕文字"
+            },
+            "button_border": {
+              "label": "按鈕邊框"
+            },
+            "overlay": {
+              "label": "覆蓋"
+            },
+            "overlay_color": {
+              "label": "疊加顏色"
+            },
+            "overlay_opacity": {
+              "label": "疊加不透明度"
+            },
+            "button_hover_background": {
+              "label": "按鈕懸停背景"
+            },
+            "button_hover_text_color": {
+              "label": "按鈕懸停文本"
+            },
+            "button_hover_border": {
+              "label": "按鈕懸停邊框"
+            },
+            "content": {
+              "label": "內容",
+              "width": {
+                "label": "桌面寬度",
+                "options": {
+                  "small": {
+                    "label": "小的"
+                  },
+                  "medium": {
+                    "label": "中等的"
+                  },
+                  "large": {
+                    "label": "大的"
+                  }
+                }
+              },
+              "alignment": {
+                "label": "結盟"
+              }
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "幻燈片"
+      }
+    },
+    "split_slider": {
+      "name": "拆分幻燈片",
+      "settings": {
+        "navigation_style": {
+          "label": "導航風格",
+          "options": {
+            "image": {
+              "label": "圖像"
+            },
+            "count": {
+              "label": "數數"
+            }
+          }
+        },
+        "background_color": {
+          "label": "背景"
+        },
+        "heading_font_family": {
+          "label": "標題字體系列",
+          "options": {
+            "heading": {
+              "label": "標題"
+            },
+            "body": {
+              "label": "身體"
+            }
+          }
+        },
+        "desktop_font_size": {
+          "label": "桌面字體大小"
+        },
+        "mobile_font_size": {
+          "label": "手機字體大小"
+        },
+        "desktop_height": {
+          "label": "桌面",
+          "options": {
+            "options__1": {
+              "label": "650px"
+            },
+            "options__2": {
+              "label": "750px"
+            },
+            "options__3": {
+              "label": "900px"
+            },
+            "options__4": {
+              "label": "100vh"
+            }
+          }
+        },
+        "mobile_height": {
+          "label": "移動的",
+          "options": {
+            "options__1": {
+              "label": "550px"
+            },
+            "options__2": {
+              "label": "650px"
+            },
+            "options__3": {
+              "label": "750px"
+            },
+            "options__4": {
+              "label": "100vh"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "滑動",
+          "settings": {
+            "heading": {
+              "label": "標題"
+            },
+            "description": {
+              "label": "描述"
+            },
+            "button_text": {
+              "label": "文本"
+            },
+            "link": {
+              "label": "關聯"
+            },
+            "desktop_image": {
+              "label": "圖片（桌面）"
+            },
+            "mobile_image": {
+              "label": "圖片（手機）"
+            },
+            "heading_color": {
+              "label": "標題"
+            },
+            "highlight_text_color": {
+              "label": "高亮文本"
+            },
+            "background": {
+              "label": "背景"
+            },
+            "description_color": {
+              "label": "描述"
+            },
+            "button_background": {
+              "label": "按鈕背景"
+            },
+            "button_text_color": {
+              "label": "按鈕文字"
+            },
+            "button_border": {
+              "label": "按鈕邊框"
+            },
+            "button_hover_background": {
+              "label": "按鈕懸停背景"
+            },
+            "button_hover_text_color": {
+              "label": "按鈕懸停文本"
+            },
+            "button_hover_border": {
+              "label": "按鈕懸停邊框"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "拆分幻燈片"
+      }
+    },
+    "testimonials": {
+      "name": "感言",
+      "settings": {
+        "heading": {
+          "label": "標題"
+        },
+        "stacked_carousel": {
+          "label": "啟用堆疊輪播"
+        },
+        "hide_border": {
+          "label": "隱藏邊框"
+        },
+        "quote_count": {
+          "label": "行情查看",
+          "info": "它不適用於堆疊式傳送帶。",
+          "options": {
+            "one": {
+              "label": "一"
+            },
+            "two": {
+              "label": "二"
+            }
+          }
+        },
+        "quote_text_alignment": {
+          "label": "引用文本對齊",
+          "options": {
+            "left": {
+              "label": "左邊"
+            },
+            "center": {
+              "label": "中心"
+            },
+            "right": {
+              "label": "正確的"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "quote": {
+          "name": "引用",
+          "settings": {
+            "author_name": {
+              "label": "作者姓名"
+            },
+            "author_title": {
+              "label": "作者職稱"
+            },
+            "show_rating": {
+              "label": "顯示評分"
+            },
+            "rating": {
+              "label": "評分"
+            },
+            "message": {
+              "label": "信息"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "感言"
+      }
+    },
+    "spotlight": {
+      "name": "購買外觀",
+      "settings": {
+        "heading": {
+          "label": "標題"
+        },
+        "image": {
+          "label": "圖像"
+        },
+        "button": {
+          "info": "此設置僅適用於“樣式 2”。"
+        },
+        "spotlight_style": {
+          "label": "風格",
+          "options": {
+            "style1": {
+              "label": "款式一"
+            },
+            "style2": {
+              "label": "樣式 2"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "look": {
+          "name": "看",
+          "settings": {
+            "product": {
+              "label": "產品"
+            },
+            "hotspot": {
+              "label": "熱點"
+            },
+            "position": {
+              "horizontal": {
+                "label": "水平位置"
+              },
+              "vertical": {
+                "label": "垂直位置"
+              }
+            },
+            "spot_color": {
+              "label": "專色"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "購買外觀"
+      }
+    },
+    "images_grid": {
+      "name": "圖片網格",
+      "settings": {
+        "tiles": {
+          "label": "顯示為圖塊"
+        },
+        "heading_alignment": {
+          "label": "航向對齊"
+        }
+      },
+      "blocks": {
+        "image": {
+          "name": "圖像",
+          "settings": {
+            "image": {
+              "label": "圖像"
+            },
+            "button": {
+              "header": {
+                "info": "按鈕不適用於圖像塊，但按鈕鏈接將適用於圖像塊。"
+              },
+              "text": {
+                "label": "文本"
+              },
+              "link": {
+                "label": "關聯"
+              }
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "圖片網格"
+      }
+    },
+    "header": {
+      "name": "標頭",
+      "settings": {
+        "header_style": {
+          "label": "導航類型",
+          "options": {
+            "header1": {
+              "label": "全寬菜單"
+            },
+            "header2": {
+              "label": "漢堡菜單"
+            }
+          }
+        },
+        "sticky_header": {
+          "label": "啟用粘性標頭"
+        },
+        "sticky_header_type": {
+          "label": "粘性標頭類型",
+          "options": {
+            "type1": {
+              "label": "向上滾動"
+            },
+            "type2": {
+              "label": "總是"
+            }
+          }
+        },
+        "logo": {
+          "width": {
+            "label": "自定義徽標寬度"
+          },
+          "position": {
+            "label": "標識位置",
+            "info": "這僅適用於桌面。",
+            "options": {
+              "left": {
+                "label": "左邊"
+              },
+              "center": {
+                "label": "中心"
+              }
+            }
+          }
+        },
+        "transparent_header": {
+          "header": {
+            "label": "透明表頭",
+            "info": "在第一個位置添加一個部分，允許透明標題，例如幻燈片或拆分幻燈片。"
+          },
+          "logo": {
+            "label": "備用標誌"
+          },
+          "desktop": {
+            "label": "啟用透明度（桌面）"
+          },
+          "mobile": {
+            "label": "啟用透明度（移動）"
+          },
+          "background_blur": {
+            "label": "啟用背景模糊",
+            "info": "它僅適用於桌面視圖"
+          },
+          "color": {
+            "label": "文本和圖標顏色"
+          },
+          "background": {
+            "label": "背景"
+          },
+          "opacity": {
+            "label": "不透明度"
+          }
+        },
+        "navigation": {
+          "header": {
+            "label": "導航"
+          },
+          "menu": {
+            "label": "菜單"
+          },
+          "menu_alignment": {
+            "label": "菜單排列",
+            "info": "僅適用於全寬菜單，並且僅適用於桌面。"
+          },
+          "desktop_header": {
+            "label": "桌面導航",
+            "info": "僅適用於全寬菜單。"
+          }
+        },
+        "desktop_font_bold": {
+          "label": "顯示桌面字體粗體"
+        },
+        "enable_icon_background": {
+          "label": "啟用圖標背景"
+        },
+        "background_container_header": {
+          "label": "在容器中顯示標題背景"
+        },
+        "search": {
+          "label": "啟用搜索"
+        },
+        "hamburger_menu": {
+          "header": {
+            "label": "漢堡菜單"
+          },
+          "blur_background": {
+            "label": "啟用模糊背景"
+          },
+          "social_icons": {
+            "label": "顯示社交媒體圖標",
+            "info": "要顯示您的社交媒體帳戶，請在您的主題設置 -> 社交媒體中鏈接它們"
+          },
+          "social_icons_position": {
+            "label": "社交媒體圖標位置",
+            "options": {
+              "top": {
+                "label": "頂部"
+              },
+              "bottom": {
+                "label": "底部"
+              }
+            }
+          }
+        },
+        "show_header_border": {
+          "label": "顯示底部邊框"
+        },
+        "header_border_opacity": {
+          "label": "底部邊框不透明度"
+        }
+      },
+      "blocks": {
+        "megamenu": {
+          "name": "超級菜單",
+          "settings": {
+            "menu_label": {
+              "label": "菜單標籤",
+              "info": "輸入功能表項以應用大型功能表。[瞭解更多]（https:\/\/shinedezign.gitbook.io\/fame-documentations\/overview\/header#mega-menu）"
+            },
+            "content_1": {
+              "header": {
+                "label": "內容一"
+              }
+            },
+            "content_2": {
+              "header": {
+                "label": "內容二"
+              }
+            },
+            "content_3": {
+              "header": {
+                "label": "內容三"
+              }
+            },
+            "content_4": {
+              "header": {
+                "label": "內容4"
+              }
+            }
+          }
+        }
+      }
+    },
+    "footer": {
+      "name": "頁腳",
+      "settings": {
+        "logo_position": {
+          "label": "標誌位置",
+          "options": {
+            "top": {
+              "label": "頂部"
+            },
+            "bottom": {
+              "label": "底部"
+            }
+          }
+        },
+        "open_menu_mobile": {
+          "info": "它不適用於堆疊視圖。",
+          "label": "默認打開手機菜單"
+        },
+        "follow_on_shop": {
+          "content": "關注店鋪",
+          "info": "要允許客戶從您的店面在 Shop 應用程序上關注您的商店，必須啟用 Shop Pay。 [了解更多](https:\/\/help.shopify.com\/manual\/online-store\/themes\/customizing-themes\/follow-on-shop)."
+        },
+        "enable_follow_on_shop": {
+          "label": "啟用商店關注"
+        },
+        "logo": {
+          "label": "標識"
+        },
+        "logo_width": {
+          "label": "自定義徽標寬度"
+        },
+        "description": {
+          "label": "描述"
+        },
+        "language_selector": {
+          "header": {
+            "label": "語言選擇器"
+          },
+          "paragraph": {
+            "label": "要添加語言，請轉到您的[語言設置](\/admin\/settings\/languages)"
+          },
+          "show_language_selector": {
+            "label": "啟用語言選擇器"
+          }
+        },
+        "currency_selector": {
+          "header": {
+            "label": "貨幣選擇器"
+          },
+          "paragraph": {
+            "label": "要添加國家\/地區，請轉到您的[付款設置](\/admin\/settings\/payments)"
+          },
+          "show_currency_selector": {
+            "label": "啟用貨幣轉換器"
+          }
+        },
+        "payment_methods": {
+          "header": {
+            "label": "支付方式"
+          },
+          "show_payment_icons": {
+            "label": "顯示付款圖標"
+          }
+        }
+      },
+      "blocks": {
+        "menu": {
+          "name": "菜單",
+          "settings": {
+            "heading": {
+              "label": "標題",
+              "info": "需要標題才能顯示菜單。"
+            },
+            "heading_link": {
+              "label": "標題鏈接",
+              "info": "僅在菜單為空白時適用。"
+            },
+            "menu": {
+              "label": "菜單",
+              "info": "僅顯示頂級菜單項。"
+            }
+          }
+        },
+        "social_icons": {
+          "name": "社交媒體圖標",
+          "settings": {
+            "heading": {
+              "label": "標題"
+            },
+            "paragraph": {
+              "label": "要顯示您的社交媒體帳戶，請在您的主題設置 -> 社交媒體中鏈接它們"
+            }
+          }
+        }
+      }
+    },
+    "video_banner": {
+      "name": "視頻橫幅",
+      "settings": {
+        "desktop_font_size": {
+          "label": "桌面字體大小"
+        },
+        "mobile_font_size": {
+          "label": "手機字體大小"
+        },
+        "desktop_video_border": {
+          "label": "桌面視頻邊框"
+        },
+        "mobile_video_border": {
+          "label": "手機視頻邊框"
+        },
+        "video_url": {
+          "label": "視頻鏈接"
+        },
+        "cover_image": {
+          "label": "封面圖片",
+          "info": "建議使用 1920 x 720 像素。"
+        },
+        "full_width": {
+          "label": "啟用全角"
+        },
+        "autoplay": {
+          "label": "啟用自動播放",
+          "info": "如果啟用自動播放，則視頻將被靜音。"
+        },
+        "text_alignment": {
+          "label": "文本對齊"
+        },
+        "desktop_height": {
+          "label": "桌面"
+        },
+        "mobile_height": {
+          "label": "移動的"
+        },
+        "masked_effect_on_border": {
+          "label": "在文本邊框上顯示視頻"
+        },
+        "masked_text": {
+          "label": "文本",
+          "info": "最多 14 個字符",
+          "heading": "蒙面視頻",
+          "heading_info": "它僅適用於自動播放視頻。"
+        },
+        "font_family": {
+          "label": "字體系列",
+          "options": {
+            "heading": {
+              "label": "標題"
+            },
+            "body": {
+              "label": "身體"
+            }
+          }
+        },
+        "masked_text_background": {
+          "label": "背景",
+          "options": {
+            "light": {
+              "label": "光"
+            },
+            "dark": {
+              "label": "黑暗的"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "視頻橫幅"
+      }
+    },
+    "map": {
+      "name": "地圖",
+      "settings": {
+        "heading": {
+          "label": "標題"
+        },
+        "map_address": {
+          "label": "地圖地址"
+        },
+        "map_style": {
+          "label": "地圖樣式",
+          "options": {
+            "roadmap": {
+              "label": "路線圖"
+            },
+            "satellite": {
+              "label": "衛星"
+            },
+            "hybrid": {
+              "label": "雜交種"
+            },
+            "terrain": {
+              "label": "地形"
+            }
+          }
+        },
+        "contact_details": {
+          "header": {
+            "label": "聯繫方式"
+          },
+          "contact_heading": {
+            "label": "聯繫標題"
+          },
+          "phone": {
+            "heading": {
+              "label": "電話標題"
+            },
+            "number": {
+              "label": "電話號碼"
+            }
+          },
+          "email": {
+            "heading": {
+              "label": "電子郵件標題"
+            },
+            "text": {
+              "label": "電子郵件"
+            }
+          },
+          "location": {
+            "heading": {
+              "label": "位置標題"
+            },
+            "text": {
+              "label": "地點"
+            }
+          }
+        },
+        "social_icons": {
+          "label": "啟用社交媒體圖標",
+          "info": "要顯示您的社交媒體帳戶，請在您的主題設置 -> 社交媒體中鏈接它們。"
+        }
+      },
+      "presets": {
+        "name": "地圖"
+      }
+    },
+    "collage_with_text": {
+      "name": "與文字拼貼",
+      "settings": {
+        "heading_alignment": {
+          "label": "航向對齊"
+        },
+        "show_marquee_text": {
+          "label": "在圖像周圍啟用選取框文本"
+        },
+        "show_marquee_text_desktop": {
+          "label": "在桌面上啟用字幕文本"
+        },
+        "show_marquee_text_mobile": {
+          "label": "在移動設備上啟用字幕文本"
+        }
+      },
+      "blocks": {
+        "image": {
+          "name": "圖像",
+          "settings": {
+            "video": {
+              "label": "視頻"
+            },
+            "heading_size": {
+              "label": "標題大小",
+              "options": {
+                "large": {
+                  "label": "大的"
+                },
+                "medium": {
+                  "label": "中等的"
+                },
+                "small": {
+                  "label": "小的"
+                }
+              }
+            },
+            "background": {
+              "label": "背景"
+            },
+            "text_color": {
+              "label": "文本"
+            },
+            "marquee_text": {
+              "label": "字幕文本"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "與文字拼貼"
+      }
+    },
+    "announcement_bar": {
+      "name": "公告欄",
+      "settings": {
+        "auto-rotate": {
+          "label": "自動旋轉"
+        },
+        "interval": {
+          "label": "更改公告每"
+        },
+        "font_color": {
+          "label": "文本"
+        },
+        "background": {
+          "label": "背景",
+          "style": {
+            "label": "背景樣式",
+            "options": {
+              "solid": {
+                "label": "堅硬的"
+              },
+              "gradient": {
+                "label": "坡度"
+              }
+            }
+          },
+          "solid": {
+            "label": "堅硬的"
+          },
+          "gradient": {
+            "label": "坡度"
+          }
+        },
+        "link": {
+          "label": "關聯",
+          "text_color": {
+            "label": "文本"
+          },
+          "text_hover_color": {
+            "label": "徘徊"
+          }
+        }
+      },
+      "blocks": {
+        "announcement": {
+          "name": "公告"
+        }
+      },
+      "presets": {
+        "name": "公告欄"
+      }
+    },
+    "apps": {
+      "name": "應用",
+      "presets": {
+        "name": "應用"
+      }
+    },
+    "before_after_image": {
+      "name": "之前\/之後的圖像",
+      "settings": {
+        "before": {
+          "header": {
+            "label": "前"
+          },
+          "image": {
+            "label": "圖像"
+          },
+          "text": {
+            "label": "文本"
+          }
+        },
+        "after": {
+          "header": {
+            "label": "後"
+          },
+          "image": {
+            "label": "圖像"
+          },
+          "text": {
+            "label": "文本"
+          }
+        },
+        "drag": {
+          "header": {
+            "label": "拖"
+          },
+          "position": {
+            "label": "位置"
+          }
+        }
+      },
+      "presets": {
+        "name": "之前\/之後的圖像"
+      }
+    },
+    "collapsible_content": {
+      "name": "可折疊內容",
+      "settings": {
+        "open_first_content": {
+          "label": "默認打開最上面的手風琴"
+        }
+      },
+      "blocks": {
+        "content": {
+          "name": "內容",
+          "settings": {
+            "content": {
+              "label": "內容"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "可折疊內容"
+      }
+    },
+    "collection_carousel": {
+      "name": "收藏輪播",
+      "settings": {
+        "collection": {
+          "label": "收藏標題",
+          "info": "這些設置僅適用於移動設備。",
+          "settings": {
+            "title_color": {
+              "label": "顏色"
+            },
+            "title_alignment": {
+              "label": "結盟"
+            }
+          }
+        },
+        "heading": {
+          "info": "最多 10 個字符"
+        },
+        "carousel_style": {
+          "label": "輪播樣式",
+          "options": {
+            "carousel_style1": {
+              "label": "水平的"
+            },
+            "carousel_style2": {
+              "label": "圓"
+            }
+          }
+        },
+        "background_gradient": {
+          "info": "它僅適用於“圓形”樣式。"
+        },
+        "background_image": {
+          "label": "背景圖",
+          "info": "它僅適用於“圓形”樣式。"
+        },
+        "bottom_gradient": {
+          "label": "底部漸變",
+          "info": "它僅適用於“圓形”樣式。"
+        },
+        "link": {
+          "text": {
+            "label": "鏈接文字"
+          },
+          "link": {
+            "label": "關聯"
+          }
+        },
+        "radius": {
+          "label": "啟用邊界半徑"
+        }
+      },
+      "blocks": {
+        "collection": {
+          "name": "收藏",
+          "settings": {
+            "collection": {
+              "label": "收藏",
+              "info": "最多 15 個字符"
+            },
+            "collection_title": {
+              "label": "收藏標題"
+            },
+            "background": {
+              "label": "背景",
+              "info": "它僅適用於“水平”樣式。"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "收藏輪播"
+      }
+    },
+    "collection_list": {
+      "name": "收藏清單",
+      "settings": {
+        "collection_title_alignment": {
+          "label": "集合標題對齊",
+          "options": {
+            "left": {
+              "label": "左邊"
+            },
+            "center": {
+              "label": "中心"
+            },
+            "right": {
+              "label": "正確的"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "name": "收藏",
+        "settings": {
+          "collection": {
+            "label": "收藏"
+          }
+        }
+      },
+      "presets": {
+        "name": "收藏清單"
+      }
+    },
+    "contact_page": {
+      "name": "聯繫頁面",
+      "settings": {
+        "header": {
+          "label": "標頭"
+        },
+        "media": {
+          "label": "媒體"
+        },
+        "image": {
+          "label": "選擇圖片"
+        },
+        "image_size": {
+          "label": "圖片高度",
+          "options": {
+            "auto": {
+              "label": "汽車"
+            },
+            "adaptive_to_content": {
+              "label": "適應內容"
+            }
+          }
+        },
+        "image_position": {
+          "label": "桌面圖像位置",
+          "options": {
+            "left": {
+              "label": "左邊"
+            },
+            "right": {
+              "label": "正確的"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "聯繫表"
+      }
+    },
+    "countdown": {
+      "name": "倒數",
+      "settings": {
+        "date": {
+          "header": {
+            "label": "日期"
+          },
+          "end_text": {
+            "label": "結束日期",
+            "info": "結束日期必須設置為將來的日期，並包括以下格式：月\/日\/年。例如：08\/12\/2023"
+          },
+          "hide_section": {
+            "label": "日期過後隱藏倒計時"
+          }
+        },
+        "button": {
+          "text": {
+            "label": "文本"
+          },
+          "link": {
+            "label": "關聯"
+          }
+        },
+        "overlay": {
+          "header": {
+            "label": "覆蓋"
+          },
+          "text": {
+            "label": "文本"
+          },
+          "color": {
+            "label": "顏色"
+          },
+          "background": {
+            "label": "背景"
+          },
+          "background_opacity": {
+            "label": "背景不透明度"
+          }
+        },
+        "full_width": {
+          "label": "啟用全角"
+        },
+        "countdown_style": {
+          "label": "風格",
+          "options": {
+            "split": {
+              "label": "分裂"
+            },
+            "overlay": {
+              "label": "覆蓋"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "倒數"
+      }
+    },
+    "custom_liquid": {
+      "name": "定制液體",
+      "settings": {
+        "liquid": {
+          "label": "液體",
+          "info": "添加應用程序片段或其他流動代碼以創建高級自定義。"
+        }
+      },
+      "presets": {
+        "name": "定制液體"
+      }
+    },
+    "featured_blog": {
+      "name": "精選博客",
+      "settings": {
+        "link": {
+          "text": {
+            "label": "文本"
+          },
+          "link": {
+            "label": "關聯"
+          }
+        },
+        "blog": {
+          "header": {
+            "label": "博客"
+          },
+          "blog": {
+            "label": "博客"
+          },
+          "show_post_range": {
+            "label": "要顯示的帖子"
+          },
+          "show_author": {
+            "label": "顯示帖子作者"
+          },
+          "show_post": {
+            "label": "顯示發布日期"
+          },
+          "show_excerpt": {
+            "label": "顯示文章摘錄"
+          },
+          "show_swipe": {
+            "label": "在手機上啟用滑動"
+          },
+          "show_grayscale": {
+            "label": "啟用灰度圖像",
+            "info": "它僅適用於桌面。"
+          },
+          "show_content_below": {
+            "label": "顯示圖片下方的內容",
+            "info": "它僅適用於桌面。"
+          }
+        }
+      },
+      "blocks": {
+        "article": {
+          "name": "郵政",
+          "settings": {
+            "article": {
+              "label": "文章",
+              "info": "此帖子塊具有更高的優先順序。如果選擇此文章，則已添加的任何博客文章都將被隱藏。"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "精選博客"
+      }
+    },
+    "featured_collection": {
+      "name": "精選合集",
+      "settings": {
+        "link_title": {
+          "label": "鏈接標題"
+        },
+        "collection": {
+          "header": {
+            "label": "收藏"
+          },
+          "collection": {
+            "label": "收藏"
+          },
+          "show_stacked_products": {
+            "label": "堆疊產品"
+          },
+          "product_range": {
+            "label": "產品展示"
+          }
+        }
+      },
+      "presets": {
+        "name": "精選合集"
+      }
+    },
+    "featured_content_columns": {
+      "name": "特色內容欄目",
+      "settings": {
+        "show_curved_corners": {
+          "label": "啟用彎角"
+        },
+        "featured_column": {
+          "label": "柱子",
+          "style": {
+            "label": "風格",
+            "options": {
+              "none": {
+                "label": "沒有任何"
+              },
+              "curved_corners": {
+                "label": "彎角"
+              },
+              "rounded": {
+                "label": "圓形"
+              }
+            }
+          },
+          "size": {
+            "label": "尺寸",
+            "info": "此設置僅適用於桌面。",
+            "options": {
+              "small": {
+                "label": "小的"
+              },
+              "medium": {
+                "label": "中等的"
+              },
+              "large": {
+                "label": "大的"
+              }
+            }
+          }
+        },
+        "show_border": {
+          "label": "顯示邊框",
+          "info": "此設置僅適用於“圓形”樣式。"
+        }
+      },
+      "blocks": {
+        "content": {
+          "name": "內容"
+        }
+      },
+      "presets": {
+        "name": "特色內容欄目"
+      }
+    },
+    "featured_product": {
+      "name": "特色產品",
+      "settings": {
+        "product": {
+          "label": "產品"
+        },
+        "fullwidth": {
+          "label": "啟用全角"
+        },
+        "scrolling_speed": {
+          "label": "滾動文字速度"
+        },
+        "media_height": {
+          "header": {
+            "label": "介質高度"
+          },
+          "fixed_height": {
+            "label": "啟用媒體固定高度"
+          },
+          "media_height_desktop": {
+            "label": "桌面",
+            "options": {
+              "small": {
+                "label": "小的"
+              },
+              "medium": {
+                "label": "中等的"
+              },
+              "large": {
+                "label": "大的"
+              }
+            }
+          },
+          "media_height_mobile": {
+            "label": "移動的",
+            "options": {
+              "small": {
+                "label": "小的"
+              },
+              "medium": {
+                "label": "中等的"
+              },
+              "large": {
+                "label": "大的"
+              }
+            }
+          }
+        },
+        "inner_color_scheme_title": {
+          "label": "內部配色方案"
+        }
+      },
+      "blocks": {
+        "title": {
+          "name": "標題"
+        },
+        "sku": {
+          "name": "存貨單位"
+        },
+        "text": {
+          "name": "文本",
+          "settings": {
+            "text": {
+              "label": "文本"
+            }
+          }
+        },
+        "price": {
+          "name": "價格",
+          "settings": {
+            "hide_shipping_content": {
+              "label": "隱藏運送內容"
+            }
+          }
+        },
+        "review_rating": {
+          "name": "評價等級"
+        },
+        "variant_picker": {
+          "name": "變體選擇器"
+        },
+        "custom_liquid": {
+          "name": "定制液體",
+          "settings": {
+            "liquid": {
+              "label": "液體",
+              "info": "添加應用程序片段或其他流動代碼以創建高級自定義。"
+            }
+          }
+        },
+        "button": {
+          "name": "購買按鈕",
+          "settings": {
+            "dynamic_checkout_button": {
+              "label": "顯示動態結帳按鈕"
+            },
+            "quantity": {
+              "label": "啟用數量"
+            }
+          }
+        },
+        "social_sharing": {
+          "name": "社交分享"
+        }
+      },
+      "presets": {
+        "name": "特色產品"
+      }
+    },
+    "shapes": {
+      "settings": {
+        "select_shape": {
+          "label": "選擇形狀",
+          "options": {
+            "shape1": {
+              "label": "小波浪"
+            },
+            "shape2": {
+              "label": "不對稱"
+            },
+            "shape3": {
+              "label": "中波"
+            },
+            "shape4": {
+              "label": "山脈"
+            }
+          }
+        }
+      }
+    },
+    "featured_products": {
+      "name": "特色產品",
+      "settings": {
+        "collection": {
+          "label": "收藏"
+        },
+        "product": {
+          "label": "產品",
+          "info": "僅在未選擇收藏時適用。"
+        },
+        "collection_image": {
+          "label": "圖像"
+        },
+        "show_curved_corner": {
+          "label": "顯示彎曲的角"
+        },
+        "products_count": {
+          "label": "產品展示",
+          "info": "僅適用於收藏。"
+        },
+        "collection_card_width": {
+          "label": "收款卡寬度",
+          "options": {
+            "medium": {
+              "label": "中等的"
+            },
+            "large": {
+              "label": "大的"
+            }
+          }
+        },
+        "heading": {
+          "label": "標題",
+          "info": "最多 10 個字符"
+        },
+        "Show_overlap_on_image": {
+          "label": "在圖像上顯示重疊"
+        },
+        "show_description": {
+          "label": "啟用說明"
+        }
+      },
+      "presets": {
+        "name": "特色產品"
+      }
+    },
+    "images_carousel": {
+      "name": "圖片輪播",
+      "settings": {
+        "enable_round_image": {
+          "label": "啟用圓形圖像"
+        },
+        "show_border": {
+          "label": "顯示邊框",
+          "info": "僅適用於圓形圖像。"
+        },
+        "enable_overlay_on_image": {
+          "label": "啟用圖像疊加"
+        },
+        "heading": {
+          "label": "標題",
+          "info": "最多 20 個字符"
+        },
+        "overlay_color": {
+          "label": "疊加顏色"
+        },
+        "overlay_opacity": {
+          "label": "疊加不透明度"
+        }
+      },
+      "blocks": {
+        "image": {
+          "name": "圖像",
+          "settings": {
+            "image": {
+              "label": "圖像",
+              "info": "需要 700 x 800 像素。"
+            },
+            "heading": {
+              "label": "標題",
+              "info": "標題文本是連接圖像所必需的。"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "圖片輪播"
+      }
+    },
+    "logo_bar": {
+      "name": "標誌欄",
+      "settings": {
+        "style": {
+          "header": {
+            "label": "風格"
+          },
+          "direction": {
+            "label": "方向",
+            "options": {
+              "right_to_left": {
+                "label": "右到左"
+              },
+              "left_to_right": {
+                "label": "左到右"
+              }
+            }
+          },
+          "show_border": {
+            "label": "顯示邊框"
+          },
+          "show_as_stacked": {
+            "label": "顯示為堆疊"
+          }
+        }
+      },
+      "blocks": {
+        "logo": {
+          "name": "標識",
+          "settings": {
+            "logo": {
+              "label": "標識"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "標誌欄"
+      }
+    },
+    "account": {
+      "name": "主賬戶"
+    },
+    "activate_account": {
+      "name": "激活賬戶",
+      "settings": {
+        "enable_marque": {
+          "label": "啟用字幕"
+        },
+        "button_text": {
+          "label": "按鈕文字"
+        }
+      }
+    },
+    "article": {
+      "name": "文章",
+      "settings": {
+        "show_article_image": {
+          "label": "顯示文章圖片"
+        },
+        "image_fixed_height": {
+          "label": "固定圖像高度"
+        },
+        "show_article_date": {
+          "label": "顯示文章發布日期"
+        },
+        "show_author": {
+          "label": "顯示帖子作者"
+        },
+        "show_social_share": {
+          "label": "顯示社交分享圖標"
+        },
+        "show_article_tags": {
+          "label": "顯示文章標籤"
+        },
+        "related_posts": {
+          "header": {
+            "label": "相關文章"
+          },
+          "enable_related_posts": {
+            "label": "啟用相關帖子"
+          }
+        },
+        "spacing": {
+          "paragraph": {
+            "label": "間距"
+          }
+        }
+      }
+    },
+    "blog": {
+      "name": "博文",
+      "settings": {
+        "show_article_date": {
+          "label": "顯示文章發布日期"
+        },
+        "show_author": {
+          "label": "顯示帖子作者"
+        },
+        "show_article_tags": {
+          "label": "顯示文章標籤"
+        },
+        "show_article_excerpt": {
+          "label": "顯示文章摘錄"
+        },
+        "show_article_comments_count": {
+          "label": "顯示文章評論數"
+        },
+        "post_per_page": {
+          "label": "每頁發帖"
+        }
+      }
+    },
+    "cart": {
+      "name": "主推車",
+      "settings": {
+        "cart_note": {
+          "label": "顯示購物車備註"
+        },
+        "show_payment_icon": {
+          "label": "顯示付款圖標"
+        },
+        "shipping_estimation": {
+          "label": "運費預估"
+        },
+        "shipping_estimation_status": {
+          "label": "使能夠"
+        },
+        "shipping_estimation_open": {
+          "label": "默認開卡"
+        }
+      }
+    },
+    "collection": {
+      "name": "主要收藏",
+      "settings": {
+        "filter_bar_mobile": {
+          "label": "底欄移動"
+        },
+        "filter_bar_background": {
+          "label": "背景"
+        },
+        "filter_bar_text": {
+          "label": "文本"
+        },
+        "banner_content": {
+          "header": {
+            "label": "橫幅內容"
+          },
+          "enable_banner_image": {
+            "label": "啟用橫幅圖片",
+            "info": "它會默認將收藏特色圖片顯示為橫幅。"
+          },
+          "custom_banner_image": {
+            "label": "自定義橫幅圖片",
+            "info": "建議使用 1920 x 200 像素。"
+          }
+        },
+        "collection": {
+          "header": {
+            "label": "收藏"
+          },
+          "show_collection_title": {
+            "label": "顯示收藏標題"
+          },
+          "title_overlay": {
+            "label": "啟用集合標題覆蓋"
+          },
+          "show_description": {
+            "label": "顯示集合說明"
+          },
+          "products_per_page": {
+            "label": "每頁產品"
+          }
+        },
+        "filter_and_sorting": {
+          "header": {
+            "label": "篩選"
+          },
+          "enable_filtering": {
+            "label": "啟用過濾"
+          },
+          "enable_sorting": {
+            "label": "啟用排序"
+          }
+        },
+        "banner_background": {
+          "label": "橫幅背景"
+        },
+        "banner_overlay_background": {
+          "label": "橫幅疊加背景"
+        },
+        "overlay_heading": {
+          "label": "標題",
+          "info": "僅適用於疊加標題。"
+        },
+        "banner_overlay_opacity": {
+          "label": "橫幅疊加不透明度"
+        },
+        "infinte_scroll": {
+          "label": "啟用無限滾動"
+        },
+        "infinte_scroll_type": {
+          "label": "無限滾動類型",
+          "options": {
+            "onscroll": {
+              "label": "在滾動"
+            },
+            "onbutton": {
+              "label": "單擊按鈕"
+            }
+          }
+        }
+      }
+    },
+    "main_collections_list": {
+      "name": "收藏清單",
+      "settings": {
+        "enable_heading_overlay": {
+          "label": "啟用標題疊加"
+        },
+        "collection": {
+          "header": {
+            "label": "收藏"
+          },
+          "title_position": {
+            "label": "收藏標題位置",
+            "options": {
+              "below_image": {
+                "label": "下圖"
+              },
+              "overlay": {
+                "label": "覆蓋"
+              },
+              "overlay_with_hover": {
+                "label": "懸停疊加"
+              }
+            }
+          },
+          "title_alignment": {
+            "label": "標題對齊",
+            "info": "僅適用於收藏標題的“圖片下方”位置。"
+          },
+          "collections_per_page": {
+            "label": "每頁收藏"
+          },
+          "sorting": {
+            "label": "按字母順序，a-z",
+            "options": {
+              "alphabetical": {
+                "label": "排序方式"
+              },
+              "alphabetical_reversed": {
+                "label": "按字母順序，z-a"
+              },
+              "date_reversed": {
+                "label": "日期，從新到舊"
+              },
+              "date": {
+                "label": "日期，從舊到新"
+              },
+              "products_high": {
+                "label": "產品數量，從高到低"
+              },
+              "products_low": {
+                "label": "產品數量，從低到高"
+              }
+            }
+          }
+        },
+        "banner_colors": {
+          "header": {
+            "label": "橫幅顏色"
+          },
+          "banner_background": {
+            "label": "橫幅背景"
+          },
+          "banner_overlay_background": {
+            "label": "橫幅疊加背景"
+          },
+          "heading": {
+            "label": "標題",
+            "info": "僅適用於疊加標題。"
+          },
+          "overlay_opacity": {
+            "label": "不透明度"
+          },
+          "paragraph": {
+            "label": "集合標題疊加"
+          },
+          "color": {
+            "label": "顏色"
+          },
+          "opacity": {
+            "label": "不透明度"
+          },
+          "text": {
+            "label": "文本"
+          }
+        }
+      }
+    },
+    "main_login": {
+      "name": "登錄",
+      "settings": {
+        "enable_marque": {
+          "label": "啟用跑馬燈"
+        },
+        "login_title": {
+          "label": "登錄標題"
+        },
+        "reset_text": {
+          "label": "重置標題"
+        }
+      }
+    },
+    "main_page": {
+      "name": "主頁",
+      "settings": {
+        "banner_colors": {
+          "header": {
+            "label": "橫幅顏色"
+          },
+          "background": {
+            "label": "背景"
+          },
+          "Overlay": {
+            "label": "覆蓋"
+          },
+          "heading": {
+            "label": "標題",
+            "info": "僅適用於疊加標題。"
+          },
+          "overlay_opacity": {
+            "label": "橫幅疊加不透明度"
+          }
+        }
+      }
+    },
+    "main_product": {
+      "name": "主要產品",
+      "settings": {
+        "gallery_style": {
+          "label": "畫廊風格",
+          "options": {
+            "carousel": {
+              "label": "旋轉木馬"
+            },
+            "list": {
+              "label": "列表"
+            },
+            "grid": {
+              "label": "網格"
+            }
+          }
+        },
+        "enable_fixed_height": {
+          "label": "啟用媒體固定高度"
+        },
+        "media_height_desktop": {
+          "label": "媒體桌面高度"
+        },
+        "media_mobile_desktop": {
+          "label": "媒體移動高度"
+        },
+        "media_height": {
+          "options": {
+            "small": {
+              "label": "小的"
+            },
+            "medium": {
+              "label": "中等的"
+            },
+            "large": {
+              "label": "大的"
+            }
+          }
+        },
+        "enable_first_big_list": {
+          "label": "強調網格視圖中的第一張圖像"
+        },
+        "enabled_border": {
+          "label": "啟用邊框"
+        },
+        "carousel": {
+          "header": {
+            "label": "旋轉木馬"
+          },
+          "fullwidth_carousel": {
+            "label": "啟用全角"
+          },
+          "thumbs_position": {
+            "label": "縮略圖位置",
+            "info": "僅在禁用全寬輪播時適用。",
+            "options": {
+              "left": {
+                "label": "左邊"
+              },
+              "bottom": {
+                "label": "底部"
+              }
+            }
+          }
+        },
+        "accordions_or_tab": {
+          "header": {
+            "label": "手風琴\/標籤內容",
+            "info": "標題文本需要顯示描述文本內容。"
+          },
+          "content_style": {
+            "label": "內容風格",
+            "options": {
+              "accordion": {
+                "label": "手風琴"
+              },
+              "tabs": {
+                "label": "選項卡"
+              }
+            }
+          },
+          "show_description": {
+            "label": "顯示說明"
+          },
+          "description_heading": {
+            "label": "說明標題"
+          },
+          "custom_content_1": {
+            "label": "自定義內容 1"
+          },
+          "custom_content_2": {
+            "label": "自定義內容 2"
+          },
+          "custom_content_3": {
+            "label": "自定義內容 3"
+          }
+        }
+      },
+      "blocks": {
+        "back_in_stock": {
+          "name": "貨源又充足了",
+          "settings": {
+            "heading": {
+              "label": "標題"
+            },
+            "placeholder": {
+              "label": "佔位符"
+            },
+            "btn_text": {
+              "label": "按鈕文字"
+            },
+            "success_message": {
+              "label": "成功消息"
+            }
+          }
+        },
+        "size_chart": {
+          "name": "尺碼表",
+          "settings": {
+            "size_chart": {
+              "label": "選擇尺碼表"
+            },
+            "header": {
+              "content": "定制尺寸表"
+            },
+            "paragraph": {
+              "content": "顯示特定產品的不同尺寸表。為名稱為「尺寸表」的產品創建自定義元欄位，然後鍵入「頁面」。。[添加元欄位]（\/admin\/metafields\/product)"
+            }
+          }
+        },
+        "query_form": {
+          "name": "查詢表格",
+          "settings": {
+            "title": {
+              "label": "標題",
+              "info": "此表單將所有提交發送到您商店的寄件者電子郵件位址。您可以在 Shopify 後台的 [商店詳細資訊]（\/admin\/settings\/general）設置頁面中更改發件者電子郵件位址。"
+            }
+          }
+        },
+        "custom_label": {
+          "name": "自定義標籤",
+          "info": "要顯示產品自定義標籤，請在主題設置 -> 產品網格中設置它們。"
+        },
+        "title": {
+          "name": "標題"
+        },
+        "sku": {
+          "name": "存貨單位"
+        },
+        "text": {
+          "name": "文本",
+          "settings": {
+            "text": {
+              "label": "文本"
+            }
+          }
+        },
+        "pickup": {
+          "name": "取貨可用性"
+        },
+        "description": {
+          "name": "描述"
+        },
+        "price": {
+          "name": "價格",
+          "settings": {
+            "hide_shipping_content": {
+              "label": "隱藏運送內容"
+            }
+          }
+        },
+        "review_rating": {
+          "name": "評價等級",
+          "settings": {
+            "paragraph": {
+              "label": "要顯示評分，請添加 [Product Review 應用程序](https:\/\/apps.shopify.com\/product-reviews)。"
+            }
+          }
+        },
+        "social_sharing": {
+          "name": "社交分享"
+        },
+        "variant_picker": {
+          "name": "變體選擇器"
+        },
+        "custom_liquid": {
+          "name": "定制液體",
+          "settings": {
+            "liquid": {
+              "label": "液體",
+              "info": "添加應用程序片段或其他流動代碼以創建高級自定義。"
+            }
+          }
+        },
+        "complementary_products": {
+          "name": "互補產品",
+          "settings": {
+            "paragraph": {
+              "label": "要選擇互補產品，請添加搜索"
+            },
+            "products_count": {
+              "label": "產品數量"
+            },
+            "show_below_description": {
+              "label": "顯示以下說明",
+              "info": "它僅適用於全寬輪播。"
+            }
+          }
+        },
+        "button": {
+          "name": "購買按鈕",
+          "settings": {
+            "dynamic_checkout_btn": {
+              "label": "顯示動態結帳按鈕"
+            },
+            "enable_quantity": {
+              "label": "啟用數量"
+            }
+          }
+        },
+        "line_item_property": {
+          "name": "訂單項屬性",
+          "settings": {
+            "property_label": {
+              "label": "標籤"
+            },
+            "property_type": {
+              "label": "財產種類",
+              "options": {
+                "single_line_text": {
+                  "label": "單行文字"
+                },
+                "multi_line_text": {
+                  "label": "多行文本"
+                },
+                "checkbox": {
+                  "label": "複選框"
+                },
+                "radio_button": {
+                  "label": "單選按鈕"
+                },
+                "select": {
+                  "label": "選擇"
+                }
+              }
+            }
+          }
+        },
+        "property_values": {
+          "label": "適當的價值",
+          "info": "對於單選按鈕選項和選擇選項，請在屬性值中添加以逗號分隔的選項名稱。"
+        },
+        "inventory_status": {
+          "name": "庫存狀態欄",
+          "settings": {
+            "minimun_inventory": {
+              "label": "最低庫存"
+            },
+            "inventory_available_status": {
+              "label": "可用消息"
+            },
+            "inventory_less_status": {
+              "label": "低庫存消息",
+              "info": "使用 ||inventory||然後在消息中記錄庫存盤點。"
+            }
+          }
+        }
+      }
+    },
+    "main_register": {
+      "name": "登記",
+      "settings": {
+        "enable_marquee": {
+          "label": "啟用跑馬燈"
+        }
+      }
+    },
+    "reset_password": {
+      "name": "重設密碼",
+      "settings": {
+        "enable_marquee": {
+          "label": "啟用跑馬燈"
+        }
+      }
+    },
+    "search": {
+      "name": "搜索"
+    },
+    "marquee_text": {
+      "name": "字幕文本",
+      "settings": {
+        "scrolling_speed_mobile": {
+          "label": "滾動速度移動"
+        },
+        "enable_autoplay": {
+          "label": "啟用自動播放"
+        },
+        "direction": {
+          "label": "方向",
+          "options": {
+            "rtl": {
+              "label": "右到左"
+            },
+            "ltr": {
+              "label": "左到右"
+            }
+          }
+        },
+        "scrolling_speed": {
+          "label": "滾動速度"
+        },
+        "font_family": {
+          "label": "字體系列",
+          "options": {
+            "heading": {
+              "label": "標題"
+            },
+            "body": {
+              "label": "身體"
+            }
+          }
+        },
+        "desktop_font": {
+          "label": "桌面字體大小"
+        },
+        "mobile_font": {
+          "label": "手機字體大小"
+        },
+        "background": {
+          "label": "背景"
+        }
+      },
+      "blocks": {
+        "text": {
+          "name": "文本",
+          "settings": {
+            "outlined_text": {
+              "label": "使文字輪廓化"
+            },
+            "color": {
+              "label": "顏色"
+            }
+          }
+        },
+        "icon": {
+          "name": "圖標",
+          "settings": {
+            "custom_icon": {
+              "label": "自定義 svg 代碼"
+            },
+            "custom_color": {
+              "label": "自定義顏色",
+              "info": "在新行中輸入每個樣本。"
+            },
+            "default_color": {
+              "label": "使用默認顏色"
+            },
+            "small_icon": {
+              "label": "使圖標變小"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "字幕文本"
+      }
+    },
+    "multi_image_with_text": {
+      "name": "帶文字的多圖",
+      "settings": {
+        "content_width": {
+          "label": "桌面內容寬度",
+          "options": {
+            "small": {
+              "label": "小的"
+            },
+            "medium": {
+              "label": "中等的"
+            },
+            "large": {
+              "label": "大的"
+            }
+          }
+        },
+        "text_position": {
+          "label": "文本位置",
+          "info": "這僅適用於桌面。",
+          "options": {
+            "top": {
+              "label": "頂部"
+            },
+            "middle": {
+              "label": "中間"
+            },
+            "bottom": {
+              "label": "底部"
+            }
+          }
+        },
+        "image_position": {
+          "label": "圖像位置",
+          "options": {
+            "left": {
+              "label": "左邊"
+            },
+            "right": {
+              "label": "正確的"
+            }
+          }
+        },
+        "main_image": {
+          "paragraph": {
+            "label": "主圖"
+          },
+          "full_width_image": {
+            "label": "顯示全寬"
+          },
+          "border_main_image": {
+            "label": "顯示邊框",
+            "info": "不適用於全寬圖像。"
+          }
+        },
+        "overlay_image": {
+          "paragraph": {
+            "label": "疊加圖像"
+          },
+          "image": {
+            "label": "圖像",
+            "info": "不適用於全寬圖像。"
+          }
+        },
+        "background_effect": {
+          "label": "啟用背景效果"
+        },
+        "effect_color": {
+          "label": "效果漸變",
+          "info": "添加多個色標以查看動畫。"
+        },
+        "border_color": {
+          "label": "邊框顏色"
+        }
+      },
+      "blocks": {
+        "heading": {
+          "name": "標題"
+        },
+        "text": {
+          "name": "文本"
+        },
+        "button": {
+          "name": "按鈕",
+          "settings": {
+            "button_as_link": {
+              "label": "將按鈕顯示為鏈接"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "帶文字的多圖"
+      }
+    },
+    "newsletter": {
+      "name": "通訊",
+      "settings": {
+        "placeholder": {
+          "label": "佔位符"
+        },
+        "stacked": {
+          "label": "顯示堆疊視圖"
+        }
+      },
+      "presets": {
+        "name": "通訊"
+      }
+    },
+    "password": {
+      "name": "密碼頁面",
+      "settings": {
+        "logo_size": {
+          "label": "自定義徽標尺寸"
+        },
+        "password_title": {
+          "label": "密碼標題"
+        },
+        "password_enable_highlight": {
+          "label": "啟用高亮文本",
+          "info": "突出顯示文本適用於標題的粗體和斜體文本。"
+        },
+        "show_newsletter": {
+          "label": "顯示通訊"
+        },
+        "show_social_share": {
+          "label": "顯示社交媒體圖標"
+        }
+      }
+    },
+    "related_products": {
+      "name": "相關產品",
+      "settings": {
+        "products_count": {
+          "label": "產品展示"
+        }
+      }
+    },
+    "rich_text": {
+      "name": "富文本",
+      "settings": {
+        "content_width": {
+          "label": "桌面內容寬度",
+          "options": {
+            "small": {
+              "label": "小的"
+            },
+            "medium": {
+              "label": "中等的"
+            },
+            "large": {
+              "label": "大的"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "heading": {
+          "name": "標題",
+          "settings": {
+            "font_size": {
+              "label": "字體大小",
+              "options": {
+                "small": {
+                  "label": "小的"
+                },
+                "medium": {
+                  "label": "中等的"
+                },
+                "regular": {
+                  "label": "常規的"
+                },
+                "large": {
+                  "label": "大的"
+                }
+              }
+            },
+            "style": {
+              "label": "風格",
+              "info": "突出顯示文本適用於標題的粗體和斜體文本。",
+              "options": {
+                "none": {
+                  "label": "沒有任何"
+                },
+                "highlight": {
+                  "label": "強調"
+                },
+                "animated_text": {
+                  "label": "動畫文字"
+                }
+              }
+            },
+            "animate_color1": {
+              "label": "動畫色1"
+            },
+            "animate_color2": {
+              "label": "動畫色2"
+            }
+          }
+        },
+        "subheading": {
+          "name": "副標題"
+        },
+        "text": {
+          "name": "文本"
+        },
+        "button": {
+          "name": "按鈕",
+          "settings": {
+            "button_size": {
+              "label": "按鈕尺寸",
+              "options": {
+                "xsmall": {
+                  "label": "特別小"
+                },
+                "small": {
+                  "label": "小的"
+                },
+                "medium": {
+                  "label": "中等的"
+                },
+                "large": {
+                  "label": "大的"
+                }
+              }
+            },
+            "button_as_link": {
+              "label": "將按鈕顯示為鏈接"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "富文本"
+      }
+    },
+    "section_divider": {
+      "name": "分節器",
+      "presets": {
+        "name": "分節器"
+      }
+    },
+    "text_with_icon": {
+      "name": "帶有圖標的文本",
+      "settings": {
+        "show_icon_left": {
+          "label": "在左側顯示圖標"
+        }
+      },
+      "blocks": {
+        "column": {
+          "name": "柱子",
+          "settings": {
+            "icon": {
+              "label": "圖標",
+              "options": {
+                "chat": {
+                  "label": "聊天"
+                },
+                "eye": {
+                  "label": "眼睛"
+                },
+                "file": {
+                  "label": "文件"
+                },
+                "gift": {
+                  "label": "禮物"
+                },
+                "global": {
+                  "label": "全球的"
+                },
+                "heart": {
+                  "label": "心"
+                },
+                "phone": {
+                  "label": "電話"
+                },
+                "refund": {
+                  "label": "退款"
+                },
+                "search": {
+                  "label": "搜索"
+                },
+                "secure": {
+                  "label": "安全的"
+                },
+                "shipping": {
+                  "label": "船運"
+                },
+                "smile": {
+                  "label": "微笑"
+                },
+                "support": {
+                  "label": "支持"
+                },
+                "thumb": {
+                  "label": "拇指"
+                },
+                "user": {
+                  "label": "用戶"
+                }
+              }
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "帶有圖標的文本"
+      }
+    },
+    "video": {
+      "name": "滾動顯示視頻",
+      "settings": {
+        "video": {
+          "label": "視頻",
+          "info": "它僅支持 mp4 視頻。"
+        },
+        "video_text": {
+          "label": "標題",
+          "info": "最多 12 個字符"
+        },
+        "style": {
+          "label": "風格",
+          "info": "突出顯示文本適用於標題的粗體和斜體文本。",
+          "options": {
+            "none": {
+              "label": "沒有任何"
+            },
+            "highlight_text": {
+              "label": "強調"
+            },
+            "shadow": {
+              "label": "陰影"
+            }
+          }
+        },
+        "text_shadow": {
+          "label": "文字陰影",
+          "info": "此顏色僅適用於文本樣式陰影"
+        }
+      },
+      "presets": {
+        "name": "滾動顯示視頻"
+      }
+    },
+    "promotional_text": {
+      "name": "宣傳文字",
+      "settings": {
+        "animated_text": {
+          "label": "動畫文字"
+        },
+        "enable_outlined": {
+          "label": "啟用概述的動畫文本"
+        },
+        "font_size": {
+          "label": "字體大小",
+          "options": {
+            "small": {
+              "label": "小的"
+            },
+            "medium": {
+              "label": "中等的"
+            },
+            "large": {
+              "label": "大的"
+            }
+          }
+        },
+        "font_family": {
+          "label": "字體系列",
+          "options": {
+            "heading": {
+              "label": "標題"
+            },
+            "body": {
+              "label": "身體"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "宣傳文字"
+      }
+    },
+    "timeline": {
+      "name": "時間線",
+      "blocks": {
+        "name": "信息",
+        "settings": {
+          "image_position": {
+            "label": "圖像位置",
+            "options": {
+              "left": {
+                "label": "左邊"
+              },
+              "right": {
+                "label": "正確的"
+              }
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "時間線"
+      }
+    },
+    "recent-viewed-product": {
+      "name": "最近瀏覽的產品",
+      "settings": {
+        "recent_product_info": {
+          "label": "如果沒有訪問過任何產品，部分將被隱藏。"
+        },
+        "heading": {
+          "label": "標題"
+        }
+      },
+      "presets": {
+        "name": "最近瀏覽的產品"
+      }
+    },
+    "events_calendar": {
+      "name": "活動日曆",
+      "presets": {
+        "name": "活動日曆"
+      },
+      "blocks": {
+        "event": {
+          "name": "事件",
+          "settings": {
+            "image": {
+              "label": "圖像"
+            },
+            "title": {
+              "label": "標題"
+            },
+            "description": {
+              "label": "描述"
+            },
+            "time": {
+              "label": "時間"
+            },
+            "date": {
+              "label": "日期"
+            },
+            "location": {
+              "label": "地點"
+            },
+            "location_url": {
+              "label": "位置網址"
+            },
+            "link_text": {
+              "label": "按鈕文字"
+            },
+            "link_url": {
+              "label": "按鈕網址"
+            }
+          }
+        }
+      }
+    },
+    "mobile_dock": {
+      "name": "移動底座",
+      "settings": {
+        "enable_dock": {
+          "label": "啟用停靠"
+        }
+      },
+      "blocks": {
+        "link": {
+          "name": "關聯",
+          "settings": {
+            "custom_icon": {
+              "label": "自定義 SVG 圖標"
+            },
+            "link": {
+              "label": "關聯"
+            },
+            "title": {
+              "label": "標題"
+            }
+          }
+        },
+        "home": {
+          "name": "家"
+        },
+        "search": {
+          "name": "搜索"
+        },
+        "menu": {
+          "name": "菜單"
+        },
+        "cart": {
+          "name": "大車"
+        },
+        "account": {
+          "name": "帳戶"
+        }
+      }
+    },
+    "collections_tabs": {
+      "name": "收藏標籤",
+      "settings": {
+        "tab_alignment": {
+          "label": "製表符對齊桌面"
+        }
+      },
+      "blocks": {
+        "name": "收藏",
+        "settings": {
+          "collection": {
+            "label": "收藏"
+          }
+        }
+      },
+      "presets": {
+        "name": "收藏標籤"
+      }
+    }
+  },
+  "settings_schema": {
+    "rtl": {
+      "name": "RTL",
+      "settings": {
+        "content_direction": {
+          "label": "啟用RTL"
+        },
+        "languanges_code": {
+          "label": "支持 RTL 的語言",
+          "info": "輸入 ISO 語言代碼，以逗號分隔。留空以啟用所有語言 [檢查 ISO 語言代碼]（https:\/\/www.loc.gov\/standards\/iso639-2\/php\/code_list.php）。"
+        }
+      }
+    },
+    "global_color_scheme": {
+      "name": "全局配色方案",
+      "settings": {
+        "header": {
+          "content": "標頭"
+        },
+        "header_background_color": {
+          "label": "背景"
+        },
+        "header_text_color": {
+          "label": "文本"
+        },
+        "header_hover_color": {
+          "label": "徘徊"
+        },
+        "header_divider_color": {
+          "label": "分頻器"
+        },
+        "submenu": {
+          "content": "子菜單"
+        },
+        "submenu_background_color": {
+          "label": "背景"
+        },
+        "submenu_text_color": {
+          "label": "文本"
+        },
+        "submenu_hover_color": {
+          "label": "徘徊"
+        },
+        "footer": {
+          "content": "頁腳"
+        },
+        "footer_background_color": {
+          "label": "背景"
+        },
+        "footer_text_color": {
+          "label": "文本"
+        },
+        "footer_hover_color": {
+          "label": "徘徊"
+        },
+        "footer_divider_color": {
+          "label": "分頻器"
+        },
+        "footer_form_bg": {
+          "label": "表單背景"
+        },
+        "footer_form_text": {
+          "label": "表單文本"
+        },
+        "footer_form_border": {
+          "label": "窗體邊框"
+        },
+        "scroll_to_top": {
+          "content": "滾動到頂部"
+        },
+        "stp_background": {
+          "label": "背景"
+        },
+        "stp_color": {
+          "label": "顏色"
+        },
+        "badges": {
+          "content": "徽章"
+        },
+        "sold_out": {
+          "content": "售罄"
+        },
+        "sold_out_background": {
+          "label": "背景"
+        },
+        "sold_out_color": {
+          "label": "顏色"
+        }
+      }
+    },
+    "primary_color_scheme": {
+      "name": "原色方案",
+      "settings": {
+        "primary_background_color": {
+          "label": "背景"
+        },
+        "primary_alternate_background_color": {
+          "label": "備用背景"
+        },
+        "primary_heading_color": {
+          "label": "標題"
+        },
+        "primary_text_color": {
+          "label": "文本"
+        },
+        "primary_link_color": {
+          "label": "鏈接文字"
+        },
+        "primary_link_hover_color": {
+          "label": "徘徊"
+        },
+        "primary_button_background_color": {
+          "label": "背景"
+        },
+        "primary_button_text_color": {
+          "label": "文本"
+        },
+        "primary_button_border_color": {
+          "label": "邊界"
+        },
+        "primary_alternate_button_background_color": {
+          "label": "背景"
+        },
+        "primary_alternate_button_text_color": {
+          "label": "文本"
+        },
+        "primary_alternate_button_border_color": {
+          "label": "邊界"
+        },
+        "primary_product_border_color": {
+          "label": "邊界"
+        },
+        "primary_product_discount_background_color": {
+          "label": "背景"
+        },
+        "primary_product_discount_text_color": {
+          "label": "文本"
+        },
+        "primary_form_input_background_color": {
+          "label": "背景"
+        },
+        "primary_form_input_text_color": {
+          "label": "文本"
+        },
+        "primary_form_input_border_color": {
+          "label": "邊界"
+        },
+        "primary_slider_arrows_background_color": {
+          "label": "背景"
+        },
+        "primary_slider_arrows_icon_color": {
+          "label": "圖標"
+        },
+        "primary_divider_color": {
+          "label": "分頻器"
+        },
+        "primary_image_background_color": {
+          "label": "圖片背景"
+        },
+        "primary_highlight_color": {
+          "label": "突出顯示文本"
+        }
+      }
+    },
+    "secondary_color_scheme": {
+      "name": "二級配色方案",
+      "settings": {
+        "secondary_background_color": {
+          "label": "背景"
+        },
+        "secondary_alternate_background_color": {
+          "label": "備用背景"
+        },
+        "secondary_heading_color": {
+          "label": "標題"
+        },
+        "secondary_text_color": {
+          "label": "文本"
+        },
+        "secondary_link_color": {
+          "label": "鏈接文字"
+        },
+        "secondary_link_hover_color": {
+          "label": "徘徊"
+        },
+        "secondary_button_background_color": {
+          "label": "背景"
+        },
+        "secondary_button_text_color": {
+          "label": "文本"
+        },
+        "secondary_button_border_color": {
+          "label": "邊界"
+        },
+        "secondary_alternate_button_background_color": {
+          "label": "背景"
+        },
+        "secondary_alternate_button_text_color": {
+          "label": "文本"
+        },
+        "secondary_alternate_button_border_color": {
+          "label": "邊界"
+        },
+        "secondary_product_border_color": {
+          "label": "邊界"
+        },
+        "secondary_product_discount_background_color": {
+          "label": "背景"
+        },
+        "secondary_product_discount_text_color": {
+          "label": "文本"
+        },
+        "secondary_form_input_background_color": {
+          "label": "背景"
+        },
+        "secondary_form_input_text_color": {
+          "label": "文本"
+        },
+        "secondary_form_input_border_color": {
+          "label": "邊界"
+        },
+        "secondary_slider_arrows_background_color": {
+          "label": "背景"
+        },
+        "secondary_slider_arrows_icon_color": {
+          "label": "圖標"
+        },
+        "secondary_divider_color": {
+          "label": "分頻器"
+        },
+        "secondary_image_background_color": {
+          "label": "圖片背景"
+        },
+        "secondary_highlight_color": {
+          "label": "突出顯示文本"
+        }
+      }
+    },
+    "tertiary_color_scheme": {
+      "name": "三級配色方案",
+      "settings": {
+        "tertiary_background_color": {
+          "label": "背景"
+        },
+        "tertiary_alternate_background_color": {
+          "label": "備用背景"
+        },
+        "tertiary_heading_color": {
+          "label": "標題"
+        },
+        "tertiary_text_color": {
+          "label": "文本"
+        },
+        "tertiary_link_color": {
+          "label": "鏈接文字"
+        },
+        "tertiary_link_hover_color": {
+          "label": "徘徊"
+        },
+        "tertiary_button_background_color": {
+          "label": "背景"
+        },
+        "tertiary_button_text_color": {
+          "label": "文本"
+        },
+        "tertiary_button_border_color": {
+          "label": "邊界"
+        },
+        "tertiary_alternate_button_background_color": {
+          "label": "背景"
+        },
+        "tertiary_alternate_button_text_color": {
+          "label": "文本"
+        },
+        "tertiary_alternate_button_border_color": {
+          "label": "邊界"
+        },
+        "tertiary_product_border_color": {
+          "label": "邊界"
+        },
+        "tertiary_product_discount_background_color": {
+          "label": "背景"
+        },
+        "tertiary_product_discount_text_color": {
+          "label": "文本"
+        },
+        "tertiary_form_input_background_color": {
+          "label": "背景"
+        },
+        "tertiary_form_input_text_color": {
+          "label": "文本"
+        },
+        "tertiary_form_input_border_color": {
+          "label": "邊界"
+        },
+        "tertiary_slider_arrows_background_color": {
+          "label": "背景"
+        },
+        "tertiary_slider_arrows_icon_color": {
+          "label": "圖標"
+        },
+        "tertiary_divider_color": {
+          "label": "分頻器"
+        },
+        "tertiary_image_background_color": {
+          "label": "圖片背景"
+        },
+        "tertiary_highlight_color": {
+          "label": "突出顯示文本"
+        }
+      }
+    },
+    "quaternary_color_scheme": {
+      "name": "第四紀配色方案",
+      "settings": {
+        "quaternary_background_color": {
+          "label": "背景"
+        },
+        "quaternary_alternate_background_color": {
+          "label": "備用背景"
+        },
+        "quaternary_heading_color": {
+          "label": "標題"
+        },
+        "quaternary_text_color": {
+          "label": "文本"
+        },
+        "quaternary_link_color": {
+          "label": "鏈接文字"
+        },
+        "quaternary_link_hover_color": {
+          "label": "徘徊"
+        },
+        "quaternary_button_background_color": {
+          "label": "背景"
+        },
+        "quaternary_button_text_color": {
+          "label": "文本"
+        },
+        "quaternary_button_border_color": {
+          "label": "邊界"
+        },
+        "quaternary_alternate_button_background_color": {
+          "label": "背景"
+        },
+        "quaternary_alternate_button_text_color": {
+          "label": "文本"
+        },
+        "quaternary_alternate_button_border_color": {
+          "label": "邊界"
+        },
+        "quaternary_product_border_color": {
+          "label": "邊界"
+        },
+        "quaternary_product_discount_background_color": {
+          "label": "背景"
+        },
+        "quaternary_product_discount_text_color": {
+          "label": "文本"
+        },
+        "quaternary_form_input_background_color": {
+          "label": "背景"
+        },
+        "quaternary_form_input_text_color": {
+          "label": "文本"
+        },
+        "quaternary_form_input_border_color": {
+          "label": "邊界"
+        },
+        "quaternary_slider_arrows_background_color": {
+          "label": "背景"
+        },
+        "quaternary_slider_arrows_icon_color": {
+          "label": "圖標"
+        },
+        "quaternary_divider_color": {
+          "label": "分頻器"
+        },
+        "quaternary_image_background_color": {
+          "label": "圖片背景"
+        },
+        "quaternary_highlight_color": {
+          "label": "突出顯示文本"
+        }
+      }
+    },
+    "typography": {
+      "name": "排版",
+      "settings": {
+        "header": {
+          "content": "標題"
+        },
+        "header_font": {
+          "label": "字體"
+        },
+        "heading_font_scale": {
+          "label": "字體比例"
+        },
+        "type_heading_line_height": {
+          "label": "行高"
+        },
+        "body": {
+          "content": "身體"
+        },
+        "body_font": {
+          "label": "字體"
+        },
+        "body_font_scale": {
+          "label": "字體比例"
+        },
+        "type_base_line_height": {
+          "label": "行高"
+        }
+      }
+    },
+    "buttons": {
+      "name": "鈕扣",
+      "settings": {
+        "button_style": {
+          "label": "風格",
+          "options": {
+            "classic": {
+              "label": "經典的"
+            },
+            "modern": {
+              "label": "現代的"
+            }
+          }
+        },
+        "button_radius": {
+          "label": "啟用圓形按鈕"
+        },
+        "round_button_radius": {
+          "label": "按鈕半徑",
+          "options": {
+            "small": {
+              "label": "小的"
+            },
+            "large": {
+              "label": "大的"
+            }
+          }
+        }
+      }
+    },
+    "animations": {
+      "name": "動畫",
+      "settings": {
+        "enable_animations": {
+          "label": "啟用動畫"
+        }
+      }
+    },
+    "images": {
+      "name": "圖片",
+      "settings": {
+        "header1": {
+          "content": "穿過顏色",
+          "info": "將此效果應用於您的產品圖片，它將隱藏白色背景。"
+        },
+        "pass_through_product_images": {
+          "label": "在產品圖片上啟用"
+        }
+      }
+    },
+    "breadcrumb": {
+      "name": "麵包屑",
+      "settings": {
+        "enable_breadcrumb": {
+          "label": "啟用麵包屑"
+        }
+      }
+    },
+    "swatches": {
+      "name": "色板",
+      "settings": {
+        "show_variant_image": {
+          "label": "將變體圖像顯示為顏色"
+        },
+        "color_name": {
+          "label": "顏色選項名稱",
+          "info": "保存顏色的選項名稱。"
+        },
+        "custom_colors": {
+          "label": "自定義顏色代碼"
+        },
+        "size_name": {
+          "label": "尺寸選項名稱",
+          "info": "包含大小的選項名稱。"
+        },
+        "color_swatches_style": {
+          "label": "顏色款式",
+          "options": {
+            "circle": {
+              "label": "圓圈"
+            },
+            "square": {
+              "label": "正方形"
+            }
+          }
+        }
+      }
+    },
+    "product_grid": {
+      "name": "產品網格",
+      "settings": {
+        "product_grid_carousel_navigation": {
+          "label": "輪播導航",
+          "options": {
+            "arrows": {
+              "label": "箭頭"
+            },
+            "tiles": {
+              "label": "瓷磚"
+            }
+          }
+        },
+        "show_vendor": {
+          "label": "顯示供應商"
+        },
+        "color_swatch_position": {
+          "label": "顏色樣本位置",
+          "options": {
+            "above": {
+              "label": "在圖像上"
+            },
+            "below": {
+              "label": "下圖"
+            }
+          }
+        },
+        "color_swatch_on_mobile": {
+          "label": ""
+        },
+        "grid_on_hover": {
+          "label": "懸停選項",
+          "options": {
+            "none": {
+              "label": "沒有任何"
+            },
+            "carousel": {
+              "label": "旋轉木馬"
+            },
+            "second_image": {
+              "label": "第二張圖片"
+            }
+          }
+        },
+        "border_enabled": {
+          "label": "啟用邊框"
+        },
+        "show_sold_out_badge": {
+          "label": "顯示售罄徽章"
+        },
+        "show_savings": {
+          "label": "顯示價格優惠"
+        },
+        "inventory": {
+          "show_inventory": {
+            "label": "顯示庫存"
+          },
+          "inventory_threshold": {
+            "label": "庫存門檻低",
+            "info": "當數量低於閾值時，以黃色顯示庫存數量。"
+          }
+        },
+        "custom_label1": {
+          "label": "產品標籤 1"
+        },
+        "custom_label2": {
+          "label": "產品標籤 2"
+        },
+        "custom_label3": {
+          "label": "產品標籤 3"
+        },
+        "custom_label4": {
+          "label": "產品標籤 4"
+        },
+        "custom_label5": {
+          "label": "產品標籤 5"
+        },
+        "show_quickview": {
+          "label": "啟用快速查看"
+        },
+        "show_atc_button": {
+          "label": "啟用 ATC 按鈕"
+        },
+        "show_swatches": {
+          "label": "啟用樣本"
+        }
+      }
+    },
+    "search_drawer": {
+      "name": "搜索抽屜",
+      "settings": {
+        "popular_search_heading": {
+          "label": "熱門搜索"
+        },
+        "popular_search_content": {
+          "label": "查詢"
+        },
+        "suggestions_heading": {
+          "label": "標題"
+        },
+        "suggestions_products": {
+          "label": "產品"
+        },
+        "suggestion_grid_image_size": {
+          "label": "圖片比例",
+          "options": {
+            "auto": {
+              "label": "汽車"
+            },
+            "landscape": {
+              "label": "景觀"
+            },
+            "portrait": {
+              "label": "肖像"
+            },
+            "square": {
+              "label": "正方形"
+            }
+          }
+        },
+        "results_product_grid_image_size": {
+          "label": "產品圖片比例"
+        },
+        "results_article_grid_image_size": {
+          "label": "文章圖片比例"
+        }
+      }
+    },
+    "drawer_popup": {
+      "name": "抽屜\/彈出"
+    },
+    "google_map": {
+      "name": "谷歌地圖",
+      "settings": {
+        "googlemapapi": {
+          "label": "谷歌地圖 API 密鑰",
+          "info": "您需要註冊一個 [Google 地圖 API 密鑰](https:\/\/shinedezign.gitbook.io\/fame-documentations\/overview\/theme-settings#google-maps)更多顯示旅遊地圖。"
+        }
+      }
+    },
+    "social_media": {
+      "name": "社交媒體",
+      "settings": {
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https:\/\/facebook.com\/shopify"
+        },
+        "social_twitter_link": {
+          "label": "推特",
+          "info": "https:\/\/twitter.com\/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram的",
+          "info": "http:\/\/instagram.com\/shopify"
+        },
+        "social_pinterest_link": {
+          "label": "平特雷斯特",
+          "info": "https:\/\/pinterest.com\/shopify"
+        },
+        "social_snapchat_link": {
+          "label": "即時聊天",
+          "info": "http:\/\/snapchat.com\/shopify"
+        },
+        "social_linkedin_link": {
+          "label": "領英",
+          "info": "http:\/\/linkedin.com\/shopify"
+        },
+        "social_tiktok_link": {
+          "label": "抖音",
+          "info": "https:\/\/tiktok.com\/@shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https:\/\/www.youtube.com\/shopify"
+        }
+      }
+    },
+    "newsletter_popup": {
+      "name": "時事通訊彈出窗口",
+      "settings": {
+        "newsletter_pop_enable": {
+          "label": "啟用時事通訊彈出窗口"
+        },
+        "newsletter_heading": {
+          "label": "標題"
+        },
+        "newsletter_subheading": {
+          "label": "副標題"
+        },
+        "newsletter_description": {
+          "label": "描述"
+        },
+        "popup_cookie": {
+          "label": "為時事通訊彈出窗口設置 cookie（天）"
+        }
+      }
+    },
+    "scroll_to_top": {
+      "name": "滾動到頂部",
+      "settings": {
+        "scrollToTop_position_vertical": {
+          "label": "垂直位置"
+        },
+        "enableScrollToTop": {
+          "label": "使能夠"
+        },
+        "custom_scrollToTop_svg": {
+          "label": "SVG代碼",
+          "info": "SVG 應該有寬度和高度屬性。"
+        },
+        "scrollToTop_position": {
+          "label": "位置",
+          "options": {
+            "left": {
+              "label": "左邊"
+            },
+            "center": {
+              "label": "中心"
+            },
+            "right": {
+              "label": "正確的"
+            }
+          }
+        }
+      }
+    },
+    "favicon_icon": {
+      "name": "圖標",
+      "settings": {
+        "favicon": {
+          "label": "圖標",
+          "info": "建議使用 16 x 16 像素。"
+        }
+      }
+    },
+    "age_verification-popup": {
+      "name": "年齡驗證彈出窗口",
+      "settings": {
+        "age_verification_pop_enable": {
+          "label": "啟用年齡驗證彈出窗口"
+        },
+        "age_verification_logo": {
+          "label": "標識"
+        },
+        "age_verification_heading": {
+          "label": "標題"
+        },
+        "age_verification_sub-heading": {
+          "label": "副標題"
+        },
+        "age_verification_description": {
+          "label": "描述"
+        },
+        "approve_btn_text": {
+          "label": "批准按鈕文本"
+        },
+        "decline_btn_text": {
+          "label": "拒絕按鈕文本"
+        },
+        "decline_heading": {
+          "label": "未滿 18 名"
+        },
+        "decline_sub-heading": {
+          "label": "未滿 18 歲說明"
+        },
+        "age-decline_btn_text": {
+          "label": "拒絕按鈕文本"
+        },
+        "age_verify_popup_cookie": {
+          "label": "為年齡驗證彈出窗口設置 cookie（天）"
+        }
+      }
+    },
+    "cookie-banner": {
+      "name": "Cookie 隱私橫幅",
+      "settings": {
+        "enable_cookie_banner": {
+          "info": "要使隱私橫幅發揮作用，您需要先通過 Shopify 後台激活客戶隱私 [在線商店 > 首選項 > 客戶隱私](https:\/\/www.shopify.com\/admin\/online_store\/preferences)",
+          "label": "啟用隱私橫幅"
+        },
+        "description": {
+          "label": "描述"
+        },
+        "accept_cookie_btn_text": {
+          "label": "接受按鈕文本"
+        },
+        "decline_cookie_btn_text": {
+          "label": "拒絕鏈接文本"
+        }
+      }
+    },
+    "border_radius": {
+      "settings": {
+        "product_quantity": {
+          "content": "產品數量選擇器"
+        }
+      }
+    },
+    "product": {
+      "enable_preorder": {
+        "info": "當啟用“缺貨時繼續銷售”選項時，預購將有效。 [工作原理](https:\/\/shinedezign.gitbook.io\/fame-documentations\/overview).",
+        "label": "啟用預購"
+      },
+      "name": "產品",
+      "option_style": {
+        "label": "選項樣式",
+        "options": {
+          "dropdown": {
+            "label": "落下"
+          },
+          "swatch": {
+            "label": "斯沃琪"
+          }
+        }
+      },
+      "show_saved_amount": {
+        "label": "顯示儲蓄金額"
+      }
+    },
+    "cart": {
+      "settings": {
+        "cart_drawer": {
+          "label": "推車抽屜"
+        },
+        "enable_cartdrawer_note": {
+          "label": "啟用備註"
+        },
+        "enable_cartdrawer": {
+          "label": "使能夠"
+        },
+        "gift_wrap": {
+          "content": "禮品包裝",
+          "info": "禮品包裝需要設置為產品。"
+        },
+        "gift_wrap_product": {
+          "label": "產品"
+        },
+        "gift_wrap_text": {
+          "label": "文本"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{% if settings.enable_animations %}
+  <link rel="preload" as="style" href="{{ 'aos.css' | asset_url }}">
+{% endif %}
+<link rel="preload" as="style" href="{{ 'flickity.min.css' | asset_url }}">
+{{ 'flickity.min.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'theme-rtl.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'base-rtl.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'header-rtl.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'footer-rtl.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'cart-rtl.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'search-rtl.css' | asset_url }}">
+  {{ 'theme-rtl.css' | asset_url | stylesheet_tag }}
+  {{ 'base-rtl.css' | asset_url | stylesheet_tag }}
+  {{ 'header-rtl.css' | asset_url | stylesheet_tag }}
+  {{ 'footer-rtl.css' | asset_url | stylesheet_tag }}
+  {{ 'cart-rtl.css' | asset_url | stylesheet_tag }}
+  {{ 'search-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'base.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'header.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'footer.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'cart.css' | asset_url }}">
+  <link rel="preload" as="style" href="{{ 'search.css' | asset_url }}">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'header.css' | asset_url | stylesheet_tag }}
+  {{ 'footer.css' | asset_url | stylesheet_tag }}
+  {{ 'cart.css' | asset_url | stylesheet_tag }}
+  {{ 'search.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{% if settings.enable_animations %}
+  {{ 'aos.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<script>
+  
+  
+  
+  
+  const rtlStatus={%- if rtlEnable  -%}true{%- else -%}false{%- endif -%};   
+  const errorCross='<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor"></circle><path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+  const successIcon='<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#32A861"></circle><path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="white"></path></svg>';
+  var fame = {};
+  var focusElement = '';
+  const moneyFormat = "{{ shop.money_format | replace:'"',"" }}"; 
+  const moneyFormatWithoutCurrency = "{{ shop.money_format  | replace:'"',""| remove: cart.currency.symbol | replace: 'amount_with_comma_separator', 'amount' }}";
+
+  const savedAmountStatus = {{ settings.show_saved_amount }};
+  const preorderStatus = {{ settings.enable_preorder }};
+  const soldOutText = "{{ 'products.product.sold_out' | t }}";
+  const saleOffText = '{{ 'products.product.off' | t }}';
+  const unitPriceText = '{{ 'products.product.price.unit_price' | t }}';
+  const addToCartText = '{{ 'products.product.add_to_cart' | t }}';
+  const unavailableText = '{{ 'products.product.unavailable' | t }}';
+  const preorderText = '{{ 'products.product.preorder' | t }}';
+  const googleMapApiKey = '{{ settings.googlemapapi }}';
+  const animationStatus = {{ settings.enable_animations }};
+  /* Dynamic cart URLs Start */
+  const cartDrawerStatus = {{settings.enable_cartdrawer }};
+  const rootUrl = '{{ routes.root_url }}';
+  const cartUrl = '{{ routes.cart_url }}.js';
+  const mainCartUrl = '{{ routes.cart_url }}';
+  const cartAdd = '{{ routes.cart_add_url }}';
+  const cartAddUrl = '{{ routes.cart_add_url }}.js';
+  const cartUpdateUrl = '{{ routes.cart_update_url }}.js';
+  const cartChangeUrl = '{{ routes.cart_change_url }}.js';
+  const cartClearUrl = '{{ routes.cart_clear_url }}.js';
+  /*Dynamic cart URLs end*/
+  const quickViewPreLoadGif=`{% render 'quickview-placeholder' %}`;
+  const preLoadLoadGif = `<div class="loader text-center">
+  <svg width="50px" height="50px" viewBox="0 0 100 100" >
+    <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="6" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+      <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
+    </circle>
+  </svg>
+</div>`;
+const noResultFound = `<div class="searchbar__notfound">
+                            <div class="search__empty empty__state-box">
+                                <h4 class="empty__state-heading">{{ 'templates.search.no_results_simple' | t }}</h4>
+                                <p class="empty__state-desc ">{{ 'templates.search.no_results_sub'| t }}</p>
+                            </div>
+                        </div>`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+<script src="{{ 'cookies.min.js' | asset_url }}" defer></script>
+<script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://webflow-assets.sfo2.cdn.digitaloceanspaces.com/egglife/InertiaPlugin.min.js"></script>
+{% if settings.enable_animations %}
+  <script src="{{ 'aos.js' | asset_url }}" defer></script>
+{% endif %}
+<script src="{{ 'flickity.min.js' | asset_url }}" defer></script>
+<script src="{{ 'theme.js' | asset_url }}" defer></script>

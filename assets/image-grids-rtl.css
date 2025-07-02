@@ -1,0 +1,121 @@
+.image-grids__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background: var(--body-alternate-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-grids__left,
+.image-grids__right {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.only-image .image-grids__left {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.image-grids__right {
+    position: relative;
+    background: var(--image-bg);
+    overflow: hidden;
+}
+
+.image-grids__left {
+    padding: 30px;
+    height: 100%;
+}
+
+.image-grids__right-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.image-grids__right-inner:first-child {
+    margin-top: auto;
+}
+
+.image-grids__right .button {
+    margin-top: 15px;
+}
+
+.image-grids__link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+}
+
+.image-grids .row .col-12 {
+    margin-bottom: 30px;
+}
+
+.image-grids__item {
+    display: block;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.image-grids__img {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--image-bg);
+    overflow: hidden;
+}
+
+.image-grids__text {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+.image-grids__heading {
+    display: inline-block;
+    background: var(--body-bg-medium);
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+@media (min-width:576px) {
+    .image-grids__right-inner {
+        /* padding: 20px;
+        padding-left: 40px; */
+        /* border: 1px solid var(--divider-color);
+        border-left: 0; */
+    }
+    .image-grids__left,
+    .image-grids__right {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .image-grids__right {
+        padding-right: 40px;
+    }
+}
+
+@media (max-width:575px) {
+    .image-grids__left {
+        padding: 15px 20px 25px;
+    }
+}

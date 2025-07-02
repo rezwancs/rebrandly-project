@@ -1,0 +1,124 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-header": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "banner": "shopify://shop_images/IMG_3141_copy.webp",
+        "banner_height_desktop": "550px",
+        "banner_height_mobile": "350px",
+        "bannerbgcolor": "#222222",
+        "bgcoloropacity": "#000000",
+        "textcolor": "#807e7e",
+        "overlay_opacity": 50
+      }
+    },
+    "8ecb621f-5325-40fb-a610-5c3b79fa9956": {
+      "type": "abz_rich-text",
+      "blocks": {
+        "template--21299324616998__8ecb621f-5325-40fb-a610-5c3b79fa9956-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>FAQs</strong>",
+            "higlight_style": "basic",
+            "size": "h2",
+            "style": "none",
+            "outline_thickness": "1px",
+            "heading_space_desktop": 0,
+            "heading_space_mobile": 0,
+            "animate_color1": "#94A5FF",
+            "animate_color2": "#FF3939",
+            "marker_color": "#000000",
+            "marker_text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "template--21299324616998__8ecb621f-5325-40fb-a610-5c3b79fa9956-heading-1"
+      ],
+      "settings": {
+        "content_width": "large",
+        "text_alignment": "center",
+        "section_visibility": "always",
+        "color_scheme": "secondary",
+        "enable_gradiant": false,
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    },
+    "2ade3ae8-424c-4848-8709-ab91b309b4dd": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--17595498594601__2ade3ae8-424c-4848-8709-ab91b309b4dd-16739412630986b7b6-0": {
+          "type": "content",
+          "settings": {
+            "heading": "What is the average size of a luxury gift box?",
+            "content": "<p>Our luxury gift boxes are available in sizes ranging from 8x8 inches to 12x12 inches, ensuring a perfect fit for diverse gifting needs. We cater to your preferences from compact and elegant to more spacious options.</p>"
+          }
+        },
+        "template--17595498594601__2ade3ae8-424c-4848-8709-ab91b309b4dd-16739412630986b7b6-1": {
+          "type": "content",
+          "settings": {
+            "heading": "What are the most popular items to put inside a luxury gift box?",
+            "content": "<p>We understand the art of combining items that resonate with your brand. The contents are tailored to align with your identity, from premium stationery to tech gadgets, fine confectionery to bespoke accessories.</p>"
+          }
+        },
+        "00a01593-5381-4120-9095-823d8cc97d36": {
+          "type": "content",
+          "settings": {
+            "heading": "What is the average number of items that can fit a luxury gift box?",
+            "content": "<p>Our gift boxes are designed with flexibility in mind. Depending on the box size and your preferences, they can comfortably accommodate anywhere from three to eight items, ensuring a delightful unboxing experience. We make sure to provide a balanced and visually appealing arrangement.</p>"
+          }
+        },
+        "template--17595498594601__2ade3ae8-424c-4848-8709-ab91b309b4dd-16739412630986b7b6-2": {
+          "type": "content",
+          "settings": {
+            "heading": "What is the average shipping cost for a luxury gift box?",
+            "content": "<p>For luxury gift boxes shipped within Dubai, the average shipping cost ranges from AED 30 to AED 60, depending on the dimensions of the box and the delivery speed selected. We work closely with trusted partners to provide competitive shipping rates while ensuring timely and secure delivery.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--17595498594601__2ade3ae8-424c-4848-8709-ab91b309b4dd-16739412630986b7b6-0",
+        "template--17595498594601__2ade3ae8-424c-4848-8709-ab91b309b4dd-16739412630986b7b6-1",
+        "00a01593-5381-4120-9095-823d8cc97d36",
+        "template--17595498594601__2ade3ae8-424c-4848-8709-ab91b309b4dd-16739412630986b7b6-2"
+      ],
+      "settings": {
+        "heading": "",
+        "enable_highlight": false,
+        "higlight_style": "basic",
+        "outline_thickness": "1px",
+        "heading_size": "h5",
+        "heading_space_desktop": 0,
+        "heading_space_mobile": 0,
+        "show_first_default": false,
+        "section_visibility": "always",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "marker_color": "#000000",
+        "marker_text_color": "#000000",
+        "top_space_desktop": 70,
+        "bottom_space_desktop": 70,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "page-header",
+    "8ecb621f-5325-40fb-a610-5c3b79fa9956",
+    "2ade3ae8-424c-4848-8709-ab91b309b4dd"
+  ]
+}

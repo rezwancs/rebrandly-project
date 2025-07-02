@@ -1,0 +1,127 @@
+.text-marque-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.text-marque__item {
+    display: flex;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-marque__item .marquee-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.marquee-icon {
+    padding-left: var(--marquee-icon-gap);
+}
+
+.text-marque__content {
+    display: flex;
+}
+.text-marque__content.on-scroll-move {
+    justify-content: center;
+}
+.text-marque__node * {
+    font-size: var(--node-size);
+    color: var(--node-color);
+    line-height: 1.2;
+}
+
+.text-marque__node {
+    padding-right: var(--marquee-gap);
+}
+
+.text-marque__node svg {
+    fill: var(--node-color);
+    width: var(--node-size);
+    height: var(--node-size);
+}
+
+.text-marque__node.small-icon svg {
+    width: calc(var(--node-size) / 2);
+    height: calc(var(--node-size) / 2);
+}
+
+.autoplay-infinite .text-marque__node {
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: text-marque;
+    animation-duration: var(--animation-speed);
+}
+
+.ltr-direction .text-marque__node {
+    animation-direction: reverse;
+}
+
+.rtl-direction .text-marque__node {
+    animation-direction: normal;
+}
+
+.outlined-text {
+    -webkit-text-stroke-color: var(--node-color);
+    -webkit-text-stroke-width: var(--outline-thickness);
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes text-marque {
+    0% {
+        transform: translateX(0);
+        visibility: visible;
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.text-marque__box {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.text-marque__box.img-enabled {
+    min-height: var(--marquee-height);
+    display: flex;
+    align-items: center;
+}
+
+.text-marque__img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    text-align: center;
+}
+
+.text-marque__img img,
+.text-marque__img svg {
+    width: 100%;
+    height: 100%;
+    max-width: 60%;
+    object-fit: contain;
+    object-position: center!important;
+}
+
+.text-marque__inner-box {
+    width: 100%;
+}
+
+.text-shadow-true .rte {
+    text-shadow: 3px 3px rgb(var(--text-shadow-color));
+}
+
+@media (max-width:767px) {
+    .autoplay-infinite .text-marque__node {
+        animation-duration: calc(var(--animation-speed)* 0.5);
+    }
+    .text-marque__img img,
+    .text-marque__img svg {
+        max-width: 70%;
+    }
+}

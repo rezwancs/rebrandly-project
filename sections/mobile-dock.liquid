@@ -1,0 +1,381 @@
+{% if section.settings.enable_dock and section.blocks.size > 0 %}
+  <link rel="preload" as="style" href="{{ 'mobile-dock.css' | asset_url }}">
+  {{ 'mobile-dock.css' | asset_url | stylesheet_tag }}
+  <div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+    <div class="mobile-dock">
+      <ul class="list-unstyled mobile-dock-list">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'home' %}
+              <li class="mobile-dock-item{% if request.path == routes.root_url %} active{% endif %}">
+                <a href="{{ routes.root_url }}" class="mobile-dock-link" title="{{block.settings.title}}">
+                  {% if block.settings.custom_icon != empty %}
+                    {{ block.settings.custom_icon }}
+                  {% else %}
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none">
+                      <path d="M4 10L13 3L22 10V21C22 21.5304 21.7893 22.0391 21.4142 22.4142C21.0391 22.7893 20.5304 23 20 23H6C5.46957 23 4.96086 22.7893 4.58579 22.4142C4.21071 22.0391 4 21.5304 4 21V10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 23V13H16V23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {% endif %}
+                  {% if block.settings.title != empty %}
+                    <span class="mobile-dock-link-text">{{ block.settings.title }}</span>
+                  {% endif %}
+                </a>
+              </li>
+            {% when 'menu' %}
+              <li class="mobile-dock-item">
+                <a href="" class="mobile-dock-link" title="{{block.settings.title}}" data-mobile-hamburger>
+                  {% if block.settings.custom_icon != empty %}
+                    {{ block.settings.custom_icon }}
+                  {% else %}
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none">
+                      <rect x="1" y="4" width="24" height="2" fill="currentColor"/>
+                      <rect x="1" y="12" width="17" height="2" fill="currentColor"/>
+                      <rect x="1" y="20" width="24" height="2" fill="currentColor"/>
+                    </svg>
+                  {% endif %}
+                  {% if block.settings.title != empty %}
+                    <span class="mobile-dock-link-text">{{ block.settings.title }}</span>
+                  {% endif %}
+                </a>
+              </li>
+            {% when 'cart' %}
+              <li class="mobile-dock-item{% if request.path == routes.cart_url %} active{% endif %}">
+                <a
+                  href="{% if request.page_type == 'cart' or settings.enable_cartdrawer == false %}{{ routes.cart_url }}{% else %}#cartDrawer{% endif %}"
+                  class="mobile-dock-link"
+                  sss
+                  {% if request.page_type != 'cart' and settings.enable_cartdrawer == true %}
+                    data-side-drawer-open
+                  {% endif %}
+                  title="{{block.settings.title}}"
+                >
+                  {% if block.settings.custom_icon != empty %}
+                    {{ block.settings.custom_icon }}
+                  {% else %}
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none">
+                      <path d="M17.65 9.45V8C17.65 6.94 17.23 5.92 16.49 5.17C15.75 4.42 14.74 4 13.68 4C12.62 4 11.62 4.42 10.87 5.17C10.13 5.92 9.71 6.94 9.71 8V9.45M21.04 9.69L22.35 21.88C22.37 22.09 22.35 22.31 22.3 22.52C22.25 22.73 22.14 22.92 22.01 23.09C21.88 23.26 21.71 23.4 21.52 23.5C21.33 23.6 21.13 23.67 20.92 23.69H6.62C6.19 23.69 5.78 23.52 5.48 23.21C5.18 22.91 5 22.49 5 22.06C5 22 5 21.94 5 21.88L6.32 9.69C6.32 9.62 6.35 9.56 6.4 9.52C6.45 9.48 6.51 9.45 6.58 9.46H20.77C20.84 9.46 20.9 9.48 20.95 9.52C21 9.56 21.03 9.63 21.03 9.69H21.04Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {% endif %}
+                  {% if block.settings.title != empty %}
+                    <span class="mobile-dock-link-text">{{ block.settings.title }}</span>
+                  {% endif %}
+                </a>
+              </li>
+            {% when 'account' %}
+              <li class="mobile-dock-item{%- if customer -%}{% if request.path == routes.account_url %} active{% endif %}{%-else-%}{% if request.path == routes.account_login_url %} active{% endif %}{% endif %}">
+                <a
+                  href="{%- if customer -%}{{- routes.account_url -}}{%-else-%}{{ routes.account_login_url }}{%- endif -%}"
+                  class="mobile-dock-link"
+                  title="{{block.settings.title}}"
+                >
+                  {% if block.settings.custom_icon != empty %}
+                    {{ block.settings.custom_icon }}
+                  {% else %}
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none">
+                      <path d="M21.86 17.0001C20.48 15.5801 18.5 14.8301 16.13 14.8301H10.67C8.3 14.8301 6.32 15.5801 4.94 17.0001C3.69 18.2901 3 20.1101 3 22.1101V23.9401C3 24.4101 3.38 24.8001 3.85 24.8001H22.94C23.41 24.8001 23.79 24.4201 23.79 23.9401V22.1101C23.79 20.1101 23.1 18.3001 21.85 17.0001H21.86ZM22.09 22.1101V23.0801H4.71V22.1101C4.71 20.5301 5.22 19.1801 6.18 18.1901C7.23 17.1201 8.78 16.5501 10.67 16.5501H16.13C18.02 16.5501 19.57 17.1201 20.62 18.1901C21.58 19.1801 22.09 20.5301 22.09 22.1101Z" fill="currentcolor"/>
+                      <path d="M13.3969 13.8C16.6269 13.8 19.2469 11.15 19.2469 7.9C19.2469 4.65 16.6269 2 13.3969 2C10.1669 2 7.54688 4.65 7.54688 7.9C7.54688 11.15 10.1769 13.8 13.3969 13.8ZM13.3969 3.72C15.6869 3.72 17.5469 5.6 17.5469 7.9C17.5469 10.2 15.6869 12.08 13.3969 12.08C11.1069 12.08 9.24687 10.2 9.24687 7.9C9.24687 5.6 11.1069 3.72 13.3969 3.72Z" fill="currentcolor"/>
+                    </svg>
+                  {% endif %}
+                  {% if block.settings.title != empty %}
+                    <span class="mobile-dock-link-text">{{ block.settings.title }}</span>
+                  {% endif %}
+                </a>
+              </li>
+            {% when 'search' %}
+              <li class="mobile-dock-item{% if request.path == routes.search_url %} active{% endif %}">
+                <a href="" class="mobile-dock-link" title="{{block.settings.title}}" data-search-drawer>
+                  {% if block.settings.custom_icon != empty %}
+                    {{ block.settings.custom_icon }}
+                  {% else %}
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none">
+                      <path d="M11.5 19C15.6421 19 19 15.6421 19 11.5C19 7.35786 15.6421 4 11.5 4C7.3579 4 4 7.35786 4 11.5C4 15.6421 7.3579 19 11.5 19Z" stroke="currentcolor" stroke-width="2"/>
+                      <path d="M17 17L23 22" stroke="currentcolor" stroke-width="2"/>
+                    </svg>
+                  {% endif %}
+                  {% if block.settings.title != empty %}
+                    <span class="mobile-dock-link-text">{{ block.settings.title }}</span>
+                  {% endif %}
+                </a>
+              </li>
+            {% when 'link' %}
+              <li class="mobile-dock-item{% if request.path == block.settings.link %} active{% endif %}">
+                <a href="{{ block.settings.link }}" class="mobile-dock-link" title="{{block.settings.title}}">
+                  {% if block.settings.custom_icon != empty %}
+                    {{ block.settings.custom_icon }}
+                  {% else %}
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none">
+                      <path d="M10.833 18.527L9.94365 19.4738C8.39199 21.1259 5.86734 21.1253 4.31567 19.4735C3.56416 18.6735 3.15024 17.6097 3.15024 16.4781C3.15024 15.3465 3.56416 14.2829 4.31567 13.4826L7.33756 10.2657C8.08934 9.46544 9.08893 9.02481 10.1517 9.02481C11.2144 9.02481 12.2138 9.46544 12.9655 10.2657C14.0786 11.4506 14.4312 13.2266 13.8643 14.7902C13.6504 15.3799 13.9259 16.0426 14.4801 16.2701C15.0338 16.4975 15.6566 16.2045 15.8703 15.6145C16.7435 13.2065 16.2003 10.4717 14.4863 8.64713C13.3284 7.4145 11.7894 6.73582 10.152 6.73582C8.51455 6.73582 6.97552 7.4145 5.81761 8.64713L2.79545 11.864C1.63755 13.0967 1 14.735 1 16.4778C0.999731 18.2209 1.63755 19.8595 2.79545 21.0918C3.99045 22.3639 5.56012 23 7.13007 23C8.69947 23 10.2694 22.3639 11.4641 21.0921L12.3535 20.1453C12.7736 19.6981 12.7736 18.9737 12.3535 18.5267C11.934 18.0801 11.2526 18.0801 10.833 18.527ZM24.2075 5.90806C21.8173 3.36384 17.9288 3.36412 15.5386 5.90806L14.6492 6.85484C14.2291 7.30206 14.2291 8.02652 14.6492 8.47345C15.0688 8.92038 15.7501 8.92038 16.1694 8.47345L17.0588 7.52666C18.6102 5.87544 21.1354 5.87487 22.6868 7.52666C24.2385 9.17846 24.2382 11.8663 22.6868 13.5178L19.6654 16.7344C18.1143 18.3862 15.5894 18.3862 14.0377 16.7344C12.9244 15.5493 12.5721 13.7733 13.1389 12.21C13.3529 11.6202 13.0774 10.9576 12.5231 10.7301C11.9686 10.5018 11.3467 10.7962 11.133 11.3856C10.2597 13.7934 10.8029 16.5281 12.517 18.3533C13.7117 19.6254 15.2814 20.2612 16.8513 20.2612C18.421 20.2612 19.9906 19.6252 21.1856 18.3533L24.2073 15.1364C26.5975 12.5922 26.5975 8.45256 24.2075 5.90806Z" fill="currentColor"/>
+                    </svg>
+                  {% endif %}
+                  {% if block.settings.title != empty %}
+                    <span class="mobile-dock-link-text">{{ block.settings.title }}</span>
+                  {% endif %}
+                </a>
+              </li>
+          {% endcase %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <style>
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }}{
+            display: none !important;
+        }
+    }
+  </style>
+{% endif %}
+<script>
+  
+  
+  
+  
+  
+  
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    mobileDockInit();
+  });
+  document.addEventListener('shopify:section:load', function () {
+    mobileDockInit();
+  });
+  function mobileDockInit() {
+    let windowScrollTop = window.scrollY;
+    let mainDockWraper = document.querySelector('.mobile-dock');
+    if (mainDockWraper) {
+      let mobileDockHeight = mainDockWraper.getBoundingClientRect().height;
+      let windowHeight = document.documentElement.offsetHeight * 0.20;
+      if (window.innerWidth < 768) {
+        if (window.scrollY > windowHeight) {
+          mainDockWraper.classList.add('dock-active');
+          document.querySelector('body').style.setProperty('--mobile-dock-height', `${mobileDockHeight}px`);
+        } else {
+          mainDockWraper.classList.remove('dock-active');
+          document.querySelector('body').style.setProperty('--mobile-dock-height', `0px`);
+        }
+      }
+      window.addEventListener('scroll', function () {
+        let mainDockWraper = document.querySelector('.mobile-dock');
+        if (mainDockWraper) {
+          if (window.innerWidth < 768) {
+            if (window.scrollY > windowHeight) {
+                mainDockWraper.classList.add('dock-active');
+                document.querySelector('body').style.setProperty('--mobile-dock-height', `${mobileDockHeight}px`);
+            } else {
+              mainDockWraper.classList.remove('dock-active');
+              document.querySelector('body').style.setProperty('--mobile-dock-height', '0px');
+            }
+          }
+        }
+      });
+    }
+    else{
+        document.querySelector('body').style.setProperty('--mobile-dock-height', '0px');
+    }
+  }
+  window.addEventListener('resize', function () {
+    let mainDockWraper = document.querySelector('.mobile-dock');
+    if (mainDockWraper) {
+      let mobileDockHeight = mainDockWraper.getBoundingClientRect().height;
+      let windowHeight = document.documentElement.offsetHeight * 0.20;
+      {% comment %} document.querySelector('body').style.setProperty('--mobile-dock-height', `${mobileDockHeight}px`); {% endcomment %}
+      if (window.scrollY > windowHeight) {
+        mainDockWraper.classList.add('dock-active');
+        document.querySelector('body').style.setProperty('--mobile-dock-height', `${mobileDockHeight}px`);
+      } else {
+        mainDockWraper.classList.remove('dock-active');
+        document.querySelector('body').style.setProperty('--mobile-dock-height', `0px`);
+      }
+    }
+    else{
+        document.querySelector('body').style.setProperty('--mobile-dock-height', '0px');
+    }
+  });
+
+
+
+
+
+
+
+</script>
+{% schema %}
+{
+  "name": "t:sections.mobile_dock.name",
+  "class": "mobile-dock-section",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_dock",
+      "label": "t:sections.mobile_dock.settings.enable_dock.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "secondary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradiant",
+      "label":"t:common.gradient.label",
+      "default":false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "t:sections.mobile_dock.blocks.link.name",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "t:sections.mobile_dock.blocks.link.settings.custom_icon.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.mobile_dock.blocks.link.settings.title.label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.mobile_dock.blocks.link.settings.link.label"
+        }
+      ]
+    },
+    {
+      "type": "home",
+      "name": "t:sections.mobile_dock.blocks.home.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "t:sections.mobile_dock.blocks.link.settings.custom_icon.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.mobile_dock.blocks.link.settings.title.label",
+          "default": "Home"
+        }
+      ]
+    },
+    {
+      "type": "search",
+      "name": "t:sections.mobile_dock.blocks.search.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "t:sections.mobile_dock.blocks.link.settings.custom_icon.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.mobile_dock.blocks.link.settings.title.label",
+          "default": "Search"
+        }
+      ]
+    },
+    {
+      "type": "cart",
+      "name": "t:sections.mobile_dock.blocks.cart.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "t:sections.mobile_dock.blocks.link.settings.custom_icon.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.mobile_dock.blocks.link.settings.title.label",
+          "default": "Cart"
+        }
+      ]
+    },
+    {
+      "type": "account",
+      "name": "t:sections.mobile_dock.blocks.account.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "t:sections.mobile_dock.blocks.link.settings.custom_icon.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.mobile_dock.blocks.link.settings.title.label",
+          "default": "Account"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "t:sections.mobile_dock.blocks.menu.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_icon",
+          "label": "t:sections.mobile_dock.blocks.link.settings.custom_icon.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.mobile_dock.blocks.link.settings.title.label",
+          "default": "Menu"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "menu"
+      },
+      {
+        "type": "search"
+      },
+      {
+        "type": "home"
+      },
+      {
+        "type": "account"
+      },
+      {
+        "type": "cart"
+      }
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+.text-with-icon__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-with-icon__icon {
+    display: block;
+    min-width: 30px;
+    max-width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    color: var(--heading-color);
+}
+
+.text-with-icon__icon.small {
+    min-width: 30px;
+    max-width: 30px;
+    height: 30px;
+}
+
+.text-with-icon__icon.medium {
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+}
+
+.text-with-icon__icon.large {
+    min-width: 60px;
+    max-width: 60px;
+    height: 60px;
+}
+
+.text-with-icon__icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor
+}
+
+.text-with-icon__desc {
+    margin-top: 5px;
+}
+
+.text-with-icon__item.icon-position-left {
+    flex-direction: row;
+}
+
+.text-with-icon__item.icon-position-left .text-with-icon__icon {
+    margin-right: 15px;
+    margin-bottom: 0;
+}
+
+@media (min-width:768px) {
+    .text-with-icon__item {
+        justify-content: center;
+        text-align: center;
+    }
+    .text-with-icon__icon.medium {
+        min-width: 50px;
+        max-width: 50px;
+        height: 50px;
+    }
+    .text-with-icon__icon.large {
+        min-width: 80px;
+        max-width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width:991px) {
+    .text-with-icon__item {
+        padding: 10px 0px;
+    }
+}
+
+@media (max-width:767px) {
+    .text-with-icon__item {
+        padding: 15px 0px;
+    }
+    .text-with-icon__heading {
+        font-size: var(--text);
+    }
+}

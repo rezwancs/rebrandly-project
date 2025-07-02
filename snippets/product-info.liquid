@@ -1,0 +1,149 @@
+<div class="product-card-info">
+  {% if settings.show_vendor %}
+    <p class="product-vendor-info">
+      {{ product.vendor }}
+    </p>
+  {% endif %}
+  <a
+    {% if product != blank %}
+      href="{{ product.url | within: collection }}"
+    {% else %}
+      role="link"
+      aria-disabled="true"
+    {% endif %}
+    class="unstyled-link product-title text-xsmall_"
+    title="{{ product.title | strip_html }}"
+  >
+    {% liquid
+      if product != blank
+        echo product.title | strip_html
+      else
+        echo 'products.product.onboarding.title' | t
+      endif
+    %}
+  </a>
+  <div class="product-prizebox">
+    {%- assign price_min = product.price_min | default: 1899 | money -%}
+    {% assign offText = 'products.product.off' | t %}
+    {%- if product.price_varies -%}
+      <span class="product-actual-price price-varies">
+        {{ 'products.product.price.from_price_html' | t: price: price_min }}
+      </span>
+    {%- else -%}
+      <span class="product-actual-price">{{ price_min }}</span>
+    {%- endif -%}
+    {%- if product.compare_at_price_min > product.price_min -%}
+      <span class="product-compare-price">{{ product.compare_at_price_min | money }}</span>
+    {%- endif -%}
+    {%- if current_variant.unit_price_measurement -%}
+      <p class="product-unit-price text-xsmall">
+        {{ current_variant.unit_price | money }} /
+        {% if current_variant.unit_price_measurement.reference_value != 1 -%}
+          {{- current_variant.unit_price_measurement.reference_value -}}
+        {%- endif %}
+        {{ current_variant.unit_price_measurement.reference_unit }}
+      </p>
+    {%- endif -%}
+  </div>
+
+  {% liquid
+    assign colorSwatchStatus = false
+    if productColorSwatchs != blank
+      if settings.color_swatch_position_desktop == 'below' or settings.color_swatch_position_mobile == 'below'
+        assign colorSwatchStatus = true
+      endif
+    endif
+  %}
+  {% if colorSwatchStatus %}
+    <div class="product-options {% if settings.color_swatch_position_desktop == 'below' and settings.color_swatch_position_mobile == 'above' %}d-none d-md-block{% elsif settings.color_swatch_position_desktop == 'above' and settings.color_swatch_position_mobile == 'below' %}d-block d-md-none{% endif %}">
+      {{ productColorSwatchs | replace: '[[option_location]]', 'below' }}
+    </div>
+  {% endif %}
+  {% liquid
+    if settings.show_inventory
+      assign thershold = settings.inventory_threshold
+      if product.available
+        assign stock = 0
+        assign selling = false
+        assign lows_inventory = false
+        assign track_inventory = true
+        for variant in product.variants
+          if variant.inventory_policy == 'continue' and settings.enable_preorder
+            assign selling = true
+          endif
+          if variant.inventory_management == null
+            assign track_inventory = false
+          endif
+          if variant.inventory_quantity == 0
+            assign lows_inventory = true
+          endif
+          if variant.inventory_quantity > 0
+            assign stock = stock | plus: variant.inventory_quantity
+          endif
+        endfor
+        if track_inventory == true
+          if lows_inventory == true and selling and stock >= 0
+            assign stockconent = 'products.product.in_stock' | t
+            assign stockClass = 'instock'
+          elsif selling == false and stock > 0 and stock > thershold
+            assign stockconent = 'products.product.in_stock_with_unit' | t: stock: stock
+            assign stockClass = 'instock'
+          elsif stock > 0 and thershold > stock
+            assign stockconent = 'products.product.low_stock' | t: stock: stock
+            assign stockClass = 'lowstock'
+          elsif stock <= 0 and selling == true
+            assign stockconent = 'products.product.restock' | t
+            assign stockClass = 'restock'
+          else
+            assign stockconent = 'products.product.in_stock' | t
+            assign stockClass = 'instock'
+          endif
+        elsif track_inventory == false
+          if selling == true and track_inventory == false and stock > 0
+            assign stockconent = 'products.product.in_stock' | t
+            assign stockClass = 'instock'
+          elsif selling == false and stock > 0 and stock > thershold
+            assign stockconent = 'products.product.in_stock_with_unit' | t: stock: stock
+            assign stockClass = 'instock'
+          elsif stock > 0 and thershold > stock
+            assign stockconent = 'products.product.low_stock' | t: stock: stock
+            assign stockClass = 'lowstock'
+          elsif stock <= 0 and selling == true
+            assign stockconent = 'products.product.restock' | t
+            assign stockClass = 'restock'
+          else
+            assign stockconent = 'products.product.in_stock' | t
+            assign stockClass = 'instock'
+          endif
+        endif
+      else
+        assign stockconent = 'products.product.out_of_stock' | t
+        assign stockClass = 'outofstock'
+      endif
+    endif
+  %}
+  {% if settings.show_inventory and product != blank %}
+    <p class="stock-status {{ stockClass }}">
+      {{ stockconent }}
+    </p>
+  {% endif %}
+  <ul class="list-unstyled product-card-label-container">
+    {% for i in (1..5) %}
+      {% liquid
+        assign valueIndex = 'custom_value_' | append: forloop.index
+        assign tagValue = settings[valueIndex]
+      %}
+      {% if tagValue != blank %}
+        {% liquid
+          assign key = tagValue | split: '.' | first
+          assign value = tagValue | split: '.' | last
+        %}
+        {% if product.metafields[key][value] != blank %}
+          <li class="product-card-label">
+            {{ product.metafields[key][value] }}
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

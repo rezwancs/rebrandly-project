@@ -1,0 +1,80 @@
+<ul class="list-unstyled header__icons {% if section.settings.enable_icon_background %}background-enabled{% endif %}">
+  {%- if section.settings.show_search -%}
+    <li class="header__icons-item">
+      <a
+        href="{{ routes.search_url }}"
+        class="unstyled-link header__icons-link search"
+        title="{{ 'general.search.search' | t }}"
+        data-search-drawer
+      >
+       {% comment %} <svg width="21" height="20" viewBox="0 0 21 20" fill="none">
+          <g clip-path="url(#clip0_10936_781)">
+          <path d="M12 17C7.58172 17 4 13.4182 4 9C4 4.58172 7.58172 1 12 1C16.4182 1 20 4.58172 20 9C20 13.4182 16.4182 17 12 17Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M6 15L1 19" stroke="currentColor" stroke-width="2"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_10936_781">
+          <rect width="21" height="20" fill="currentColor"/>
+          </clipPath>
+          </defs>
+        </svg>  {% endcomment %}
+    <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12.9158" cy="12.9158" r="10.9158" stroke="white" stroke-width="2.27412" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M21.1025 21.1035L29.2894 29.2904" stroke="white" stroke-width="2.27412" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if shop.customer_accounts_enabled -%}
+    <li class="header__icons-item icon-account">
+      <a
+        href="{%- if customer -%}{{- routes.account_url -}}{%-else-%}{{ routes.account_login_url }}{%- endif -%}"
+        class="unstyled-link header__icons-link account"
+        title="{%- if customer -%}{{ 'customer.account_fallback' | t }}{%-else-%}{{ 'customer.log_in' | t }}{%- endif -%}"
+      >
+       {% comment %} <svg viewBox="0 0 21 23" fill="currentColor">
+          <g><g><path d="m18.86,15c-1.38-1.42-3.36-2.17-5.73-2.17h-5.46c-2.37,0-4.35.75-5.73,2.17-1.25,1.29-1.94,3.11-1.94,5.11v1.83c0,.47.38.86.85.86h19.09c.47,0,.85-.38.85-.86v-1.83c0-2-.69-3.81-1.94-5.11Zm.23,5.11v.97H1.71v-.97c0-1.58.51-2.93,1.47-3.92,1.05-1.07,2.6-1.64,4.49-1.64h5.46c1.89,0,3.44.57,4.49,1.64.96.99,1.47,2.34,1.47,3.92Z"/><path d="m10.4,11.8c3.23,0,5.85-2.65,5.85-5.9S13.63,0,10.4,0s-5.85,2.65-5.85,5.9,2.63,5.9,5.85,5.9Zm0-10.08c2.29,0,4.15,1.88,4.15,4.18s-1.86,4.18-4.15,4.18-4.15-1.88-4.15-4.18,1.86-4.18,4.15-4.18Z"/></g></g>
+        </svg> {% endcomment %}
+
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.01505 24.9998C0.795755 21.491 2.85716 14.2103 12.8572 13.1577C15.4887 13.8156 24.6994 15.7893 24.6994 24.9998" stroke="white" stroke-width="1.8"/>
+          <circle cx="12.8573" cy="7.89474" r="7.89474" fill="white"/>
+        </svg>
+
+      </a>
+    </li>
+  {%- endif -%}
+  <li class="header__icons-item">
+    <a
+      href="{% if template == 'cart' or settings.enable_cartdrawer == false  %}{{ routes.cart_url }}{% else %}#cartDrawer{% endif %}"
+      class="unstyled-link header__icons-link cart no-js-hidden"
+      {% if template != 'cart' and settings.enable_cartdrawer == true %}
+        data-side-drawer-open
+      {% endif %}
+      aria-label="cart icon"
+    >
+      {% comment %} <svg viewBox="0 0 19 22">
+        <g><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7px" d="m13.51,6.3v-1.45c0-1.06-.42-2.08-1.16-2.83-.74-.75-1.75-1.17-2.81-1.17s-2.06.42-2.81,1.17c-.74.75-1.16,1.77-1.16,2.83v1.45m11.33.24l1.31,12.19c.02.21,0,.43-.05.64s-.16.4-.29.57c-.13.17-.3.31-.49.41-.19.1-.39.17-.6.19H2.48c-.43,0-.84-.17-1.14-.48-.3-.3-.48-.72-.48-1.15,0-.06,0-.12,0-.18l1.32-12.19c0-.07.03-.13.08-.17.05-.04.11-.07.18-.06h14.19c.07,0,.13.02.18.06.05.04.08.11.08.17Z"/></g>
+      </svg> {% endcomment %} 
+
+      <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M29.121 8.66608H26.028L19.261 0.325081C19.1138 0.145335 18.902 0.030499 18.6711 0.00525517C18.4401 -0.0199886 18.2085 0.0463747 18.026 0.190081C17.9361 0.260354 17.861 0.347867 17.8053 0.447497C17.7496 0.547127 17.7144 0.65687 17.7016 0.770298C17.6888 0.883727 17.6989 0.99856 17.731 1.10807C17.7632 1.21759 17.8169 1.31958 17.889 1.40808L23.778 8.66708H6.223L12.112 1.40808C12.184 1.31953 12.2376 1.21753 12.2697 1.10803C12.3018 0.998533 12.3117 0.883736 12.299 0.770346C12.2862 0.656956 12.251 0.547244 12.1954 0.447615C12.1397 0.347986 12.0648 0.260437 11.975 0.190081C11.7925 0.0463747 11.5609 -0.0199886 11.3299 0.00525517C11.099 0.030499 10.8872 0.145335 10.74 0.325081L3.972 8.66608H0.879C0.764355 8.66529 0.650678 8.68709 0.544457 8.73023C0.438238 8.77338 0.341556 8.83702 0.259932 8.91753C0.178309 8.99804 0.113343 9.09383 0.0687438 9.19945C0.0241444 9.30507 0.000785229 9.41844 0 9.53308L0 12.9991C0.000785229 13.1137 0.0241444 13.2271 0.0687438 13.3327C0.113343 13.4383 0.178309 13.5341 0.259932 13.6146C0.341556 13.6951 0.438238 13.7588 0.544457 13.8019C0.650678 13.8451 0.764355 13.8669 0.879 13.8661H1.974L5.308 25.3661C5.36095 25.5489 5.47192 25.7095 5.62417 25.8237C5.77642 25.9379 5.96169 25.9994 6.152 25.9991H23.852C24.042 25.9999 24.2271 25.939 24.3795 25.8256C24.5318 25.7121 24.6433 25.5523 24.697 25.3701L28.03 13.8701H29.125C29.2396 13.8703 29.3532 13.848 29.4592 13.8044C29.5653 13.7608 29.6616 13.6967 29.7429 13.6158C29.8241 13.5349 29.8887 13.4388 29.9328 13.333C29.9769 13.2272 29.9997 13.1137 30 12.9991V9.53308C29.9992 9.41844 29.9759 9.30507 29.9313 9.19945C29.8867 9.09383 29.8217 8.99804 29.7401 8.91753C29.6584 8.83702 29.5618 8.77338 29.4555 8.73023C29.3493 8.68709 29.2356 8.66529 29.121 8.66608ZM23.185 24.2661H6.815L3.8 13.8661H26.2L23.185 24.2661ZM28.242 12.1331H1.758V10.3991H28.242V12.1331Z" fill="white"/>
+      </svg>
+
+      <span class="cart-count{% if cart.item_count == 0 %} hidden{% endif %}" data-header-cart-count>
+        {%- if cart.item_count < 100 and cart.item_count > 0 %}{{ cart.item_count }}{% endif -%}
+      </span>
+    </a>
+    <noscript>
+      <a
+        href="{{ routes.cart_url }}"
+        class="unstyled-link header__icons-link cart"
+      >
+        <svg width="20" height="22" viewBox="0 0 17 19" fill="none">
+          <path d="M11.9303 5.7077V4.45722C11.9303 3.5403 11.569 2.66095 10.926 2.01259C10.2829 1.36424 9.41079 1 8.50138 1C7.59198 1 6.71982 1.36424 6.07678 2.01259C5.43373 2.66095 5.07248 3.5403 5.07248 4.45722V5.7077M14.8566 5.91201L15.9915 16.4389C16.0118 16.6236 15.9958 16.8104 15.9444 16.9888C15.893 17.1672 15.8073 17.3336 15.6921 17.4786C15.577 17.6235 15.4346 17.7442 15.2731 17.8337C15.1117 17.9231 14.9344 17.9797 14.7512 18H2.40555C2.03502 18 1.67955 17.8522 1.41678 17.5888C1.15402 17.3254 1.00533 16.9678 1.00319 16.5942C0.998938 16.5426 0.998938 16.4906 1.00319 16.4389L2.14615 5.91201C2.15032 5.85492 2.17632 5.80169 2.21866 5.76357C2.26101 5.72545 2.3164 5.70541 2.37313 5.70768H14.6296C14.6864 5.70541 14.7418 5.72545 14.7841 5.76357C14.8265 5.80169 14.8525 5.85492 14.8566 5.91201Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </noscript>
+  </li>
+</ul>

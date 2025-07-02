@@ -1,0 +1,93 @@
+<div
+  class="gift__card-box"
+  data-gift-card-box
+  data-section-id="{{ section.id }}"
+  data-product-variant-id="{{ product.selected_or_first_available_variant.id }}"
+>
+  {%- assign gift_card_recipient_control_flag = 'properties[__shopify_send_gift_card_to_recipient]' -%}
+  <div class="custom-checkbox gift__card-checkbox no-js-hidden">
+    <input
+      id="Recipient-Checkbox-{{ section.id }}"
+      class="checkmark-input"
+      type="checkbox"
+      name="{{ gift_card_recipient_control_flag }}"
+      unchecked
+      disabled
+      data-js-gift-card-selector
+    >
+    <span class="checkmark"></span>
+    <label for="Recipient-Checkbox-{{ section.id }}">{{ 'products.product.recipient.form.checkbox' | t }}</label>
+  </div>
+  <div class="gift__card-content no-js-visible" data-gift-card-content>
+    <div class="form-message__wrapper error {% unless form.errors %}hidden{% endunless %}" data-gift-card-errors>
+      <div id="RecipientForm-email-error-{{ section.id }}" class="form-message__title" tabindex="-1">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+          <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span class="error-message">
+          {%- if form.errors contains 'email' -%}
+            {{ form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email }}.
+          {%- endif -%}
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="hidden" for="Recipient-name-{{ section.id }}">
+        {{- 'products.product.recipient.form.name' | t -}}
+      </label>
+      <input
+        class="form-control input-md"
+        autocomplete="{{ 'products.product.recipient.form.name' | t }}"
+        type="text"
+        data-attr="{{ 'products.product.recipient.form.name' | t }}"
+        id="Recipient-name-{{ section.id }}"
+        name="properties[Recipient name]"
+        placeholder="{{ 'products.product.recipient.form.name_optional' | t }}"
+        value="{{ form.name }}"
+      >
+    </div>
+    <div class="form-group">
+      <label class="hidden" for="Recipient-email-{{ section.id }}">
+        {{- 'products.product.recipient.form.email' | t -}}
+      </label>
+      <input
+        class="form-control input-md"
+        id="Recipient-email-{{ section.id }}"
+        type="email"
+        data-attr="{{ 'products.product.recipient.form.email' | t }}"
+        placeholder="{{ 'products.product.recipient.form.email' | t }}"
+        name="properties[Recipient email]"
+        value="{{ form.email }}"
+        {% if form.errors contains 'email' %}
+          aria-invalid="true"
+          aria-describedby="RecipientForm-email-error-{{ section.id }}"
+        {% endif %}
+        pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)*[a-zA-Z]{2,}))$"
+      >
+    </div>
+    <div class="form-group">
+      <label class="hidden" for="Recipient-message-{{ section.id }}">
+        {{ 'products.product.recipient.form.message' | t }}
+      </label>
+      <textarea
+        rows="5"
+        class="form-control"
+        id="Recipient-message-{{ section.id }}"
+        data-attr="textarea"
+        name="properties[Message]"
+        maxlength="200"
+        placeholder="{{ 'products.product.recipient.form.message_optional' | t }}"
+        aria-label="{{ 'products.product.recipient.form.message' | t }}"
+      >{{ form.message }}</textarea>
+    </div>
+    <input
+      type="hidden"
+      name="{{ gift_card_recipient_control_flag }}"
+      value="if_present"
+      id="Recipient-Control-{{ section.id }}"
+      data-no-js-gift-card-selector
+    >
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{% comment %}theme-check-disable ImgWidthAndHeight,ImgLazyLoading,DeprecateLazysizes,DeprecatedFilter{% endcomment %}
+{%- assign img_url = image | image_url: width: '100' | replace: 'width=100', 'width={width}' -%}
+<img
+  {% if id != blank %}
+    id="{{ id }}"
+  {% endif %}
+  class="lazyload no-js-hidden {{ class }}"
+  data-src="{{ img_url }}"
+  data-aspectratio="{{ image.aspect_ratio }}"
+  data-sizes="auto"
+  data-widths="{{ sizes }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  data-original="{{ image | image_url }}"
+  alt="{{ image.alt | escape }}"
+  loading="lazy"
+  style="object-position:{{ image.presentation.focal_point }}"
+>
+{% comment %} <div class='threedotloader'>
+  <div class='dot'></div>
+  <div class='dot'></div>
+  <div class='dot'></div>
+</div> {% endcomment %}
+<div class="imgloader">
+<span class="imgloader__dot"></span>
+</div>
+<noscript>
+  <img
+    class="{{ class }}"
+    src="{{ image | img_url: 'master' }}"
+    alt="{{ image.alt | default: shop.name | strip_html }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+  >
+</noscript>
+{% comment %}theme-check-enable ImgWidthAndHeight,ImgLazyLoading,DeprecateLazysizes,DeprecatedFilter{% endcomment %}

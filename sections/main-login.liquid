@@ -1,0 +1,379 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'account-rtl.css' | asset_url }}">
+  {{ 'account-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'account.css' | asset_url }}">
+  {{ 'account.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  <div class="account__form-box">
+    <div class="account__form-block" id="forgotPassword">
+      {%- if section.settings.marque_enable and section.settings.reset_text != blank -%}
+        <div class="account__main-heading-item" data-marquee-text>
+          {%- for i in (1..6) -%}
+            <h2 class="account__main-heading h1-large" data-marque-node>{{ section.settings.reset_text }}</h2>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <div class="container">
+        {%- if section.settings.reset_text != blank -%}
+          <h3 class="account__form-heading {{ section.settings.heading_size }}">
+            {{ section.settings.reset_text }}
+          </h3>
+        {%- endif -%}
+        {%- form 'recover_customer_password', class: 'account__form' -%}
+          {% if form.errors %}
+            <div class="form-message__wrapper error">
+              <p id="RecoverEmail-email-error" class="form-message__title">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                  <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                {{ form.errors.messages.form }}
+              </p>
+            </div>
+          {%- endif -%}
+          {% assign recover_success = form.posted_successfully? %}
+          <div class="form-group">
+            <label class="hidden" for="RecoverEmail">{{ 'customer.login_page.email' | t }}</label>
+            <input
+              type="email"
+              class="form-control input-md"
+              name="email"
+              id="RecoverEmail"
+              autocomplete="email"
+              autocapitalize="off"
+              {% if form.errors %}
+                aria-invalid="true"
+                aria-describedby="RecoverEmail-email-error"
+              {% endif %}
+              placeholder="{{ 'customer.login_page.email' | t }}"
+              pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)*[a-zA-Z]{2,}))$"
+            >
+          </div>
+          <button class="button med-btn btn-block icon-btn right-icon {{ settings.button_style }}">
+            {% assign buttonText = 'customer.login_page.submit' | t %}
+            {% render 'button-style', buttonText: buttonText %}
+          </button>
+          <div class="accpunt__form-text text-center">
+            <p class="cancel_recover">
+              <a href="#login" class="hyperlink text-small">{{ 'customer.login_page.cancel' | t }}</a>
+            </p>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+    <div class="account__form-block" id="login">
+      {%- if section.settings.marque_enable and section.settings.login_text != blank -%}
+        <div class="account__main-heading-item" data-marquee-text>
+          {%- for i in (1..6) -%}
+            <h2 class="account__main-heading h1-large" data-marque-node>{{ section.settings.login_text }}</h2>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <div class="container">
+        {%- if section.settings.login_text != blank -%}
+          <h3 class="account__form-heading {{ section.settings.heading_size }}">
+            {{ section.settings.login_text }}
+          </h3>
+        {% endif %}
+        {%- form 'customer_login', novalidate: 'novalidate', class: 'account__form' -%}
+          {%- if recover_success == true -%}
+            <div class="form-message__wrapper success">
+              <p class="form-message__title" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="#32A861"></circle>
+                  <path d="M13.756 6.22351L8.60712 11.3724L6.30231 9.06764C6.0043 8.76962 5.52147 8.76962 5.22351 9.06764C4.9255 9.36566 4.9255 9.84849 5.22351 10.1464L8.06764 12.9906C8.21604 13.139 8.41216 13.2144 8.60703 13.2144C8.80191 13.2144 8.99679 13.1402 9.14641 12.9906L14.8347 7.30231C15.1327 7.0043 15.1327 6.52147 14.8347 6.22351C14.5367 5.9255 14.0539 5.9255 13.7559 6.22351H13.756Z" fill="white"></path>
+                </svg>
+                {{ 'customer.recover_password.success' | t }}
+              </p>
+            </div>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="form-message__wrapper error">
+              <div class="form-message__title" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                  <path d="M7.05331 7L10.004 10.0269L7 13M12.9467 7L9.99602 10.0269L13 13" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                {{ form.errors | default_errors }}
+              </div>
+            </div>
+          {%- endif -%}
+          <div class="form-group">
+            <label class="hidden" for="CustomerEmail">{{ 'customer.login_page.email' | t }}</label>
+            <input
+              type="email"
+              class="form-control input-md"
+              name="customer[email]"
+              id="CustomerEmail"
+              autocomplete="email"
+              autocapitalize="off"
+              {% if form.errors contains 'form' %}
+                aria-invalid="true"
+              {% endif %}
+              placeholder="{{ 'customer.login_page.email' | t }}"
+              pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)*[a-zA-Z]{2,}))$"
+            >
+          </div>
+          {%- if form.password_needed -%}
+            <div class="form-group">
+              <label class="hidden" for="customerPassword">{{ 'customer.login_page.password' | t }}</label>
+              <input
+                type="password"
+                class="form-control input-md"
+                name="customer[password]"
+                id="CustomerPassword"
+                autocomplete="current-password"
+                autocapitalize="off"
+                {% if form.errors contains 'password' %}
+                  aria-invalid="true"
+                {% endif %}
+                placeholder="{{ 'customer.login_page.password' | t }}"
+              >
+            </div>
+          {%- endif -%}
+          <button class="button med-btn btn-block icon-btn right-icon {{ settings.button_style }}">
+            {% assign buttonText = 'customer.login_page.sign_in' | t %}
+            {% render 'button-style', buttonText: buttonText %}
+          </button>
+          <div class="accpunt__form-text text-center">
+            <a href="#forgotPassword" class="unstyled-link text-small forgot-passowrd-text">
+              {{- 'customer.login_page.forgot_password' | t -}}
+            </a>
+            <p class="text-small ">
+              {{ 'customer.login_page.account_heading' | t }}
+              <a href="{{ routes.account_register_url }}" class="hyperlink">
+                {{- 'customer.login_page.account_subtext' | t -}}
+              </a>
+            </p>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var url = window.location.href;
+  var showRecover = document.getElementsByClassName('forgot-passowrd-text')[0];
+  var recoverSection = document.getElementById('forgotPassword');
+  var cancelRecover = document.getElementsByClassName('cancel_recover')[0];
+  var loginSection = document.getElementById('login');
+  if (url.indexOf('#recover') > -1) {
+    loginSection.style.display = 'none';
+    recoverSection.style.display = 'flex';
+  } else {
+    recoverSection.style.display = 'none';
+    loginSection.style.display = 'flex';
+  }
+  showRecover.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginSection.style.display = 'none';
+    recoverSection.style.display = 'flex';
+    var url = window.location.pathname + '#recover';
+    history.pushState({}, null, url);
+    marqueeTextAutoplay(showRecover.closest('.shopify-section'));
+  });
+  cancelRecover.addEventListener('click', (e) => {
+    e.preventDefault();
+    recoverSection.style.display = 'none';
+    loginSection.style.display = 'flex';
+    var url = window.location.pathname;
+    history.pushState({}, null, url);
+    marqueeTextAutoplay(showRecover.closest('.shopify-section'));
+  });
+</script>
+<style>
+    #shopify-section-{{ section.id }} .section-wrapper {
+      --inner-space-top:{{ section.settings.top_space_desktop }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+   }
+   #shopify-section-{{ section.id }} .account__form-heading{
+     padding-bottom:{{ section.settings.heading_space_desktop }}px;
+   }
+  @media screen and (max-width:767px){
+    #shopify-section-{{ section.id }} .section-wrapper {
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .account__form-heading{
+      padding-bottom:{{ section.settings.heading_space_mobile }}px;
+    }
+  }
+  #shopify-section-{{ section.id }}{
+    --marque-opacity: {{ section.settings.marque_opacity | divided_by: 100.0 }};
+  }
+</style>
+{% schema %}
+{
+  "name": "t:sections.main_login.name",
+  "class": "section account-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "marque_enable",
+      "default": true,
+      "label": "t:sections.main_login.settings.enable_marque.label"
+    },
+    {
+      "type": "range",
+      "id": "marque_opacity",
+      "label": "t:common.marquee_text_opacity.label",
+      "default": 10,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "login_text",
+      "default": "Customer Login",
+      "label": "t:sections.main_login.settings.login_title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:common.heading_size.label",
+      "default": "h5",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.heading_size.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_space_desktop",
+      "label": "t:common.header.heading_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_space_mobile",
+      "label": "t:common.header.heading_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "reset_text",
+      "default": "Reset Password",
+      "label": "t:sections.main_login.settings.reset_text.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gradiant",
+      "label": "t:common.gradient.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ]
+}
+{% endschema %}

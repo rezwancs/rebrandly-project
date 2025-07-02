@@ -1,0 +1,503 @@
+/* searchbar css start */
+
+.searchbar .product-title {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.searchbar {
+    position: fixed;
+    width: 100%;
+    right: 0;
+    top: 0;
+    height: 100%;
+    max-height: 100%;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: .2s ease;
+}
+
+.search-drawer-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.searchbar__wrapper {
+    background: var(--body-bg);
+    height: 100%;
+    overflow-y: auto;
+}
+
+.searchbar__container {
+    max-width: 100%;
+    background: var(--body-bg);
+    height: 100%;
+    position: relative;
+    transform: translate(0, -100%);
+    transition: .8s ease;
+}
+
+.search-drawer-active .searchbar__container {
+    transform: translate(0, 0%);
+}
+
+.search-close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--body-bg);
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    z-index: 2;
+    border-radius: 100%;
+    transition: unset;
+}
+
+.search-close:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    background: var(--body-text-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+    z-index: -1;
+    transition: .4s ease;
+}
+
+.search-close svg {
+    transition: .4s ease;
+    fill: currentColor;
+    width: 16px;
+}
+
+.searchbar__content {
+    padding: 30px 0;
+}
+
+.searchbar__content .searchbar__input-box,
+.search__topbar .searchbar__input-box {
+    margin-bottom: 30px;
+}
+
+.searchbar__input-box {
+    position: relative;
+}
+
+.searchbar__input-box form {
+    position: relative;
+    padding: 1px;
+}
+
+.border:before,
+.border:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--form-input-color);
+    transition: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.border:after {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    transition-delay: 0.6s;
+}
+
+.border i:before,
+.border i:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 0;
+    background-color: var(--form-input-color);
+    transition: 0.2s;
+}
+
+.border i:after {
+    right: auto;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    transition-delay: 0.4s;
+}
+
+.searchbar__input-box form input:focus~.border:before,
+.searchbar__input-box form input:focus~.border:after {
+    width: 100%;
+    transition: 0.2s;
+    transition-delay: 0.6s;
+}
+
+.searchbar__input-box form input:focus~.border:after {
+    transition-delay: 0.2s;
+}
+
+.searchbar__input-box form input:focus~.border i:before,
+.searchbar__input-box form input:focus~.border i:after {
+    height: 100%;
+    transition: 0.2s;
+}
+
+.searchbar__input-box form input:focus~.border i:after {
+    transition-delay: 0.4s;
+}
+
+.searchbar__sticky-input {
+    padding-top: 30px;
+    background: var(--body-bg);
+}
+
+.searchbar__input {
+    font-size: var(--large-text);
+    padding: 8px 20px;
+    padding-right: 55px;
+}
+
+.seachbar__button {
+    position: absolute;
+    top: 2px;
+    height: 100%;
+    background: 100%;
+    right: 10px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.3;
+    transition: .4s ease-out;
+}
+
+.seachbar__button {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    background: 100%;
+    right: 10px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .3;
+    transition: .4s ease-out;
+}
+
+.search-section .seachbar__button {
+    top: 0px;
+    height: 51px;
+}
+
+.seachbar__button svg {
+    width: 18px;
+}
+
+.recent__list-item {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.recent__list-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--body-text-color);
+    font-size: var(--small-text);
+    padding: 4px 20px;
+    border-radius: 50px;
+    line-height: 1.1;
+    border: 1px solid var(--form-input-border);
+}
+
+.searchbar__result-heading {
+    margin-bottom: 20px;
+    font-size: var(--small-text);
+}
+
+.searchbar__result-heading span {
+    opacity: 0.5;
+    margin-left: 5px;
+}
+
+.searchbar__result-content .product-card-img .product-percent-off {
+    padding: 2px 6px;
+}
+
+.pages-result__list {
+    padding: 10px 0 0;
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.search-section .searchbar__input-box {
+    max-width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.pages-result__item+.pages-result__item {
+    margin-top: 10px;
+}
+
+.pages-result__link {
+    display: inline-block;
+}
+
+.searchbar__result-content-heading,
+.searchbar__suggestions-content-heading {
+    margin-bottom: 10px;
+}
+
+.page__result-title {
+    color: var(--body-text-color);
+    margin-bottom: 10px;
+}
+
+.page__result-desc {
+    margin-bottom: 15px;
+    padding-left: 40px;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.page__result-link {
+    margin-top: 10px;
+}
+
+.searchbar__result-content .post__item {
+    margin-bottom: 30px;
+}
+
+.searchbar__background {
+    display: block;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: .4s ease;
+    pointer-events: none;
+    background: var(--body-text-color-light);
+}
+
+.search-drawer-active .searchbar__background {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.searchbar__notfound .empty__state-box {
+    min-height: auto;
+}
+
+.searchbar__recent,
+.searchbar__result-all {
+    margin-bottom: 30px;
+}
+
+.js body:not(.tab-focus) .searchbar .searchbar__input:focus-visible {
+    border-color: transparent!important;
+}
+
+.searchbar__result-content+.searchbar__result-content {
+    border-top: 1px solid var(--divider-color);
+    padding-top: 40px;
+}
+
+.searchbar .overlay-close {
+    right: 33px;
+}
+
+.searchbar__bottom-btn {
+    padding-top: 20px;
+}
+
+.searchbar__input-box .search-close {
+    display: flex;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+}
+
+.searchbar__wrapper form.search {
+    max-width: calc(100% - 54px);
+}
+
+.related-query__list,
+.popular__search {
+    margin-bottom: 30px;
+}
+
+.related-query__item {
+    margin-bottom: 10px;
+}
+
+.related-query__link {
+    display: inline-block;
+    font-size: var(--xsmall-text);
+    background: var(--divider-color);
+    color: var(--body-text-color);
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+
+.related-query__link svg {
+    width: 10px;
+    height: auto;
+    vertical-align: middle;
+    margin-left: 3px;
+    opacity: 0.6;
+}
+
+.related-query__link mark {
+    font-weight: 600;
+    background: transparent;
+    color: var(--body-text-color);
+}
+
+.popular__search-item {
+    display: inline-block;
+}
+
+.popular__search-link {
+    font-size: var(--small-text);
+    margin-left: 15px;
+}
+
+.recent__list-item.clear-recent .recent__list-link {
+    background-color: var(--button-bg);
+    color: var(--button-color);
+    border-color: var(--button-border);
+}
+
+@media (min-width:768px) {
+    .searchbar__result-content .product-title,
+    .searchbar__result-content .product-card-info .product-prizebox span,
+    .searchbar__suggestions .product-card-info .product-prizebox span {
+        font-size: var(--xsmall-text);
+    }
+    .searchbar__recent,
+    .searchbar__result-all {
+        margin-bottom: 50px;
+    }
+}
+
+@media (min-width:992px) {
+    .header-2 .searchbar {
+        right: 60px;
+        z-index: 2;
+    }
+    .header-2 .searchbar__container {
+        transform: translate(100%, 0);
+        max-width: calc(70% - 60px);
+    }
+    .header-2 .search-drawer-active .searchbar__container {
+        transform: translate(0%, 0);
+    }
+    .pages-result__list {
+        max-width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (min-width:1025px) {
+    .searchbar__background {
+        cursor: none;
+    }
+    html.no-js .searchbar__background {
+        cursor: pointer;
+    }
+    .searchbar__background:hover .overlay-close {
+        transform: scale(1);
+    }
+    .searchbar__background:hover {
+        color: var(--body-text-color);
+    }
+    .search-section .seachbar__button {
+        height: 61px;
+    }
+    .search-close {
+        color: var(--body-text-color);
+    }
+    .search-close:hover {
+        color: var(--body-bg);
+    }
+    .search-close:after {
+        transform: scale(0);
+    }
+    .search-close:hover:after {
+        transform: scale(1);
+    }
+    .recent__list-link:hover {
+        color: var(--link-hover-color);
+        border-color: var(--link-hover-color);
+    }
+}
+
+@media (min-width:1441px) {
+    .header-2 .searchbar__container {
+        max-width: calc(50% - 60px);
+    }
+    .search-section .seachbar__button {
+        height: 70px;
+    }
+}
+
+@media (max-width: 767px) {
+    .searchbar__content {
+        padding: 30px 20px 20px;
+    }
+    .searchbar__content .searchbar__input-box,
+    .search__topbar .searchbar__input-box {
+        margin-bottom: 20px;
+    }
+    .seachbar__button {
+        right: 5px;
+    }
+    .searchbar__input {
+        padding-right: 45px;
+    }
+    .searchbar .searchbar__result-content.searchbar__result-product .product-card-img {
+        min-width: 80px;
+        max-width: 80px;
+        margin-left: 10px;
+    }
+    .searchbar .searchbar__result-content.searchbar__result-product .product-card {
+        display: flex;
+    }
+    .searchbar .searchbar__result-content.searchbar__result-product .product-card-item {
+        margin-bottom: 15px;
+    }
+    .searchbar .searchbar__result-content.searchbar__result-product .product-card-info {
+        padding-top: 0;
+    }
+    .searchbar .product-title {
+        white-space: normal;
+    }
+}
+
+@media (max-width: 575px) {
+    .searchbar__content {
+        padding: 20px 0 20px;
+    }
+}

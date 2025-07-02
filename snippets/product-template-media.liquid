@@ -1,0 +1,303 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+<link rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css">
+<div class="product__img-gallery{% if section.settings.gallery_style == 'carousel' and section.settings.fullwidth_carousel == false %} thumb-slider thumbnail-{{section.settings.thumbs_position}}{% endif %}{% unless section.settings.gallery_style == 'carousel' and section.settings.fullwidth_carousel %} sticky-item{% endunless%}">
+  {% if section.settings.gallery_style == 'carousel' and section.settings.fullwidth_carousel == false %}
+    <div class="product__img-box-slider-wrapper">
+  {% endif %}
+
+  {% liquid
+    assign limit = 1
+    assign sliderClass = ''
+    if section.settings.fullwidth_carousel and section.settings.gallery_style == 'carousel'
+      if product.media.size == 1
+        assign limit = 3
+        assign sliderClass = 'single-slide'
+      elsif product.media.size == 2 or product.media.size == 3
+        assign limit = 2
+        assign sliderClass = 'double-slide'
+      endif
+    endif
+  %}
+  <div
+    id="productMainSlider-{{ section.id }}"
+    class="{{sliderClass}} {% if section.settings.gallery_style == 'carousel' %}{% if section.settings.fullwidth_carousel %}product__img-slider{% else %}product__img-box-slider{% endif %}{% else %}product__img-box {{ gridClass }}{% if section.settings.gallery_style == 'grid' and section.settings.enable_first_big_list %} emphasize_first_image{% endif %}{% endif %} slider product__media-count-{{ product.media.size | min: 1 }}"
+    data-product-main-media
+    {% if section.settings.gallery_style == 'carousel' and product.media.size > 1 %}
+      data-desktop-only
+      data-theme-slider='
+        {"cellAlign": "left",
+        "wrapAround": true,
+        "contain": true,
+        "resize": true,
+        "pageDots": false,
+        "prevNextButtons": true,
+        "groupCells": false,
+        "draggable":true,
+        "adaptiveHeight": false,
+        "rightToLeft":{%- if rtlEnable  -%}true{%- else -%}false{%- endif -%},
+        "arrowShape": "{%- render 'icons' icon:'flickity-arrow' -%}"
+        }
+      '
+    {% endif %}
+  >
+    {%- if product.media.size > 0 -%}
+      {% for i in (1..limit) %}
+        {%- if current_variant.featured_media != null -%}
+          {%- assign featured_media = current_variant.featured_media -%}
+          <div
+            id="productMedia-{{ media.id }}"
+            class="product__img-item img-zoom {% if settings.pass_through_product_images %} pass-through-color{% endif %} {% if section.settings.enable_fixed_height %} fixed-height{% endif %}"
+            href="#productMediaModal"
+            data-side-drawer-open
+          >
+            <div
+              class="image-wrapper"
+              {% unless section.settings.enable_fixed_height %}
+                style="--img-ratio:{{ 1 | divided_by : featured_media.preview_image.aspect_ratio | times: 100 }}%"
+              {% endunless %}
+            >
+              {%- render 'lazy-image', image: featured_media -%}
+            </div>
+          </div>
+        {% endif %}
+        {% for media in product.media %}
+          {% unless media.id == current_variant.featured_media.id %}
+            {% case media.media_type %}
+              {% when 'image' %}
+                <div
+                  id="productMedia-{{ media.id }}"
+                  class="product__img-item img-zoom {% if settings.pass_through_product_images %} pass-through-color{% endif %} {% if section.settings.enable_fixed_height %} fixed-height{% endif %}"
+                  href="#productMediaModal"
+                  data-side-drawer-open
+                >
+                  <div
+                    class="image-wrapper"
+                    {% unless section.settings.enable_fixed_height %}
+                      style="--img-ratio:{{ 1 | divided_by : media.preview_image.aspect_ratio | times: 100 }}%"
+                    {% endunless %}
+                  >
+                    {%- render 'lazy-image', image: media -%}
+                  </div>
+                </div>
+              {%- when 'external_video' -%}
+                {% liquid
+                  assign videoUrl = media | external_video_url
+                  assign videoClass = 'youtube-video product-media no-js-hidden'
+                  if videoUrl contains 'vimeo'
+                    assign videoClass = 'vimeo-video product-media no-js-hidden'
+                  endif
+                %}
+                <div
+                  id="productMedia-{{ media.id }}"
+                  class="product__img-item product-external-video-item {% if settings.pass_through_product_images %} pass-through-color{% endif %}{% if section.settings.enable_fixed_height %} fixed-height{% endif %}"
+                >
+                  <div
+                    class="image-wrapper"
+                    {% unless section.settings.enable_fixed_height %}
+                      style="padding-bottom:{{ 1 | divided_by : media.aspect_ratio | times: 100 }}%"
+                    {% endunless %}
+                  >
+                    {{
+                      media
+                      | external_video_url: autoplay: false
+                      | external_video_tag: class: videoClass, loading: 'lazy'
+                    }}
+                    <noscript>
+                      <a
+                        href="{{ media | external_video_url }}"
+                        target="_blank"
+                        class="unstyled-link"
+                        aria-label="{{ media.alt | default: product.title | strip_html }}"
+                      >
+                        {% comment %}theme-check-disable ImgWidthAndHeight{% endcomment %}
+                        <img
+                          src="{{ media.preview_image | image_url: width: 2048 }}"
+                          alt="{{ media.preview_image.alt | escape }}"
+                          loading="lazy"
+                        >
+                        {% comment %}theme-check-enable ImgWidthAndHeight{% endcomment %}
+                      </a>
+                    </noscript>
+                  </div>
+                </div>
+              {%- when 'video' -%}
+                {%- liquid
+                  assign htmlVideo = media.sources[0]
+                  if media.sources[1] != blank
+                    assign htmlVideo = media.sources[1]
+                  endif
+                -%}
+                <div
+                  id="media-main-{{ media.id }}"
+                  class="product__img-item product-video-item {% if settings.pass_through_product_images %} pass-through-color{% endif %}{% if section.settings.enable_fixed_height %} fixed-height{% endif %}"
+                >
+                  <div
+                    class="image-wrapper"
+                    {% unless section.settings.enable_fixed_height %}
+                      style="padding-bottom:{{ 1 | divided_by : media.aspect_ratio | times: 100 }}%"
+                    {% endunless %}
+                  >
+                    {{
+                      media
+                      | media_tag:
+                        loading: 'lazy',
+                        class: 'no-js-hidden',
+                        autoplay: false,
+                        controls: true,
+                        preload: 'none'
+                    }}
+                    <noscript>
+                      <a href="{{ htmlVideo.url }}" target="_blank">
+                        {% comment %}theme-check-disable ImgWidthAndHeight{% endcomment %}
+                        <img
+                          src="{{ media.preview_image | image_url: width: 2048 }}"
+                          alt="{{ media.preview_image.alt | escape }}"
+                          loading="lazy"
+                          aria-label="{{ media.alt | default: product.title | strip_html }}"
+                        >
+                        {% comment %}theme-check-enable ImgWidthAndHeight{% endcomment %}
+                      </a>
+                    </noscript>
+                  </div>
+                </div>
+              {%- when 'model' -%}
+                {%- liquid
+                  if media.preview_image.aspect_ratio
+                    assign media_aspect_ratio = media.preview_image.aspect_ratio
+                  endif
+                -%}
+                <div
+                  id="media-main-{{ media.id }}"
+                  class="product__img-item product-model-item{% if section.settings.enable_fixed_height %} fixed-height{% endif %}"
+                >
+                  <div
+                    class="image-wrapper no-js-hidden"
+                    {% unless section.settings.enable_fixed_height %}
+                      style="padding-bottom: {{ 100 | divided_by: media_aspect_ratio }}%"
+                    {% endunless %}
+                    data-media-id="{{ media.id }}"
+                  >
+                    {{
+                      media
+                      | model_viewer_tag:
+                        image_size: true,
+                        reveal: 'interaction',
+                        toggleable: true,
+                        data-model-id: media.id
+                    }}
+
+                    <button class="close-product-model hidden">
+                      <svg width="12" height="12" viewBox="0 0 22 22" fill="none">
+                        <path d="M21.7987 20.826L11.9721 10.9958L21.7987 1.16552C22.0561 0.899047 22.0561 0.476499 21.7987 0.20994C21.5349 -0.0632507 21.0997 -0.0708067 20.8266 0.193065L11 10.0233L1.17343 0.193149C0.907055 -0.0642582 0.484664 -0.0642582 0.218204 0.193149C-0.0548867 0.457021 -0.0624398 0.892415 0.201335 1.16561L10.0279 10.9958L0.201335 20.826C0.0724268 20.9549 1.71925e-08 21.1298 1.71925e-08 21.3122C-8.39964e-05 21.692 0.307751 21.9999 0.687425 22C0.869793 22.0002 1.04469 21.9276 1.17343 21.7984L11 11.9682L20.8266 21.7985C20.9553 21.9277 21.1303 22.0002 21.3127 22C21.4949 21.9999 21.6696 21.9275 21.7985 21.7987C22.0671 21.5301 22.0672 21.0946 21.7987 20.826Z" fill="currentColor"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <button
+                    class="product-model__button button xsmall-btn d-md-none d-lg-none no-js-hidden"
+                    type="button"
+                    aria-label="{{ 'products.product.media.view_in_ar_button' | t }}"
+                    data-shopify-xr
+                    data-shopify-model3d-id="{{ media.id }}"
+                    data-shopify-title="title"
+                    data-shopify-xr-hidden
+                  >
+                    {{ 'products.product.media.view_in_ar_button' | t }}
+                  </button>
+                  {% comment %}theme-check-disable ImgWidthAndHeight,ImgLazyLoading{% endcomment %}
+                  <noscript>
+                    <img
+                      src="{{ media.preview_image | image_url: width: 2048 }}"
+                      alt="{{ media.preview_image.alt | escape }}"
+                      aria-label="{{ media.alt | default: product.title | strip_html }}"
+                    >
+                  </noscript>
+                  {% comment %}theme-check-enable ImgWidthAndHeight,ImgLazyLoading{% endcomment %}
+                </div>
+            {% endcase %}
+          {% endunless %}
+        {% endfor %}
+      {% endfor %}
+    {%- else -%}
+      {% liquid
+        assign limit = 1
+        if section.settings.fullwidth_carousel and section.settings.gallery_style == 'carousel'
+          assign limit = 3
+        endif
+      %}
+
+      {% for i in (1..limit) %}
+        <div class="product__img-item">
+          <div
+            class="image-wrapper"
+            style="--img-ratio:var(--img-square)"
+          >
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        </div>
+      {% endfor %}
+    {%- endif -%}
+  </div>
+
+  <div class="slider-progress-bar" data-slider-progressbar></div>
+  {% if section.settings.gallery_style == 'carousel' and section.settings.fullwidth_carousel == false %}
+    </div>
+  {% endif %}
+  {% if section.settings.gallery_style == 'carousel' and section.settings.fullwidth_carousel == false %}
+    <div class="product-img-thumbnails-wrapper no-js-hidden">
+      <div
+        id="productThumbSlider-{{ section.id }}"
+        class="product-img-thumbnails"
+        {%- if product.media.size > 0 -%}
+          data-theme-slider='
+            {"cellAlign": "{{- section.settings.thumbs_position -}}",
+            "wrapAround": false,
+            "contain": true,
+            "resize": true,
+            "pageDots": false,
+            "asNavFor":"#productMainSlider-{{ section.id }}",
+            "prevNextButtons": false,
+            "groupCells": false,
+            "rightToLeft":{%- if rtlEnable  -%}true{%- else -%}false{%- endif -%},
+            "draggable":false
+            }
+          '
+        {%- endif -%}
+      >
+        {% for media in product.media %}
+          <div class="product__thumb-item">
+            <div class="product__thumb-item-img">
+              <div
+                class="image-wrapper{% if settings.pass_through_product_images %} pass-through-color{% endif %}"
+                style="--img-ratio:var(--img-square)"
+              >
+                {%- render 'lazy-image', image: media -%}
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="product__thumb-item">
+            <div class="product__thumb-item-img">
+              <div
+                class="image-wrapper"
+                style="--img-ratio:var(--img-square)"
+              >
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>

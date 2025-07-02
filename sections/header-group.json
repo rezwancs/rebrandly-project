@@ -1,0 +1,73 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "5abd2e9a-bb53-4c2a-bcf6-3805af0d9042": {
+          "type": "announcement",
+          "settings": {
+            "text": "FREE SHIPPING ON ALL ORDERS / PREMIUM WEEKEND DELIVERY"
+          }
+        }
+      },
+      "block_order": [
+        "5abd2e9a-bb53-4c2a-bcf6-3805af0d9042"
+      ],
+      "settings": {
+        "rotate": false,
+        "interval": 5,
+        "section_visibility": "always",
+        "fontcolor": "#ffffff",
+        "bg_style": "solid",
+        "bgcolor": "#981b22",
+        "bgcolor2": "",
+        "link_color": "#ffffff",
+        "link_hover_color": "#a3a3a3"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "header_style": "header2",
+        "show_header_border": false,
+        "header_border_opacity": 10,
+        "enable_sticky_header": false,
+        "sticky_header_type": "type1",
+        "enable_icon_background": false,
+        "logo": "shopify://shop_images/Rebrand.png",
+        "logo_width": 250,
+        "logo_position": "left",
+        "desktop_transparent_header": true,
+        "mobile_transparent_header": false,
+        "enable_background_blur": false,
+        "background_container_header": false,
+        "transparent_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "overlay_opacity": 0,
+        "menu": "abz-main-menu",
+        "menu_alignment": "flex-start",
+        "desktop_navigation_font_size": 16,
+        "desktop_font_bold": false,
+        "show_search": true,
+        "blur_background": false,
+        "show_social_icons": false,
+        "social_icons_position": "bottom"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

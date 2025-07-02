@@ -1,0 +1,81 @@
+<div
+  class="searchbar{% if section.settings.header_style == 'header1' %} full-width-search-drawer{% endif %} {{ settings.search_drawer_color_scheme }}-color-scheme"
+  data-side-drawer
+>
+  <a href="#" class="unstyled-link searchbar__background" data-search-close data-moving-cursor>
+    <span class="overlay-close" aria-label="Close">
+      {% render 'icons', icon: 'close' %}
+    </span>
+  </a>
+  <div class="searchbar__container">
+    {% capture searchInput %}
+    <div class="{% if section.settings.header_style == 'header2' %}sticky-item {% endif %}searchbar__sticky-input">
+      <div class="searchbar__input-box">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search" data-mg-search>
+          <input
+            type="text"
+            class="form-control searchbar__input"
+            id="Search-In-Template"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ 'general.search.search' | t }}"
+            data-searchbar__input
+          >
+            <div class="border"><i></i></div>
+          <button
+            type="submit"
+            class="mg-search-button seachbar__button"
+            aria-label="{{ 'general.search.search' | t }}"
+          >
+            <svg width="18" height="23" viewBox="0 0 24 23" fill="none">
+              <path d="M9.68421 18.3684C14.4804 18.3684 18.3684 14.4804 18.3684 9.68421C18.3684 4.88805 14.4804 1 9.68421 1C4.88805 1 1 4.88805 1 9.68421C1 14.4804 4.88805 18.3684 9.68421 18.3684Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M16.0526 16.0527L23 21.8422" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </button>
+        </form>
+        <a href="#" class="unstyled-link search-close" aria-label="Close" data-search-close>
+          <svg viewBox="0 0 44 44" fill="none">
+            <path d="M43.5974 41.6521L23.9441 21.9916L43.5974 2.33104C44.1122 1.79809 44.1122 0.952998 43.5974 0.419881C43.0698 -0.126501 42.1994 -0.141613 41.6532 0.386131L21.9999 20.0467L2.34686 0.386299C1.81411 -0.128516 0.969327 -0.128516 0.436407 0.386299C-0.109773 0.914043 -0.12488 1.78483 0.402669 2.33121L20.0558 21.9916L0.402669 41.6519C0.144854 41.9098 3.4385e-08 42.2596 3.4385e-08 42.6243C-0.000167993 43.3839 0.615502 43.9998 1.37485 44C1.73959 44.0003 2.08938 43.8553 2.34686 43.5968L21.9999 23.9365L41.6532 43.597C41.9107 43.8554 42.2606 44.0005 42.6254 44C42.9898 43.9998 43.3392 43.8551 43.5971 43.5973C44.1342 43.0602 44.1343 42.1892 43.5974 41.6521Z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+    {% endcapture %}
+    <div class="searchbar__wrapper">
+      <div class="container{% if section.settings.header_style == 'header1' %}-xs{% endif %}">
+        {{ searchInput }}
+        <div class="searchbar__content">
+          <div class="searchbar__recent" data-recent-search=""></div>
+          <div class="search-result-container" data-search-result></div>
+          {% if settings.suggestions_products != blank %}
+            <div class="searchbar__suggestions" data-search-suggestion>
+              {% if settings.suggestions_heading != blank %}
+                <h6 class="searchbar__suggestions-content-heading text-small">{{ settings.suggestions_heading }}</h6>
+              {% endif %}
+              <div class="row no-gutters product-card-outer">
+                {% for product in settings.suggestions_products %}
+                  <div class="col-4 col-sm-3 col-md-3 col-lg-3">
+                    {% render 'product-grid',
+                      product: product,
+                      gridImageSize: settings.suggestion_grid_image_size,
+                      hideOptions: true
+                    %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ 'search.js' | asset_url }}" defer></script>
+<style>
+  .searchbar__result-product{
+    --image-fit:{{ settings.results_product_grid_image_fit}};
+  }
+  .searchbar__suggestions{
+    --image-fit:{{ settings.grid_image_fit}};
+  }
+</style>

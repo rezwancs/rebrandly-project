@@ -1,0 +1,503 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'testimonials-rtl.css' | asset_url }}">
+  {{ 'testimonials-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'testimonials.css' | asset_url }}">
+  {{ 'testimonials.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<div class="section-wrapper {{ section.settings.color_scheme }}-color-scheme {% if section.settings.enable_gradiant %} gradient{% endif %}">
+  <div class="container{% if section.settings.stacked_carousel == false %}-xs{% endif %}">
+    {% if section.settings.heading != blank %}
+      {%- capture higlightPrefix -%}
+        <span class="marker">
+      {%- endcapture -%}
+      {%- capture highlightSuffix -%}
+          {%- render 'marker-text-style' marker_style:section.settings.higlight_style -%}
+      {%- endcapture -%}
+      <div class="section-heading text-{{ section.settings.heading_text_alignment }}">
+        <h3
+          class="section-heading-title rte{% if section.settings.enable_highlight %} highlight-text{% endif %} {{ section.settings.heading_size }}"
+          style="--outline-thickness:{{ section.settings.outline_thickness }};--marker-svg:{{ section.settings.marker_color }};--marker:{{ section.settings.marker_text_color }}"
+        >
+          {{ section.settings.heading | replace:"[[", higlightPrefix | replace:"]]",highlightSuffix }}
+        </h3>
+      </div>
+    {% endif %}
+    <div
+      class="testimonial__wrapper{% if section.settings.stacked_carousel %}  stacked-testimonials-carousel{% endif %}"
+      {% if section.settings.stacked_carousel %}
+        data-stacked-testimonials-carousel
+      {% endif %}
+    >
+      <div
+        class="{% if section.settings.stacked_carousel == false %}slider {% endif %}testimonial__slider{% if section.settings.stacked_carousel == false %}{% if section.settings.quote_count == 'one' or section.blocks.size == 1%} one-column{% else %} two-column{% endif %}{% endif %}"
+        {% if section.settings.stacked_carousel == false %}
+          data-theme-slider='
+            {"cellAlign": "left",
+            "wrapAround": true,
+            "contain": true,
+            "resize": true,
+            "pageDots": false,
+            "groupCells":true,
+            "prevNextButtons": true,
+            "rightToLeft":{%- if rtlEnable  -%}true{%- else -%}false{%- endif -%},
+            "arrowShape": "{%- render 'icons' icon:'flickity-arrow' -%}"
+            }
+          '
+        {% endif %}
+      >
+        {% for block in section.blocks %}
+          <div
+            class="testimonial__slider-item"
+            {{ block.shopify_attributes }}
+          >
+            <div class="testimonial__slider-content text-{{ section.settings.text_alignment }}">
+              {% if section.settings.stacked_carousel %}
+                <div class="quote">
+                  <svg width="17" height="14" viewBox="0 0 17 14" fill="none">
+                    <path d="M4.51931 7.456C5.57531 7.456 6.37531 7.72 6.91931 8.248C7.46331 8.776 7.73531 9.464 7.73531 10.312C7.73531 11.208 7.41531 11.952 6.77531 12.544C6.13531 13.12 5.35131 13.408 4.42331 13.408C3.35131 13.408 2.46331 13.016 1.75931 12.232C1.05531 11.448 0.703313 10.24 0.703313 8.608C0.703313 7.024 0.991313 5.664 1.56731 4.528C2.15931 3.376 2.90331 2.456 3.79931 1.768C4.69531 1.064 5.61531 0.607998 6.55931 0.399998C6.87931 0.335999 7.12731 0.343999 7.30331 0.423999C7.47931 0.503999 7.59131 0.639998 7.63931 0.831998C7.67131 1.008 7.62331 1.184 7.49531 1.36C7.36731 1.52 7.11131 1.672 6.72731 1.816C5.89531 2.12 5.19131 2.536 4.61531 3.064C4.03931 3.592 3.59931 4.16 3.29531 4.768C3.00731 5.376 2.86331 5.952 2.86331 6.496C2.86331 6.8 2.94331 7.04 3.10331 7.216C3.26331 7.376 3.54331 7.456 3.94331 7.456H4.51931ZM13.5433 7.456C14.6153 7.456 15.4233 7.72 15.9673 8.248C16.5113 8.776 16.7833 9.464 16.7833 10.312C16.7833 11.208 16.4553 11.944 15.7993 12.52C15.1593 13.096 14.3753 13.384 13.4473 13.384C12.3753 13.384 11.4873 13 10.7833 12.232C10.0953 11.448 9.75131 10.24 9.75131 8.608C9.75131 7.024 10.0393 5.664 10.6153 4.528C11.2073 3.376 11.9513 2.456 12.8473 1.768C13.7433 1.064 14.6553 0.607998 15.5833 0.399998C15.9033 0.335999 16.1513 0.343999 16.3273 0.423999C16.5193 0.503999 16.6313 0.639998 16.6633 0.831998C16.7113 1.008 16.6713 1.176 16.5433 1.336C16.4153 1.496 16.1513 1.656 15.7513 1.816C14.9353 2.12 14.2393 2.536 13.6633 3.064C13.0873 3.592 12.6473 4.16 12.3433 4.768C12.0553 5.376 11.9113 5.952 11.9113 6.496C11.9113 6.8 11.9833 7.04 12.1273 7.216C12.2873 7.376 12.5753 7.456 12.9913 7.456H13.5433Z" fill="currentColor"/>
+                  </svg>
+                </div>
+              {% endif %}
+              {% if block.settings.show_rating %}
+                <ul class="list-unstyled testimonial__slider-review-star">
+                  {% for i in (1..block.settings.rating) %}
+                    <li>
+                      <svg width="18" height="16" viewBox="0 0 18 16" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.82825 0.468779L11.4847 5.59717L16.8737 5.58392C17.554 5.58392 17.8102 6.42761 17.2138 6.86049L12.907 9.97463L14.5812 15.0942C14.7976 15.7479 14.0114 16.2648 13.4945 15.823L9.18333 12.678L4.82796 15.854C4.23605 16.2824 3.5823 15.7038 3.82967 14.9528L5.45962 9.97463L1.09541 6.81632C0.538837 6.41435 0.865711 5.53975 1.54155 5.58392L6.88196 5.59717L8.53842 0.468779C8.7372 -0.158466 9.62947 -0.154049 9.82825 0.468779Z" fill="currentColor"></path>
+                      </svg>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% if block.settings.message != blank %}
+                <p class="testimonial__slider-review-desc{% if section.settings.stacked_carousel %} text-medium{% endif %}">
+                  {{ block.settings.message }}
+                </p>
+              {% endif %}
+              {% if block.settings.author != blank %}
+                <p class="testimonial__slider-review-head {% if section.settings.stacked_carousel %} text-medium{% endif %}">
+                  {{ block.settings.author -}}
+                  {%- if section.settings.stacked_carousel and block.settings.breif != blank %}
+                    - <span>{{ block.settings.breif }}</span>
+                  {%- endif %}
+                </p>
+              {% endif %}
+              {% if block.settings.breif != blank and section.settings.stacked_carousel == false %}
+                <p class="testimonial__slider-detail text-small">{{ block.settings.breif }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% if section.settings.stacked_carousel and section.blocks.size > 1 %}
+        <div class="slide_arrows">
+          <a href="#" class="unstyled-link slide_arrow previous">
+            <svg class="slide_arrow_icon" viewBox="0 0 100 100">
+              <path d="M24.9089 34L29.4288 38.52L20.3177 47.6311H91V52.2222H20.3177L29.4288 61.2977L24.9089 65.8177L9 49.9089L24.9089 34Z" class="arrow"></path>
+            </svg></a
+          ><a href="#" class="unstyled-link slide_arrow next">
+            <svg class="slide_arrow_icon" viewBox="0 0 100 100">
+              <path d="M24.9089 34L29.4288 38.52L20.3177 47.6311H91V52.2222H20.3177L29.4288 61.2977L24.9089 65.8177L9 49.9089L24.9089 34Z" class="arrow" transform="translate(100, 100) rotate(180) "></path>
+            </svg>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+    #shopify-section-{{ section.id }} {
+      --inner-space-top:{{ section.settings.top_space_desktop }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .section-heading-title{
+      padding-bottom:{{ section.settings.heading_space_desktop }}px;
+    }
+    @media only screen and (max-width:767px) {
+      #shopify-section-{{ section.id }}.shopify-section{
+        --inner-space-top:{{ section.settings.top_space_mobile }}px;
+        --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+      }
+      #shopify-section-{{ section.id }} .section-heading-title{
+        padding-bottom:{{ section.settings.heading_space_mobile }}px;
+      }
+    }
+    {% if section.settings.section_visibility == 'large' %}
+      @media (max-width: 767px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+    {% elsif section.settings.section_visibility == 'small' %}
+      @media (min-width: 768px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "t:sections.testimonials.name",
+  "class": "section testimonial-section",
+  "max_blocks": 10,
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "info":"t:common.marker_style.info",
+      "label": "t:sections.testimonials.settings.heading.label",
+      "default": "Testimonials"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_highlight",
+      "label": "t:common.highlight_text.label",
+      "info": "t:common.highlight_text.info",
+      "default": false
+    },
+    {
+      "type":"select",
+      "id":"higlight_style",
+      "label":"t:common.marker_style.label",
+      "default": "basic",
+      "options":[
+        {
+          "value": "basic",
+          "label": "t:common.marker_style.options.basic.label"
+        },
+        {
+          "value": "curved",
+          "label": "t:common.marker_style.options.curved.label"
+        },
+        {
+          "value": "line",
+          "label": "t:common.marker_style.options.line.label"
+        },
+        {
+          "value": "box",
+          "label": "t:common.marker_style.options.box.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "outline_thickness",
+      "label": "t:common.outline_stroke.label",
+      "default": "1px",
+      "options": [
+        {
+          "value": "1px",
+          "label": "t:common.outline_stroke.options.thin.label"
+        },
+        {
+          "value": "2px",
+          "label": "t:common.outline_stroke.options.thick.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:common.heading_size.label",
+      "default": "h5",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.heading_size.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.heading_size.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.heading_size.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.heading_size.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.heading_size.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_text_alignment",
+      "label": "t:common.heading_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:common.heading_alignment.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:common.heading_alignment.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:common.heading_alignment.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_space_desktop",
+      "label": "t:common.header.heading_space_desktop.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    },
+    {
+      "type": "range",
+      "id": "heading_space_mobile",
+      "label": "t:common.header.heading_space_mobile.label",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit":"px"
+    },
+    {
+      "type": "select",
+      "id": "quote_count",
+      "label": "t:sections.testimonials.settings.quote_count.label",
+      "info": "t:sections.testimonials.settings.quote_count.info",
+      "default": "two",
+      "options": [
+        {
+          "value": "one",
+          "label": "t:sections.testimonials.settings.quote_count.options.one.label"
+        },
+        {
+          "value": "two",
+          "label": "t:sections.testimonials.settings.quote_count.options.two.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "stacked_carousel",
+      "label": "t:sections.testimonials.settings.stacked_carousel.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:sections.testimonials.settings.quote_text_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.testimonials.settings.quote_text_alignment.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.testimonials.settings.quote_text_alignment.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.testimonials.settings.quote_text_alignment.options.right.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.color_scheme.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.color_scheme.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.color_scheme.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.color_scheme.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.color_scheme.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradiant",
+      "label":"t:common.gradient.label",
+      "default":false
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "t:common.marker_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "marker_text_color",
+      "label": "t:common.marker_text_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:common.section_spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.section_spacing.top_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.section_spacing.bottom_space_desktop.label",
+      "default": 70,
+      "min": 0,
+      "max": 150,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.section_spacing.top_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.section_spacing.bottom_space_mobile.label",
+      "default": 40,
+      "min": 0,
+      "max": 100,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "t:sections.testimonials.blocks.quote.name.",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author",
+          "label": "t:sections.testimonials.blocks.quote.settings.author_name.label",
+          "default": "Author name here"
+        },
+        {
+          "type": "text",
+          "id": "breif",
+          "label": "t:sections.testimonials.blocks.quote.settings.author_title.label",
+          "default": "Breif text here"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "t:sections.testimonials.blocks.quote.settings.show_rating.label",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "t:sections.testimonials.blocks.quote.settings.rating.label",
+          "min": 3,
+          "max": 5,
+          "default": 5,
+          "step": 1
+        },
+        {
+          "type": "textarea",
+          "id": "message",
+          "label": "t:sections.testimonials.blocks.quote.settings.message.label",
+          "default": "Add client reviews & testimonials to showcase your store’s happy clients."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.testimonials.presets.name",
+      "blocks": [
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

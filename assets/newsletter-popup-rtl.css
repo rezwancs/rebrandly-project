@@ -1,0 +1,31 @@
+.newsletter-popup .popup-container {
+    max-width: 450px;
+}
+
+.newsletter-popup .popup-body-inner {
+    padding: 40px 60px;
+}
+
+.newsletter__subhead {
+    margin-bottom: 5px;
+}
+
+.newsletter__heading {
+    margin-bottom: 15px;
+}
+
+.newsletter__desc * {
+    margin-bottom: 20px;
+}
+
+@media (max-width:575px) {
+    .newsletter-popup .popup-body-inner {
+        padding: 40px 40px;
+    }
+}
+
+@media (max-width:480px) {
+    .newsletter-popup .popup-container {
+        max-width: 95%;
+    }
+}

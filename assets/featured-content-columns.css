@@ -1,0 +1,158 @@
+.image-grid__item {
+    margin-bottom: 40px;
+    display: block;
+}
+
+.image-grid__img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: var(--image-bg);
+    overflow: hidden;
+}
+
+.images-grid-section .image-grid__item.rounded .image-grid__img {
+    overflow: unset;
+    background: transparent;
+}
+
+.images-grid-section .image-grid__item.rounded .image-grid__img .image-wrapper {
+    overflow: hidden;
+    background: var(--image-bg);
+}
+
+.image-grid__item.rounded .image-grid__img.border-enabled .image-wrapper {
+    transform: scale(0.93);
+}
+
+
+/* .images-grid-section .image-grid__item.rounded .image-grid__img.border-enabled:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border: var(--grid-border-width) solid var(--grid-border-color);
+    border-radius: 100%;
+    transform: scale(1.07);
+    transition: .4s ease;
+} */
+
+.fullwidth-link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.image-grid__content {
+    padding-top: 10px;
+    position: relative;
+}
+
+.image-grid__title {
+    margin-bottom: 5px;
+}
+
+.image-grid__desc {
+    font-size: var(--small-text);
+}
+
+.image-grid__item.rounded .image-grid__img {
+    border-radius: 100%;
+}
+
+.image-grid__img.border-enabled {
+    border: var(--grid-border-width) solid var(--grid-border-color);
+}
+
+.image-grid__item.rounded .image-grid__img.border-enabled:after {
+    position: absolute;
+    content: "";
+    width: calc(100% + var(--grid-border-width) * 2);
+    height: calc(100% + var(--grid-border-width) * 2);
+    border-radius: 50%;
+    top: calc(-1 * var(--grid-border-width));
+    left: calc(-1 * var(--grid-border-width));
+    border: var(--grid-border-width) dashed var(--grid-border-color);
+    z-index: -1;
+}
+
+@media (min-width:768px) {
+    .images-grid-section .featured-content-column:nth-child(3n+1) .image-grid__item.curved .image-grid__img {
+        border-top-left-radius: 35%;
+    }
+    .images-grid-section .featured-content-column:nth-child(3n+2) .image-grid__item.curved .image-grid__img {
+        border-bottom-right-radius: 35%;
+    }
+    .images-grid-section .featured-content-column:nth-child(3n+3) .image-grid__item.curved .image-grid__img {
+        border-top-right-radius: 35%;
+    }
+    .image-grid__content {
+        padding-top: 20px;
+    }
+    .images-grid-section .image-grid__item.rounded .image-grid__img .image-wrapper {
+        border-radius: 100%!important;
+    }
+}
+
+@media (min-width:992px) {
+    .image-grid__item {
+        padding: 0 5px;
+    }
+    .image-grid__item.rounded {
+        padding: 0 10px;
+    }
+}
+
+@media (min-width:1025px) {
+    .image-grid__img.border-enabled:hover {
+        border-color: transparent;
+        transition: box-shadow 0.2s;
+    }
+    .image-grid__item.rounded .image-grid__img.border-enabled:hover:after {
+        animation: spinAround 20s linear infinite;
+    }
+    @keyframes spinAround {
+        from {
+            transform: rotate(0deg)
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+@media (min-width:1200px) {
+    .image-grid__item {
+        padding: 0 10px;
+    }
+    .image-grid__item.rounded {
+        padding: 0 25px;
+    }
+}
+
+@media (max-width:767px) {
+    .images-grid-section .featured-content-column:nth-child(2n+1) .image-grid__item.curved .image-grid__img {
+        border-top-left-radius: 35%;
+    }
+    .images-grid-section .featured-content-column:nth-child(2n+2) .image-grid__item.curved .image-grid__img {
+        border-bottom-right-radius: 35%;
+    }
+    .images-grid-section .image-grid__item.rounded .image-grid__img .image-wrapper {
+        border-radius: 100%!important;
+    }
+}
+
+@media (max-width:575px) {
+    .images-grid-section .featured-content-column:nth-child(2n+1) .image-grid__item.curved .image-grid__img {
+        border-top-left-radius: 20%;
+    }
+    .images-grid-section .featured-content-column:nth-child(2n+2) .image-grid__item.curved .image-grid__img {
+        border-bottom-right-radius: 20%;
+    }
+}
