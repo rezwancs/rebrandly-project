@@ -1,0 +1,333 @@
+{% liquid
+  assign rtlEnable = false
+  if settings.content_direction
+    if settings.languanges_code != blank
+      if settings.languanges_code contains localization.language.iso_code
+        assign rtlEnable = true
+      endif
+    else
+      assign rtlEnable = true
+    endif
+  endif
+%}
+{% if rtlEnable %}
+  <link rel="preload" as="style" href="{{ 'vendor-collections-rtl.css' | asset_url }}">
+  {{ 'vendor-collections-rtl.css' | asset_url | stylesheet_tag }}
+{% else %}
+  <link rel="preload" as="style" href="{{ 'vendor-collections.css' | asset_url }}">
+  {{ 'vendor-collections.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<div class="section-wrapper vendor-collections-wrapper{% if section.settings.background_image %} has-background-image{% endif %}"
+  style="
+    {% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }};{% endif %}
+    {% if section.settings.background_image %}background-image: url('{{ section.settings.background_image | img_url: '1920x' }}'); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}
+  ">
+  <div class="container">
+    {% if section.settings.heading != blank %}
+      <div class="vendor-collections-heading">
+        <h2 class="vendor-collections-title">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    {% endif %}
+    
+    <div class="vendor-collections__container">
+      <div class="row">
+        {% liquid
+          assign template_name = template.suffix
+          for block in section.blocks
+            assign collection = block.settings.collection
+            assign show_collection = false
+            
+            if collection != blank
+              assign is_vendor_collection = collection.metafields.vendor_store.is_vendor_collection
+              assign include_templates = collection.metafields.vendor_store.include_templates
+              
+              if is_vendor_collection == true
+                if include_templates != blank
+                  assign templates_array = include_templates | split: ','
+                  for template in templates_array
+                    assign trimmed_template = template | strip
+                    if trimmed_template == template_name
+                      assign show_collection = true
+                      break
+                    endif
+                  endfor
+                else
+                  assign show_collection = true
+                endif
+              endif
+            endif
+            
+            if show_collection
+              render 'vendor-collection-card', collection: collection, section: section, block: block
+            endif
+          endfor
+        %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} .section-wrapper {
+    --inner-space-top:{{ section.settings.top_space_desktop }}px;
+    --inner-space-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+  #shopify-section-{{ section.id }} .vendor-collections-title {
+    color: {{ section.settings.title_color }};
+    {% case section.settings.title_size %}
+      {% when 'small' %}
+        font-size: 20px;
+      {% when 'medium' %}
+        font-size: 24px;
+      {% when 'large' %}
+        font-size: 32px;
+      {% when 'extra-large' %}
+        font-size: 40px;
+    {% endcase %}
+  }
+  {% if section.settings.background_image %}
+  #shopify-section-{{ section.id }} .vendor-collections-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  #shopify-section-{{ section.id }} .container {
+    position: relative;
+    z-index: 2;
+  }
+  #shopify-section-{{ section.id }} .vendor-collections-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  {% endif %}
+  @media screen and (max-width:767px){
+    #shopify-section-{{ section.id }} .section-wrapper {
+      --inner-space-top:{{ section.settings.top_space_mobile }}px;
+      --inner-space-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .vendor-collections-title {
+      {% case section.settings.title_size %}
+        {% when 'small' %}
+          font-size: 18px;
+        {% when 'medium' %}
+          font-size: 20px;
+        {% when 'large' %}
+          font-size: 24px;
+        {% when 'extra-large' %}
+          font-size: 28px;
+      {% endcase %}
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Vendor Collections",
+  "tag": "section",
+  "class": "vendor-collections-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+    "settings": [
+    {
+      "label": "Section Title",
+      "id": "heading",
+      "type": "text",
+      "default": "Categories"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "Title Font Size",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small (20px)"
+        },
+        {
+          "value": "medium",
+          "label": "Medium (24px)"
+        },
+        {
+          "value": "large",
+          "label": "Large (32px)"
+        },
+        {
+          "value": "extra-large",
+          "label": "Extra Large (40px)"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#2563eb"
+    },
+    {
+      "type": "select",
+      "id": "grid_image_size",
+      "label": "Image Aspect Ratio",
+      "default": "adapt",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to Image"
+        },
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Default Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "default_image",
+      "label": "Default Collection Image",
+      "info": "Used when collection doesn't have an image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_random_bg",
+      "label": "Enable Random Background for Default Image",
+      "default": true
+    },
+        {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Background image will override background color"
+    },
+        {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 80,
+      "unit": "px",
+      "label": "Top Spacing"
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 80,
+      "unit": "px",
+      "label": "Bottom Spacing"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 40,
+      "unit": "px",
+      "label": "Top Spacing"
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 40,
+      "unit": "px",
+      "label": "Bottom Spacing"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Leave blank to use collection title"
+        },
+        {
+          "type": "text",
+          "id": "custom_subtitle",
+          "label": "Custom Subtitle",
+          "info": "Leave blank to show product count or 'Lorem ipsum'"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image",
+          "info": "Leave blank to use collection featured image or default image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vendor Collections",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
