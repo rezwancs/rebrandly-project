@@ -94,6 +94,26 @@
               </a>
             </li>
           {%- endfor -%}
+          
+          <!-- Cart Link in Mobile Menu -->
+          <li class="custom-header__mobile-menu-item custom-header__mobile-cart-item">
+            <a 
+              href="{{ routes.cart_url }}"
+              class="custom-header__mobile-menu-link custom-header__mobile-cart-link"
+            >
+              <span class="custom-header__mobile-cart-text">
+                Cart
+                {%- if cart.item_count > 0 -%}
+                  <span class="custom-header__mobile-cart-count">
+                    ({{ cart.item_count }})
+                  </span>
+                {%- endif -%}
+              </span>
+              <svg class="custom-header__mobile-cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 15.3C4.3 15.7 4.6 16.5 5.1 16.5H17M17 13V16.5M9 19.5C9.8 19.5 10.5 20.2 10.5 21S9.8 22.5 9 22.5 7.5 21.8 7.5 21 8.2 19.5 9 19.5ZM20 19.5C20.8 19.5 21.5 20.2 21.5 21S20.8 22.5 20 22.5 18.5 21.8 18.5 21 19.2 19.5 20 19.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
         </ul>
       {%- endif -%}
     </div>
@@ -296,14 +316,21 @@
     border-bottom: 1px solid var(--custom-header-border);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 999;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
   }
 
   .custom-header__mobile-menu--active {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .custom-header__mobile-menu-wrapper {
-    padding: 20px;
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
   }
 
   .custom-header__mobile-menu-list {
@@ -322,47 +349,122 @@
 
   .custom-header__mobile-menu-link {
     display: block;
-    padding: 12px 0;
+    padding: 15px 0;
     color: var(--custom-header-text);
     text-decoration: none;
     font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s ease;
   }
 
+  .custom-header__mobile-menu-link:hover,
   .custom-header__mobile-menu-link--active {
     color: var(--custom-header-active);
+  }
+
+  /* Hamburger Animation */
+  .custom-header__hamburger--active .custom-header__hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .custom-header__hamburger--active .custom-header__hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .custom-header__hamburger--active .custom-header__hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(2px, -2px);
+  }
+
+  /* Mobile Cart in Menu Styles */
+  .custom-header__mobile-cart-item {
+    border-top: 2px solid var(--custom-header-border);
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .custom-header__mobile-cart-link {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0 !important;
+  }
+
+  .custom-header__mobile-cart-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .custom-header__mobile-cart-count {
+    color: var(--custom-header-active);
+    font-weight: bold;
+  }
+
+  .custom-header__mobile-cart-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--custom-header-text);
   }
 
   /* Responsive Design */
   @media (max-width: 768px) {
     .custom-header__wrapper {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: auto 1fr auto;
+      gap: 15px;
+      min-height: 60px;
+      padding: 0 15px;
+    }
+
+    .custom-header__logo {
+      order: 1;
+      justify-content: flex-start;
     }
 
     .custom-header__nav {
+      display: none;
+      order: 2;
+    }
+
+    .custom-header__cart {
       display: none;
     }
 
     .custom-header__mobile-toggle {
       display: flex;
+      order: 3;
+      justify-content: flex-end;
+      padding: 5px;
     }
 
-    .custom-header__cart {
-      order: -1;
+    .custom-header__hamburger-line {
+      width: 20px;
+      height: 2px;
     }
   }
 
   @media (max-width: 480px) {
     .custom-header__wrapper {
-      gap: 15px;
-      min-height: 60px;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      min-height: 55px;
+      padding: 0 10px;
     }
 
     .custom-header__logo-img {
-      max-height: 40px;
+      max-height: 35px;
     }
 
     .custom-header__logo-text {
-      font-size: 20px;
+      font-size: 18px;
+    }
+
+    .custom-header__hamburger-line {
+      width: 18px;
+    }
+
+    .custom-header__mobile-cart-icon {
+      width: 18px;
+      height: 18px;
     }
   }
 </style>
@@ -375,11 +477,39 @@
     
     if (mobileToggle && mobileMenu) {
       mobileToggle.addEventListener('click', function() {
-        mobileMenu.classList.toggle('custom-header__mobile-menu--active');
+        const isActive = mobileMenu.classList.contains('custom-header__mobile-menu--active');
+        
+        if (isActive) {
+          // Closing menu
+          mobileMenu.classList.remove('custom-header__mobile-menu--active');
+          setTimeout(() => {
+            mobileMenu.style.display = 'none';
+          }, 300);
+        } else {
+          // Opening menu
+          mobileMenu.style.display = 'block';
+          // Force reflow
+          mobileMenu.offsetHeight;
+          mobileMenu.classList.add('custom-header__mobile-menu--active');
+        }
         
         // Toggle hamburger animation 
         const hamburger = this.querySelector('.custom-header__hamburger');
         hamburger.classList.toggle('custom-header__hamburger--active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!mobileToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          if (mobileMenu.classList.contains('custom-header__mobile-menu--active')) {
+            mobileMenu.classList.remove('custom-header__mobile-menu--active');
+            const hamburger = mobileToggle.querySelector('.custom-header__hamburger');
+            hamburger.classList.remove('custom-header__hamburger--active');
+            setTimeout(() => {
+              mobileMenu.style.display = 'none';
+            }, 300);
+          }
+        }
       });
     }
   });
