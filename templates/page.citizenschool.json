@@ -42,6 +42,9 @@
         "headline_W4RKRr": {
           "type": "headline",
           "settings": {
+            "headline_image": "shopify://shop_images/citizen-banner-title.png",
+            "headline_image_max_width": 400,
+            "headline_image_max_width_mobile": 280,
             "headline": "Welcome to Our Store",
             "headline_color": "#ffffff",
             "headline_size": "h1",
@@ -52,7 +55,7 @@
         "subheading_Qzaqr4": {
           "type": "subheading",
           "settings": {
-            "subheading": "Discover amazing products and exceptional service",
+            "subheading": "A school where education is re-imagined.",
             "subheading_color": "#ffffff",
             "subheading_size": "medium"
           }
@@ -65,22 +68,75 @@
       "name": "Custom Hero Banner",
       "settings": {
         "gradient_background": "linear-gradient(135deg, #0E55AA 0%, #062244 55%)",
-        "overlay_opacity": 30,
-        "section_height": "60vh",
-        "min_height": 500,
-        "min_height_mobile": 400,
+        "overlay_opacity": 0,
         "content_width": "medium",
-        "top_space_desktop": 80,
-        "bottom_space_desktop": 80,
+        "top_space_desktop": 50,
+        "bottom_space_desktop": 50,
         "top_space_mobile": 60,
         "bottom_space_mobile": 60,
         "section_visibility": "always"
+      }
+    },
+    "vendor_collections_jHgD8A": {
+      "type": "vendor-collections",
+      "blocks": {
+        "collection_7d3VHz": {
+          "type": "collection",
+          "settings": {
+            "collection": "citizen-school-t-shirts",
+            "custom_title": "",
+            "custom_subtitle": ""
+          }
+        },
+        "collection_wfHxfa": {
+          "type": "collection",
+          "settings": {
+            "collection": "citizen-school-t-shirts",
+            "custom_title": "",
+            "custom_subtitle": "",
+            "custom_image": "shopify://shop_images/t-shirt-white-with-logo-front.png"
+          }
+        },
+        "collection_jeaXTy": {
+          "type": "collection",
+          "settings": {
+            "collection": "citizen-school-t-shirts",
+            "custom_title": "",
+            "custom_subtitle": ""
+          }
+        },
+        "collection_jjHGRd": {
+          "type": "collection",
+          "settings": {
+            "collection": "citizen-school-t-shirts",
+            "custom_title": "",
+            "custom_subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_7d3VHz",
+        "collection_wfHxfa",
+        "collection_jeaXTy",
+        "collection_jjHGRd"
+      ],
+      "name": "Vendor Collections",
+      "settings": {
+        "heading": "Categories",
+        "grid_image_size": "adapt",
+        "default_image": "shopify://shop_images/loader.png",
+        "enable_random_bg": true,
+        "top_space_desktop": 80,
+        "bottom_space_desktop": 80,
+        "top_space_mobile": 40,
+        "bottom_space_mobile": 40
       }
     }
   },
   "order": [
     "main",
     "custom_header_dY4pHi",
-    "custom_hero_banner_Ly7xck"
+    "custom_hero_banner_Ly7xck",
+    "vendor_collections_jHgD8A"
   ]
 }
