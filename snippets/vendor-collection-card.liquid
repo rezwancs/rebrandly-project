@@ -1,0 +1,77 @@
+{% comment %}
+  Renders a vendor collection card
+  
+  Accepts:
+  - collection: {Collection} Collection object
+  - section: {Section} Section object  
+  - block: {Block} Block object
+{% endcomment %}
+
+{% assign collection_title = block.settings.custom_title %}
+{% if collection_title == blank %}
+  {% assign collection_title = collection.title %}
+{% endif %}
+
+{% assign collection_subtitle = block.settings.custom_subtitle %}
+{% if collection_subtitle == blank %}
+  {% if collection.products_count > 0 %}
+    {% assign collection_subtitle = collection.products_count | append: ' products' %}
+  {% else %}
+    {% assign collection_subtitle = 'Coming soon' %}
+  {% endif %}
+{% endif %}
+
+{% assign collection_image = block.settings.custom_image %}
+{% if collection_image == blank %}
+  {% assign collection_image = collection.featured_image %}
+{% endif %}
+{% if collection_image == blank %}
+  {% assign collection_image = section.settings.default_image %}
+{% endif %}
+
+{% assign random_colors = '#7DD3FC,#A78BFA,#FB7185,#34D399,#FBBF24,#F472B6,#60A5FA,#10B981' %}
+{% assign colors_array = random_colors | split: ',' %}
+{% assign random_index = forloop.index0 | modulo: colors_array.size %}
+{% assign random_bg_color = colors_array[random_index] %}
+
+<div class="vendor-collection-card-item col-6 col-md-4 col-lg-3">
+  <a href="{{ collection.url }}" class="vendor-collection-card-link">
+    <div class="vendor-collection-card">
+      <div class="vendor-collection-card-img" {% if collection_image == blank and section.settings.enable_random_bg %}style="--random-bg-color: {{ random_bg_color }}"{% endif %}>
+        {% if collection_image != blank %}
+          <div class="image-wrapper">
+            {% assign image_aspect_ratio = section.settings.grid_image_size %}
+            {% case image_aspect_ratio %}
+              {% when 'square' %}
+                {% assign aspect_ratio = '1:1' %}
+              {% when 'portrait' %}
+                {% assign aspect_ratio = '3:4' %}
+              {% when 'landscape' %}
+                {% assign aspect_ratio = '4:3' %}
+              {% else %}
+                {% assign aspect_ratio = 'auto' %}
+            {% endcase %}
+            
+            {% if aspect_ratio == 'auto' %}
+              <img src="{{ collection_image | img_url: '400x400' }}" alt="{{ collection_title | escape }}" loading="lazy" width="400" height="400">
+            {% else %}
+              <img src="{{ collection_image | img_url: '400x400' }}" alt="{{ collection_title | escape }}" loading="lazy" width="400" height="400" style="aspect-ratio: {{ aspect_ratio }};">
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="default-collection-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 7H5C3.89543 7 3 7.89543 3 9V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V9C21 7.89543 20.1046 7 19 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 9L12 15L21 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+      
+      <div class="vendor-collection-card-content">
+        <h3 class="vendor-collection-card-title">{{ collection_title }}</h3>
+        <p class="vendor-collection-card-subtitle">{{ collection_subtitle }}</p>
+      </div>
+    </div>
+  </a>
+</div>
