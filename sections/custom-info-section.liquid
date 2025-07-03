@@ -1,0 +1,531 @@
+{{ 'custom-info-section.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-info-section" style="
+  background-color: {{ section.settings.background_color }};
+  padding: {{ section.settings.section_padding_top }}px {{ section.settings.section_padding_horizontal }}px {{ section.settings.section_padding_bottom }}px {{ section.settings.section_padding_horizontal }}px;
+">
+  <div class="custom-info-container container">
+    <div class="custom-info-image">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | image_url: width: 400 }}" 
+             alt="{{ section.settings.image.alt | escape }}"
+             width="400"
+             height="auto"
+             loading="lazy">
+      {% else %}
+        <div class="placeholder-image">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#e5e5e5"/>
+            <path d="M30 30h40v40H30z" stroke="#999" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="custom-info-content">
+      {% if section.settings.heading != blank %}
+        <h2 class="custom-info-heading" style="
+          color: {{ section.settings.heading_color }};
+          font-size: {{ section.settings.heading_font_size }}px;
+          font-weight: {{ section.settings.heading_font_weight }};
+          margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+        ">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+      
+      {% if section.settings.content != blank %}
+        <div class="custom-info-text" style="
+          color: {{ section.settings.text_color }};
+          font-size: {{ section.settings.text_font_size }}px;
+          line-height: {{ section.settings.text_line_height }};
+          margin-bottom: {{ section.settings.text_margin_bottom }}px;
+        ">
+          {{ section.settings.content }}
+        </div>
+      {% endif %}
+      
+      {% if section.settings.link_text != blank and section.settings.link_url != blank %}
+        <p class="custom-info-link" style="
+          color: {{ section.settings.link_color }};
+          font-size: {{ section.settings.link_font_size }}px;
+          margin-bottom: {{ section.settings.link_margin_bottom }}px;
+        ">
+          {{ section.settings.link_text }} 
+          <a href="{{ section.settings.link_url }}" 
+             style="color: {{ section.settings.link_color }}; text-decoration: underline;">
+            {{ section.settings.link_url }}
+          </a>
+        </p>
+      {% endif %}
+      
+      {% if section.settings.additional_text != blank %}
+        <p class="custom-info-additional" style="
+          color: {{ section.settings.additional_text_color }};
+          font-size: {{ section.settings.additional_text_font_size }}px;
+          margin-bottom: {{ section.settings.additional_text_margin_bottom }}px;
+        ">
+          {{ section.settings.additional_text }}
+        </p>
+      {% endif %}
+      
+      <div class="custom-info-buttons">
+        {% if section.settings.button1_text != blank %}
+          <a href="{{ section.settings.button1_url | default: '#' }}" 
+             class="custom-button custom-button-1"
+             style="
+               background-color: {{ section.settings.button1_bg_color }};
+               color: {{ section.settings.button1_text_color }};
+               font-size: {{ section.settings.button1_font_size }}px;
+               font-weight: {{ section.settings.button1_font_weight }};
+               padding: {{ section.settings.button1_padding_vertical }}px {{ section.settings.button1_padding_horizontal }}px;
+               border-radius: {{ section.settings.button1_border_radius }}px;
+               margin-right: {{ section.settings.buttons_spacing }}px;
+             ">
+            {{ section.settings.button1_text }}
+          </a>
+        {% endif %}
+        
+        {% if section.settings.button2_text != blank %}
+          <a href="{{ section.settings.button2_url | default: '#' }}" 
+             class="custom-button custom-button-2"
+             style="
+               background-color: {{ section.settings.button2_bg_color }};
+               color: {{ section.settings.button2_text_color }};
+               font-size: {{ section.settings.button2_font_size }}px;
+               font-weight: {{ section.settings.button2_font_weight }};
+               padding: {{ section.settings.button2_padding_vertical }}px {{ section.settings.button2_padding_horizontal }}px;
+               border-radius: {{ section.settings.button2_border_radius }}px;
+               border: {{ section.settings.button2_border_width }}px solid {{ section.settings.button2_border_color }};
+             ">
+            {{ section.settings.button2_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Info Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1e5aa8"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Horizontal",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our School"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading Font Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Bottom Margin",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Content Text"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Citizens is a visionary new school in Dubai, founded in 2022 by Al Citizen Emirates Investment. Designed to reimagine education for the 21st century, Citizens places each child's unique learning journey at the heart of its approach. Influenced by world-leading cognitive scientists and education researchers, the school's cutting-edge curriculum emphasizes critical thinking, creativity, collaboration, and communication - essential for real-world problem solving to nurture curiosity, creativity, and a growth mindset."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Font Size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_line_height",
+      "label": "Text Line Height",
+      "options": [
+        { "value": "1.2", "label": "1.2" },
+        { "value": "1.4", "label": "1.4" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.6", "label": "1.6" },
+        { "value": "1.8", "label": "1.8" }
+      ],
+      "default": "1.6"
+    },
+    {
+      "type": "range",
+      "id": "text_margin_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Text Bottom Margin",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link Text",
+      "default": "Learn more at"
+    },
+    {
+      "type": "text",
+      "id": "link_url",
+      "label": "Link URL",
+      "default": "http://citizenschool.me/"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "link_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Link Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "link_margin_bottom",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Link Bottom Margin",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Additional Text"
+    },
+    {
+      "type": "text",
+      "id": "additional_text",
+      "label": "Additional Text",
+      "default": "Find out more about our uniform policy here"
+    },
+    {
+      "type": "color",
+      "id": "additional_text_color",
+      "label": "Additional Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "additional_text_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Additional Text Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "additional_text_margin_bottom",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Additional Text Bottom Margin",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "button1_text",
+      "label": "Button 1 Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button1_url",
+      "label": "Button 1 URL"
+    },
+    {
+      "type": "color",
+      "id": "button1_bg_color",
+      "label": "Button 1 Background Color",
+      "default": "#1e5aa8"
+    },
+    {
+      "type": "color",
+      "id": "button1_text_color",
+      "label": "Button 1 Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button1_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button 1 Font Size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "button1_font_weight",
+      "label": "Button 1 Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "button1_padding_vertical",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Button 1 Vertical Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button1_padding_horizontal",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button 1 Horizontal Padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "button1_border_radius",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Button 1 Border Radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Button 2"
+    },
+    {
+      "type": "text",
+      "id": "button2_text",
+      "label": "Button 2 Text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "button2_url",
+      "label": "Button 2 URL"
+    },
+    {
+      "type": "color",
+      "id": "button2_bg_color",
+      "label": "Button 2 Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "button2_text_color",
+      "label": "Button 2 Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button2_border_color",
+      "label": "Button 2 Border Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button2_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Button 2 Border Width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "button2_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button 2 Font Size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "button2_font_weight",
+      "label": "Button 2 Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "button2_padding_vertical",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Button 2 Vertical Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button2_padding_horizontal",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button 2 Horizontal Padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "button2_border_radius",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Button 2 Border Radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "buttons_spacing",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Spacing Between Buttons",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Info Section"
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,120 @@
+.custom-info-section {
+  width: 100%;
+  display: block;
+}
+
+.custom-info-container {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.custom-info-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.custom-info-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder-image {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.custom-info-content {
+  flex: 1;
+}
+
+.custom-info-heading {
+  margin: 0;
+  font-family: inherit;
+}
+
+.custom-info-text {
+  margin: 0;
+  font-family: inherit;
+}
+
+.custom-info-text p {
+  margin: 0;
+}
+
+.custom-info-link {
+  margin: 0;
+  font-family: inherit;
+}
+
+.custom-info-additional {
+  margin: 0;
+  font-family: inherit;
+}
+
+.custom-info-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.custom-button {
+  display: inline-block;
+  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-align: center;
+}
+
+.custom-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .custom-info-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+  
+  .custom-info-image {
+    flex: none;
+    width: 100%;
+  }
+  
+  .custom-info-content {
+    max-width: 100%;
+  }
+  
+  .custom-info-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-info-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .custom-button {
+    width: 100%;
+    text-align: center;
+  }
+} 
