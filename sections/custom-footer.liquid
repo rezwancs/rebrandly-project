@@ -1,0 +1,673 @@
+{% liquid
+  assign bg_color = section.settings.background_color | default: '#2563eb'
+  assign bg_gradient = section.settings.background_gradient
+  assign text_color = section.settings.text_color | default: '#ffffff'
+%}
+
+<style>
+  .custom-footer {
+    {% if bg_gradient != blank %}
+      background: {{ bg_gradient }};
+    {% else %}
+      background-color: {{ bg_color }};
+    {% endif %}
+    color: {{ text_color }};
+    padding: {{ section.settings.padding_top }}px 0 0;
+  }
+
+  .custom-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .custom-footer .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+  }
+
+  .custom-footer .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  .custom-footer .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+    padding: 0 15px;
+  }
+
+  .footer-brand-section {
+    display: flex;
+    gap: 15px;
+  }
+
+  .custom-footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .custom-footer__logo img {
+    width: {{ section.settings.logo_width }}px;
+    height: auto;
+  }
+
+  .custom-footer__logo-text {
+    font-size: {{ section.settings.logo_text_size }}px;
+    font-weight: bold;
+    color: {{ section.settings.logo_text_color | default: text_color }};
+    margin: 0;
+  }
+
+  .custom-footer__tagline {
+    font-size: {{ section.settings.tagline_size }}px;
+    color: {{ section.settings.tagline_color | default: text_color }};
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  .custom-footer__social {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .custom-footer__social-icon {
+    width: {{ section.settings.social_icon_size }}px;
+    height: {{ section.settings.social_icon_size }}px;
+    background-color: transparent;
+    color: {{ text_color }};
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-footer__social-icon:hover {
+    opacity: 0.8;
+  }
+
+  .custom-footer__heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: bold;
+    color: {{ section.settings.heading_color | default: text_color }};
+    margin-bottom: 15px;
+  }
+
+  .custom-footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-footer__links li {
+    margin-bottom: 8px;
+  }
+
+  .custom-footer__links a {
+    color: {{ section.settings.link_color | default: text_color }};
+    text-decoration: none;
+    font-size: {{ section.settings.link_size }}px;
+  }
+
+  .custom-footer__links a:hover {
+    opacity: 0.8;
+  }
+
+  .custom-footer__contact-item {
+    margin-bottom: 15px;
+  }
+
+  .custom-footer__contact-label {
+    font-size: {{ section.settings.contact_label_size }}px;
+    font-weight: bold;
+    color: {{ section.settings.contact_label_color | default: text_color }};
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .custom-footer__contact-icon {
+    width: {{ section.settings.contact_icon_size | default: 20 }}px;
+    height: {{ section.settings.contact_icon_size | default: 20 }}px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ section.settings.contact_icon_color | default: text_color }};
+  }
+
+  .custom-footer__contact-text {
+    font-size: {{ section.settings.contact_text_size }}px;
+    color: {{ section.settings.contact_text_color | default: text_color }};
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .custom-footer__bottom .container {
+    border-top: 1px solid {{ section.settings.separator_color | default: 'rgba(255, 255, 255, 0.2)' }};
+    padding: {{ section.settings.bottom_padding }}px 0;
+    margin-top: 30px;
+  }
+
+  .custom-footer__bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .custom-footer__copyright {
+    font-size: {{ section.settings.copyright_size }}px;
+    color: {{ section.settings.copyright_color | default: text_color }};
+    margin: 0;
+  }
+
+  .custom-footer__powered {
+    font-size: {{ section.settings.copyright_size }}px;
+    color: {{ section.settings.powered_color | default: text_color }};
+    text-decoration: none;
+  }
+
+  .custom-footer__powered:hover {
+    opacity: 0.8;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .custom-footer .col-md-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+    
+    .custom-footer .col-md-4:last-child {
+      margin-bottom: 0;
+    }
+    
+    .custom-footer__content {
+      text-align: center;
+    }
+    
+    .custom-footer__logo {
+      justify-content: center;
+    }
+    
+    .custom-footer__social {
+      justify-content: center;
+    }
+    
+    .custom-footer__bottom-content {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .custom-footer__logo {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    
+    .custom-footer__logo-text {
+      font-size: {{ section.settings.logo_text_size | minus: 2 }}px;
+    }
+    
+    .custom-footer__heading {
+      font-size: {{ section.settings.heading_size | minus: 2 }}px;
+    }
+  }
+</style>
+
+<footer class="custom-footer">
+  <div class="container">
+    <div class="row custom-footer__content">
+      <!-- Logo and Social Section -->
+      <div class="col-12 col-md-4 footer-brand-section">
+        {% if section.settings.logo != blank %}
+            <img src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+                 alt="{{ shop.name }}" 
+                 width="{{ section.settings.logo_width }}"
+                 height="{{ section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round }}"
+                 loading="lazy">
+        {% endif %}
+
+        <div class="">
+            <div class="custom-footer__logo">
+                {% if section.settings.logo_text != blank %}
+                  <h3 class="custom-footer__logo-text">{{ section.settings.logo_text }}</h3>
+                {% endif %}
+              </div>
+              
+              {% if section.settings.tagline != blank %}
+                <p class="custom-footer__tagline">{{ section.settings.tagline }}</p>
+              {% endif %}
+              
+              <div class="custom-footer__social">
+                {% if section.settings.facebook_url != blank %}
+                  <a href="{{ section.settings.facebook_url }}" class="custom-footer__social-icon" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                  </a>
+                {% endif %}
+                {% if section.settings.instagram_url != blank %}
+                  <a href="{{ section.settings.instagram_url }}" class="custom-footer__social-icon" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  </a>
+                {% endif %}
+                {% if section.settings.youtube_url != blank %}
+                  <a href="{{ section.settings.youtube_url }}" class="custom-footer__social-icon" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  </a>
+                {% endif %}
+            </div>
+        </div>
+      </div>
+      
+      <!-- Quick Links Section -->
+      <div class="col-12 col-md-4">
+        {% if section.settings.quick_links_title != blank %}
+          <h4 class="custom-footer__heading">{{ section.settings.quick_links_title }}</h4>
+        {% endif %}
+        
+        {% if section.settings.quick_links_menu != blank %}
+          <ul class="custom-footer__links">
+            {% for link in section.settings.quick_links_menu.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      
+      <!-- Contact Information Section -->
+      <div class="col-12 col-md-4">
+        {% if section.settings.show_address and section.settings.address_text != blank %}
+          <div class="custom-footer__contact-item">
+            <div class="custom-footer__contact-label">
+              <div class="custom-footer__contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.6536 16.6572L13.4106 20.9002C13.225 21.0859 13.0047 21.2333 12.7621 21.3338C12.5196 21.4344 12.2596 21.4861 11.9971 21.4861C11.7345 21.4861 11.4746 21.4344 11.232 21.3338C10.9895 21.2333 10.7691 21.0859 10.5836 20.9002L6.33959 16.6572C5.22081 15.5384 4.45892 14.1129 4.15027 12.5611C3.84162 11.0092 4.00008 9.40071 4.60559 7.93893C5.2111 6.47714 6.23648 5.22774 7.55207 4.3487C8.86765 3.46967 10.4144 3.00049 11.9966 3.00049C13.5788 3.00049 15.1255 3.46967 16.4411 4.3487C17.7567 5.22774 18.7821 6.47714 19.3876 7.93893C19.9931 9.40071 20.1515 11.0092 19.8429 12.5611C19.5342 14.1129 18.7724 15.5384 17.6536 16.6572Z" stroke="#F89A1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.9966 11C14.9966 11.7956 14.6805 12.5587 14.1179 13.1213C13.5553 13.6839 12.7922 14 11.9966 14C11.2009 14 10.4379 13.6839 9.87526 13.1213C9.31265 12.5587 8.99658 11.7956 8.99658 11C8.99658 10.2044 9.31265 9.44129 9.87526 8.87868C10.4379 8.31607 11.2009 8 11.9966 8C12.7922 8 13.5553 8.31607 14.1179 8.87868C14.6805 9.44129 14.9966 10.2044 14.9966 11Z" stroke="#F89A1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    
+              </div>
+              Address
+            </div>
+            <p class="custom-footer__contact-text">{{ section.settings.address_text }}</p>
+          </div>
+        {% endif %}
+        
+        {% if section.settings.show_email and section.settings.email_text != blank %}
+          <div class="custom-footer__contact-item">
+            <div class="custom-footer__contact-label">
+              <div class="custom-footer__contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.99658 8L10.8866 13.26C11.2152 13.4793 11.6015 13.5963 11.9966 13.5963C12.3917 13.5963 12.7779 13.4793 13.1066 13.26L20.9966 8M4.99658 19H18.9966C19.527 19 20.0357 18.7893 20.4108 18.4142C20.7859 18.0391 20.9966 17.5304 20.9966 17V7C20.9966 6.46957 20.7859 5.96086 20.4108 5.58579C20.0357 5.21071 19.527 5 18.9966 5H4.99658C4.46615 5 3.95744 5.21071 3.58237 5.58579C3.2073 5.96086 2.99658 6.46957 2.99658 7V17C2.99658 17.5304 3.2073 18.0391 3.58237 18.4142C3.95744 18.7893 4.46615 19 4.99658 19Z" stroke="#F89A1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                    
+              </div>
+              Email
+            </div>
+            <p class="custom-footer__contact-text">{{ section.settings.email_text }}</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bottom Section -->
+  <div class="custom-footer__bottom">
+    <div class="container">
+      <div class="custom-footer__bottom-content">
+        <p class="custom-footer__copyright">
+          {{ section.settings.copyright_text | default: '© 2024 Citizen School. All rights reserved.' }}
+        </p>
+        {% if section.settings.powered_by_text != blank %}
+          <a href="{{ section.settings.powered_by_url }}" class="custom-footer__powered" {% if section.settings.powered_by_url != blank %}target="_blank" rel="noopener"{% endif %}>
+            {{ section.settings.powered_by_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Footer Background Color",
+      "default": "#2563eb"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Footer Background Gradient"
+    },
+    {
+      "type": "header",
+      "content": "Text Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Default Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "logo_text_color",
+      "label": "Logo Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color",
+      "label": "Tagline Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "contact_label_color",
+      "label": "Contact Label Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "contact_text_color",
+      "label": "Contact Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "contact_icon_color",
+      "label": "Contact Icon Color",
+      "default": "#f59e0b"
+    },
+    {
+      "type": "color",
+      "id": "copyright_color",
+      "label": "Copyright Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "powered_color",
+      "label": "Powered By Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Separator Line Color",
+      "default": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "type": "header",
+      "content": "Logo & Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Brand Name",
+      "default": "Citizen School"
+    },
+    {
+      "type": "range",
+      "id": "logo_text_size",
+      "min": 16,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Brand Name Size",
+      "default": 20
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Student information portal for Citizen School Students"
+    },
+    {
+      "type": "range",
+      "id": "tagline_size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "range",
+      "id": "social_icon_size",
+      "min": 20,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Social Icon Size",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Quick Links"
+    },
+    {
+      "type": "text",
+      "id": "quick_links_title",
+      "label": "Quick Links Title",
+      "default": "Quick Links"
+    },
+    {
+      "type": "link_list",
+      "id": "quick_links_menu",
+      "label": "Quick Links Menu"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Link Size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_address",
+      "label": "Show Address",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "address_text",
+      "label": "Address",
+      "default": "Citizens School\n243 220 St., Al Satwa - Dubai"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email",
+      "label": "Show Email",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email_text",
+      "label": "Email",
+      "default": "citizenschool@rebrand.ae"
+    },
+    {
+      "type": "range",
+      "id": "contact_label_size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Contact Label Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "contact_text_size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Contact Text Size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "contact_icon_size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Contact Icon Size",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Bottom Section"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "© 2024 Citizen School. All rights reserved."
+    },
+    {
+      "type": "text",
+      "id": "powered_by_text",
+      "label": "Powered By Text",
+      "default": "Powered by REBRAND.AE"
+    },
+    {
+      "type": "url",
+      "id": "powered_by_url",
+      "label": "Powered By URL"
+    },
+    {
+      "type": "range",
+      "id": "copyright_size",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Text Size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Section Padding",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Footer"
+    }
+  ]
+}
+{% endschema %} 
