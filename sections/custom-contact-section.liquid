@@ -1,0 +1,432 @@
+{{ 'custom-contact-section.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-contact-section" style="background-color: {{ section.settings.background_color }}; padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;">
+  <div class="container">
+    <div class="contact-content">
+      <!-- Left Column - Contact Info -->
+      <div class="contact-info">
+        {% if section.settings.contact_heading != blank %}
+          <h2 class="contact-heading" style="color: {{ section.settings.contact_heading_color }}; font-size: {{ section.settings.contact_heading_size }}px;">
+            {{ section.settings.contact_heading }}
+          </h2>
+        {% endif %}
+        
+        {% if section.settings.contact_description != blank %}
+          <p class="contact-description" style="color: {{ section.settings.contact_description_color }}; font-size: {{ section.settings.contact_description_size }}px;">
+            {{ section.settings.contact_description }}
+          </p>
+        {% endif %}
+
+        <!-- Address -->
+        {% if section.settings.show_address %}
+          <div class="contact-detail">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ section.settings.icon_color }}" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <h4 style="color: {{ section.settings.contact_label_color }}; font-size: {{ section.settings.contact_label_size }}px;">{{ section.settings.address_label }}</h4>
+              <p style="color: {{ section.settings.contact_text_color }}; font-size: {{ section.settings.contact_text_size }}px;">{{ section.settings.address_text }}</p>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Email -->
+        {% if section.settings.show_email %}
+          <div class="contact-detail">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ section.settings.icon_color }}" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <h4 style="color: {{ section.settings.contact_label_color }}; font-size: {{ section.settings.contact_label_size }}px;">{{ section.settings.email_label }}</h4>
+              <p style="color: {{ section.settings.contact_text_color }}; font-size: {{ section.settings.contact_text_size }}px;">{{ section.settings.email_text }}</p>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Logo -->
+        {% if section.settings.show_logo and section.settings.logo != blank %}
+          <div class="contact-logo">
+            <img src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" alt="{{ section.settings.logo.alt | default: shop.name }}" width="{{ section.settings.logo_width }}" height="auto" />
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right Column - Contact Form -->
+      <div class="contact-form-wrapper" style="background-color: {{ section.settings.form_background_color }};">
+        {% if section.settings.form_heading != blank %}
+          <h2 class="form-heading" style="color: {{ section.settings.form_heading_color }}; font-size: {{ section.settings.form_heading_size }}px;">
+            {{ section.settings.form_heading }}
+          </h2>
+        {% endif %}
+
+        {% form 'contact', class: 'contact-form' %}
+          {% if form.posted_successfully? %}
+            <div class="form-success" style="background-color: {{ section.settings.success_bg_color }}; color: {{ section.settings.success_text_color }};">
+              {{ section.settings.success_message | default: 'Thank you for contacting us.' }}
+            </div>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="form-errors" style="background-color: {{ section.settings.error_bg_color }}; color: {{ section.settings.error_text_color }};">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="form-group">
+            <label for="ContactFormName" style="color: {{ section.settings.form_label_color }}; font-size: {{ section.settings.form_label_size }}px;">{{ section.settings.name_label | default: 'Name' }}</label>
+            <input type="text" id="ContactFormName" name="contact[name]" value="{% if form.name %}{{ form.name }}{% endif %}" style="background-color: {{ section.settings.form_input_bg_color }}; border-color: {{ section.settings.form_input_border_color }}; color: {{ section.settings.form_input_text_color }};" required>
+          </div>
+
+          <div class="form-group">
+            <label for="ContactFormEmail" style="color: {{ section.settings.form_label_color }}; font-size: {{ section.settings.form_label_size }}px;">{{ section.settings.email_form_label | default: 'Email' }}</label>
+            <input type="email" id="ContactFormEmail" name="contact[email]" value="{% if form.email %}{{ form.email }}{% endif %}" style="background-color: {{ section.settings.form_input_bg_color }}; border-color: {{ section.settings.form_input_border_color }}; color: {{ section.settings.form_input_text_color }};" required>
+          </div>
+
+          <div class="form-group">
+            <label for="ContactFormSubject" style="color: {{ section.settings.form_label_color }}; font-size: {{ section.settings.form_label_size }}px;">{{ section.settings.subject_label | default: 'Subject' }}</label>
+            <input type="text" id="ContactFormSubject" name="contact[subject]" value="{% if form.subject %}{{ form.subject }}{% endif %}" style="background-color: {{ section.settings.form_input_bg_color }}; border-color: {{ section.settings.form_input_border_color }}; color: {{ section.settings.form_input_text_color }};">
+          </div>
+
+          <div class="form-group">
+            <label for="ContactFormMessage" style="color: {{ section.settings.form_label_color }}; font-size: {{ section.settings.form_label_size }}px;">{{ section.settings.message_label | default: 'Message' }}</label>
+            <textarea id="ContactFormMessage" name="contact[body]" rows="5" style="background-color: {{ section.settings.form_input_bg_color }}; border-color: {{ section.settings.form_input_border_color }}; color: {{ section.settings.form_input_text_color }};" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+
+          <button type="submit" class="contact-submit-btn" style="background-color: {{ section.settings.button_bg_color }}; color: {{ section.settings.button_text_color }}; font-size: {{ section.settings.button_font_size }}px;">
+            {{ section.settings.submit_label | default: 'Send' }}
+          </button>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Contact Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Contact Info (Left Side)"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "color",
+      "id": "contact_heading_color",
+      "label": "Contact Heading Color",
+      "default": "#1976D2"
+    },
+    {
+      "type": "range",
+      "id": "contact_heading_size",
+      "label": "Contact Heading Font Size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "textarea",
+      "id": "contact_description",
+      "label": "Contact Description",
+      "default": "For any questions regarding uniforms or orders, please don't hesitate to contact us."
+    },
+    {
+      "type": "color",
+      "id": "contact_description_color",
+      "label": "Contact Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "contact_description_size",
+      "label": "Contact Description Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "contact_label_color",
+      "label": "Contact Label Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "contact_label_size",
+      "label": "Contact Label Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "contact_text_color",
+      "label": "Contact Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "contact_text_size",
+      "label": "Contact Text Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#1976D2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_address",
+      "label": "Show Address",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "Address Label",
+      "default": "Address"
+    },
+    {
+      "type": "textarea",
+      "id": "address_text",
+      "label": "Address Text",
+      "default": "Citizens School\n2A3 22D St - Al Satwa - Dubai"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email",
+      "label": "Show Email",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email Label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "email_text",
+      "label": "Email Address",
+      "default": "citizenschool@rebrandly.ae"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show Logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo Width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 150
+    },
+    {
+      "type": "header",
+      "content": "Contact Form (Right Side)"
+    },
+    {
+      "type": "color",
+      "id": "form_background_color",
+      "label": "Form Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form Heading",
+      "default": "Contact"
+    },
+    {
+      "type": "color",
+      "id": "form_heading_color",
+      "label": "Form Heading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "form_heading_size",
+      "label": "Form Heading Font Size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name Field Label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "email_form_label",
+      "label": "Email Field Label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "subject_label",
+      "label": "Subject Field Label",
+      "default": "Subject"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message Field Label",
+      "default": "Message"
+    },
+    {
+      "type": "color",
+      "id": "form_label_color",
+      "label": "Form Label Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "form_label_size",
+      "label": "Form Label Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "form_input_bg_color",
+      "label": "Form Input Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "form_input_border_color",
+      "label": "Form Input Border Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "form_input_text_color",
+      "label": "Form Input Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit Button Label",
+      "default": "Send"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#1976D2"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for contacting us. We will get back to you as soon as possible."
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Success Message Background",
+      "default": "#d4edda"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "label": "Success Message Text Color",
+      "default": "#155724"
+    },
+    {
+      "type": "color",
+      "id": "error_bg_color",
+      "label": "Error Message Background",
+      "default": "#f8d7da"
+    },
+    {
+      "type": "color",
+      "id": "error_text_color",
+      "label": "Error Message Text Color",
+      "default": "#721c24"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Contact Section"
+    }
+  ]
+}
+{% endschema %} 

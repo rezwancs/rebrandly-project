@@ -1,0 +1,207 @@
+.custom-contact-section {
+  /* Dynamic padding set via inline styles */
+}
+
+.custom-contact-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* Contact Info (Left Side) */
+.contact-info {
+  padding-right: 40px;
+}
+
+.contact-heading {
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  /* Dynamic font-size and color set via inline styles */
+}
+
+.contact-description {
+  line-height: 1.6;
+  margin-bottom: 40px;
+  /* Dynamic font-size and color set via inline styles */
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(25, 118, 210, 0.1);
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+.contact-text h4 {
+  font-weight: 600;
+  margin-bottom: 4px;
+  /* Dynamic font-size and color set via inline styles */
+}
+
+.contact-text p {
+  line-height: 1.5;
+  white-space: pre-line;
+  /* Dynamic font-size and color set via inline styles */
+}
+
+.contact-logo {
+  margin-top: 40px;
+}
+
+.contact-logo img {
+  height: auto;
+  /* Dynamic width set via inline styles */
+}
+
+/* Contact Form (Right Side) */
+.contact-form-wrapper {
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  /* Dynamic background-color set via inline styles */
+}
+
+.form-heading {
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+  /* Dynamic font-size and color set via inline styles */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+  /* Dynamic font-size and color set via inline styles */
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  max-height: unset;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1976D2 !important;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-submit-btn {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* Dynamic font-size, background-color, and text color set via inline styles */
+}
+
+.contact-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+.contact-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Form Messages */
+.form-success,
+.form-errors {
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  /* Dynamic background-color and text color set via inline styles */
+}
+
+.form-success {
+  border: 1px solid #c3e6cb;
+}
+
+.form-errors {
+  border: 1px solid #f5c6cb;
+}
+
+.form-errors ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.form-errors li {
+  margin-bottom: 4px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .contact-info {
+    padding-right: 0;
+  }
+  
+  .contact-form-wrapper {
+    padding: 30px 20px;
+  }
+  
+  .contact-detail {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .custom-contact-section .container {
+    padding: 0 15px;
+  }
+  
+  .contact-form-wrapper {
+    padding: 20px 15px;
+  }
+} 

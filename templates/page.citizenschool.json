@@ -185,6 +185,57 @@
         "button2_border_radius": 4,
         "buttons_spacing": 15
       }
+    },
+    "custom_contact_section_GYhnLA": {
+      "type": "custom-contact-section",
+      "name": "Custom Contact Section",
+      "settings": {
+        "background_color": "#f8f9fa",
+        "section_padding_top": 60,
+        "section_padding_bottom": 60,
+        "contact_heading": "Contact Us",
+        "contact_heading_color": "#1976d2",
+        "contact_heading_size": 24,
+        "contact_description": "For any questions regarding uniforms or orders, please don't hesitate to contact us.",
+        "contact_description_color": "#666666",
+        "contact_description_size": 14,
+        "contact_label_color": "#333333",
+        "contact_label_size": 14,
+        "contact_text_color": "#666666",
+        "contact_text_size": 13,
+        "icon_color": "#2196f3",
+        "show_address": true,
+        "address_label": "Address",
+        "address_text": "Citizens School\n2A3 22D St - Al Satwa - Dubai",
+        "show_email": true,
+        "email_label": "Email",
+        "email_text": "citizenschool@rebrandly.ae",
+        "show_logo": true,
+        "logo": "shopify://shop_images/citizenschool-logo.png",
+        "logo_width": 150,
+        "form_background_color": "#ffffff",
+        "form_heading": "",
+        "form_heading_color": "#333333",
+        "form_heading_size": 24,
+        "name_label": "Name",
+        "email_form_label": "Email",
+        "subject_label": "Subject",
+        "message_label": "Message",
+        "form_label_color": "#333333",
+        "form_label_size": 14,
+        "form_input_bg_color": "#ffffff",
+        "form_input_border_color": "#e0e0e0",
+        "form_input_text_color": "#333333",
+        "submit_label": "Send",
+        "button_bg_color": "#2196f3",
+        "button_text_color": "#ffffff",
+        "button_font_size": 14,
+        "success_message": "Thank you for contacting us. We will get back to you as soon as possible.",
+        "success_bg_color": "#d4edda",
+        "success_text_color": "#155724",
+        "error_bg_color": "#f8d7da",
+        "error_text_color": "#721c24"
+      }
     }
   },
   "order": [
@@ -192,6 +243,7 @@
     "custom_header_dY4pHi",
     "custom_hero_banner_Ly7xck",
     "vendor_collections_jHgD8A",
-    "custom_info_section_EN3q6t"
+    "custom_info_section_EN3q6t",
+    "custom_contact_section_GYhnLA"
   ]
 }
