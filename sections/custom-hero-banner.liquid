@@ -25,7 +25,17 @@
           {% case block.type %}
           
             {% when 'headline' %}
-              {% if block.settings.headline_image != blank %}
+              {% if collection.title != blank %}
+                <h1 class="hero-banner-headline {{ block.settings.headline_size }} {{ block.settings.headline_style }}"
+                  style="--outline-thickness:{{ block.settings.outline_thickness }};"
+                  {{ block.shopify_attributes }}>
+                  <span class="headline-part headline-part-2 {{ block.settings.headline_part2_size | default: block.settings.headline_size }} {{ block.settings.headline_part2_style | default: block.settings.headline_style }}" 
+                    style="color: {{ block.settings.headline_part2_color }}; --outline-thickness:{{ block.settings.outline_thickness }};">{{ collection.title | upcase }}</span>
+                </h1>
+
+
+
+              {% elsif block.settings.headline_image != blank %}
                 <div class="hero-banner-headline-image" 
                   style="--headline-img-max-width-desktop: {{ block.settings.headline_image_max_width }}px;
                          --headline-img-max-width-mobile: {{ block.settings.headline_image_max_width_mobile }}px;"
@@ -37,20 +47,36 @@
                     {%- render 'lazy-image', image: block.settings.headline_image, class: 'headline-image' -%}
                   {% endif %}
                 </div>
-              {% elsif block.settings.headline_part1 != blank or block.settings.headline_part2 != blank or block.settings.headline_part3 != blank %}
-                <h1 class="hero-banner-headline {{ block.settings.headline_size }} {{ block.settings.headline_style }}"
-                  style="--outline-thickness:{{ block.settings.outline_thickness }};"
-                  {{ block.shopify_attributes }}>
-                  {% if block.settings.headline_part1 != blank %}
-                    <span class="headline-part headline-part-1" style="color: {{ block.settings.headline_part1_color }};">{{ block.settings.headline_part1 }}</span>
-                  {% endif %}
-                  {% if block.settings.headline_part2 != blank %}
-                    <span class="headline-part headline-part-2" style="color: {{ block.settings.headline_part2_color }};">{{ block.settings.headline_part2 }}</span>
-                  {% endif %}
-                  {% if block.settings.headline_part3 != blank %}
-                    <span class="headline-part headline-part-3" style="color: {{ block.settings.headline_part3_color }};">{{ block.settings.headline_part3 }}</span>
-                  {% endif %}
-                </h1>
+              {% else %}
+                {% comment %} Determine what to display for each headline part {% endcomment %}
+                {% assign part1_text = block.settings.headline_part1 %}
+                {% assign part2_text = block.settings.headline_part2 %}
+                {% assign part3_text = block.settings.headline_part3 %}
+                
+                {% comment %} If part2 is empty and we have a collection title, use it as part2 {% endcomment %}
+                {% if part2_text == blank and collection.title != blank %}
+                  {% assign part2_text = collection.title %}
+                {% endif %}
+                
+                {% comment %} Only show headline if at least one part has content {% endcomment %}
+                {% if part1_text != blank or part2_text != blank or part3_text != blank %}
+                  <h1 class="hero-banner-headline {{ block.settings.headline_size }} {{ block.settings.headline_style }}"
+                    style="--outline-thickness:{{ block.settings.outline_thickness }};"
+                    {{ block.shopify_attributes }}>
+                    {% if part1_text != blank %}
+                      <span class="headline-part headline-part-1 {{ block.settings.headline_part1_size | default: block.settings.headline_size }} {{ block.settings.headline_part1_style | default: block.settings.headline_style }}" 
+                        style="color: {{ block.settings.headline_part1_color }}; --outline-thickness:{{ block.settings.outline_thickness }};">{{ part1_text }}</span>
+                    {% endif %}
+                    {% if part2_text != blank %}
+                      <span class="headline-part headline-part-2 {{ block.settings.headline_part2_size | default: block.settings.headline_size }} {{ block.settings.headline_part2_style | default: block.settings.headline_style }}" 
+                        style="color: {{ block.settings.headline_part2_color }}; --outline-thickness:{{ block.settings.outline_thickness }};">{{ part2_text }}</span>
+                    {% endif %}
+                    {% if part3_text != blank %}
+                      <span class="headline-part headline-part-3 {{ block.settings.headline_part3_size | default: block.settings.headline_size }} {{ block.settings.headline_part3_style | default: block.settings.headline_style }}" 
+                        style="color: {{ block.settings.headline_part3_color }}; --outline-thickness:{{ block.settings.outline_thickness }};">{{ part3_text }}</span>
+                    {% endif %}
+                  </h1>
+                {% endif %}
               {% endif %}
               
             {% when 'hero_image' %}
@@ -297,6 +323,50 @@
           "default": "#ffffff"
         },
         {
+          "type": "select",
+          "id": "headline_part1_size",
+          "label": "Headline Part 1 Size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "Small"
+            },
+            {
+              "value": "h2",
+              "label": "Medium"
+            },
+            {
+              "value": "h1",
+              "label": "Large"
+            },
+            {
+              "value": "h0",
+              "label": "Extra Large"
+            }
+          ],
+          "info": "Leave blank to use global headline size"
+        },
+        {
+          "type": "select",
+          "id": "headline_part1_style",
+          "label": "Headline Part 1 Style",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "animated-text",
+              "label": "Animated"
+            }
+          ],
+          "info": "Leave blank to use global headline style"
+        },
+        {
           "type": "text",
           "id": "headline_part2",
           "label": "Headline Part 2",
@@ -310,6 +380,50 @@
           "default": "#ff6b6b"
         },
         {
+          "type": "select",
+          "id": "headline_part2_size",
+          "label": "Headline Part 2 Size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "Small"
+            },
+            {
+              "value": "h2",
+              "label": "Medium"
+            },
+            {
+              "value": "h1",
+              "label": "Large"
+            },
+            {
+              "value": "h0",
+              "label": "Extra Large"
+            }
+          ],
+          "info": "Leave blank to use global headline size"
+        },
+        {
+          "type": "select",
+          "id": "headline_part2_style",
+          "label": "Headline Part 2 Style",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "animated-text",
+              "label": "Animated"
+            }
+          ],
+          "info": "Leave blank to use global headline style"
+        },
+        {
           "type": "text",
           "id": "headline_part3",
           "label": "Headline Part 3",
@@ -321,6 +435,50 @@
           "id": "headline_part3_color",
           "label": "Headline Part 3 Color",
           "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "headline_part3_size",
+          "label": "Headline Part 3 Size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "Small"
+            },
+            {
+              "value": "h2",
+              "label": "Medium"
+            },
+            {
+              "value": "h1",
+              "label": "Large"
+            },
+            {
+              "value": "h0",
+              "label": "Extra Large"
+            }
+          ],
+          "info": "Leave blank to use global headline size"
+        },
+        {
+          "type": "select",
+          "id": "headline_part3_style",
+          "label": "Headline Part 3 Style",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "animated-text",
+              "label": "Animated"
+            }
+          ],
+          "info": "Leave blank to use global headline style"
         },
         {
           "type": "select",
