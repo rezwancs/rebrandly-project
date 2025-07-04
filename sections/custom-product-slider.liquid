@@ -1,0 +1,460 @@
+{% liquid
+  assign section_id = 'custom-product-slider-' | append: section.id
+  assign collection_handle = collection
+  assign products_to_show = section.settings.products_to_show | default: 6
+  assign section_title = section.settings.section_title | default: collection.title
+%}
+
+<div class="custom-product-slider-wrapper" id="{{ section_id }}">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <div class="section-header">
+        <h2 class="section-title">{{ section.settings.section_title }}</h2>
+      </div>
+    {% elsif collection.title %}
+      <div class="section-header">
+        <h2 class="section-title">{{ collection.title }}</h2>
+      </div>
+    {% endif %}
+    
+    {% assign product_count = collection_handle.products.size %}
+    {% if product_count > 0 %}
+      <div class="custom-product-slider{% if product_count < 3 %} left-align{% endif %}" data-slider-id="{{ section_id }}">
+        {% for product in collection_handle.products limit: products_to_show %}
+          <div class="product-slide">
+            <div class="product-card">
+              <div class="product-image">
+                {% if product.featured_media %}
+                  <img 
+                    src="{{ product.featured_media | image_url: width: 300, height: 300 }}" 
+                    alt="{{ product.featured_media.alt | default: product.title }}"
+                    loading="lazy"
+                    width="300"
+                    height="300"
+                  >
+                {% else %}
+                  <div class="placeholder-image">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M25 25L75 75M75 25L25 75" stroke="#999" stroke-width="2"/>
+                    </svg>
+                  </div>
+                {% endif %}
+                {% assign badges_string = product.metafields.vendor_store.badges | strip %}
+                {% assign badges_string = badges_string | replace: '\r\n', '\n' %}
+                {% assign badges = badges_string | split: '\n' %}
+                {% for badge in badges %}
+                  {% if badge != blank %}
+                    <span class="product-badge metafield-badge" style="background: {{ section.settings.badge_bg_color }}; color: {{ section.settings.badge_text_color }}">{{ badge }}</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <div class="product-info">
+                <h3 class="product-title" style="color: {{ section.settings.title_color }}">{{ product.title }}</h3>
+                <div class="product-bottom-row">
+                  <span class="product-price" style="color: {{ section.settings.price_color }}">{{ product.price | money }}</span>
+                  <a href="{{ product.url }}" class="btn btn-primary view-details-btn" style="background: {{ section.settings.button_bg_color }}; color: {{ section.settings.button_text_color }}; border-color: {{ section.settings.button_bg_color }}">
+                    {{ section.settings.view_button_text | default: 'View Details' }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="no-products-message">
+        <p>No products found in this collection.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.custom-product-slider-wrapper {
+  padding: 60px 0;
+  background-color: #f9fafb;
+}
+.custom-product-slider-wrapper .container {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.custom-product-slider-wrapper .section-header {
+  text-align: left;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+.custom-product-slider-wrapper .section-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  text-transform: capitalize;
+  text-align: left;
+  color: #0E55AA;
+}
+.custom-product-slider {
+  position: relative;
+}
+.custom-product-slider.left-align .slick-track {
+  justify-content: flex-start !important;
+}
+.custom-product-slider .slick-dots {
+  bottom: -50px;
+  text-align: center;
+}
+.custom-product-slider .slick-dots li {
+  margin: 0 5px;
+}
+.custom-product-slider .slick-dots li button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ccc;
+  border: none;
+  text-indent: -9999px;
+  transition: all 0.3s ease;
+}
+.custom-product-slider .slick-dots li.slick-active button {
+  background: #007bff;
+}
+.custom-product-slider .slick-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+.custom-product-slider .slick-arrow:hover {
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.custom-product-slider .slick-prev {
+  left: -20px;
+}
+.custom-product-slider .slick-next {
+  right: -20px;
+}
+.custom-product-slider .slick-arrow:before {
+  font-size: 18px;
+  color: #333;
+}
+.custom-product-slider .slick-prev:before {
+  content: "\2190"; /* Left arrow icon */
+  margin-left: 10px;
+}
+.custom-product-slider .slick-next:before {
+  content: "\2192"; /* Right arrow icon */
+  margin-left: 10px;
+}
+.product-slide {
+  padding: 0 12px;
+}
+.product-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  padding: 0;
+}
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.product-image {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #e5e7eb;
+}
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+.product-card:hover .product-image img {
+  transform: scale(1.02);
+}
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb;
+}
+.product-badge.metafield-badge {
+  display: inline-block;
+  position: static;
+  margin: 8px 8px 0 0;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #ff8c00;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: unset;
+}
+.product-info {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.product-title {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+.product-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+}
+.btn.btn-primary.view-details-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  width: fit-content;
+  display: block;
+}
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+  border: 1px solid #3b82f6;
+}
+.btn-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.no-products-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+@media (max-width: 1024px) {
+  .custom-product-slider .slick-arrow {
+    /* display: none !important; Removed this rule */
+  }
+}
+@media (max-width: 768px) {
+  .custom-product-slider-wrapper {
+    padding: 40px 0;
+  }
+  .custom-product-slider-wrapper .container {
+    padding: 0 15px;
+  }
+  .custom-product-slider-wrapper .section-title {
+    font-size: 2rem;
+  }
+  .product-slide {
+    padding: 0 8px;
+  }
+  .product-info {
+    padding: 12px;
+  }
+}
+@media (max-width: 480px) {
+  .custom-product-slider-wrapper .section-title {
+    font-size: 1.5rem;
+  }
+  .product-slide {
+    padding: 0 4px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sliderElement = document.querySelector('#{{ section_id }} .custom-product-slider');
+  const productCount = {{ product_count | default: 0 }};
+  if (sliderElement && typeof jQuery !== 'undefined' && jQuery().slick) {
+    jQuery(sliderElement).slick({
+      slidesToShow: {{ section.settings.slides_to_show_desktop | default: 4 }},
+      slidesToScroll: 1,
+      dots: false,
+      arrows: true,
+      infinite: productCount >= 3,
+      autoplay: {{ section.settings.autoplay }},
+      autoplaySpeed: {{ section.settings.autoplay_speed | default: 3000 }},
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: {{ section.settings.slides_to_show_tablet | default: 2 }},
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: {{ section.settings.slides_to_show_mobile | default: 1 }},
+            slidesToScroll: 1,
+            arrows: false
+          }
+        }
+      ]
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Custom Product Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "info": "Leave empty to use the collection title automatically"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Product Title Color",
+      "default": "#222"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#1976d2"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#1976d2"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge Background Color",
+      "default": "#ff8c00"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to Show",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "view_button_text",
+      "label": "View Button Text",
+      "default": "View Details"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popular_badge",
+      "label": "Show Popular Badge",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_desktop",
+      "label": "Slides to Show (Desktop)",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_tablet",
+      "label": "Slides to Show (Tablet)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show_mobile",
+      "label": "Slides to Show (Mobile)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed (ms)",
+      "min": 1000,
+      "max": 8000,
+      "step": 500,
+      "default": 3000
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Product Slider"
+    }
+  ]
+}
+{% endschema %}

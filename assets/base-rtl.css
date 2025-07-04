@@ -1136,6 +1136,7 @@ button.shopify-payment-button__button--hidden,
     position: absolute;
     top: 6px;
     right: 6px;
+    left: unset;
     font-size: 12px;
     line-height: 1.2;
     padding: 3px 10px;

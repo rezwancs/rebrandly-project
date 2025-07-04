@@ -9,6 +9,20 @@
  */
 {
   "sections": {
+    "custom_liquid_XR3HHy": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom_liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n*, h1, h2, h3, h4, h5, h6, p, span {\n  font-family: \"Montserrat\", sans-serif !important;\n}\n</style>",
+        "text_alignment": "center",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 0
+      }
+    },
     "custom_header_7a34bR": {
       "type": "custom-header",
       "name": "Custom Header",
@@ -107,6 +121,27 @@
         "bottom_space_desktop": 30,
         "top_space_mobile": 0,
         "bottom_space_mobile": 20
+      }
+    },
+    "custom_product_slider_8hTkL3": {
+      "type": "custom-product-slider",
+      "name": "Custom Product Slider",
+      "settings": {
+        "section_title": "T-Shirt",
+        "title_color": "#333333",
+        "price_color": "#0e55aa",
+        "button_bg_color": "#0e55aa",
+        "button_text_color": "#ffffff",
+        "badge_bg_color": "#ff8c00",
+        "badge_text_color": "#ffffff",
+        "products_to_show": 8,
+        "view_button_text": "View Details",
+        "show_popular_badge": true,
+        "slides_to_show_desktop": 4,
+        "slides_to_show_tablet": 2,
+        "slides_to_show_mobile": 1,
+        "autoplay": false,
+        "autoplay_speed": 3000
       }
     },
     "vendor_collections_jJKrD8A": {
@@ -215,9 +250,11 @@
     }
   },
   "order": [
+    "custom_liquid_XR3HHy",
     "custom_header_7a34bR",
     "custom_hero_banner_9wRCVc",
     "main-collection",
+    "custom_product_slider_8hTkL3",
     "vendor_collections_jJKrD8A",
     "custom_footer_AajByX"
   ]
