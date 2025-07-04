@@ -74,6 +74,10 @@
   line-height: 1.2;
 }
 
+h1.hero-banner-headline .headline-part {
+  font-weight: 500;
+}
+
 .hero-banner-headline.outline {
   -webkit-text-stroke: var(--outline-thickness) currentColor;
   -webkit-text-fill-color: transparent;

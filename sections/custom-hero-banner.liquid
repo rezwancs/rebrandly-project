@@ -37,12 +37,19 @@
                     {%- render 'lazy-image', image: block.settings.headline_image, class: 'headline-image' -%}
                   {% endif %}
                 </div>
-              {% elsif block.settings.headline != blank %}
+              {% elsif block.settings.headline_part1 != blank or block.settings.headline_part2 != blank or block.settings.headline_part3 != blank %}
                 <h1 class="hero-banner-headline {{ block.settings.headline_size }} {{ block.settings.headline_style }}"
-                  style="--outline-thickness:{{ block.settings.outline_thickness }};
-                         color: {{ block.settings.headline_color }};"
+                  style="--outline-thickness:{{ block.settings.outline_thickness }};"
                   {{ block.shopify_attributes }}>
-                  {{ block.settings.headline }}
+                  {% if block.settings.headline_part1 != blank %}
+                    <span class="headline-part headline-part-1" style="color: {{ block.settings.headline_part1_color }};">{{ block.settings.headline_part1 }}</span>
+                  {% endif %}
+                  {% if block.settings.headline_part2 != blank %}
+                    <span class="headline-part headline-part-2" style="color: {{ block.settings.headline_part2_color }};">{{ block.settings.headline_part2 }}</span>
+                  {% endif %}
+                  {% if block.settings.headline_part3 != blank %}
+                    <span class="headline-part headline-part-3" style="color: {{ block.settings.headline_part3_color }};">{{ block.settings.headline_part3 }}</span>
+                  {% endif %}
                 </h1>
               {% endif %}
               
@@ -278,15 +285,41 @@
         },
         {
           "type": "text",
-          "id": "headline",
-          "label": "Headline Text",
-          "default": "Welcome to Our Store",
-          "info": "This will be used if no headline image is selected."
+          "id": "headline_part1",
+          "label": "Headline Part 1",
+          "default": "Welcome to",
+          "info": "First part of the headline. This will be used if no headline image is selected."
         },
         {
           "type": "color",
-          "id": "headline_color",
-          "label": "Headline Color",
+          "id": "headline_part1_color",
+          "label": "Headline Part 1 Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "headline_part2",
+          "label": "Headline Part 2",
+          "default": "Our Amazing",
+          "info": "Second part of the headline."
+        },
+        {
+          "type": "color",
+          "id": "headline_part2_color",
+          "label": "Headline Part 2 Color",
+          "default": "#ff6b6b"
+        },
+        {
+          "type": "text",
+          "id": "headline_part3",
+          "label": "Headline Part 3",
+          "default": "Store",
+          "info": "Third part of the headline."
+        },
+        {
+          "type": "color",
+          "id": "headline_part3_color",
+          "label": "Headline Part 3 Color",
           "default": "#ffffff"
         },
         {

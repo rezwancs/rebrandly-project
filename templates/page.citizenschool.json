@@ -25,7 +25,7 @@
       "type": "custom-liquid",
       "name": "t:sections.custom_liquid.presets.name",
       "settings": {
-        "custom_liquid": "<style>\n*, h1, h2, h3, h4, h5, h6, p {\n  font-family: \"Montserrat\", sans-serif !important;\n}\n</style>",
+        "custom_liquid": "<style>\n*, h1, h2, h3, h4, h5, h6, p, span {\n  font-family: \"Montserrat\", sans-serif !important;\n}\n</style>",
         "text_alignment": "center",
         "color_scheme": "primary",
         "enable_gradiant": false,
@@ -56,12 +56,15 @@
         "headline_W4RKRr": {
           "type": "headline",
           "settings": {
-            "headline_image": "shopify://shop_images/citizen-banner-title.png",
             "headline_image_max_width": 400,
             "headline_image_max_width_mobile": 280,
-            "headline": "Welcome to Our Store",
-            "headline_color": "#ffffff",
-            "headline_size": "h1",
+            "headline_part1": "Citizens",
+            "headline_part1_color": "#ffffff",
+            "headline_part2": "School",
+            "headline_part2_color": "#f89a1c",
+            "headline_part3": "Shop",
+            "headline_part3_color": "#ffffff",
+            "headline_size": "h2",
             "headline_style": "normal",
             "outline_thickness": 2
           }
@@ -78,6 +81,9 @@
       "block_order": [
         "headline_W4RKRr",
         "subheading_Qzaqr4"
+      ],
+      "custom_css": [
+        ".headline-part.headline-part-2 {font-family: \"Rock Salt\", sans-serif !important;}"
       ],
       "name": "Custom Hero Banner",
       "settings": {
