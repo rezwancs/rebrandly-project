@@ -5,7 +5,7 @@
 
 .custom-info-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin: 0 auto;
   gap: 40px;
 }
@@ -45,6 +45,10 @@
   font-family: inherit;
 }
 
+.custom-info-headline .headline-part-1, .custom-info-headline .headline-part-3 {
+  font-family: "Rock Salt", sans-serif !important;
+}
+
 .custom-info-text {
   margin: 0;
   font-family: inherit;
@@ -68,7 +72,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 25px;
 }
 
 .custom-button {
@@ -79,6 +83,10 @@
   transition: all 0.3s ease;
   border: none;
   text-align: center;
+}
+
+.custom-info-buttons .custom-button {
+  font-family: "Rock Salt", sans-serif !important;
 }
 
 .custom-button:hover {

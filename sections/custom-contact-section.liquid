@@ -2,6 +2,13 @@
 
 <div class="custom-contact-section" style="background-color: {{ section.settings.background_color }}; padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;">
   <div class="container">
+    <!-- Section Headline -->
+    {% if section.settings.section_headline != blank %}
+      <h1 class="section-headline" style="color: {{ section.settings.section_headline_color }}; font-size: {{ section.settings.section_headline_size }}px; font-weight: {{ section.settings.section_headline_weight }}; text-align: {{ section.settings.section_headline_alignment }}; margin-bottom: {{ section.settings.section_headline_spacing }}px;">
+        {{ section.settings.section_headline }}
+      </h1>
+    {% endif %}
+    
     <div class="contact-content">
       <!-- Left Column - Contact Info -->
       <div class="contact-info">
@@ -138,6 +145,92 @@
       "max": 100,
       "step": 5,
       "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Section Headline"
+    },
+    {
+      "type": "text",
+      "id": "section_headline",
+      "label": "Section Headline",
+      "default": "Get In Touch"
+    },
+    {
+      "type": "color",
+      "id": "section_headline_color",
+      "label": "Section Headline Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "section_headline_size",
+      "label": "Section Headline Font Size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "section_headline_weight",
+      "label": "Section Headline Font Weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "section_headline_alignment",
+      "label": "Section Headline Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "section_headline_spacing",
+      "label": "Section Headline Bottom Spacing",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "default": 40
     },
     {
       "type": "header",

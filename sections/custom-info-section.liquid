@@ -4,6 +4,46 @@
   background-color: {{ section.settings.background_color }};
   padding: {{ section.settings.section_padding_top }}px {{ section.settings.section_padding_horizontal }}px {{ section.settings.section_padding_bottom }}px {{ section.settings.section_padding_horizontal }}px;
 ">
+  <!-- 3-Part Headline -->
+  {% if section.settings.headline_part1 != blank or section.settings.headline_part2 != blank or section.settings.headline_part3 != blank %}
+    <div class="custom-info-headline" style="
+      text-align: {{ section.settings.headline_alignment }};
+      margin-bottom: {{ section.settings.headline_margin_bottom }}px;
+    ">
+      {% if section.settings.headline_part1 != blank %}
+        <span class="headline-part-1" style="
+          color: {{ section.settings.headline_part1_color }};
+          font-size: {{ section.settings.headline_part1_font_size }}px;
+          font-weight: {{ section.settings.headline_part1_font_weight }};
+          margin-right: {{ section.settings.headline_spacing }}px;
+        ">
+          {{ section.settings.headline_part1 }}
+        </span>
+      {% endif %}
+      
+      {% if section.settings.headline_part2 != blank %}
+        <span class="headline-part-2" style="
+          color: {{ section.settings.headline_part2_color }};
+          font-size: {{ section.settings.headline_part2_font_size }}px;
+          font-weight: {{ section.settings.headline_part2_font_weight }};
+          margin-right: {{ section.settings.headline_spacing }}px;
+        ">
+          {{ section.settings.headline_part2 }}
+        </span>
+      {% endif %}
+      
+      {% if section.settings.headline_part3 != blank %}
+        <span class="headline-part-3" style="
+          color: {{ section.settings.headline_part3_color }};
+          font-size: {{ section.settings.headline_part3_font_size }}px;
+          font-weight: {{ section.settings.headline_part3_font_weight }};
+        ">
+          {{ section.settings.headline_part3 }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+
   <div class="custom-info-container container">
     <div class="custom-info-image">
       {% if section.settings.image != blank %}
@@ -80,7 +120,6 @@
                font-weight: {{ section.settings.button1_font_weight }};
                padding: {{ section.settings.button1_padding_vertical }}px {{ section.settings.button1_padding_horizontal }}px;
                border-radius: {{ section.settings.button1_border_radius }}px;
-               margin-right: {{ section.settings.buttons_spacing }}px;
              ">
             {{ section.settings.button1_text }}
           </a>
@@ -151,6 +190,161 @@
       "unit": "px",
       "label": "Section Padding Horizontal",
       "default": 20
+    },
+    {
+      "type": "header",
+      "content": "3-Part Headline"
+    },
+    {
+      "type": "select",
+      "id": "headline_alignment",
+      "label": "Headline Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "headline_margin_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Headline Bottom Margin",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "headline_spacing",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing Between Headline Parts",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Headline Part 1"
+    },
+    {
+      "type": "text",
+      "id": "headline_part1",
+      "label": "Headline Part 1 Text",
+      "default": "Welcome"
+    },
+    {
+      "type": "color",
+      "id": "headline_part1_color",
+      "label": "Part 1 Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "headline_part1_font_size",
+      "min": 18,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Part 1 Font Size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "headline_part1_font_weight",
+      "label": "Part 1 Font Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Headline Part 2"
+    },
+    {
+      "type": "text",
+      "id": "headline_part2",
+      "label": "Headline Part 2 Text",
+      "default": "to"
+    },
+    {
+      "type": "color",
+      "id": "headline_part2_color",
+      "label": "Part 2 Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "headline_part2_font_size",
+      "min": 18,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Part 2 Font Size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "headline_part2_font_weight",
+      "label": "Part 2 Font Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Headline Part 3"
+    },
+    {
+      "type": "text",
+      "id": "headline_part3",
+      "label": "Headline Part 3 Text",
+      "default": "Citizens School"
+    },
+    {
+      "type": "color",
+      "id": "headline_part3_color",
+      "label": "Part 3 Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "headline_part3_font_size",
+      "min": 18,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Part 3 Font Size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "headline_part3_font_weight",
+      "label": "Part 3 Font Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra Bold" }
+      ],
+      "default": "700"
     },
     {
       "type": "header",
