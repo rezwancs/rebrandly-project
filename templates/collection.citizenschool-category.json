@@ -9,6 +9,74 @@
  */
 {
   "sections": {
+    "custom_header_7a34bR": {
+      "type": "custom-header",
+      "name": "Custom Header",
+      "settings": {
+        "logo": "shopify://shop_images/citizenschool-logo.png",
+        "logo_width": 150,
+        "menu": "main-menu",
+        "header_bg_color": "#ffffff",
+        "header_text_color": "#333333",
+        "header_hover_color": "#007bff",
+        "header_active_color": "#ff6b35",
+        "header_underline_color": "#ff6b35",
+        "header_border_color": "#e5e5e5"
+      }
+    },
+    "custom_hero_banner_9wRCVc": {
+      "type": "custom-hero-banner",
+      "blocks": {
+        "headline_W4RKRr": {
+          "type": "headline",
+          "settings": {
+            "headline_image_max_width": 400,
+            "headline_image_max_width_mobile": 280,
+            "headline_part1": "Citizens",
+            "headline_part1_color": "#ffffff",
+            "headline_part1_size": "h3",
+            "headline_part1_style": "normal",
+            "headline_part2": "School",
+            "headline_part2_color": "#ffffff",
+            "headline_part2_size": "h3",
+            "headline_part2_style": "normal",
+            "headline_part3": "Shop",
+            "headline_part3_color": "#ffffff",
+            "headline_part3_size": "h3",
+            "headline_part3_style": "normal",
+            "headline_size": "h2",
+            "headline_style": "normal",
+            "outline_thickness": 2
+          }
+        },
+        "subheading_Qzaqr4": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "A school where education is re-imagined.",
+            "subheading_color": "#ffffff",
+            "subheading_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "headline_W4RKRr",
+        "subheading_Qzaqr4"
+      ],
+      "custom_css": [
+        ".headline-part.headline-part-2 {font-family: \"Rock Salt\", sans-serif !important;}"
+      ],
+      "name": "Custom Hero Banner",
+      "settings": {
+        "gradient_background": "linear-gradient(135deg, #79D3E8 0%, #0E55AA 100%)",
+        "overlay_opacity": 0,
+        "content_width": "medium",
+        "top_space_desktop": 50,
+        "bottom_space_desktop": 50,
+        "top_space_mobile": 60,
+        "bottom_space_mobile": 60,
+        "section_visibility": "always"
+      }
+    },
     "main-collection": {
       "type": "main-collection",
       "disabled": true,
@@ -39,68 +107,6 @@
         "bottom_space_desktop": 30,
         "top_space_mobile": 0,
         "bottom_space_mobile": 20
-      }
-    },
-    "custom_header_7a34bR": {
-      "type": "custom-header",
-      "name": "Custom Header",
-      "settings": {
-        "logo": "shopify://shop_images/citizenschool-logo.png",
-        "logo_width": 150,
-        "menu": "main-menu",
-        "header_bg_color": "#ffffff",
-        "header_text_color": "#333333",
-        "header_hover_color": "#007bff",
-        "header_active_color": "#ff6b35",
-        "header_underline_color": "#ff6b35",
-        "header_border_color": "#e5e5e5"
-      }
-    },
-    "custom_hero_banner_9wRCVc": {
-      "type": "custom-hero-banner",
-      "blocks": {
-        "headline_W4RKRr": {
-          "type": "headline",
-          "settings": {
-            "headline_image_max_width": 400,
-            "headline_image_max_width_mobile": 280,
-            "headline_part1": "Citizens",
-            "headline_part1_color": "#ffffff",
-            "headline_part2": "School",
-            "headline_part2_color": "#f89a1c",
-            "headline_part3": "Shop",
-            "headline_part3_color": "#ffffff",
-            "headline_size": "h2",
-            "headline_style": "normal",
-            "outline_thickness": 2
-          }
-        },
-        "subheading_Qzaqr4": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "A school where education is re-imagined.",
-            "subheading_color": "#ffffff",
-            "subheading_size": "medium"
-          }
-        }
-      },
-      "block_order": [
-        "headline_W4RKRr",
-        "subheading_Qzaqr4"
-      ],
-      "custom_css": [
-        ".headline-part.headline-part-2 {font-family: \"Rock Salt\", sans-serif !important;}"
-      ],
-      "name": "Custom Hero Banner",
-      "settings": {
-        "gradient_background": "linear-gradient(135deg, #0E55AA 0%, #062244 55%)",
-        "overlay_opacity": 0,
-        "content_width": "medium",
-        "top_space_desktop": 50,
-        "bottom_space_desktop": 50,
-        "top_space_mobile": 60,
-        "bottom_space_mobile": 60,
-        "section_visibility": "always"
       }
     },
     "vendor_collections_jJKrD8A": {
@@ -148,9 +154,9 @@
       ],
       "name": "Vendor Collections",
       "settings": {
-        "heading": "Categories",
+        "heading": "Shop other categories",
         "title_size": "medium",
-        "title_color": "#2563eb",
+        "title_color": "#0e55aa",
         "grid_image_size": "adapt",
         "default_image": "shopify://shop_images/loader.png",
         "enable_random_bg": true,
@@ -213,6 +219,6 @@
     "custom_hero_banner_9wRCVc",
     "main-collection",
     "vendor_collections_jJKrD8A",
-    "custom_footer_AajByX",
+    "custom_footer_AajByX"
   ]
 }
