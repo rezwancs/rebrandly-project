@@ -21,6 +21,20 @@
         "overlay_opacity": 50
       }
     },
+    "custom_liquid_8YYdLN": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom_liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n*, h1, h2, h3, h4, h5, h6, p {\n  font-family: \"Montserrat\", sans-serif !important;\n}\n</style>",
+        "text_alignment": "center",
+        "color_scheme": "primary",
+        "enable_gradiant": false,
+        "top_space_desktop": 0,
+        "bottom_space_desktop": 0,
+        "top_space_mobile": 0,
+        "bottom_space_mobile": 40
+      }
+    },
     "custom_header_dY4pHi": {
       "type": "custom-header",
       "name": "Custom Header",
@@ -286,6 +300,7 @@
   },
   "order": [
     "main",
+    "custom_liquid_8YYdLN",
     "custom_header_dY4pHi",
     "custom_hero_banner_Ly7xck",
     "vendor_collections_jHgD8A",
