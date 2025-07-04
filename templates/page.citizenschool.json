@@ -236,6 +236,52 @@
         "error_bg_color": "#f8d7da",
         "error_text_color": "#721c24"
       }
+    },
+    "custom_footer_ErjTyX": {
+      "type": "custom-footer",
+      "name": "Custom Footer",
+      "settings": {
+        "background_color": "#0e55aa",
+        "background_gradient": "linear-gradient(54deg, rgba(14, 85, 170, 1), rgba(6, 34, 68, 1) 100%)",
+        "text_color": "#ffffff",
+        "logo_text_color": "#ffffff",
+        "tagline_color": "#ffffff",
+        "heading_color": "#ffffff",
+        "link_color": "#d1d5db",
+        "contact_label_color": "#ffffff",
+        "contact_text_color": "#ffffff",
+        "contact_icon_color": "#f59e0b",
+        "copyright_color": "#d1d5db",
+        "powered_color": "#d1d5db",
+        "separator_color": "#374151",
+        "logo": "shopify://shop_images/citizenschool-short-logo.png",
+        "logo_width": 50,
+        "logo_text": "Citizen School",
+        "logo_text_size": 20,
+        "tagline": "Student information portal for Citizen School Students",
+        "tagline_size": 13,
+        "facebook_url": "",
+        "instagram_url": "",
+        "youtube_url": "",
+        "social_icon_size": 24,
+        "quick_links_title": "Quick Links",
+        "quick_links_menu": "main-menu",
+        "heading_size": 16,
+        "link_size": 13,
+        "show_address": true,
+        "address_text": "Citizens School\n243 220 St., Al Satwa - Dubai",
+        "show_email": true,
+        "email_text": "citizenschool@rebrand.ae",
+        "contact_label_size": 14,
+        "contact_text_size": 13,
+        "contact_icon_size": 20,
+        "copyright_text": "© 2024 Citizen School. All rights reserved.",
+        "powered_by_text": "Powered by REBRAND.AE",
+        "powered_by_url": "",
+        "copyright_size": 12,
+        "padding_top": 50,
+        "bottom_padding": 12
+      }
     }
   },
   "order": [
@@ -244,6 +290,7 @@
     "custom_hero_banner_Ly7xck",
     "vendor_collections_jHgD8A",
     "custom_info_section_EN3q6t",
-    "custom_contact_section_GYhnLA"
+    "custom_contact_section_GYhnLA",
+    "custom_footer_ErjTyX"
   ]
 }
